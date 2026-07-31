@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Humsana for Developers  Cognitive Interlock for AI Tools</title>
+<meta name="description" content="Humsana adds real-time cognitive awareness to AI tools, so risky actions do not happen when you are fatigued or overloaded.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav><div class="wrap nav-in">
+  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
+  <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
+  <div class="nav-links" id="nav">
+    <a href="voice.html">Voice</a>
+    <a href="developers.html" class="active">Developers</a>
+    <a href="partners.html">Partners</a>
+    <a href="swan.html">Swan</a>
+    <a class="nav-cta" href="https://github.com/sriramnatrajhen">GitHub</a>
+  </div>
+</div></nav>
+
+<header class="hero"><div class="wrap"><div class="inner">
+  <span class="label"><span class="n">Developers</span>Cognitive Interlock</span>
+  <h1>When you are tired, AI should slow down.</h1>
+  <p class="lead">A safety interlock between you and AI execution. Think seatbelts, not autopilot.</p>
+  <div class="cta-row">
+    <span class="code-inline">pip install humsana-daemon</span>
+    <span class="code-inline">npx @humsana/mcp-server</span>
+  </div>
+</div></div></header>
+
+<section><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">01</span>The problem</span>
+    <h2>The worst mistakes are not random.</h2>
+    <p>They happen when you are sleep-deprived, overloaded, or rushing late at night. AI cannot see that, so it executes destructive commands and overwrites files with false confidence anyway.</p>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="rn">01</div><div><h3>Observe timing</h3><p>A local daemon monitors typing rhythm, corrections, and activity. Never content.</p></div></div>
+    <div class="row"><div class="rn">02</div><div><h3>Analyze on-device</h3><p>Stress, focus, and fatigue are computed on your machine. No cloud required.</p></div></div>
+    <div class="row"><div class="rn">03</div><div><h3>Gate unsafe actions</h3><p>Destructive operations are blocked when fatigue is high. Overrides are logged to an audit trail.</p></div></div>
+  </div>
+</div></section>
+
+<section class="alt"><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">02</span>MCP tools</span>
+    <h2>What Claude and other agents receive.</h2>
+  </div>
+  <div class="cols2">
+    <div class="deflist">
+      <div class="item"><h4 class="mono">get_user_state</h4><p>Stress, focus, and fatigue levels, plus response-style recommendations.</p></div>
+      <div class="item"><h4 class="mono">check_dangerous_command</h4><p>Whether a command is dangerous and fatigue exceeds threshold.</p></div>
+    </div>
+    <div class="deflist">
+      <div class="item"><h4 class="mono">safe_execute_command</h4><p>Runs shell commands with interlock protection. Blocks when fatigued.</p></div>
+      <div class="item"><h4 class="mono">safe_write_file</h4><p>Blocks large destructive rewrites when the user is fatigued.</p></div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:2.5rem"><strong>Blocked when fatigue is high:</strong> <span class="mono">rm -rf</span>, <span class="mono">DROP TABLE</span>, <span class="mono">git push --force</span>, <span class="mono">kubectl delete</span>, <span class="mono">terraform destroy</span>. Override with <span class="mono">OVERRIDE SAFETY PROTOCOL: [reason]</span>, logged to <span class="mono">~/.humsana/audit.log</span>.</div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">03</span>Pricing</span>
+    <h2>Start free. Upgrade for interlocks.</h2>
+  </div>
+  <div class="price">
+    <div>
+      <div class="pn">Free</div>
+      <div class="pa">$0</div>
+      <ul class="plain"><li>Local daemon</li><li>MCP integration</li><li>Adaptive AI responses</li><li>Fully on-device</li></ul>
+      <a class="btn btn-ghost" href="https://github.com/sriramnatrajhen" style="margin-top:1.4rem">Get started</a>
+    </div>
+    <div>
+      <div class="pn">Pro</div>
+      <div class="pa">$10<span> / mo</span></div>
+      <ul class="plain"><li>Everything in Free</li><li>Cognitive Interlock</li><li>AI write protection</li><li>Override audit logs</li></ul>
+      <a class="btn btn-primary" href="mailto:contact@humsana.com?subject=Humsana%20Pro" style="margin-top:1.4rem">Start Pro</a>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap foot-in">
+  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
+  <div class="foot-links">
+    <a href="voice.html">Voice</a><a href="developers.html">Developers</a><a href="partners.html">Partners</a><a href="swan.html">Swan</a><a href="privacy.html">Privacy</a><a href="https://github.com/sriramnatrajhen">GitHub</a>
+  </div>
+  <div class="foot-copy">&copy; 2026 Humsana</div>
+</div></footer>
+
+</body>
+</html>
