@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Humsana Swan: terms of service</title>
+<meta name="description" content="Terms of service for the Swan voice screening service, including its use as a connector inside Muse.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav><div class="wrap nav-in">
+  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
+  <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
+  <div class="nav-links" id="nav">
+    <a href="voice.html">Voice</a>
+    <a href="developers.html">Developers</a>
+    <a href="partners.html">Partners</a>
+    <a href="swan.html" class="active">Swan</a>
+    <a class="nav-cta" href="https://github.com/sriramnatrajhen">GitHub</a>
+  </div>
+</div></nav>
+
+<section style="padding-top:5rem"><div class="wrap"><div class="prose">
+  <span class="label"><span class="n">Swan</span>Terms</span>
+  <h1 style="font-size:clamp(2.2rem,5vw,3.2rem);font-weight:600;letter-spacing:-0.03em;margin:1rem 0 .5rem">Swan Terms of Service</h1>
+  <p class="updated">Last updated: September 2026</p>
+
+  <p style="margin-top:1.5rem;color:var(--ink);font-weight:400">These terms govern the Swan voice screening service, including its use as a connector inside a third-party assistant such as Muse. By submitting a recording to Swan, or by using an application that calls Swan, you accept them.</p>
+
+  <h2>Who provides the service</h2>
+  <p>Swan is provided by Humsana. When Swan is used inside Muse, Humsana provides the screening service and Meta provides the assistant. Meta's terms govern Muse, the account, and the conversation. These terms govern the screening and its result.</p>
+
+  <h2>What Swan does</h2>
+  <p>Swan screens a recording and reports three things separately: whether the voice is likely human or likely synthetic, how much the available evidence is worth, and a recommended action. It supports a decision about a recording. It does not replace one.</p>
+
+  <h2>What Swan does not do</h2>
+  <ul>
+    <li>It does not identify a speaker. It cannot tell you who is talking, and it never reports an identity match</li>
+    <li>It does not report a calibrated probability. The score is a detector output, not a percentage chance, and it is withheld when the evidence is weak</li>
+    <li>It is not certain. Recordings of real people are sometimes flagged, and synthetic recordings are sometimes missed, particularly on telephone band audio and on short clips</li>
+    <li>It is not a finding about a person. It describes a recording, not anyone's intent or conduct</li>
+    <li>It is not a forensic instrument, and no result from it should be presented as proof in any proceeding or dispute</li>
+  </ul>
+
+  <h2>Minimum length and inconclusive results</h2>
+  <p>Recordings shorter than ten seconds are not assessed, and the service states this rather than guessing. Longer recordings sometimes return an inconclusive result when the audio quality does not support an assessment. An inconclusive result is a normal outcome, and it means the recording should be verified another way.</p>
+
+  <h2>Acceptable use</h2>
+  <p>You may screen recordings that you have the right to screen. You may not use Swan to:</p>
+  <ul>
+    <li>Record, intercept, or analyse communications unlawfully, or without any consent required in your jurisdiction</li>
+    <li>Tell any person that a voice has been proven to be synthetic, or proven to be human</li>
+    <li>Present an inconclusive result as a determination</li>
+    <li>Build a database of voice characteristics about identified people</li>
+    <li>Attempt to reverse engineer the service, exceed its rate limits, or bypass its access controls</li>
+    <li>Screen recordings of children, or screen people without a basis for doing so</li>
+  </ul>
+
+  <h2>Access and keys</h2>
+  <p>Access is by API key, issued to an integration. Keep the key confidential, do not embed it in client software where others can read it, and tell us if you believe it has been exposed so that it can be rotated. You are responsible for the requests made with your key.</p>
+
+  <h2>Availability and limits</h2>
+  <p>The service is provided as is, subject to rate limits, upload limits, and maintenance. It may change, and it may be unavailable. It should not be the only control protecting you from fraud or impersonation.</p>
+
+  <h2>Fees</h2>
+  <p>Where a paid plan applies, the price and its terms are those presented when you obtain the service. If you are using Swan through Muse, any payment you make through the assistant is handled by that platform, not by Humsana.</p>
+
+  <h2>No warranty</h2>
+  <p>To the extent permitted by law, the service is provided without warranties of any kind, including accuracy and fitness for a particular purpose. No result, and no recommended action, is a guarantee about any recording or any person.</p>
+
+  <h2>Limitation of liability</h2>
+  <p>To the extent permitted by law, Humsana is not liable for indirect, incidental, or consequential losses, or for losses arising from a decision made in reliance on a screening result, including payments made, contracts entered into, or opportunities declined. Where liability cannot be excluded, it is limited to the amount paid for the service in the three months before the claim.</p>
+
+  <h2>Changes to these terms</h2>
+  <p>These terms may change. The date at the top of this page shows the current version, and material changes are described on this page.</p>
+
+  <h2>Governing law</h2>
+  <p>These terms are governed by the laws of India, and the courts of Chennai have jurisdiction.</p>
+
+  <h2>Contact</h2>
+  <p>Email: <a class="accent" href="mailto:contact@humsana.com">contact@humsana.com</a></p>
+</div></div></section>
+
+<footer><div class="wrap foot-in">
+  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
+  <div class="foot-links">
+    <a href="voice.html">Voice</a><a href="developers.html">Developers</a><a href="partners.html">Partners</a><a href="swan.html">Swan</a><a href="swanprivacy.html">Swan privacy</a><a href="swanterms.html">Swan terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a>
+  </div>
+  <div class="foot-copy">&copy; 2026 Humsana</div>
+</div></footer>
+
+</body>
+</html>
