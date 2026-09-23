@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Humsana Swan: get an API key</title>
+<meta name="description" content="Get a Swan API key. Issued immediately, without an account, with the rate and length limits stated.">
+<link rel="stylesheet" href="style.css">
+<style>
+  .issue-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+  .issue-note{color:var(--muted);font-size:.86rem;font-weight:300}
+  .result{margin-top:1.6rem}
+  .result h3{font-size:1rem;margin-bottom:.7rem}
+  .keyval{word-break:break-all;font-size:.86rem}
+  .result p{color:var(--muted);font-weight:300;font-size:.9rem;margin-top:.8rem;max-width:60ch}
+  .result p.warn{color:var(--accent)}
+  .copied{margin-left:.6rem;font-size:.8rem;color:var(--accent)}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap nav-in">
+  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
+  <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
+  <div class="nav-links" id="nav">
+    <a href="voice.html">Voice</a>
+    <a href="developers.html">Developers</a>
+    <a href="partners.html">Partners</a>
+    <a href="swan.html" class="active">Swan</a>
+    <a class="nav-cta" href="https://github.com/sriramnatrajhen">GitHub</a>
+  </div>
+</div></nav>
+
+<header class="hero"><div class="wrap"><div class="inner">
+  <span class="label"><span class="n">Swan</span>Access</span>
+  <h1>Get an API key.</h1>
+  <p class="lead">You do not need a key to screen a recording. The service answers a request that carries no credential at all, at a lower limit, which is what someone using Swan through a platform or an assistant will do.</p>
+  <p class="lead">A key raises that limit, and it is issued to this browser as soon as you ask for one. There is no account to create, no email to confirm, and nothing to pay. Only the hash of a key is stored, so the key itself is shown once and cannot be looked up afterwards.</p>
+</div></div></header>
+
+<section><div class="wrap">
+  <div class="metrics">
+    <div class="m"><div class="mv">20 / 120</div><div class="mk">Requests per hour, without a key and with one</div></div>
+    <div class="m"><div class="mv">25 MB</div><div class="mk">Largest request accepted</div></div>
+    <div class="m"><div class="mv">10 to 120s</div><div class="mk">Audio length per request</div></div>
+  </div>
+</div></section>
+
+<section class="alt"><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">01</span>Issue a key</span>
+    <h2>One button, one key, no account.</h2>
+    <p>Two keys are issued per address per hour and six per day, with a daily ceiling for the service as a whole. When a limit is reached the response says how long to wait. It does not fail silently, and it does not hand out a key that will not work.</p>
+  </div>
+  <div class="issue-row">
+    <button class="btn btn-primary" id="issue" type="button">Issue a key</button>
+    <span class="issue-note">The key is created by the service at api.humsana.com and returned to this page.</span>
+  </div>
+  <div class="result" id="result" hidden></div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">02</span>What access does</span>
+    <h2>One capability, three results.</h2>
+    <p>Screening is available with or without a key. A key raises the hourly limit and is what lets you look up an earlier analysis by its id. There is no account to manage, no plan to select, and no other data the service will return.</p>
+  </div>
+  <div class="rows">
+    <div class="row"><div class="rn">01</div><div><h3>Screening</h3><p>Send a recording and receive three results: whether the voice is likely human or likely synthetic, the quality of the evidence behind that finding, and one recommended action, which is proceed, verify or hold.</p></div></div>
+    <div class="row"><div class="rn">02</div><div><h3>Length</h3><p>At least ten seconds of speech for a finding, up to 120 seconds per request, and 25 MB. A shorter recording returns an inconclusive result rather than an error, and a longer one is refused with the reason stated.</p></div></div>
+    <div class="row"><div class="rn">03</div><div><h3>Formats</h3><p>Wav, mp3, m4a, ogg, flac and webm. Telephone band and compressed audio are accepted, and reduce what the service is willing to report rather than producing a finding.</p></div></div>
+    <div class="row"><div class="rn">04</div><div><h3>What it is not</h3><p>Not speaker identification, not a calibrated probability, and not evidence on its own. A result describes a recording. It never claims that the person speaking has been identified.</p></div></div>
+    <div class="row"><div class="rn">05</div><div><h3>Data</h3><p>Audio is decoded in memory and never stored. A metadata record is kept for 30 days so a result can be explained later. Details are in the <a class="accent" href="swanprivacy.html">Swan privacy policy</a>.</p></div></div>
+  </div>
+</div></section>
+
+<section class="alt"><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">03</span>Use it</span>
+    <h2>One request, from any client.</h2>
+    <p>Send the key in an Authorization header as a bearer token. The recording goes in the file field, and the decision comes back in the same response.</p>
+  </div>
+  <div class="code">curl -sS -X POST "https://api.humsana.com/v1/voice/screen/upload" \
+  -H "Authorization: Bearer $SWAN_KEY" \
+  -F "file=@recording.wav" | python3 -m json.tool</div>
+  <p style="color:var(--muted);font-weight:300;font-size:.9rem;margin-top:1rem">Documentation: <a class="accent" href="https://api.humsana.com/docs">api.humsana.com/docs</a>. OpenAPI document: <a class="accent" href="https://api.humsana.com/openapi.json">api.humsana.com/openapi.json</a>.</p>
+</div></section>
+
+<div class="cta-band alt"><div class="wrap">
+  <h2>A screening result is evidence, not proof.</h2>
+  <p>The service states what a recording supports, and says so when it supports neither finding.</p>
+  <div class="cta-row" style="justify-content:center;display:flex;gap:.8rem;flex-wrap:wrap">
+    <a class="btn btn-primary" href="https://api.humsana.com/docs">API documentation</a>
+    <a class="btn btn-ghost" href="mailto:contact@humsana.com">Contact</a>
+  </div>
+</div></div>
+
+<footer><div class="wrap foot-in">
+  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
+  <div class="foot-links">
+    <a href="voice.html">Voice</a><a href="developers.html">Developers</a><a href="partners.html">Partners</a><a href="swan.html">Swan</a><a href="swankey.html">API key</a><a href="swanprivacy.html">Swan privacy</a><a href="swanterms.html">Swan terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a>
+  </div>
+  <div class="foot-copy">&copy; 2026 Humsana</div>
+</div></footer>
+
+<script>
+(function () {
+  var button = document.getElementById('issue');
+  var result = document.getElementById('result');
+  if (!button || !result) { return; }
+
+  function line(text, className) {
+    var p = document.createElement('p');
+    if (className) { p.className = className; }
+    p.textContent = text;
+    return p;
+  }
+
+  function showKey(key, limits) {
+    result.textContent = '';
+    var heading = document.createElement('h3');
+    heading.textContent = 'Your API key';
+    result.appendChild(heading);
+
+    var block = document.createElement('div');
+    block.className = 'code keyval';
+    block.textContent = key;
+    result.appendChild(block);
+
+    var copy = document.createElement('button');
+    copy.className = 'btn btn-ghost';
+    copy.type = 'button';
+    copy.style.marginTop = '.8rem';
+    copy.textContent = 'Copy key';
+    copy.addEventListener('click', function () {
+      navigator.clipboard.writeText(key).then(function () {
+        var note = document.createElement('span');
+        note.className = 'copied';
+        note.textContent = 'Copied';
+        copy.parentNode.insertBefore(note, copy.nextSibling);
+        setTimeout(function () { note.remove(); }, 2000);
+      });
+    });
+    result.appendChild(copy);
+
+    result.appendChild(line('This is the only time the key is shown. Send it in an Authorization header as a bearer token, and keep it somewhere private.', 'warn'));
+    result.appendChild(line('Rate limit: ' + limits + ' requests per hour. If you need a different limit, write to contact@humsana.com.'));
+    result.appendChild(line('The request is a multipart upload with the recording in the file field. The example below uses the same endpoint.'));
+    button.disabled = true;
+  }
+
+  function showProblem(body) {
+    result.textContent = '';
+    var heading = document.createElement('h3');
+    heading.textContent = body.message ? body.message : 'The request was refused.';
+    result.appendChild(heading);
+    if (body.remedy) { result.appendChild(line(body.remedy)); }
+    result.appendChild(line('If you already have a key, reuse it. Otherwise write to contact@humsana.com.'));
+    button.disabled = false;
+  }
+
+  button.addEventListener('click', function () {
+    button.disabled = true;
+    result.hidden = false;
+    result.textContent = '';
+    result.appendChild(line('Requesting a key...'));
+
+    fetch('https://api.humsana.com/v1/keys', { method: 'POST' })
+      .then(function (response) {
+        return response.json().then(function (body) {
+          return { ok: response.ok, body: body };
+        });
+      })
+      .then(function (outcome) {
+        if (outcome.ok && outcome.body.api_key) {
+          showKey(outcome.body.api_key, outcome.body.rate_limit_per_hour);
+        } else {
+          showProblem(outcome.body);
+        }
+      })
+      .catch(function () {
+        result.textContent = '';
+        result.appendChild(line('The request did not reach the service. Check the connection and try again.'));
+        button.disabled = false;
+      });
+  });
+})();
+</script>
+
+</body>
+</html>
