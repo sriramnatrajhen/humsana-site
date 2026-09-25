@@ -49,8 +49,8 @@
   </ul>
 
   <h2>What is kept</h2>
-  <p>Each screening produces a metadata record: the screening identifier, the date and time, the length of the recording, the detector version, the outcome, the evidence grade, the recommended action, and the audio quality measurements behind that grade.</p>
-  <p>The record exists so that a result can be traced and explained, which matters when a screening is used to support a decision. It contains no audio. It also contains no hash or fingerprint of the audio, so the record cannot be used to recognise a recording later.</p>
+  <p>Each screening produces a metadata record: the screening identifier, the date and time, the length of the recording, the detector version, the outcome, the evidence grade, the recommended action, the detector's score, the audio quality measurements behind that grade, the context the caller supplied, meaning what they stated about where the message came from and what it asked for, and whether the request used a reviewer credential. A caller may also state whether the person on the recording was a person or an automated agent. That statement is compared with the audio and reported in the response. It is not written to the record.</p>
+  <p>The record exists so that a result can be traced and explained, which matters when a screening is used to support a decision. It contains no audio. It contains no hash or fingerprint of the audio either, so it cannot be used to recognise a recording later, or to tell whether two recordings are the same. The digest of a recording is returned to the caller in that screening's response, so they can confirm the result belongs to the file they sent, and is not stored here.</p>
   <p>The record is kept for 30 days, after which it is no longer served or used.</p>
 
   <h2>Server logs</h2>

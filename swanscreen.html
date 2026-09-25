@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Humsana Swan: screen a recording in the browser</title>
+<meta name="description" content="Drop in a voice recording and see the screening result: the finding, the quality of the evidence, and one recommended action. No account and no key.">
+<link rel="stylesheet" href="style.css">
+<style>
+  .screen-box{border:1px solid var(--line,#e3e5e8);border-radius:14px;padding:1.6rem;background:var(--card,#fff)}
+  .screen-box .fieldrow{display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-end;margin-bottom:1.1rem}
+  .screen-box label{display:block;font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted,#6b7280);margin-bottom:.35rem}
+  .screen-box input[type=file]{font:inherit;padding:.6rem;border:1px dashed var(--line,#cfd3d8);border-radius:10px;width:100%}
+  .screen-box select{font:inherit;padding:.6rem .7rem;border:1px solid var(--line,#cfd3d8);border-radius:10px;background:transparent;min-width:11rem}
+  .screen-box button{font:inherit;padding:.72rem 1.3rem;border-radius:10px;border:0;background:var(--fg,#111);color:var(--bg,#fff);cursor:pointer}
+  .screen-box button[disabled]{opacity:.5;cursor:progress}
+  .result{margin-top:1.4rem;display:none}
+  .result.on{display:block}
+  .verdict{font-size:1.5rem;font-weight:600;margin:.1rem 0 .2rem}
+  .triplet{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));margin:.9rem 0 1.1rem}
+  .triplet .t{border:1px solid var(--line,#e3e5e8);border-radius:10px;padding:.85rem}
+  .triplet .tk{font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted,#6b7280)}
+  .triplet .tv{font-weight:600;margin-top:.15rem}
+  .notes{margin:.2rem 0 1rem;padding-left:1.1rem}
+  .notes li{margin:.25rem 0}
+  .status{font-size:.92rem;color:var(--muted,#6b7280);min-height:1.2rem}
+  .status.err{color:#b3261e}
+  details.raw{margin-top:1rem}
+  details.raw pre{overflow:auto;font-size:.82rem;background:rgba(0,0,0,.04);padding:.9rem;border-radius:10px}
+  .sample{margin-top:.2rem}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap nav-in">
+  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
+  <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
+  <div class="nav-links" id="nav">
+    <a href="voice.html">Voice</a>
+    <a href="developers.html">Developers</a>
+    <a href="partners.html">Partners</a>
+    <a href="swan.html" class="active">Swan</a>
+    <a class="nav-cta" href="https://github.com/sriramnatrajhen">GitHub</a>
+  </div>
+</div></nav>
+
+<header class="hero"><div class="wrap"><div class="inner">
+  <span class="label"><span class="n">Swan</span>Screen a recording</span>
+  <h1>Drop in a recording and read the result.</h1>
+  <p class="lead">No account, no key and nothing to install. Choose a voice message, a voicemail or a call recording, and the service returns the same three results a connected assistant receives: the finding, the quality of the evidence behind it, and one recommended action. If you say whether the person on the recording was a person or an automated agent, the response also reports whether the audio agrees with that.</p>
+</div></div></header>
+
+<section><div class="wrap">
+  <div class="screen-box">
+    <div class="fieldrow">
+      <div style="flex:1 1 18rem">
+        <label for="clip">Recording</label>
+        <input type="file" id="clip" accept="audio/*,.wav,.mp3,.m4a,.ogg,.flac,.webm">
+      </div>
+      <div>
+        <label for="declared">Who was it?</label>
+        <select id="declared">
+          <option value="">Not stated</option>
+          <option value="human">A person</option>
+          <option value="agent">An automated agent</option>
+        </select>
+      </div>
+      <div>
+        <button id="go" type="button">Screen it</button>
+      </div>
+    </div>
+    <p class="status" id="status">Accepts wav, mp3, m4a, ogg, flac and webm, up to 25 MB. Between 10 and 120 seconds of audio. A screening usually takes about two seconds.</p>
+    <p class="status sample">No recording to hand? <a class="accent" href="#" id="sample">Screen a sample instead</a>. It is twenty three seconds of synthetic speech we generated, so you can see a finding without hunting for audio of your own.</p>
+
+    <div class="result" id="result">
+      <div class="triplet">
+        <div class="t"><div class="tk">Finding</div><div class="tv" id="r-verdict"></div></div>
+        <div class="t"><div class="tk">Evidence quality</div><div class="tv" id="r-evidence"></div></div>
+        <div class="t"><div class="tk">Recommended action</div><div class="tv" id="r-action"></div></div>
+      </div>
+      <p id="r-summary"></p>
+      <p id="r-declaration" style="display:none"></p>
+      <p><strong>What to do next.</strong> <span id="r-next"></span></p>
+      <ul class="notes">
+        <li>The recording is not stored, in any format. The metadata record is kept for 30 days.</li>
+        <li>This service describes the audio. It does not identify the speaker, and a finding is evidence, not proof.</li>
+        <li>A screening reference is shown below. Keep it if you may want to check the result later; a key is needed to look one up.</li>
+      </ul>
+      <p class="status" id="r-ref"></p>
+      <details class="raw">
+        <summary>The full response</summary>
+        <pre id="r-json"></pre>
+      </details>
+    </div>
+  </div>
+</div></section>
+
+<section class="alt"><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">01</span>How to read it</span>
+    <h2>Three results, stated separately.</h2>
+  </div>
+  <div class="row"><div class="rn">01</div><div><h3>Finding</h3><p>Likely human, likely synthetic, or inconclusive. Inconclusive is a normal outcome, and the most common one on recordings made in an ordinary room. It is returned whenever the recording cannot support either of the other two: too short, too narrow in bandwidth, or carrying too much background noise for a voice to be judged. A noisy recording is answered with a request for a quieter one rather than a guess.</p></div></div>
+  <div class="row"><div class="rn">02</div><div><h3>Evidence quality</h3><p>Strong, adequate, limited or insufficient. This describes the recording: its length, its bandwidth, and how much of it is speech. A degraded phone recording lowers this value rather than producing a finding from it.</p></div></div>
+  <div class="row"><div class="rn">03</div><div><h3>Recommended action</h3><p>Proceed, verify, or hold. When the action is verify, the response asks the person to confirm through a channel they already trust, which is the step that matters before money or account access moves.</p></div></div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">02</span>Connecting it</span>
+    <h2>Use the same service from your own software.</h2>
+  </div>
+  <div class="row"><div class="rn">01</div><div><h3>One request</h3><p>The API takes a recording and returns the same result you see here. It is documented at <a class="accent" href="https://api.humsana.com/docs">api.humsana.com/docs</a>, where the page has a "Try it out" button, so a first test needs no code.</p></div></div>
+  <div class="row"><div class="rn">02</div><div><h3>Audio as it arrives</h3><p>A socket accepts audio while a call is still in progress and answers every few seconds. The answer may only escalate: once a window has found synthetic speech, nothing later in the session returns a cleaner verdict.</p></div></div>
+  <div class="row"><div class="rn">03</div><div><h3>Access</h3><p>Requests are answered without an account. A key is issued at <a class="accent" href="swankey.html">Get an API key</a> for callers who want their own allowance and a record they can look up by reference.</p></div></div>
+</div></section>
+
+<section class="alt"><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">03</span>What this build is</span>
+    <h2>An evaluation, and we are looking for recordings.</h2>
+  </div>
+  <div class="row"><div class="rn">01</div><div><h3>Where it stands</h3><p>This is a working service under evaluation, not a finished product. Measured against interview-style recordings, it catches most synthetic speech on a wideband channel, calls telephone audio inconclusive rather than guessing, and returns no finding at all when the recording is too noisy or too short to judge. It does not identify anyone.</p></div></div>
+  <div class="row"><div class="rn">02</div><div><h3>What we are asking for</h3><p>A recording from your own setting, and what you expected it to come back as. Voice messages, call recordings, interview audio, support calls. The channels that matter to us most are the ones we cannot reproduce ourselves, so a recording that comes back inconclusive is useful to us rather than a failure.</p></div></div>
+  <div class="row"><div class="rn">03</div><div><h3>What happens to it</h3><p>Screened in memory and not stored, in any format. The record kept for thirty days holds the outcome and the measurements behind it, no audio, and no fingerprint of the audio. Details are in the <a class="accent" href="swanprivacy.html">privacy policy</a>.</p></div></div>
+  <div class="row"><div class="rn">04</div><div><h3>Getting in touch</h3><p>Write to <a class="accent" href="mailto:ram@humsana.com">ram@humsana.com</a>, or use <a class="accent" href="https://api.humsana.com/docs">the API documentation</a> if you would rather wire it into something first.</p></div></div>
+</div></section>
+
+<div class="cta-band alt"><div class="wrap">
+  <h2>A screening result is evidence, not proof.</h2>
+  <p>Swan describes a recording. It does not identify the speaker, and it reports when it cannot reach a finding.</p>
+  <div class="cta-row" style="justify-content:center;display:flex;gap:.8rem;flex-wrap:wrap">
+    <a class="btn btn-primary" href="https://api.humsana.com/docs">API documentation</a>
+    <a class="btn btn-ghost" href="swan.html">How Swan works</a>
+  </div>
+</div></div>
+
+<footer><div class="wrap foot-in">
+  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
+  <div class="foot-links">
+    <a href="voice.html">Voice</a><a href="developers.html">Developers</a><a href="partners.html">Partners</a><a href="swan.html">Swan</a><a href="swanscreen.html">Screen a recording</a><a href="swankey.html">API key</a><a href="swanprivacy.html">Swan privacy</a><a href="swanterms.html">Swan terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a>
+  </div>
+  <div class="foot-copy">&copy; 2026 Humsana</div>
+</div></footer>
+
+<script>
+(function () {
+  var API = "https://api.humsana.com/v1/voice/screen/upload";
+  var SAMPLE = "swan-sample-synthetic.mp3";
+  var MAX_BYTES = 25 * 1024 * 1024;
+  var go = document.getElementById("go");
+  var clip = document.getElementById("clip");
+  var declared = document.getElementById("declared");
+  var status = document.getElementById("status");
+  var result = document.getElementById("result");
+  var sampleLink = document.getElementById("sample");
+
+  function say(text, isError) {
+    status.textContent = text;
+    status.className = isError ? "status err" : "status";
+  }
+
+  function show(id, value) {
+    document.getElementById(id).textContent = value == null ? "" : value;
+  }
+
+  function render(body) {
+    show("r-verdict", body.voice.verdict.replace(/_/g, " ").toLowerCase());
+    show("r-evidence", body.voice.evidence_quality.toLowerCase());
+    show("r-action", body.risk.action.toLowerCase());
+    show("r-summary", body.summary);
+    show("r-next", body.recommended_action);
+    var decl = body.declaration;
+    var line = document.getElementById("r-declaration");
+    if (decl && decl.check !== "not_declared") {
+      line.textContent = decl.summary;
+      line.style.display = "block";
+    } else {
+      line.style.display = "none";
+    }
+    show("r-ref", "Screening reference " + body.analysis_id + " of " +
+         body.audio.duration_seconds + " seconds of audio.");
+    document.getElementById("r-json").textContent = JSON.stringify(body, null, 2);
+    result.className = "result on";
+  }
+
+  function failFromResponse(res, body) {
+    var code = (body && body.code) || ("HTTP " + res.status);
+    var remedy = (body && body.remedy) || "";
+    say(code.replace(/_/g, " ").toLowerCase() + ". " + remedy, true);
+  }
+
+  function screen(file) {
+    if (file.size > MAX_BYTES) {
+      say("That file is larger than 25 MB, which is the limit. Trim it to the part that matters.", true);
+      return;
+    }
+    var form = new FormData();
+    form.append("file", file, file.name);
+    if (declared.value) { form.append("declared_origin", declared.value); }
+
+    go.disabled = true;
+    result.className = "result";
+    say("Screening. This usually takes about two seconds.");
+    fetch(API, { method: "POST", body: form })
+      .then(function (res) {
+        return res.json().then(function (body) { return { res: res, body: body }; });
+      })
+      .then(function (out) {
+        if (!out.res.ok) { failFromResponse(out.res, out.body); return; }
+        say("Screened. The three results are below.");
+        render(out.body);
+      })
+      .catch(function () {
+        say("The request did not complete. Check your connection and try again.", true);
+      })
+      .then(function () { go.disabled = false; });
+  }
+
+  go.addEventListener("click", function () {
+    var file = clip.files && clip.files[0];
+    result.className = "result";
+    if (!file) { say("Choose a recording first, or screen the sample.", true); return; }
+    screen(file);
+  });
+
+  sampleLink.addEventListener("click", function (ev) {
+    ev.preventDefault();
+    result.className = "result";
+    say("Fetching the sample recording.");
+    go.disabled = true;
+    fetch(SAMPLE)
+      .then(function (res) { return res.blob(); })
+      .then(function (blob) {
+        var name = "swan-sample-synthetic.mp3";
+        var file = window.File ? new File([blob], name, { type: "audio/mpeg" }) : blob;
+        if (file.name === undefined) { file.name = name; }
+        screen(file);
+      })
+      .catch(function () { say("The sample could not be fetched. Choose a recording of your own instead.", true); })
+      .then(function () { go.disabled = false; });
+  });
+})();
+</script>
+
+</body>
+</html>
