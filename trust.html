@@ -3,97 +3,101 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trust: Humsana</title>
-<meta name="description" content="The method behind each figure, what is not claimed, what is stored, and how to evaluate this without our help.">
+<title>Trust: sources, measurements and limits. Humsana</title>
+<meta name="description" content="What Humsana claims, the method behind every number, and the limits stated plainly.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <nav><div class="wrap nav-in">
-  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
+  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana"></a>
   <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
   <div class="nav-links" id="nav">
     <a href="swan.html">Swan</a>
-    <a class="nav-cta" href="sandbox.html">See it refuse</a>
+    <a class="nav-cta" href="sandbox.html">See it work</a>
   </div>
 </div></nav>
 
-<header class="hero"><div class="wrap"><div class="inner">
+<header class="hero"><div class="wrap">
   <span class="label"><span class="n">01</span>Trust</span>
   <h1>What we claim, and what we do not.</h1>
-  <p class="lead">Every number carries its method. Every gap is stated here rather than found later.</p>
-</div></div></header>
+  <p class="lead" style="margin-top:1.4rem">Every number on this site carries its method. Every gap is stated here rather than left for you to find.</p>
+</div></header>
 
 <section><div class="wrap">
-  <div class="head">
-    <span class="label"><span class="n">02</span>Measurements</span>
-    <h2>The method behind each figure.</h2>
+  <div class="cols3">
+    <div>
+      <div class="ch">Regulation</div>
+      <h3>Where the principle comes from</h3>
+      <p>The FCA's 2026 Mills Review discusses the move from AI assistance to AI delegation, and the need for clear accountability, audit trails, explainable outcomes and meaningful human approval. <a href="https://www.fca.org.uk">fca.org.uk</a></p>
+      <p style="margin-top:1rem">Strong customer authentication, RTS Article 5, requires certain remote payments to be dynamically linked to the amount and the payee. Change either and the authentication is invalid.</p>
+      <p style="margin-top:1rem">Confirmation of Payee, Specific Direction 17, applies when a new payee is added or an existing payee's details change. <a href="https://www.wearepay.uk">wearepay.uk</a></p>
+      <p style="margin-top:1rem">Humsana applies the same shape to autonomous execution: make the approval explicit, bind it to the action, and check it again when the action happens. We are not claiming to satisfy any of these requirements.</p>
+    </div>
+    <div>
+      <div class="ch">Measurement</div>
+      <h3>Authorization cost</h3>
+      <p>5.8 ms median to authorize one exact action, 2.9 ms median to check it at execution, worst case 12.9 ms over a run of 40 actions, on the current single-host deployment. The work is a deterministic comparison of bound fields, not a model call.</p>
+      <h3>Agent variance</h3>
+      <p>Seven runs of one autonomous task, on one provider, in one day. Seven distinct artifacts. The recipient set was the same every time. All 42 presentations were refused before the send API. Zero matched, zero grants consumed, and 14 messages that the unwatched executor really sent.</p>
+      <h3>Voice</h3>
+      <p>The noise gate is set at 30 dB. Across the evaluation, synthetic detections that became affirmatives fell from 64 to 0. Audio below the floor returns inconclusive rather than cleared.</p>
+      <p class="note">None of this is a benchmark. It is what the current deployment and the current test corpora produced. The full method, the corpora and the failures are in the repository.</p>
+    </div>
+    <div>
+      <div class="ch">Limits</div>
+      <h3>What is true today</h3>
+      <ul class="facts">
+        <li><span>SOC 2</span><span>No</span></li>
+        <li><span>ISO 27001</span><span>No</span></li>
+        <li><span>Third-party audit</span><span>No</span></li>
+        <li><span>HA deployment</span><span>No</span></li>
+        <li><span>Paying customers</span><span>No</span></li>
+        <li><span>Named customer</span><span>No</span></li>
+        <li><span>Delegation verified</span><span>No</span></li>
+        <li><span>Interview ready</span><span>No</span></li>
+      </ul>
+      <p class="callout" style="margin-top:2rem">The sandbox is real. The authorization boundary is real. The production claims stop there.</p>
+    </div>
   </div>
-  <ul class="plain">
-    <li>Authorization and execution cost: 5.8 ms median to authorize, 2.9 ms to enforce, worst case 12.9 ms over 40 actions. Measured on the current single-host deployment, with no network hop and no load generator. A cost check, not a benchmark.</li>
-    <li>Agent variance: seven runs of one workflow produced seven distinct artifacts, with an identical recipient set in 21 of 21 comparisons and no amount differing. The decision was stable. The bytes were not. That is why a digest is bound, and why the approved artifact should be archived and the archive executed.</li>
-    <li>Refusals and messages: 42 cross-run presentations refused before the send API, 0 matched, 0 grants consumed. An executor with no boundary really sent 14 messages. One task, one provider, one day.</li>
-    <li>Noise gate: at 30 dB high-band SNR, affirmative clearances fell from 64 to 0 as noise was added. Noisy audio is never cleared.</li>
-  </ul>
-</div></section>
-
-<section class="alt"><div class="wrap">
-  <div class="head">
-    <span class="label"><span class="n">03</span>Not claimed</span>
-    <h2>Stated plainly.</h2>
-  </div>
-  <ul class="plain">
-    <li>No SOC 2, no ISO 27001, no third-party audit.</li>
-    <li>No high availability. One small host today.</li>
-    <li>No paying customers, and no production deployment handling consequential actions for a customer.</li>
-    <li>No verification of a presented delegation. Scope, revocation and expiry are not enforced yet.</li>
-    <li>No named customer, and no claim that an external party already accepts our receipts.</li>
-    <li>Swan is not presented as interview-ready. It has a coverage limit, and degraded audio is one.</li>
-  </ul>
-</div></section>
-
-<section><div class="wrap">
-  <div class="head">
-    <span class="label"><span class="n">04</span>Data</span>
-    <h2>What is stored, and what is not.</h2>
-  </div>
-  <ul class="plain">
-    <li>Each record holds the claim, what was established, the grant with its bound digests, the confirmation and its approver, and the receipt.</li>
-    <li>The parameters of the authorized action are stored, because that is what makes a field comparable later.</li>
-    <li>Voice audio is processed to return a result and not stored. Request metadata is kept for 30 days.</li>
-    <li>The sandbox runs on generated data, with its own register and no production credentials.</li>
-  </ul>
-</div></section>
-
-<section class="alt"><div class="wrap">
-  <div class="head">
-    <span class="label"><span class="n">05</span>Alongside, not instead</span>
-    <h2>Where it sits with your controls.</h2>
-  </div>
-  <p>Screening, monitoring and name checking produce results. Humsana consumes those results and binds them into the thing it enforces, so a result that changes after approval is refused like any other field. It does not produce them, and it does not replace them.</p>
-  <p class="callout">We are not claiming to satisfy any regulatory requirement. We are claiming that the principle they share, an approval bound to the exact action, is buildable today for actions no person performs.</p>
 </div></section>
 
 <section><div class="wrap">
   <div class="head">
-    <span class="label"><span class="n">06</span>Evaluate us</span>
-    <h2>Three things to check without our help.</h2>
+    <span class="label"><span class="n">02</span>Data</span>
+    <h2>What is kept, and for how long.</h2>
+  </div>
+  <div class="deflist">
+    <div class="item"><h4>A record holds</h4><p>What the caller claimed, what was established, the grant with the digest of every bound field, the confirmation with its approver, and the receipt for what executed or was refused.</p></div>
+    <div class="item"><h4>Voice audio</h4><p>Processed to reach a verdict and not stored. Where a voice check is used at all, the evidence contributes a state. It cannot clear a caller on its own.</p></div>
+    <div class="item"><h4>Metadata</h4><p>Retained for 30 days on the current deployment. The retention policy changes when this runs inside your environment, because the store does.</p></div>
+    <div class="item"><h4>The sandbox</h4><p>Uses generated data. No real money moves, and no bank is involved at any point in the demonstration.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">03</span>Evaluate us</span>
+    <h2>Three things to ask for.</h2>
   </div>
   <ul class="plain">
-    <li>Run the sandbox, change the instruction, and read the field, both values and the rule it names.</li>
-    <li>Ask what a receipt records, what it does not, and who would accept it today.</li>
-    <li>Ask what is unverified. Delegation verification is the clearest example, and the record says so.</li>
+    <li>Run the sandbox and try to make a changed field pass. Nothing you can do makes it pass.</li>
+    <li>Ask for a receipt and for who would accept it. The record is a structure, not a log line.</li>
+    <li>Ask what is unverified. Delegation scope, revocation and expiry are not enforced today, and this page says so above.</li>
   </ul>
-  <div class="cta-row"><a class="btn btn-ghost" href="mailto:ram@humsana.com">Ask us the hard question</a></div>
+  <div class="cta-row" style="margin-top:2.6rem">
+    <a class="btn btn-primary arrow-after" href="sandbox.html">Open the sandbox</a>
+    <a class="btn btn-ghost" href="mailto:ram@humsana.com">Talk to us</a>
+  </div>
 </div></section>
 
 <footer><div class="wrap foot-in">
-  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
+  <div class="brand"><img src="logo.png" alt="Humsana"></div>
   <div class="foot-links">
     <a href="swan.html">Swan</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a>
   </div>
-  <div class="foot-copy">&copy; 2026 Humsana</div>
+  <div class="foot-copy">Humsana. Authorization for autonomous actors.</div>
 </div></footer>
-
+<script src="site.js"></script>
 </body>
 </html>

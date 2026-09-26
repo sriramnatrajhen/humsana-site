@@ -4,30 +4,46 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Humsana: the authorization boundary for autonomous actors</title>
-<meta name="description" content="Your agent has permission. That does not mean the action is authorized. Humsana checks the action itself before it executes and stops it when it no longer matches what was approved.">
+<meta name="description" content="Your agent has permission. That does not mean the action is authorized. Humsana checks the action itself before it executes.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <nav><div class="wrap nav-in">
-  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
+  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana"></a>
   <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
   <div class="nav-links" id="nav">
     <a href="swan.html">Swan</a>
-    <a class="nav-cta" href="sandbox.html">See it refuse</a>
+    <a class="nav-cta" href="sandbox.html">See it work</a>
   </div>
 </div></nav>
 
-<header class="hero"><div class="wrap"><div class="inner">
-  <span class="label"><span class="n">01</span>Authorization</span>
-  <h1>Your agent has permission. That does not mean the action is authorized.</h1>
-  <p class="lead">Humsana is the authorization boundary for autonomous actors.</p>
-  <p class="lead">AI agents can now act on behalf of people and companies. Humsana checks the action itself before it executes, ties it to the authority and approval behind it, and stops it when the two no longer match.</p>
-  <div class="cta-row">
-    <a class="btn btn-primary" href="sandbox.html">See it refuse</a>
-    <a class="btn btn-ghost" href="sandbox.html">See it execute</a>
+<header class="hero"><div class="wrap hero-grid">
+  <div class="hero-copy">
+    <span class="label"><span class="n">01</span>Authorization</span>
+    <h1>Your agent has permission. That does not mean the action is authorized.</h1>
+    <p class="lead">Humsana is the authorization boundary for autonomous actors.</p>
+    <p>AI agents can now act on behalf of people and companies. Humsana checks the action itself before it executes, ties it to the authority and approval behind it, and stops it when the two no longer match.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="sandbox.html">See it refuse</a>
+      <a class="btn btn-ghost" href="sandbox.html">See it execute</a>
+    </div>
   </div>
-</div></div></header>
+  <aside class="hero-panel">
+    <div class="panel">
+      <div class="panel-head"><b>AUTHORIZATION</b><span>payments.transfer</span></div>
+      <ul class="panel-rows">
+        <li><span class="k">Principal</span><span class="v">cfo:northwind</span></li>
+        <li><span class="k">Agent</span><span class="v">procurement-agent-3</span></li>
+        <li><span class="k">Amount</span><span class="v">&pound;50,000</span></li>
+        <li><span class="k">Destination</span><span class="v">GB00SUPPLIERA0001</span></li>
+        <li><span class="k">Status</span><span class="v flag">HUMAN_CONFIRM</span></li>
+      </ul>
+      <div class="panel-foot">Bound to exact action</div>
+    </div>
+    <p class="note">An example authorization, in the shape the service returns.</p>
+  </aside>
+</div></header>
 
 <section><div class="wrap">
   <div class="metrics">
@@ -35,24 +51,42 @@
     <div class="m"><div class="mv">2.9 ms</div><div class="mk">Median time to check it at execution</div></div>
     <div class="m"><div class="mv">Deterministic</div><div class="mk">Policy decides. Models do not.</div></div>
   </div>
-  <p class="note">Measured on the current single-host deployment.</p>
+  <p class="note">Measured on the current single-host deployment, over 40 actions. Method on the trust page.</p>
 </div></section>
 
-<section class="alt"><div class="wrap">
+<section><div class="wrap">
   <div class="head">
     <span class="label"><span class="n">02</span>The problem</span>
-    <h2>Permission answers the wrong question.</h2>
-    <p>A permission tells you what an agent can access.</p>
-    <p>It does not tell you whether this action, with these parameters, is the action someone approved.</p>
+    <h2>Permission is not the same as authorization.</h2>
   </div>
-  <div class="deflist">
-    <div class="item"><h4>Destination changed</h4><p>The approved account is not the account in the execution request.</p></div>
-    <div class="item"><h4>Artifact changed</h4><p>The file, letter or batch is not the one that was approved.</p></div>
-    <div class="item"><h4>Scope changed</h4><p>The action reaches more people, records or resources than the approval covers.</p></div>
-    <div class="item"><h4>Approval replayed</h4><p>The same approval is used again.</p></div>
-    <div class="item"><h4>Approval expired</h4><p>The action arrives after the approval is no longer valid.</p></div>
+  <div class="compare">
+    <div class="col">
+      <div class="ch">Permission</div>
+      <ul>
+        <li>Can call the payment API</li>
+        <li>Has a credential</li>
+        <li>Access persists</li>
+        <li>Logs what happened</li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="ch">Authorization</div>
+      <ul>
+        <li>Can make this payment</li>
+        <li>Has authority, to this account, for this amount</li>
+        <li>The grant is bounded, and single use</li>
+        <li>Binds what was approved, and compares it at execution</li>
+      </ul>
+    </div>
   </div>
-  <p class="callout">Humsana checks the action again before it happens.</p>
+  <ul class="failures" style="margin-top:3.4rem">
+    <li><span class="num">01</span><span><span class="t">Destination changed</span><span class="d">The approved account is not the account in the execution request.</span></span></li>
+    <li><span class="num">02</span><span><span class="t">Artifact changed</span><span class="d">The file, letter or batch is not the one that was approved.</span></span></li>
+    <li><span class="num">03</span><span><span class="t">Scope changed</span><span class="d">The action reaches more people, records or resources than the approval covers.</span></span></li>
+    <li><span class="num">04</span><span><span class="t">Approval replayed</span><span class="d">The same approval is used again.</span></span></li>
+    <li><span class="num">05</span><span><span class="t">Approval expired</span><span class="d">The action arrives after the approval is no longer valid.</span></span></li>
+  </ul>
+  <p class="callout" style="margin-top:3rem">Humsana checks the action again before it happens.</p>
 </div></section>
 
 <section><div class="wrap">
@@ -60,31 +94,64 @@
     <span class="label"><span class="n">03</span>How it works</span>
     <h2>From authority to execution.</h2>
   </div>
-  <div class="rows">
-    <div class="row"><div class="rn">01</div><div><h3>Claim</h3><p>The agent says who it is, who it acts for, what it wants to do and what authority it has.</p></div></div>
-    <div class="row"><div class="rn">02</div><div><h3>Establish</h3><p>Humsana separates what is established from what is claimed and what remains unknown.</p></div></div>
-    <div class="row"><div class="rn">03</div><div><h3>Confirm</h3><p>The consequence of the action determines whether human confirmation is required. When it is, the approval comes from an authenticated approver.</p></div></div>
-    <div class="row"><div class="rn">04</div><div><h3>Bind</h3><p>The approval is tied to the exact action, its parameters and its expiry. It can be used once.</p></div></div>
-    <div class="row"><div class="rn">05</div><div><h3>Enforce</h3><p>The executor presents the action immediately before it runs. If a material field has changed, Humsana refuses it and shows exactly what changed.</p></div></div>
+  <div class="rail" role="tablist">
+    <button class="step" role="tab" aria-selected="true"><span class="sn">01</span><span class="st">Claim</span></button>
+    <button class="step" role="tab" aria-selected="false"><span class="sn">02</span><span class="st">Establish</span></button>
+    <button class="step" role="tab" aria-selected="false"><span class="sn">03</span><span class="st">Confirm</span></button>
+    <button class="step" role="tab" aria-selected="false"><span class="sn">04</span><span class="st">Bind</span></button>
+    <button class="step" role="tab" aria-selected="false"><span class="sn">05</span><span class="st">Enforce</span></button>
   </div>
-  <p style="margin-top:2.4rem">An assertion stays an assertion. Repeating it does not make it evidence.</p>
-  <div class="cta-row"><a class="btn btn-ghost" href="how-it-works.html">See the full mechanism</a></div>
+  <div class="step-body"><p>The agent says who it is, who it acts for, what it wants to do and what authority it has.</p></div>
+  <div class="step-body" hidden><p>Humsana separates what is established from what is claimed and what remains unknown.</p></div>
+  <div class="step-body" hidden><p>The consequence of the action determines whether human confirmation is required. When it is, the approval comes from an authenticated approver.</p></div>
+  <div class="step-body" hidden><p>The approval is tied to the exact action, its parameters and its expiry. It can be used once.</p></div>
+  <div class="step-body" hidden><p>The executor presents the action immediately before it runs. If a material field has changed, Humsana refuses it and shows exactly what changed.</p></div>
+  <div class="match" style="margin-top:3.6rem">
+    <div class="side">
+      <h4>Authorized</h4>
+      <dl>
+        <dt>supplier</dt><dd>Northwind Supplies</dd>
+        <dt>account</dt><dd>GB00REDIRECT0000099</dd>
+        <dt>amount</dt><dd>&pound;50,000</dd>
+      </dl>
+    </div>
+    <div class="mid"><span>Does not match</span></div>
+    <div class="side">
+      <h4>Attempted</h4>
+      <dl>
+        <dt>supplier</dt><dd>Northwind Supplies</dd>
+        <dt>account</dt><dd class="changed">GB00SUPPLIERA0001</dd>
+        <dt>amount</dt><dd>&pound;50,000</dd>
+      </dl>
+    </div>
+  </div>
+  <div class="code-line">GRANT_DOES_NOT_COVER_THIS_ACTION</div>
+  <p class="note">The accounts are the values the live sandbox used, in the order it used them: the approved instruction carried the repaired mandate account, and the execution request arrived holding the account on file.</p>
+  <p class="callout" style="margin-top:3rem">An assertion stays an assertion. Repeating it does not make it evidence.</p>
 </div></section>
 
-<section class="alt"><div class="wrap">
+<section><div class="wrap">
   <div class="head">
     <span class="label"><span class="n">04</span>The record</span>
     <h2>One record from approval to execution.</h2>
   </div>
-  <div class="deflist">
-    <div class="item"><h4>Claimed</h4><p>What the agent said was true.</p></div>
-    <div class="item"><h4>Established</h4><p>What Humsana could actually establish.</p></div>
-    <div class="item"><h4>Authorized</h4><p>The exact action that was approved.</p></div>
-    <div class="item"><h4>Executed</h4><p>What reached the executor.</p></div>
-    <div class="item"><h4>Refused</h4><p>What was stopped, and why.</p></div>
+  <div class="receipt">
+    <div class="receipt-head"><b>swan.authz/1</b><span>from the live sandbox</span></div>
+    <ul class="counts">
+      <li><span class="ck">Claimed</span><span class="cv">5</span></li>
+      <li class="zero"><span class="ck">Established</span><span class="cv">0</span></li>
+      <li><span class="ck">Authorized</span><span class="cv">1</span></li>
+      <li class="zero"><span class="ck">Executed</span><span class="cv">1</span></li>
+      <li class="no"><span class="ck">Refused</span><span class="cv">3</span></li>
+    </ul>
+    <details><summary>principal</summary><div class="det">an agent acting for Ridgeway Supplies Ltd</div></details>
+    <details><summary>delegation</summary><div class="det">a signed mandate for INV-88213, recorded as asserted, not established</div></details>
+    <details><summary>binding</summary><div class="det">grant bound to sha256:1ae041f1ab7..., single use, with an expiry</div></details>
+    <details><summary>confirmation</summary><div class="det">requested of a named approver, bound to the exact instruction, spent once</div></details>
+    <details><summary>effectuation</summary><div class="det">refused: GRANT_DOES_NOT_COVER_THIS_ACTION, RAIL_REFUSED_NO_GRANT, RECEIPT_EXPIRED
+released: 1 instruction to the rail, receipt authz_...</div></details>
   </div>
-  <p>These states stay separate.</p>
-  <p>The approval is not rewritten after the fact. A model cannot turn a claim into evidence. A refusal stays in the record.</p>
+  <p class="note">Read from the record the sandbox itself produced. The counts are what it recorded, not an illustration.</p>
 </div></section>
 
 <section><div class="wrap">
@@ -92,74 +159,89 @@
     <span class="label"><span class="n">05</span>Where it matters</span>
     <h2>For actions that are hard to undo.</h2>
   </div>
-  <div class="deflist">
-    <div class="item"><h4>Money movement</h4><p>Payments, beneficiary changes and payout exceptions.</p></div>
-    <div class="item"><h4>Regulated communication</h4><p>Notices, demands and filings where the approved version and recipient set both matter.</p></div>
-    <div class="item"><h4>Destructive actions</h4><p>Deleting records, revoking access, closing accounts or destroying keys.</p></div>
-    <div class="item"><h4>Swan Voice</h4><p>Voice integrity as one evidence source inside Humsana.</p></div>
+  <div class="blocks">
+    <div class="blk"><div class="bn">01</div><h3>Money movement</h3><p>Payments, beneficiary changes and payout exceptions.</p><div class="flow">beneficiary &rarr; approval &rarr; payment</div></div>
+    <div class="blk"><div class="bn">02</div><h3>Regulated communication</h3><p>Notices, demands and filings where the approved version and recipient set both matter.</p><div class="flow">content &rarr; recipient set &rarr; send</div></div>
+    <div class="blk"><div class="bn">03</div><h3>Destructive actions</h3><p>Deleting records, revoking access, closing accounts or destroying keys.</p><div class="flow">scope &rarr; approval &rarr; deletion</div></div>
   </div>
-  <div class="cta-row"><a class="btn btn-ghost" href="swan.html">Explore Swan Voice</a></div>
+  <div class="thin-row">
+    <div><div class="tr-t">Swan Voice</div><p>Voice integrity as one evidence source inside Humsana, not a separate product.</p></div>
+    <a class="btn btn-ghost arrow-after" href="swan.html">Explore Swan Voice</a>
+  </div>
 </div></section>
 
-<section class="alt"><div class="wrap">
+<section><div class="wrap">
   <div class="head">
     <span class="label"><span class="n">06</span>See it work</span>
     <h2>Watch the boundary hold.</h2>
   </div>
-  <div class="deflist">
-    <div class="item"><h4>Outbound communication</h4><p>A real autonomous workflow creates and prepares a batch. Without Humsana, the test executor accepts an altered version and sends it. With Humsana, the send request never happens. The refusal identifies the changed batch and recipient set.</p></div>
-    <div class="item"><h4>Exact-action enforcement</h4><p>Change the destination, amount or another action parameter. Humsana identifies the changed field and refuses the action without consuming the approval.</p></div>
-    <div class="item"><h4>Sandbox</h4><p>Run the authorization flow yourself. See what is claimed, see what is established, change the action, see it refuse, then send the approved action.</p></div>
+  <div class="split">
+    <div class="side">
+      <h4>Without Humsana</h4>
+      <div class="path">Agent &rarr; Executor</div>
+      <div class="status">Executed</div>
+      <p>The test executor accepts an altered version and sends it. No error, and no record of what changed.</p>
+    </div>
+    <div class="side">
+      <h4>With Humsana</h4>
+      <div class="path">Agent &rarr; Humsana &rarr; Executor</div>
+      <div class="status">Refused</div>
+      <p>The send request never happens. The boundary names the field that moved before the executor reaches the rail.</p>
+    </div>
   </div>
-  <div class="cta-row"><a class="btn btn-primary" href="sandbox.html">Open the sandbox</a></div>
+  <div class="diff">
+    <div class="d"><span class="dk">Authorized</span><span class="dv">GB00REDIRECT0000099</span></div>
+    <div class="d changed"><span class="dk">Attempted</span><span class="dv">GB00SUPPLIERA0001</span></div>
+  </div>
+  <div class="code-line">GRANT_DOES_NOT_COVER_THIS_ACTION</div>
+  <div class="cta-row" style="margin-top:2.6rem"><a class="btn btn-primary arrow-after" href="sandbox.html">Open the sandbox</a></div>
 </div></section>
 
 <section><div class="wrap">
   <div class="head">
     <span class="label"><span class="n">07</span>The boundary</span>
-    <h2>What Humsana does, and does not do.</h2>
+    <h2>What Humsana does not do.</h2>
   </div>
-  <ul class="plain">
-    <li>Humsana is not an identity provider.</li>
-    <li>It is not KYC, AML or transaction monitoring.</li>
-    <li>It is not a payment rail.</li>
-    <li>It is not an agent framework.</li>
-    <li>It is not a dashboard.</li>
-    <li>It does not let a model decide what is authorized.</li>
+  <ul class="xlist">
+    <li>Identity provider. Your system authenticates the approver.</li>
+    <li>KYC, AML or transaction monitoring.</li>
+    <li>Payment rail.</li>
+    <li>Agent framework.</li>
+    <li>Dashboard.</li>
+    <li>A model deciding what is authorized.</li>
   </ul>
-  <p>Your systems provide the identity, screening and execution.</p>
-  <p class="callout">Humsana sits between autonomous intent and consequential execution.</p>
+  <p class="statement" style="margin-top:3.4rem">Humsana sits between autonomous intent and consequential execution.</p>
 </div></section>
 
-<section class="alt"><div class="wrap">
+<section><div class="wrap">
   <div class="head">
     <span class="label"><span class="n">08</span>Trust</span>
     <h2>Built for accountable automation.</h2>
   </div>
-  <div class="deflist">
-    <div class="item"><h4>Agents change who is accountable</h4><p>The FCA's 2026 Mills Review discusses the move from AI assistance to AI delegation, and the resulting need for clear accountability, audit trails, explainable outcomes and meaningful human approval.</p></div>
-    <div class="item"><h4>Payments already bind approval to action</h4><p>Strong customer authentication requires certain remote payments to be dynamically linked to the amount and payee, with the authentication becoming invalid when those details change.</p></div>
-    <div class="item"><h4>Payee changes already have a control point</h4><p>Confirmation of Payee applies when a new payee is added or the details of an existing payee change.</p></div>
+  <div class="cols3">
+    <div>
+      <div class="ch">Agents change who is accountable</div>
+      <p>The FCA's 2026 Mills Review discusses the move from AI assistance to AI delegation, and the resulting need for clear accountability, audit trails, explainable outcomes and meaningful human approval.</p>
+    </div>
+    <div>
+      <div class="ch">Payments already bind approval to action</div>
+      <p>Strong customer authentication requires certain remote payments to be dynamically linked to the amount and payee, with the authentication becoming invalid when those details change.</p>
+    </div>
+    <div>
+      <div class="ch">Payee changes already have a control point</div>
+      <p>Confirmation of Payee applies when a new payee is added or the details of an existing payee change. Humsana carries the result of that check into the approval, and refuses a release when the result has changed.</p>
+    </div>
   </div>
-  <p>Humsana applies the same basic principle to autonomous execution: make the approval explicit, bind it to the action, and check it again when the action happens.</p>
-  <p>We are not claiming to satisfy these regulatory requirements. We are showing that the underlying principle can be enforced for actions carried out by autonomous systems.</p>
+  <p class="statement" style="margin-top:3.4rem">We are not claiming to satisfy these requirements. We are showing that the principle they share, an approval bound to the exact action, is enforceable for actions no person performs.</p>
+  <p class="note">Sources, measurements and limits on the <a href="trust.html">trust page</a>.</p>
 </div></section>
-
-<div class="cta-band alt"><div class="wrap">
-  <h2>See it refuse. Then see it execute.</h2>
-  <div class="cta-row" style="justify-content:center;display:flex;gap:.8rem;flex-wrap:wrap">
-    <a class="btn btn-primary" href="sandbox.html">Open the sandbox</a>
-    <a class="btn btn-ghost" href="mailto:ram@humsana.com">Talk to us</a>
-  </div>
-</div></div>
-
 <footer><div class="wrap foot-in">
-  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
+  <div class="brand"><img src="logo.png" alt="Humsana"></div>
   <div class="foot-links">
     <a href="swan.html">Swan</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a>
   </div>
-  <div class="foot-copy">&copy; 2026 Humsana</div>
+  <div class="foot-copy">Humsana. Authorization for autonomous actors.</div>
 </div></footer>
-
+<script src="site.js"></script>
 </body>
 </html>
