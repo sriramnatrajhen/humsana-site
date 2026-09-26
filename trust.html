@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trust: Humsana</title>
-<meta name="description" content="How the numbers were measured, what is not claimed, where data lives, and how to evaluate Humsana yourself.">
+<meta name="description" content="The method behind each figure, what is not claimed, what is stored, and how to evaluate this without our help.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,14 +18,14 @@
     <a href="developers.html">Developers</a>
     <a href="trust.html">Trust</a>
     <a href="swan.html">Swan</a>
-    <a class="nav-cta" href="sandbox.html">See it work</a>
+    <a class="nav-cta" href="sandbox.html">See it refuse</a>
   </div>
 </div></nav>
 
 <header class="hero"><div class="wrap"><div class="inner">
   <span class="label"><span class="n">01</span>Trust</span>
   <h1>What we claim, and what we do not.</h1>
-  <p class="lead">Every number on this site carries the method that produced it. Every gap is stated here rather than found later.</p>
+  <p class="lead">Every number carries its method. Every gap is stated here rather than found later.</p>
 </div></div></header>
 
 <section><div class="wrap">
@@ -33,12 +33,12 @@
     <span class="label"><span class="n">02</span>Measurements</span>
     <h2>The method behind each figure.</h2>
   </div>
-  <div class="deflist">
-    <div class="item"><h4>Authorization and execution cost</h4><p>5.8 ms median to authorize one exact action and 2.9 ms median to enforce the binding at execution, worst case 12.9 ms across a set of 40 actions. Measured on the current single-host deployment, with the boundary and the service on the same machine as the measurement harness. No network hop, no load generator, no production traffic. It is a cost check, not a benchmark.</p></div>
-    <div class="item"><h4>Agent variance, seven runs</h4><p>One autonomous workflow, run seven times against the same task and the same portfolio, produced seven distinct artifacts. The recipient set was identical in 21 of 21 comparisons and no amount or account differed, so the decision was stable. The bytes were not. That finding is why the boundary binds a digest of the artifact rather than a description of it, and why the guidance is to archive the approved artifact and execute the archive.</p></div>
-    <div class="item"><h4>Forty-two refusals, and fourteen messages that were sent</h4><p>Presenting each run's artifact against another run's approval produced 42 refusals before the send API was reached, with 0 matched and 0 grants consumed. In the same experiment, an executor with no boundary in front of it really sent 14 messages. One task, one portfolio, one provider, one day. Not a benchmark, and not a claim about production traffic.</p></div>
-    <div class="item"><h4>Swan's noise gate</h4><p>A gate on high-band signal-to-noise is part of the voice path, at 30 dB. In a sweep, affirmative clearances fell from 64 to 0 as noise was added, and the pre-change baseline of 75 clearances went to 0. Noisy audio is never cleared affirmatively. That is a guardrail, not an accuracy claim.</p></div>
-  </div>
+  <ul class="plain">
+    <li>Authorization and execution cost: 5.8 ms median to authorize, 2.9 ms to enforce, worst case 12.9 ms over 40 actions. Measured on the current single-host deployment, with no network hop and no load generator. A cost check, not a benchmark.</li>
+    <li>Agent variance: seven runs of one workflow produced seven distinct artifacts, with an identical recipient set in 21 of 21 comparisons and no amount differing. The decision was stable. The bytes were not. That is why a digest is bound, and why the approved artifact should be archived and the archive executed.</li>
+    <li>Refusals and messages: 42 cross-run presentations refused before the send API, 0 matched, 0 grants consumed. An executor with no boundary really sent 14 messages. One task, one provider, one day.</li>
+    <li>Noise gate: at 30 dB high-band SNR, affirmative clearances fell from 64 to 0 as noise was added. Noisy audio is never cleared.</li>
+  </ul>
 </div></section>
 
 <section class="alt"><div class="wrap">
@@ -47,16 +47,13 @@
     <h2>Stated plainly.</h2>
   </div>
   <ul class="plain">
-    <li>No SOC 2 report and no ISO 27001 certification.</li>
-    <li>No third-party security audit or penetration test.</li>
-    <li>No high-availability deployment. Today this runs on a single small host.</li>
-    <li>No paying customers yet, and no production deployment handling consequential actions on a customer's behalf.</li>
-    <li>No verification of a presented delegation. A delegation that arrives with a request is recorded as unverified, and delegation scope, revocation and expiry are not enforced yet.</li>
-    <li>No named customer. No company has agreed to be identified as a user of this.</li>
-    <li>No claim that an external party already accepts Humsana receipts as evidence of authorization. That is a conversation, not a shipped fact.</li>
-    <li>Swan is not presented as interview-ready. Voice integrity has a coverage limit, and degraded audio is one of them.</li>
+    <li>No SOC 2, no ISO 27001, no third-party audit.</li>
+    <li>No high availability. One small host today.</li>
+    <li>No paying customers, and no production deployment handling consequential actions for a customer.</li>
+    <li>No verification of a presented delegation. Scope, revocation and expiry are not enforced yet.</li>
+    <li>No named customer, and no claim that an external party already accepts our receipts.</li>
+    <li>Swan is not presented as interview-ready. It has a coverage limit, and degraded audio is one.</li>
   </ul>
-  <p class="callout">Where a claim here is load-bearing for a decision you are making, ask us for the run, the dates and the raw output behind it. If we cannot produce it, treat the claim as unproven.</p>
 </div></section>
 
 <section><div class="wrap">
@@ -64,45 +61,35 @@
     <span class="label"><span class="n">04</span>Data</span>
     <h2>What is stored, and what is not.</h2>
   </div>
-  <div class="deflist">
-    <div class="item"><h4>Authorization records</h4><p>For each action, the boundary stores the claim, what it established, the grant with its bound field digests, the confirmation and its approver, and the receipt. These records are the audit artifact, and they are kept because they are the product.</p></div>
-    <div class="item"><h4>Action parameters</h4><p>The parameters of the action being authorized are stored inside the record. That is what makes a bound field comparable later. A deployment decides what its action parameters may contain.</p></div>
-    <div class="item"><h4>Voice</h4><p>The voice screening service processes the audio to return a result. The audio is not stored. Metadata about the request is retained for 30 days.</p></div>
-    <div class="item"><h4>The sandbox</h4><p>Generated data. No personal data, no customer data, no real money, and a separate register from production.</p></div>
-  </div>
+  <ul class="plain">
+    <li>Each record holds the claim, what was established, the grant with its bound digests, the confirmation and its approver, and the receipt.</li>
+    <li>The parameters of the authorized action are stored, because that is what makes a field comparable later.</li>
+    <li>Voice audio is processed to return a result and not stored. Request metadata is kept for 30 days.</li>
+    <li>The sandbox runs on generated data, with its own register and no production credentials.</li>
+  </ul>
 </div></section>
 
 <section class="alt"><div class="wrap">
   <div class="head">
-    <span class="label"><span class="n">05</span>Existing controls</span>
-    <h2>Alongside, not instead of.</h2>
+    <span class="label"><span class="n">05</span>Alongside, not instead</span>
+    <h2>Where it sits with your controls.</h2>
   </div>
-  <p>Sanctions screening, transaction monitoring, name checking and fraud controls produce results. Humsana consumes those results and binds them into the thing it enforces, so a result that changes after approval is a change to the action and is refused like any other. It does not produce those results, and it is not a replacement for any of them.</p>
-  <p>The regulatory context we read carefully, without claiming that it requires us: the FCA's 2026 Mills Review on autonomous AI and accountability; strong customer authentication rules that require dynamic linking of certain payments to the amount and the payee, with invalidation when either changes; and Confirmation of Payee, which exists precisely because a payee change is its own control point.</p>
-  <p class="callout">We are not claiming to satisfy any of these requirements. We are claiming that the principle they share, an approval bound to the exact action, is buildable today for actions no person performs.</p>
+  <p>Screening, monitoring and name checking produce results. Humsana consumes those results and binds them into the thing it enforces, so a result that changes after approval is refused like any other field. It does not produce them, and it does not replace them.</p>
+  <p class="callout">We are not claiming to satisfy any regulatory requirement. We are claiming that the principle they share, an approval bound to the exact action, is buildable today for actions no person performs.</p>
 </div></section>
 
 <section><div class="wrap">
   <div class="head">
     <span class="label"><span class="n">06</span>Evaluate us</span>
-    <h2>Four things you can check without our help.</h2>
+    <h2>Three things to check without our help.</h2>
   </div>
-  <div class="deflist">
-    <div class="item"><h4>Run the sandbox</h4><p>It is a live deployment. Change the instruction, watch the refusal, and read the field, both values and the rule it names.</p></div>
-    <div class="item"><h4>Ask for a receipt</h4><p>Ask what a receipt records and what it does not, and ask who would accept it today. The honest answer is on this page.</p></div>
-    <div class="item"><h4>Ask what is unverified</h4><p>Delegation verification is the clearest example. If the boundary cannot establish something, it says so, and the record says so. Test that claim against a request that asserts authority it cannot prove.</p></div>
-    <div class="item"><h4>Ask about the deployment</h4><p>Today: one small host, no high availability, credentials issued by an operator rather than self-serve, and TLS with a 1.2 floor. A pilot means a real integration with your rail and your identity system, not a hosted version of the sandbox.</p></div>
-  </div>
+  <ul class="plain">
+    <li>Run the sandbox, change the instruction, and read the field, both values and the rule it names.</li>
+    <li>Ask what a receipt records, what it does not, and who would accept it today.</li>
+    <li>Ask what is unverified. Delegation verification is the clearest example, and the record says so.</li>
+  </ul>
+  <div class="cta-row"><a class="btn btn-ghost" href="mailto:ram@humsana.com">Ask us the hard question</a></div>
 </div></section>
-
-<div class="cta-band alt"><div class="wrap">
-  <h2>Ask us the hard question first.</h2>
-  <p>If something on this site is wrong, we would rather hear it from you than have it found later.</p>
-  <div class="cta-row" style="justify-content:center;display:flex;gap:.8rem;flex-wrap:wrap">
-    <a class="btn btn-primary" href="mailto:ram@humsana.com">Talk to us</a>
-    <a class="btn btn-ghost" href="sandbox.html">Open the sandbox</a>
-  </div>
-</div></div>
 
 <footer><div class="wrap foot-in">
   <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>

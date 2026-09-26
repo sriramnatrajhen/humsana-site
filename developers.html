@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Developers: Humsana</title>
-<meta name="description" content="Integrate the authorization boundary: four calls, one grant, a refusal your systems can act on, and one action class to start with.">
+<meta name="description" content="Four calls in front of the irreversible step, the refusal shape, and what a pilot actually is.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,14 +18,14 @@
     <a href="developers.html">Developers</a>
     <a href="trust.html">Trust</a>
     <a href="swan.html">Swan</a>
-    <a class="nav-cta" href="sandbox.html">See it work</a>
+    <a class="nav-cta" href="sandbox.html">See it refuse</a>
   </div>
 </div></nav>
 
 <header class="hero"><div class="wrap"><div class="inner">
   <span class="label"><span class="n">01</span>Developers</span>
   <h1>Four calls, in front of the one that matters.</h1>
-  <p class="lead">The boundary is an extra call before an irreversible action, and a refusal your systems can act on without parsing prose.</p>
+  <p class="lead">An extra call before the irreversible step, and a refusal your systems can act on without parsing prose.</p>
   <div class="cta-row">
     <a class="btn btn-primary" href="https://api.humsana.com/sandbox/gregg/">See the calls running</a>
     <a class="btn btn-ghost" href="how-it-works.html">Read the mechanism</a>
@@ -37,12 +37,12 @@
     <span class="label"><span class="n">02</span>The shape</span>
     <h2>What your side has to do.</h2>
   </div>
-  <div class="deflist">
-    <div class="item"><h4>One action class to start</h4><p>Pick one consequential action that a person cannot casually undo: a payment release, a beneficiary change, a bulk communication, a deletion. Describe its fields, and decide what has to be true before it may proceed.</p></div>
-    <div class="item"><h4>One executor that can make one extra call</h4><p>Anything that already calls the destination API can call the boundary first and pass the grant with the request. Nothing else in your stack has to change.</p></div>
-    <div class="item"><h4>One approver route</h4><p>Humsana asks your systems to authenticate a person. The approval comes back bound to the exact instruction. You keep your own identity, your own roles and your own audit trail.</p></div>
-    <div class="item"><h4>No new console</h4><p>There is no dashboard to learn. The record is a receipt the boundary already holds, and it can be exported.</p></div>
-  </div>
+  <ul class="plain">
+    <li>Pick one consequential action: a payment release, a beneficiary change, a bulk send, a deletion.</li>
+    <li>Make one extra call before it, and pass the grant with the request.</li>
+    <li>Keep your identity system. Humsana asks it to authenticate the approver and records the answer.</li>
+    <li>No new console. The record is a receipt the boundary already holds.</li>
+  </ul>
 </div></section>
 
 <section class="alt"><div class="wrap">
@@ -54,39 +54,39 @@
 POST /v1/authorize/confirm/request     ask the authenticated approver
 POST /v1/authorize/confirm             record that approval against that instruction
 POST /v1/authorize/effectuate          release, only if the arriving action matches the grant</div>
-  <p style="margin-top:1.4rem">A request carries who is asking, who it acts for, what it wants to do as structured fields, what authority it claims, the consequence class it declares, and when it expires. The decision comes back with the evidence state of every fact behind it, so a claim and an established fact are never confused in your logs.</p>
+  <p style="margin-top:1.4rem">A request carries who is asking, who it acts for, the action as structured fields, the authority it claims, the consequence class it declares, and when it expires. The decision comes back with the evidence state behind every fact, so a claim and an established fact stay apart in your logs.</p>
   <div class="code">authorized: false
 code:       GRANT_DOES_NOT_COVER_THIS_ACTION
 matched:    false
 consumed:   false
 drift:      &lt;field&gt;  authorized ...  arrived ...  rule MAY_NOT_CHANGE</div>
-  <p class="note">A refusal names the field that moved, both values and the rule it failed, as a structure. Handle it as you handle a rejected payment instruction: do not retry it blind, and show someone what moved.</p>
+  <p class="note">Handle a refusal as you handle a rejected instruction: do not retry it blind, and show a person what moved.</p>
 </div></section>
 
 <section><div class="wrap">
   <div class="head">
     <span class="label"><span class="n">04</span>Rules of the road</span>
-    <h2>Constraints worth knowing before you write code.</h2>
+    <h2>Before you write code.</h2>
   </div>
-  <div class="deflist">
-    <div class="item"><h4>A credential is capability, not authorization</h4><p>A key lets an agent call the boundary. It never substitutes for an approval, and it does not make an action authorized.</p></div>
-    <div class="item"><h4>Grants are single use and exact-action bound</h4><p>Do not design a retry loop that assumes a grant survives. It does not. A second presentation is refused, and the record shows it.</p></div>
-    <div class="item"><h4>Sets may only shrink</h4><p>A bound recipient set, record set or resource list may lose members and may not gain them.</p></div>
-    <div class="item"><h4>The provider is optional and cannot authorize</h4><p>Where a model is enabled it can only make a request stricter. The deployment runs deterministically by default, and ships that way.</p></div>
-    <div class="item"><h4>Refusals are first-class</h4><p>A refused action is not an error to be discovered in a log. It is recorded, and it is part of what you show a reviewer.</p></div>
-  </div>
+  <ul class="plain">
+    <li>A credential is capability, not authorization. A key lets an agent call the boundary. It never substitutes for an approval.</li>
+    <li>Grants are single use. Do not design a retry that assumes a grant survives.</li>
+    <li>Bound sets may only shrink.</li>
+    <li>The provider is optional and cannot authorize. The deployment ships deterministic.</li>
+    <li>A refusal is not an error to be found in a log later. It is recorded, and it is part of what you show a reviewer.</li>
+  </ul>
 </div></section>
 
 <section class="alt"><div class="wrap">
   <div class="head">
     <span class="label"><span class="n">05</span>Pilot</span>
-    <h2>What a pilot actually is.</h2>
+    <h2>What a pilot is.</h2>
   </div>
-  <div class="deflist">
-    <div class="item"><h4>One action class, one executor, one approver route</h4><p>We would rather do one action properly than five approximately. The first action class is chosen by the consequence, not by the ease of integration.</p></div>
-    <div class="item"><h4>Your rail, your identity system</h4><p>The integration is on your side of the irreversible call. We are not asking to sit in your payment path on day one, and we are not asking for production money movement during a pilot.</p></div>
-    <div class="item"><h4>What you get</h4><p>Authorization records for the action class you chose, refusals that name the field and the rule, and a receipt per action. Alongside them, a written statement of what is not covered.</p></div>
-  </div>
+  <ul class="plain">
+    <li>One action class, one executor, one approver route. One action done properly beats five done approximately.</li>
+    <li>The integration sits on your side of the irreversible call. A pilot does not move production money.</li>
+    <li>You get authorization records, refusals that name the field and the rule, a receipt per action, and a written statement of what is not covered.</li>
+  </ul>
 </div></section>
 
 <section><div class="wrap">
@@ -96,22 +96,12 @@ drift:      &lt;field&gt;  authorized ...  arrived ...  rule MAY_NOT_CHANGE</div
   </div>
   <ul class="plain">
     <li>No client SDK. The integration is HTTP today.</li>
-    <li>No self-serve key issuance. Credentials are issued by an operator against a registered organization.</li>
-    <li>No verification of a presented delegation. Scope, revocation and expiry for delegations are not enforced yet.</li>
-    <li>No high availability, no SOC 2, no ISO 27001 and no third-party audit.</li>
-    <li>No hosted multi-tenant service. A pilot runs on our host or yours, and we say which.</li>
+    <li>No self-serve key issuance. Credentials are issued by an operator.</li>
+    <li>No verification of a presented delegation.</li>
+    <li>No hosted multi-tenant service, no high availability, no SOC 2 and no ISO 27001.</li>
   </ul>
-  <p class="callout">If your action class needs something on this list before it can go ahead, that is worth a conversation rather than a workaround.</p>
+  <div class="cta-row"><a class="btn btn-ghost" href="mailto:ram@humsana.com?subject=Humsana%20pilot">Bring us one action</a></div>
 </div></section>
-
-<div class="cta-band alt"><div class="wrap">
-  <h2>Run the sandbox, then bring us one action.</h2>
-  <p>Watch the calls, then tell us the one action that keeps you up at night. That is the pilot.</p>
-  <div class="cta-row" style="justify-content:center;display:flex;gap:.8rem;flex-wrap:wrap">
-    <a class="btn btn-primary" href="https://api.humsana.com/sandbox/gregg/">Open the walkthrough</a>
-    <a class="btn btn-ghost" href="mailto:ram@humsana.com?subject=Humsana%20pilot">Start a conversation</a>
-  </div>
-</div></div>
 
 <footer><div class="wrap foot-in">
   <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
