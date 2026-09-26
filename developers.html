@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Humsana for Developers  Cognitive Interlock for AI Tools</title>
-<meta name="description" content="Humsana adds real-time cognitive awareness to AI tools, so risky actions do not happen when you are fatigued or overloaded.">
+<title>Developers: Humsana</title>
+<meta name="description" content="Integrate the authorization boundary: four calls, one grant, a refusal your systems can act on, and one action class to start with.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,80 +13,110 @@
   <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
   <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
   <div class="nav-links" id="nav">
-    <a href="voice.html">Voice</a>
-    <a href="developers.html" class="active">Developers</a>
-    <a href="partners.html">Partners</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="sandbox.html">Sandbox</a>
+    <a href="developers.html">Developers</a>
+    <a href="trust.html">Trust</a>
     <a href="swan.html">Swan</a>
-    <a class="nav-cta" href="https://github.com/sriramnatrajhen">GitHub</a>
+    <a class="nav-cta" href="sandbox.html">See it work</a>
   </div>
 </div></nav>
 
 <header class="hero"><div class="wrap"><div class="inner">
-  <span class="label"><span class="n">Developers</span>Cognitive Interlock</span>
-  <h1>When you are tired, AI should slow down.</h1>
-  <p class="lead">A safety interlock between you and AI execution. Think seatbelts, not autopilot.</p>
+  <span class="label"><span class="n">01</span>Developers</span>
+  <h1>Four calls, in front of the one that matters.</h1>
+  <p class="lead">The boundary is an extra call before an irreversible action, and a refusal your systems can act on without parsing prose.</p>
   <div class="cta-row">
-    <span class="code-inline">pip install humsana-daemon</span>
-    <span class="code-inline">npx @humsana/mcp-server</span>
+    <a class="btn btn-primary" href="https://api.humsana.com/sandbox/gregg/">See the calls running</a>
+    <a class="btn btn-ghost" href="how-it-works.html">Read the mechanism</a>
   </div>
 </div></div></header>
 
 <section><div class="wrap">
   <div class="head">
-    <span class="label"><span class="n">01</span>The problem</span>
-    <h2>The worst mistakes are not random.</h2>
-    <p>They happen when you are sleep-deprived, overloaded, or rushing late at night. AI cannot see that, so it executes destructive commands and overwrites files with false confidence anyway.</p>
+    <span class="label"><span class="n">02</span>The shape</span>
+    <h2>What your side has to do.</h2>
   </div>
-  <div class="rows">
-    <div class="row"><div class="rn">01</div><div><h3>Observe timing</h3><p>A local daemon monitors typing rhythm, corrections, and activity. Never content.</p></div></div>
-    <div class="row"><div class="rn">02</div><div><h3>Analyze on-device</h3><p>Stress, focus, and fatigue are computed on your machine. No cloud required.</p></div></div>
-    <div class="row"><div class="rn">03</div><div><h3>Gate unsafe actions</h3><p>Destructive operations are blocked when fatigue is high. Overrides are logged to an audit trail.</p></div></div>
+  <div class="deflist">
+    <div class="item"><h4>One action class to start</h4><p>Pick one consequential action that a person cannot casually undo: a payment release, a beneficiary change, a bulk communication, a deletion. Describe its fields, and decide what has to be true before it may proceed.</p></div>
+    <div class="item"><h4>One executor that can make one extra call</h4><p>Anything that already calls the destination API can call the boundary first and pass the grant with the request. Nothing else in your stack has to change.</p></div>
+    <div class="item"><h4>One approver route</h4><p>Humsana asks your systems to authenticate a person. The approval comes back bound to the exact instruction. You keep your own identity, your own roles and your own audit trail.</p></div>
+    <div class="item"><h4>No new console</h4><p>There is no dashboard to learn. The record is a receipt the boundary already holds, and it can be exported.</p></div>
   </div>
 </div></section>
 
 <section class="alt"><div class="wrap">
   <div class="head">
-    <span class="label"><span class="n">02</span>MCP tools</span>
-    <h2>What Claude and other agents receive.</h2>
+    <span class="label"><span class="n">03</span>The calls</span>
+    <h2>The authorization contract.</h2>
   </div>
-  <div class="cols2">
-    <div class="deflist">
-      <div class="item"><h4 class="mono">get_user_state</h4><p>Stress, focus, and fatigue levels, plus response-style recommendations.</p></div>
-      <div class="item"><h4 class="mono">check_dangerous_command</h4><p>Whether a command is dangerous and fatigue exceeds threshold.</p></div>
-    </div>
-    <div class="deflist">
-      <div class="item"><h4 class="mono">safe_execute_command</h4><p>Runs shell commands with interlock protection. Blocks when fatigued.</p></div>
-      <div class="item"><h4 class="mono">safe_write_file</h4><p>Blocks large destructive rewrites when the user is fatigued.</p></div>
-    </div>
-  </div>
-  <div class="callout" style="margin-top:2.5rem"><strong>Blocked when fatigue is high:</strong> <span class="mono">rm -rf</span>, <span class="mono">DROP TABLE</span>, <span class="mono">git push --force</span>, <span class="mono">kubectl delete</span>, <span class="mono">terraform destroy</span>. Override with <span class="mono">OVERRIDE SAFETY PROTOCOL: [reason]</span>, logged to <span class="mono">~/.humsana/audit.log</span>.</div>
+  <div class="code">POST /v1/authorize/verify              decide whether this exact action may proceed
+POST /v1/authorize/confirm/request     ask the authenticated approver
+POST /v1/authorize/confirm             record that approval against that instruction
+POST /v1/authorize/effectuate          release, only if the arriving action matches the grant</div>
+  <p style="margin-top:1.4rem">A request carries who is asking, who it acts for, what it wants to do as structured fields, what authority it claims, the consequence class it declares, and when it expires. The decision comes back with the evidence state of every fact behind it, so a claim and an established fact are never confused in your logs.</p>
+  <div class="code">authorized: false
+code:       GRANT_DOES_NOT_COVER_THIS_ACTION
+matched:    false
+consumed:   false
+drift:      &lt;field&gt;  authorized ...  arrived ...  rule MAY_NOT_CHANGE</div>
+  <p class="note">A refusal names the field that moved, both values and the rule it failed, as a structure. Handle it as you handle a rejected payment instruction: do not retry it blind, and show someone what moved.</p>
 </div></section>
 
 <section><div class="wrap">
   <div class="head">
-    <span class="label"><span class="n">03</span>Pricing</span>
-    <h2>Start free. Upgrade for interlocks.</h2>
+    <span class="label"><span class="n">04</span>Rules of the road</span>
+    <h2>Constraints worth knowing before you write code.</h2>
   </div>
-  <div class="price">
-    <div>
-      <div class="pn">Free</div>
-      <div class="pa">$0</div>
-      <ul class="plain"><li>Local daemon</li><li>MCP integration</li><li>Adaptive AI responses</li><li>Fully on-device</li></ul>
-      <a class="btn btn-ghost" href="https://github.com/sriramnatrajhen" style="margin-top:1.4rem">Get started</a>
-    </div>
-    <div>
-      <div class="pn">Pro</div>
-      <div class="pa">$10<span> / mo</span></div>
-      <ul class="plain"><li>Everything in Free</li><li>Cognitive Interlock</li><li>AI write protection</li><li>Override audit logs</li></ul>
-      <a class="btn btn-primary" href="mailto:contact@humsana.com?subject=Humsana%20Pro" style="margin-top:1.4rem">Start Pro</a>
-    </div>
+  <div class="deflist">
+    <div class="item"><h4>A credential is capability, not authorization</h4><p>A key lets an agent call the boundary. It never substitutes for an approval, and it does not make an action authorized.</p></div>
+    <div class="item"><h4>Grants are single use and exact-action bound</h4><p>Do not design a retry loop that assumes a grant survives. It does not. A second presentation is refused, and the record shows it.</p></div>
+    <div class="item"><h4>Sets may only shrink</h4><p>A bound recipient set, record set or resource list may lose members and may not gain them.</p></div>
+    <div class="item"><h4>The provider is optional and cannot authorize</h4><p>Where a model is enabled it can only make a request stricter. The deployment runs deterministically by default, and ships that way.</p></div>
+    <div class="item"><h4>Refusals are first-class</h4><p>A refused action is not an error to be discovered in a log. It is recorded, and it is part of what you show a reviewer.</p></div>
   </div>
 </div></section>
+
+<section class="alt"><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">05</span>Pilot</span>
+    <h2>What a pilot actually is.</h2>
+  </div>
+  <div class="deflist">
+    <div class="item"><h4>One action class, one executor, one approver route</h4><p>We would rather do one action properly than five approximately. The first action class is chosen by the consequence, not by the ease of integration.</p></div>
+    <div class="item"><h4>Your rail, your identity system</h4><p>The integration is on your side of the irreversible call. We are not asking to sit in your payment path on day one, and we are not asking for production money movement during a pilot.</p></div>
+    <div class="item"><h4>What you get</h4><p>Authorization records for the action class you chose, refusals that name the field and the rule, and a receipt per action. Alongside them, a written statement of what is not covered.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">06</span>Not ready</span>
+    <h2>What you cannot use yet.</h2>
+  </div>
+  <ul class="plain">
+    <li>No client SDK. The integration is HTTP today.</li>
+    <li>No self-serve key issuance. Credentials are issued by an operator against a registered organization.</li>
+    <li>No verification of a presented delegation. Scope, revocation and expiry for delegations are not enforced yet.</li>
+    <li>No high availability, no SOC 2, no ISO 27001 and no third-party audit.</li>
+    <li>No hosted multi-tenant service. A pilot runs on our host or yours, and we say which.</li>
+  </ul>
+  <p class="callout">If your action class needs something on this list before it can go ahead, that is worth a conversation rather than a workaround.</p>
+</div></section>
+
+<div class="cta-band alt"><div class="wrap">
+  <h2>Run the sandbox, then bring us one action.</h2>
+  <p>Watch the calls, then tell us the one action that keeps you up at night. That is the pilot.</p>
+  <div class="cta-row" style="justify-content:center;display:flex;gap:.8rem;flex-wrap:wrap">
+    <a class="btn btn-primary" href="https://api.humsana.com/sandbox/gregg/">Open the walkthrough</a>
+    <a class="btn btn-ghost" href="mailto:ram@humsana.com?subject=Humsana%20pilot">Start a conversation</a>
+  </div>
+</div></div>
 
 <footer><div class="wrap foot-in">
   <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
   <div class="foot-links">
-    <a href="voice.html">Voice</a><a href="developers.html">Developers</a><a href="partners.html">Partners</a><a href="swan.html">Swan</a><a href="privacy.html">Privacy</a><a href="https://github.com/sriramnatrajhen">GitHub</a>
+    <a href="how-it-works.html">How it works</a><a href="sandbox.html">Sandbox</a><a href="developers.html">Developers</a><a href="trust.html">Trust</a><a href="swan.html">Swan</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a>
   </div>
   <div class="foot-copy">&copy; 2026 Humsana</div>
 </div></footer>

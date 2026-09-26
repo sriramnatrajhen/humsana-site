@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sandbox: Humsana</title>
+<meta name="description" content="A live deployment. A payout held for a name mismatch, an agent's repair, one approval, and a refusal when the instruction that arrives is not the instruction that was approved.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav><div class="wrap nav-in">
+  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
+  <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
+  <div class="nav-links" id="nav">
+    <a href="how-it-works.html">How it works</a>
+    <a href="sandbox.html">Sandbox</a>
+    <a href="developers.html">Developers</a>
+    <a href="trust.html">Trust</a>
+    <a href="swan.html">Swan</a>
+    <a class="nav-cta" href="sandbox.html">See it work</a>
+  </div>
+</div></nav>
+
+<header class="hero"><div class="wrap"><div class="inner">
+  <span class="label"><span class="n">01</span>Sandbox</span>
+  <h1>One payout, one approval, one refusal.</h1>
+  <p class="lead">A live deployment, not a video. Generated data, no real money, and the authorization service is the real one.</p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="https://api.humsana.com/sandbox/gregg/">Open the walkthrough</a>
+    <a class="btn btn-ghost" href="how-it-works.html">How it works</a>
+  </div>
+</div></div></header>
+
+<section><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">02</span>How to read it</span>
+    <h2>One window, and the call underneath it.</h2>
+    <p>The top of the page is what a person sees at each step. The terminal underneath is the real exchange between the agent, the executor and the boundary, with timestamps, rendered from the responses the service actually returned. No step is a screenshot.</p>
+  </div>
+  <div class="deflist">
+    <div class="item"><h4>Step 1: the queue item</h4><p>A payout is held because the beneficiary name does not match the account on the destination side. That check is the paying bank's, and Confirmation of Payee's. It already ran. This page states that where the hold appears, because the hold is why the instruction is about to change, and it is not what the boundary does.</p></div>
+    <div class="item"><h4>Step 2: the repair</h4><p>An agent works the exception. It reads the signed mandate on file and proposes a new destination account, with its own rationale in the terminal. The account it proposes is recorded as an assertion, not as an established fact. In live mode this is a real model call, and the tokens and the latency are shown.</p></div>
+    <div class="item"><h4>Step 3: the approval</h4><p>A person approves the repaired instruction exactly as it stands. The approver, the method and every field about to be bound are shown before the button, and the approval is single use with a window.</p></div>
+    <div class="item"><h4>Step 4: the release</h4><p>This is where the demonstration lives. The screen arrives holding the account on file rather than the approved account, so the first press is a refusal. From there you can send the queue's own copy, send the version the agent read after the mandate was re-issued, send the instruction with the name check result now failing, let the approval expire, skip the boundary entirely, or send the exact approved instruction and watch it release.</p></div>
+    <div class="item"><h4>Step 5: the record</h4><p>Claimed, established, authorized, refused and executed, with the digest the grant was bound to, the attempts that were stopped, and the receipt. Downloadable as a file.</p></div>
+  </div>
+</div></section>
+
+<section class="alt"><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">03</span>The refusals</span>
+    <h2>What it stops, and what it names.</h2>
+  </div>
+  <div class="code">POST /v1/authorize/effectuate -> 200
+  authorized: false
+  code:       GRANT_DOES_NOT_COVER_THIS_ACTION
+  matched:    false
+  consumed:   false
+  drift:      payee_account
+                authorized  the account on the approved instruction
+                arrived     the account the executor was holding
+                rule        MAY_NOT_CHANGE</div>
+  <p class="note">Field names and codes are the service's own, taken from a live call. The two account values are described rather than printed, because they are sandbox identifiers.</p>
+  <div class="deflist" style="margin-top:2rem">
+    <div class="item"><h4>A refusal is not an error</h4><p>The authorization was not consumed, so the approved instruction can still be sent. Nothing was half done, and the person who approved it does not have to start again.</p></div>
+    <div class="item"><h4>Releasing with no approval</h4><p>Refused before the rail with no grant found.</p></div>
+    <div class="item"><h4>Releasing past the window</h4><p>Refused by the boundary's own expiry rule. An authorization has a life.</p></div>
+    <div class="item"><h4>Replaying an approval</h4><p>Refused. A grant is spent once.</p></div>
+    <div class="item"><h4>Bypassing the boundary</h4><p>The sandbox also lets you present an instruction straight to the rail, where it is refused for want of a grant. That refusal is the integration requirement stated out loud, not something the service can enforce on a rail it does not control.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">04</span>Honesty</span>
+    <h2>Simulated, and real.</h2>
+  </div>
+  <ul class="plain">
+    <li>Simulated: the payment rail. No money moves, and no bank is involved anywhere in this.</li>
+    <li>Simulated: the confirmation that signs the approval. A visitor has to be able to press the button, so the sandbox signs its own approval. It is not a customer identity system.</li>
+    <li>Simulated: the name check. The sandbox runs it, standing in for the control your own systems already run.</li>
+    <li>Scripted in one mode and live in another: the agent's repair. Live mode calls a real language model and shows the tokens, the latency and the raw proposal.</li>
+    <li>Real: the authorization service, its policy, its refusals, its grants, its receipts and its record. The same code path runs in production.</li>
+  </ul>
+  <p class="callout">The sandbox is real. The authorization boundary is real. The production claims stop there, and the limits are listed on <a href="trust.html">Trust</a>.</p>
+</div></section>
+
+<div class="cta-band alt"><div class="wrap">
+  <h2>Take two minutes and try to get past it.</h2>
+  <p>Change the destination, add a recipient, wait for the window to close, or skip the boundary. Then send the instruction that was actually approved.</p>
+  <div class="cta-row" style="justify-content:center;display:flex;gap:.8rem;flex-wrap:wrap">
+    <a class="btn btn-primary" href="https://api.humsana.com/sandbox/gregg/">Open the walkthrough</a>
+    <a class="btn btn-ghost" href="developers.html">Integrate it</a>
+  </div>
+</div></div>
+
+<footer><div class="wrap foot-in">
+  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
+  <div class="foot-links">
+    <a href="how-it-works.html">How it works</a><a href="sandbox.html">Sandbox</a><a href="developers.html">Developers</a><a href="trust.html">Trust</a><a href="swan.html">Swan</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a>
+  </div>
+  <div class="foot-copy">&copy; 2026 Humsana</div>
+</div></footer>
+
+</body>
+</html>

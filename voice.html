@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Humsana Voice (Signal)  Real-Time PII Detection, Open Source</title>
-<meta name="description" content="An open-source baseline for real-time PII detection in voice. Reads the texture of speech to flag sensitive data without transcription.">
+<title>Moved: Humsana</title>
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url=swan.html">
+<link rel="canonical" href="swan.html">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,69 +15,25 @@
   <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
   <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
   <div class="nav-links" id="nav">
-    <a href="voice.html" class="active">Voice</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="sandbox.html">Sandbox</a>
     <a href="developers.html">Developers</a>
-    <a href="partners.html">Partners</a>
+    <a href="trust.html">Trust</a>
     <a href="swan.html">Swan</a>
-    <a class="nav-cta" href="https://github.com/sriramnatrajhen">GitHub</a>
+    <a class="nav-cta" href="sandbox.html">See it work</a>
   </div>
 </div></nav>
 
-<header class="hero"><div class="wrap"><div class="inner">
-  <span class="label"><span class="n">Signal</span>Open source, AGPL-3.0</span>
-  <h1>Real-time PII detection, by the texture of speech.</h1>
-  <p class="lead">An open-source baseline for flagging sensitive data in live voice, without transcribing it. Self-host it, and help improve it.</p>
-  <div class="cta-row">
-    <a class="btn btn-primary" href="https://github.com/sriramnatrajhen/humsana-voice">Get it on GitHub</a>
-    <a class="btn btn-ghost" href="#integrate">See integration</a>
-  </div>
-</div></div></header>
-
-<section><div class="wrap">
-  <div class="head">
-    <span class="label"><span class="n">01</span>Why texture</span>
-    <h2>Transcription is too slow for live voice.</h2>
-    <p>Redacting PII by transcribing first adds more than a second of latency. Signal reads the acoustic texture directly.</p>
-  </div>
-  <div class="vs">
-    <div><div class="t">Status quo: transcription</div>
-      <ul class="plain"><li>Speech to text, +800ms</li><li>NLP analysis, +300ms</li><li>Redaction</li></ul>
-      <div class="big slow mono">~1.2s</div>
-    </div>
-    <div><div class="t">Humsana Signal</div>
-      <ul class="plain"><li>Texture analysis, 10ms</li><li>Signal block, instant</li></ul>
-      <div class="big fast mono">~10ms</div>
-    </div>
-  </div>
-</div></section>
-
-<section id="integrate" class="alt"><div class="wrap">
-  <div class="head">
-    <span class="label"><span class="n">02</span>Integration</span>
-    <h2>Any platform that speaks WebSockets.</h2>
-    <p>Point your media stream at a Signal engine and mute audio the moment PII is detected. Works with Vapi, Twilio, or a raw WebSocket client.</p>
-  </div>
-  <pre class="code"><span class="k">import</span> websockets
-
-<span class="k">async with</span> websockets.connect(<span class="s">"wss://your-host/stream?key=YOUR_KEY"</span>) <span class="k">as</span> ws:
-    <span class="k">await</span> ws.send(json.dumps({<span class="k">"audio"</span>: chunk_b64, <span class="k">"format"</span>: <span class="s">"pcm16"</span>}))
-    <span class="k">if</span> <span class="s">"PII_DETECTED"</span> <span class="k">in</span> <span class="k">await</span> ws.recv():
-        mute_audio()</pre>
-</div></section>
-
-<div class="cta-band"><div class="wrap">
-  <h2>Open source, AGPL-3.0.</h2>
-  <p>A working baseline you can run and improve. For a managed deployment or a pilot, get in touch.</p>
-  <div class="cta-row" style="justify-content:center;display:flex;gap:.8rem;flex-wrap:wrap">
-    <a class="btn btn-primary" href="https://github.com/sriramnatrajhen/humsana-voice">View the repository</a>
-    <a class="btn btn-ghost" href="mailto:contact@humsana.com?subject=Humsana%20Signal">Contact us</a>
-  </div>
-</div></div>
+<div class="wrap" style="padding:6rem 0">
+  <span class="label"><span class="n">Moved</span>Humsana</span>
+  <h1 style="font-size:clamp(1.6rem,3vw,2.2rem);font-weight:500">This page has moved.</h1>
+  <p style="margin-top:1rem">The product that was described here is no longer offered. <a href="swan.html">Continue to Swan</a>.</p>
+</div>
 
 <footer><div class="wrap foot-in">
   <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
   <div class="foot-links">
-    <a href="voice.html">Voice</a><a href="developers.html">Developers</a><a href="partners.html">Partners</a><a href="swan.html">Swan</a><a href="privacy.html">Privacy</a><a href="https://github.com/sriramnatrajhen">GitHub</a>
+    <a href="how-it-works.html">How it works</a><a href="sandbox.html">Sandbox</a><a href="developers.html">Developers</a><a href="trust.html">Trust</a><a href="swan.html">Swan</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a>
   </div>
   <div class="foot-copy">&copy; 2026 Humsana</div>
 </div></footer>

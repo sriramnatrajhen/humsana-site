@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How it works: Humsana</title>
+<meta name="description" content="What an agent must assert, what Humsana establishes, what a person confirms, what is bound to the action, and what happens at execution.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav><div class="wrap nav-in">
+  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
+  <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
+  <div class="nav-links" id="nav">
+    <a href="how-it-works.html">How it works</a>
+    <a href="sandbox.html">Sandbox</a>
+    <a href="developers.html">Developers</a>
+    <a href="trust.html">Trust</a>
+    <a href="swan.html">Swan</a>
+    <a class="nav-cta" href="sandbox.html">See it work</a>
+  </div>
+</div></nav>
+
+<header class="hero"><div class="wrap"><div class="inner">
+  <span class="label"><span class="n">01</span>Mechanism</span>
+  <h1>From authority to action.</h1>
+  <p class="lead">What the caller must assert, and what the boundary refuses to infer from it.</p>
+</div></div></header>
+
+<section><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">02</span>The request</span>
+    <h2>An agent presents a claim, not a proof.</h2>
+  </div>
+  <div class="deflist">
+    <div class="item"><h4>Who is asking</h4><p>The agent identifies itself, and the organization or person it acts for. Humsana records the presentation as a claim and keeps it separate from anything it can establish.</p></div>
+    <div class="item"><h4>What it wants to do</h4><p>The action arrives as structured fields, not as a sentence. The boundary compares fields, so the executor and the boundary have to agree on the parameters of the action exactly.</p></div>
+    <div class="item"><h4>What authority it claims</h4><p>A mandate, a delegation, a policy reference, an approval from an upstream system. A delegation presented with a request is recorded as unverified today. Scope, revocation and expiry rules for a presented delegation are not enforced yet, and we do not imply otherwise.</p></div>
+    <div class="item"><h4>What consequence it carries</h4><p>The caller declares an action class. The declaration is recorded and can never lower what the class requires.</p></div>
+  </div>
+</div></section>
+
+<section class="alt"><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">03</span>Evidence</span>
+    <h2>Five states, never blended.</h2>
+    <p>Every fact the boundary carries an opinion about has one state, and the state travels with the fact into the record.</p>
+  </div>
+  <div class="deflist">
+    <div class="item"><h4>Measured</h4><p>The boundary's own machinery produced this result.</p></div>
+    <div class="item"><h4>Verified</h4><p>An external check confirmed it, and the boundary knows which one.</p></div>
+    <div class="item"><h4>Reported</h4><p>A party said so, and the boundary repeats it as a report.</p></div>
+    <div class="item"><h4>Unverified</h4><p>It arrived as a claim and nothing supports it. This is the state of most of what an agent asserts.</p></div>
+    <div class="item"><h4>Unknown</h4><p>Nothing was established and nothing was claimed. Recorded as silence, not as consent.</p></div>
+  </div>
+  <p class="callout">Measured evidence outranks a caller's assertion, which outranks a caller's silence. A claim can make a decision stricter. It can never make one more permissive, and a declaration in the request never moves the verdict, the evidence grade or the action.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">04</span>Consequence</span>
+    <h2>The action decides the floor.</h2>
+  </div>
+  <div class="deflist">
+    <div class="item"><h4>The class sets a minimum, not a permission</h4><p>Each action class carries a floor: how much evidence is required and whether an authenticated person has to confirm. The class comes from the action, so an agent cannot choose a lighter path for a heavier action by describing it differently.</p></div>
+    <div class="item"><h4>Reversible actions stay cheap</h4><p>A read, a draft, a search: no confirmation, and the check measured in single-digit milliseconds.</p></div>
+    <div class="item"><h4>Irreversible actions floor at a person</h4><p>Money movement, regulated communication and destructive actions floor at human confirmation by construction. The requirement comes from the consequence, not from the model's confidence.</p></div>
+  </div>
+</div></section>
+
+<section class="alt"><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">05</span>Confirmation</span>
+    <h2>The approval is an act, not a flag.</h2>
+  </div>
+  <div class="deflist">
+    <div class="item"><h4>Asked of an authenticated approver</h4><p>The request names who is being asked and how the answer will be authenticated. That identity is what gets recorded against the approval.</p></div>
+    <div class="item"><h4>Bound to the exact instruction</h4><p>The approver sees the fields that will be bound, including the destination and the amount, and approves that instruction as it stands.</p></div>
+    <div class="item"><h4>Spent once, and it expires</h4><p>An approval covers one action, and it has a window. An approval that arrives after its window is refused by the boundary's own rule, not by the rail's.</p></div>
+    <div class="item"><h4>What this is not</h4><p>Humsana does not authenticate the approver. That belongs to the customer's identity system. The sandbox uses a reference confirmation adapter so a visitor can press the button, and it is not a customer identity system.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">06</span>The grant</span>
+    <h2>Single use, exact action.</h2>
+  </div>
+  <div class="deflist">
+    <div class="item"><h4>Every bound field is named</h4><p>The grant carries the fields that may not change and their digests. A byte-level change to an artifact is a change to a field.</p></div>
+    <div class="item"><h4>Sets may shrink, never grow</h4><p>A recipient set, a record set, a resource list: a bound set may only shrink under its rule. Adding one recipient after approval is refused, and the refusal says which rule it failed.</p></div>
+    <div class="item"><h4>A refusal names the field, both values and the rule</h4><p>The response carries the field that moved, the value that was authorized, the value that arrived and the rule that was broken, as a structure rather than a sentence. An operator or a system can act on it without parsing prose.</p></div>
+  </div>
+</div></section>
+
+<section class="alt"><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">07</span>Execution</span>
+    <h2>The check happens where the action happens.</h2>
+  </div>
+  <div class="deflist">
+    <div class="item"><h4>The executor presents what it is about to do</h4><p>Immediately before the send, the payment or the deletion, the executor presents the action it is holding together with the grant. The boundary answers in single-digit milliseconds, so the check is affordable on the hot path.</p></div>
+    <div class="item"><h4>A moved field stops the action</h4><p>If anything material changed since the approval, the call returns without releasing, the grant is not consumed, and the response says what moved.</p></div>
+    <div class="item"><h4>Nothing is authorized twice</h4><p>A second presentation of the same grant is refused, so a retry loop cannot release the same action twice.</p></div>
+    <div class="item"><h4>The rail is the customer's, and it requires a grant</h4><p>Humsana is not a payment rail and cannot make a customer's rail refuse an unsigned instruction. Making the rail require a grant is the integration, and the sandbox demonstrates the requirement rather than claiming the rail enforces it by itself.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">08</span>The record</span>
+    <h2>The audit path is the executable path.</h2>
+  </div>
+  <p>Recording is not a logging feature bolted beside the decision. Each step writes the state it produced: what was claimed, what was established, what was authorized, what executed, and what was refused, each with the reason. A refused action is not an error to be found in a log later, and an authorization cannot be rewritten after the fact.</p>
+  <p>Both outcomes are kept together, so a reviewer can see the control working and working by stopping something.</p>
+</div></section>
+
+<section class="alt"><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">09</span>The provider boundary</span>
+    <h2>Models advise. Policy decides.</h2>
+  </div>
+  <div class="deflist">
+    <div class="item"><h4>The decision is deterministic</h4><p>The same request produces the same decision, and the deployment runs deterministic by default. No model sits in the authorization path.</p></div>
+    <div class="item"><h4>A model can only raise</h4><p>Where a language model is enabled as an optional provider, it can request a stricter outcome and nothing else. Its output has no field in which a decision could be carried, and a missing, empty or unreadable key file leaves the boundary running deterministically with no network call at all.</p></div>
+    <div class="item"><h4>Bounded waits</h4><p>The boundary waits for a provider only up to its own deadline, and records a timeout by name rather than treating a slow answer as an answer.</p></div>
+  </div>
+  <p class="callout">A provider can make a request stricter. It can never make one that policy refused go through.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">10</span>The calls</span>
+    <h2>Four calls, and a refusal you can read.</h2>
+  </div>
+  <div class="code">POST /v1/authorize/verify              decide whether this exact action may proceed
+POST /v1/authorize/confirm/request     ask the authenticated approver
+POST /v1/authorize/confirm             record that approval against that instruction
+POST /v1/authorize/effectuate          release, only if the arriving action matches the grant</div>
+  <p style="margin-top:1.4rem">A refusal from the live sandbox reads like this, with the moving field named:</p>
+  <div class="code">POST /v1/authorize/effectuate -> 200
+  authorized: false
+  code:       GRANT_DOES_NOT_COVER_THIS_ACTION
+  matched:    false
+  consumed:   false
+  drift:      payee_account
+                authorized  the account on the approved instruction
+                arrived     the account the executor was holding
+                rule        MAY_NOT_CHANGE</div>
+  <p class="note">Field names and codes are the service's own, taken from a live call. The two account values are described rather than printed, because they are sandbox identifiers. The same shape appears on the <a href="sandbox.html">Sandbox</a> page.</p>
+</div></section>
+
+<div class="cta-band alt"><div class="wrap">
+  <h2>Run it against a real service.</h2>
+  <p>The sandbox is a live deployment. It holds a payout, has an agent repair it, asks one person to approve, and then refuses whatever instruction does not match that approval.</p>
+  <div class="cta-row" style="justify-content:center;display:flex;gap:.8rem;flex-wrap:wrap">
+    <a class="btn btn-primary" href="sandbox.html">Open the sandbox</a>
+    <a class="btn btn-ghost" href="developers.html">Read the integration guide</a>
+  </div>
+</div></div>
+
+<footer><div class="wrap foot-in">
+  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
+  <div class="foot-links">
+    <a href="how-it-works.html">How it works</a><a href="sandbox.html">Sandbox</a><a href="developers.html">Developers</a><a href="trust.html">Trust</a><a href="swan.html">Swan</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a>
+  </div>
+  <div class="foot-copy">&copy; 2026 Humsana</div>
+</div></footer>
+
+</body>
+</html>

@@ -144,6 +144,10 @@ ul.cross li{padding-left:1.5rem}ul.cross li::before{content:'\2013';color:var(--
 .callout{border-left:2px solid var(--accent);padding:.4rem 0 .4rem 1.4rem;color:var(--muted);font-weight:300;max-width:680px}
 .callout strong{color:var(--ink);font-weight:600}
 
+/* Provenance note: sits under a figure, a metric or a quoted block */
+.note{font-family:var(--mono);font-size:.76rem;color:var(--dim);margin-top:1.1rem;font-weight:300;line-height:1.7}
+.note a{color:var(--muted)}
+
 /* Prose (privacy) */
 .prose{max-width:720px}
 .prose h2{font-size:1.35rem;font-weight:500;margin:2.4rem 0 .7rem;letter-spacing:-0.01em}
