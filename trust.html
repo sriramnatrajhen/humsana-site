@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trust: sources, measurements and limits. Humsana</title>
-<meta name="description" content="What Humsana claims, the method behind every number, and the limits stated plainly.">
+<title>Trust: sources and measurements. Humsana</title>
+<meta name="description" content="Where the principle comes from, and the method behind every number on this site.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,11 +20,32 @@
 
 <header class="hero"><div class="wrap">
   <span class="label"><span class="n">01</span>Trust</span>
-  <h1>What we claim, and what we do not.</h1>
-  <p class="lead" style="margin-top:1.4rem">Every number on this site carries its method. Every gap is stated here rather than left for you to find.</p>
+  <h1>Where it comes from, and how it is measured.</h1>
+  <p class="lead" style="margin-top:1.4rem">Every number on this site carries its method. The sources and the test corpora are named.</p>
 </div></header>
 
-
+<section><div class="wrap">
+  <div class="cols3" style="grid-template-columns:repeat(2,1fr)">
+    <div>
+      <div class="ch">Regulation</div>
+      <h3>The principle is not new</h3>
+      <p>The FCA's 2026 Mills Review discusses the move from AI assistance to AI delegation, and the need for accountability, audit trails, explainable outcomes and meaningful human approval. <a href="https://www.fca.org.uk">fca.org.uk</a></p>
+      <p style="margin-top:1rem">Strong customer authentication, RTS Article 5, requires certain remote payments to be dynamically linked to the amount and the payee. Change either and the authentication is invalid.</p>
+      <p style="margin-top:1rem">Confirmation of Payee, Specific Direction 17, applies when a new payee is added or an existing payee's details change. <a href="https://www.wearepay.uk">wearepay.uk</a></p>
+      <p style="margin-top:1rem">Humsana applies the same shape to autonomous execution: make the approval explicit, bind it to the action, and check it again when the action happens.</p>
+    </div>
+    <div>
+      <div class="ch">Measurement</div>
+      <h3>Authorization cost</h3>
+      <p>5.8 ms median to authorize one exact action, 2.9 ms median to check it at execution, worst case 12.9 ms over a run of 40 actions, on the current single-host deployment. The work is a deterministic comparison of bound fields, not a model call.</p>
+      <h3>Agent variance</h3>
+      <p>Seven runs of one autonomous task, on one provider, in one day. Seven distinct artifacts, and the recipient set was the same every time. All 42 presentations were refused before the send API: zero matched, zero grants consumed, and 14 messages that the unwatched executor really sent.</p>
+      <h3>Voice</h3>
+      <p>The noise gate is set at 30 dB. Across the evaluation, synthetic detections that became affirmatives fell from 64 to 0. Audio below the floor returns inconclusive rather than cleared.</p>
+      <p class="note">The corpora and the full method are in the repository.</p>
+    </div>
+  </div>
+</div></section>
 
 <section><div class="wrap">
   <div class="head">
@@ -33,9 +54,9 @@
   </div>
   <div class="deflist">
     <div class="item"><h4>A record holds</h4><p>What the caller claimed, what was established, the grant with the digest of every bound field, the confirmation with its approver, and the receipt for what executed or was refused.</p></div>
-    <div class="item"><h4>Voice audio</h4><p>Processed to reach a verdict and not stored. Where a voice check is used at all, the evidence contributes a state. It cannot clear a caller on its own.</p></div>
-    <div class="item"><h4>Metadata</h4><p>Retained for 30 days on the current deployment. The retention policy changes when this runs inside your environment, because the store does.</p></div>
-    <div class="item"><h4>The sandbox</h4><p>Uses generated data. No real money moves, and no bank is involved at any point in the demonstration.</p></div>
+    <div class="item"><h4>Voice audio</h4><p>Decoded in memory to reach a verdict and then discarded. It is never written to disk, and no voiceprint is built.</p></div>
+    <div class="item"><h4>Metadata</h4><p>Kept for 30 days, so a result can be explained later. It contains no audio and no fingerprint of the audio.</p></div>
+    <div class="item"><h4>The sandbox</h4><p>Uses generated data. The authorization service is the real one.</p></div>
   </div>
 </div></section>
 
@@ -46,10 +67,11 @@
   </div>
   <ul class="plain">
     <li>Run the sandbox and try to make a changed field pass. Nothing you can do makes it pass.</li>
-    <li>Ask for a receipt and for who would accept it. The record is a structure, not a log line.</li>
-    <li>Ask for the method behind any number. It is on this page, and the corpora and the failures are in the repository.</li>
+    <li>Ask for a receipt, and for who would accept it. The record is a structure, not a log line.</li>
+    <li>Ask for the method behind any number. It is on this page, and the corpora are in the repository.</li>
   </ul>
-  <div class="cta-row" style="margin-top:2.6rem">
+  <p class="statement" style="margin-top:3rem">The principle is an approval bound to the exact action, enforceable for actions no person performs.</p>
+  <div class="cta-row" style="margin-top:2.4rem">
     <a class="btn btn-primary arrow-after" href="sandbox.html">Open the sandbox</a>
     <a class="btn btn-ghost" href="mailto:ram@humsana.com">Talk to us</a>
   </div>
