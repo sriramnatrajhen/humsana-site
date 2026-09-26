@@ -57,6 +57,74 @@ drift:      &lt;field&gt;  authorized ...  arrived ...  rule MAY_NOT_CHANGE</div
 
 <section><div class="wrap">
   <div class="head">
+    <span class="label"><span class="n">05</span>Pilot</span>
+    <h2>One action class, done properly.</h2>
+  </div>
+  <p>One action class, one executor, one approver route. The integration sits on your side of the irreversible call, and a pilot does not move production money.</p>
+  <p style="margin-top:1rem">You get authorization records, refusals that name the field and the rule, a receipt per action, and a written statement of the scope.</p>
+  <div class="cta-row" style="margin-top:2.4rem">
+    <a class="btn btn-primary arrow-after" href="mailto:ram@humsana.com">Bring us one action</a>
+    <a class="btn btn-ghost" href="how-it-works.html">Read the mechanism</a>
+  </div>
+</div></section> html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Developers. Humsana</title>
+<meta name="description" content="Four calls in front of the irreversible step, and a refusal your systems can act on.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav><div class="wrap nav-in">
+  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana"></a>
+  <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
+  <div class="nav-links" id="nav">
+    <a href="swan.html">Swan</a>
+    <a class="nav-cta" href="sandbox.html">See it work</a>
+  </div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <span class="label"><span class="n">01</span>Developers</span>
+  <h1>Four calls, in front of the one that matters.</h1>
+  <p class="lead" style="margin-top:1.4rem">An extra call before the irreversible step, and a refusal your systems can act on without parsing prose.</p>
+</div></header>
+
+<section><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">02</span>The shape</span>
+    <h2>What your side has to do.</h2>
+  </div>
+  <ul class="plain">
+    <li>Pick one consequential action: a payment release, a beneficiary change, a bulk send, a deletion.</li>
+    <li>Make one extra call before it, and pass the grant with the request.</li>
+    <li>Keep your identity system. Humsana asks it to authenticate the approver and records the answer.</li>
+    <li>Add no console. The record is a receipt the boundary already holds.</li>
+  </ul>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head">
+    <span class="label"><span class="n">03</span>The calls</span>
+    <h2>The authorization contract.</h2>
+  </div>
+  <div class="code">POST /v1/authorize/verify            decide whether this exact action may proceed
+POST /v1/authorize/confirm/request   ask the authenticated approver
+POST /v1/authorize/confirm           record that approval against that instruction
+POST /v1/authorize/effectuate        release, only if the arriving action matches the grant</div>
+  <p style="margin-top:1.6rem">A request carries who is asking, who it acts for, the action as structured fields, the authority it claims, the consequence class it declares, and when it expires. The decision returns the evidence state behind every fact, so a claim and an established fact stay apart in your logs.</p>
+  <div class="code" style="margin-top:1.6rem">authorized: false
+code:       GRANT_DOES_NOT_COVER_THIS_ACTION
+matched:    false
+consumed:   false
+drift:      &lt;field&gt;  authorized ...  arrived ...  rule MAY_NOT_CHANGE</div>
+  <p class="callout" style="margin-top:2.2rem">Handle a refusal as you handle a rejected instruction: do not retry it blind, and show a person what moved.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head">
     <span class="label"><span class="n">04</span>Rules of the road</span>
     <h2>Before you write code.</h2>
   </div>
