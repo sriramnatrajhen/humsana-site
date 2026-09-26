@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sandbox: Humsana</title>
-<meta name="description" content="A live deployment. A payout held for a name mismatch, an agent's repair, one approval, and a refusal when the instruction that arrives is not the instruction that was approved.">
+<title>Sandbox. Humsana</title>
+<meta name="description" content="One payout, one approval, one refusal, on the live authorization service.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <nav><div class="wrap nav-in">
-  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
+  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana"></a>
   <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
   <div class="nav-links" id="nav">
     <a href="swan.html">Swan</a>
@@ -18,78 +18,70 @@
   </div>
 </div></nav>
 
-<header class="hero"><div class="wrap"><div class="inner">
+<header class="hero"><div class="wrap">
   <span class="label"><span class="n">01</span>Sandbox</span>
   <h1>One payout, one approval, one refusal.</h1>
-  <p class="lead">A live deployment. Generated data, no real money, and the authorization service is the real one.</p>
-  <div class="cta-row">
-    <a class="btn btn-primary" href="https://api.humsana.com/sandbox/gregg/">Open the walkthrough</a>
-    <a class="btn btn-ghost" href="how-it-works.html">How it works</a>
+  <p class="lead" style="margin-top:1.4rem">A live deployment. Generated data, no real money, and the authorization service is the real one.</p>
+</div></header>
+
+<section><div class="wrap">
+  <div class="rows">
+    <div class="row"><div class="rn">01</div><div><h3>The hold</h3>
+      <p>A payout is held because the beneficiary name does not match the account. That check belongs to the paying bank, and it already ran.</p></div></div>
+    <div class="row"><div class="rn">02</div><div><h3>The repair</h3>
+      <p>An agent reads the signed mandate and proposes a new destination account. Live mode is a real model call, and the claim is recorded as asserted.</p></div></div>
+    <div class="row"><div class="rn">03</div><div><h3>The approval</h3>
+      <p>A person approves the repaired instruction as it stands. The approval is single use, and it expires.</p></div></div>
+    <div class="row"><div class="rn">04</div><div><h3>The release</h3>
+      <p>The screen arrives holding the account on file, so the first press is a refusal. From there you can send the queue's copy, the version the agent read after the mandate was re-issued, an instruction whose name check now fails, an expired approval, or the instruction that was actually approved.</p></div></div>
+    <div class="row"><div class="rn">05</div><div><h3>The record</h3>
+      <p>Claimed, established, authorized, refused and executed, with the digest the grant was bound to. Downloadable.</p></div></div>
   </div>
-</div></div></header>
+  <p class="note">One window, with the real exchange between the agent, the executor and the boundary underneath it, timestamped.</p>
+</div></section>
 
 <section><div class="wrap">
   <div class="head">
-    <span class="label"><span class="n">02</span>What you watch</span>
-    <h2>One window, and the call underneath it.</h2>
-    <p>The top of the page is what a person sees at each step. Underneath, a terminal shows the real exchange between the agent, the executor and the boundary, with timestamps.</p>
-  </div>
-  <ul class="plain">
-    <li>The hold. A payout is held because the beneficiary name does not match the account. That check is the bank's, and it already ran.</li>
-    <li>The repair. An agent reads the signed mandate and proposes a new destination account. Live mode is a real model call, and the claim is recorded as asserted.</li>
-    <li>The approval. A person approves the repaired instruction as it stands. The approval is single use, and it expires.</li>
-    <li>The release. The screen arrives holding the account on file, so the first press is a refusal.</li>
-    <li>The record. Claimed, established, authorized, refused, executed, with the digest the grant was bound to. Downloadable.</li>
-  </ul>
-</div></section>
-
-<section class="alt"><div class="wrap">
-  <div class="head">
-    <span class="label"><span class="n">03</span>The refusal</span>
+    <span class="label"><span class="n">02</span>The refusal</span>
     <h2>What it names.</h2>
   </div>
   <div class="code">refused:  GRANT_DOES_NOT_COVER_THIS_ACTION
 field:    payee_account   authorized ...   arrived ...   rule MAY_NOT_CHANGE
 consumed: false</div>
-  <p style="margin-top:1.4rem">The refusal names the field, both values and the rule, as a structure. Nothing is consumed, so the approved instruction can still be sent.</p>
-  <ul class="plain">
-    <li>No approval. Refused before the rail, with no grant found.</li>
-    <li>Past the window. Refused by the boundary's own expiry rule.</li>
-    <li>Replayed. Refused. A grant is spent once.</li>
-    <li>Straight to the rail. Refused for want of a grant. That is the integration requirement, not something the service can enforce on a rail it does not control.</li>
-  </ul>
+  <p class="note">The field, both values and the rule, as a structure. Nothing is consumed, so the approved instruction can still be sent.</p>
+  <div class="deflist" style="margin-top:2.6rem">
+    <div class="item"><h4>No approval</h4><p>Refused before the rail. No grant found.</p></div>
+    <div class="item"><h4>Past the window</h4><p>Refused by the boundary's own expiry rule.</p></div>
+    <div class="item"><h4>Replayed</h4><p>Refused. A grant is spent once.</p></div>
+    <div class="item"><h4>Straight to the rail</h4><p>Refused for want of a grant. That is the integration requirement, not something we can enforce on a rail we do not control.</p></div>
+  </div>
 </div></section>
 
 <section><div class="wrap">
   <div class="head">
-    <span class="label"><span class="n">04</span>Simulated, and real</span>
+    <span class="label"><span class="n">03</span>Simulated, and real</span>
     <h2>Which parts are which.</h2>
   </div>
-  <ul class="plain">
-    <li>Simulated: the payment rail, the approval signing, and the name check. The sandbox runs the last one, standing in for the control your own systems run.</li>
-    <li>Real: the deterministic policy, the grants, the refusals, the receipts, and the model calls with their token counts and latency.</li>
-    <li>The rail: when a provider credential is present the executor calls that provider in test mode, and the provider's own record is read back at the end. Otherwise it falls back to the simulated rail and the log says so.</li>
-  </ul>
-  <p class="callout">The sandbox is real. The authorization boundary is real. What we do not claim is on <a href="trust.html">Trust</a>.</p>
-</div></section>
-
-<div class="cta-band alt"><div class="wrap">
-  <h2>Try to get past it.</h2>
-  <p>Change the destination, let the approval expire, or send the instruction that was actually approved.</p>
-  <div class="cta-row" style="justify-content:center;display:flex;gap:.8rem;flex-wrap:wrap">
-    <a class="btn btn-primary" href="https://api.humsana.com/sandbox/gregg/">Open the walkthrough</a>
+  <div class="compare">
+    <div class="ch">Simulated</div><div class="ch">Real</div>
+    <div class="l">The payment rail</div><div class="r">The deterministic policy, the grants, the refusals, the receipts</div>
+    <div class="l">The approval signing</div><div class="r">The model calls, with their tokens and latency</div>
+    <div class="l">The name check, which your systems run</div><div class="r">The read back of the provider's own record</div>
+  </div>
+  <p class="note">When a provider credential is present the executor calls that provider in test mode and reads its record back at the end. Otherwise it falls back to the simulated rail, and the log says so.</p>
+  <div class="cta-row" style="margin-top:2.6rem">
+    <a class="btn btn-primary arrow-after" href="https://api.humsana.com/sandbox/gregg/">Open the walkthrough</a>
     <a class="btn btn-ghost" href="developers.html">Integrate it</a>
   </div>
-</div></div>
+</div></section>
 
 <footer><div class="wrap foot-in">
-  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
+  <div class="brand"><img src="logo.png" alt="Humsana"></div>
   <div class="foot-links">
     <a href="swan.html">Swan</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a>
   </div>
-  <div class="foot-copy">&copy; 2026 Humsana</div>
+  <div class="foot-copy">Humsana. Authorization for autonomous actors.</div>
 </div></footer>
-
 <script src="site.js"></script>
 </body>
 </html>

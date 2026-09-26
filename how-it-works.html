@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How it works: Humsana</title>
-<meta name="description" content="What an agent must assert, what Humsana establishes, what a person confirms, what is bound, and what happens at execution.">
+<title>How it works. Humsana</title>
+<meta name="description" content="Claim, establish, confirm, bind, enforce. What the boundary refuses to infer.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <nav><div class="wrap nav-in">
-  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
+  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana"></a>
   <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
   <div class="nav-links" id="nav">
     <a href="swan.html">Swan</a>
@@ -18,129 +18,74 @@
   </div>
 </div></nav>
 
-<header class="hero"><div class="wrap"><div class="inner">
+<header class="hero"><div class="wrap">
   <span class="label"><span class="n">01</span>Mechanism</span>
   <h1>From authority to action.</h1>
-  <p class="lead">What the caller must assert, and what the boundary refuses to infer from it.</p>
-</div></div></header>
+  <p class="lead" style="margin-top:1.4rem">What the caller presents, what the boundary establishes, and what it refuses to infer.</p>
+</div></header>
 
 <section><div class="wrap">
-  <div class="head">
-    <span class="label"><span class="n">02</span>The request</span>
-    <h2>An agent presents a claim, not a proof.</h2>
+  <div class="rows">
+    <div class="row"><div class="rn">01</div><div>
+      <h3>The request</h3>
+      <p>An agent presents a claim, not a proof: who it acts for, the action as structured fields, and the authority it says it holds. A presented delegation is recorded as unverified today.</p>
+      <p>The consequence class it declares is recorded. A declaration can never lower what that class requires.</p>
+    </div></div>
+    <div class="row"><div class="rn">02</div><div>
+      <h3>Evidence</h3>
+      <p>Five states, never blended: measured, verified, reported, unverified, unknown. Measured outranks reported, which outranks silence.</p>
+      <p>A claim can make a decision stricter. It can never make one more permissive.</p>
+    </div></div>
+    <div class="row"><div class="rn">03</div><div>
+      <h3>Consequence</h3>
+      <p>The action class sets the floor: how much evidence it needs, and whether a person must confirm.</p>
+      <p>A read or a draft stays cheap. Irreversible actions floor at a person by construction, not by a model's confidence.</p>
+    </div></div>
+    <div class="row"><div class="rn">04</div><div>
+      <h3>Confirmation</h3>
+      <p>The approver sees the fields that will be bound and approves that instruction as it stands. The approval is single use, and it expires.</p>
+      <p>Humsana does not authenticate the approver. That belongs to your identity system.</p>
+    </div></div>
+    <div class="row"><div class="rn">05</div><div>
+      <h3>The grant</h3>
+      <p>Every bound field is named with its digest, so a changed byte is a changed field. The bound set may shrink. It may not grow.</p>
+      <p>A refusal carries the field, both values and the rule as a structure, not as a sentence.</p>
+    </div></div>
+    <div class="row"><div class="rn">06</div><div>
+      <h3>Execution</h3>
+      <p>The executor presents the action and its grant immediately before the send, the payment or the deletion. A field that moved stops it, and the grant is not consumed.</p>
+      <p>A second presentation is refused, so a retry cannot release twice. The rail is yours. Making it require a grant is the integration.</p>
+    </div></div>
+    <div class="row"><div class="rn">07</div><div>
+      <h3>The provider</h3>
+      <p>The deployment ships deterministic and runs that way. Where a model is enabled it can only ask for a stricter outcome, and nothing it returns can hold a decision.</p>
+      <p>The boundary waits for a provider only to its own deadline, and records a timeout by name.</p>
+    </div></div>
   </div>
-  <ul class="plain">
-    <li>Who is asking. The agent identifies itself and the organization it acts for.</li>
-    <li>What it wants to do. The action arrives as structured fields, not as a sentence.</li>
-    <li>What authority it claims. A mandate or an upstream approval. A presented delegation is recorded as unverified today.</li>
-    <li>What consequence it carries. The declaration is recorded and can never lower what the class requires.</li>
-  </ul>
-</div></section>
-
-<section class="alt"><div class="wrap">
-  <div class="head">
-    <span class="label"><span class="n">03</span>Evidence</span>
-    <h2>Five states, never blended.</h2>
-  </div>
-  <ul class="plain">
-    <li>Measured. The boundary's own machinery produced this.</li>
-    <li>Verified. An external check confirmed it, and the record names which one.</li>
-    <li>Reported. A party said so, and it is repeated as a report.</li>
-    <li>Unverified. Nothing supports it. This is most of what an agent asserts.</li>
-    <li>Unknown. Nothing was established and nothing was claimed. Silence, not consent.</li>
-  </ul>
-  <p>Measured outranks asserted, which outranks silence. A claim can make a decision stricter. It can never make one more permissive.</p>
-</div></section>
-
-<section><div class="wrap">
-  <div class="head">
-    <span class="label"><span class="n">04</span>Consequence</span>
-    <h2>The action decides the floor.</h2>
-  </div>
-  <ul class="plain">
-    <li>Each action class carries a floor: how much evidence, and whether a person must confirm.</li>
-    <li>Reversible actions stay cheap. A read or a draft needs no confirmation.</li>
-    <li>Irreversible actions floor at a person, by construction, not by the model's confidence.</li>
-  </ul>
-</div></section>
-
-<section class="alt"><div class="wrap">
-  <div class="head">
-    <span class="label"><span class="n">05</span>Confirmation</span>
-    <h2>The approval is an act, not a flag.</h2>
-  </div>
-  <ul class="plain">
-    <li>The approver sees the fields that will be bound, and approves that instruction as it stands.</li>
-    <li>The approval is spent once, and it expires. A late approval is refused by the boundary, not by the rail.</li>
-    <li>Humsana does not authenticate the approver. That belongs to the customer's identity system.</li>
-  </ul>
 </div></section>
 
 <section><div class="wrap">
   <div class="head">
-    <span class="label"><span class="n">06</span>The grant</span>
-    <h2>Single use, exact action.</h2>
-  </div>
-  <ul class="plain">
-    <li>Every bound field is named with its digest. A changed byte is a changed field.</li>
-    <li>A bound set may shrink. It may not grow. Adding one recipient after approval is refused.</li>
-    <li>A refusal carries the field, both values and the rule, as a structure rather than a sentence.</li>
-  </ul>
-</div></section>
-
-<section class="alt"><div class="wrap">
-  <div class="head">
-    <span class="label"><span class="n">07</span>Execution</span>
-    <h2>The check happens where the action happens.</h2>
-  </div>
-  <ul class="plain">
-    <li>The executor presents the action and its grant immediately before the send, the payment or the deletion.</li>
-    <li>A field that moved stops the action, and the grant is not consumed.</li>
-    <li>A second presentation of the same grant is refused, so a retry cannot release twice.</li>
-    <li>The rail is the customer's. Making it require a grant is the integration.</li>
-  </ul>
-</div></section>
-
-<section><div class="wrap">
-  <div class="head">
-    <span class="label"><span class="n">08</span>The provider</span>
-    <h2>Models advise. Policy decides.</h2>
-  </div>
-  <ul class="plain">
-    <li>The deployment runs deterministically by default, and ships that way.</li>
-    <li>Where a model is enabled it can only ask for a stricter outcome, and its output has no field that could carry a decision.</li>
-    <li>The boundary waits for a provider only to its own deadline, and records a timeout by name.</li>
-  </ul>
-</div></section>
-
-<section class="alt"><div class="wrap">
-  <div class="head">
-    <span class="label"><span class="n">09</span>The calls</span>
+    <span class="label"><span class="n">02</span>The calls</span>
     <h2>Four calls, and a refusal you can read.</h2>
   </div>
-  <div class="code">POST /v1/authorize/verify              decide whether this exact action may proceed
-POST /v1/authorize/confirm/request     ask the authenticated approver
-POST /v1/authorize/confirm             record that approval against that instruction
-POST /v1/authorize/effectuate          release, only if the arriving action matches the grant</div>
-</div></section>
-
-<div class="cta-band alt"><div class="wrap">
-  <h2>Run it against a real service.</h2>
-  <p>Four calls, one grant, and a refusal your systems can act on.</p>
-  <div class="cta-row" style="justify-content:center;display:flex;gap:.8rem;flex-wrap:wrap">
-    <a class="btn btn-primary" href="sandbox.html">Open the sandbox</a>
+  <div class="code">POST /v1/authorize/verify            decide whether this exact action may proceed
+POST /v1/authorize/confirm/request   ask the authenticated approver
+POST /v1/authorize/confirm           record that approval against that instruction
+POST /v1/authorize/effectuate        release, only if the arriving action matches the grant</div>
+  <div class="cta-row" style="margin-top:2.4rem">
+    <a class="btn btn-primary arrow-after" href="sandbox.html">Run it against a real service</a>
     <a class="btn btn-ghost" href="developers.html">Integrate it</a>
   </div>
-</div></div>
+</div></section>
 
 <footer><div class="wrap foot-in">
-  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
+  <div class="brand"><img src="logo.png" alt="Humsana"></div>
   <div class="foot-links">
     <a href="swan.html">Swan</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a>
   </div>
-  <div class="foot-copy">&copy; 2026 Humsana</div>
+  <div class="foot-copy">Humsana. Authorization for autonomous actors.</div>
 </div></footer>
-
 <script src="site.js"></script>
 </body>
 </html>

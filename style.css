@@ -79,15 +79,18 @@ nav.scrolled{border-bottom-color:var(--line)}
 .metrics .mk{font-size:14px;line-height:1.35;color:var(--muted);margin-top:.6rem;max-width:22ch}
 
 .compare{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.compare .col{padding:2rem 2rem 2rem 0}
-.compare .col + .col{border-left:1px solid var(--line);padding-left:2rem}
-.compare .ch{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1.4rem}
-.compare .col:last-child .ch{color:var(--accent)}
-.compare ul{list-style:none;display:flex;flex-direction:column;gap:.85rem}
-.compare li{font-size:16px;color:var(--muted);padding-left:1.1rem;position:relative}
-.compare li::before{content:'';position:absolute;left:0;top:.72em;width:9px;height:1px;background:var(--line)}
-.compare .col:last-child li::before{background:var(--accent)}
-
+.compare > *{padding:.8rem 2rem .8rem 0;border-top:1px solid var(--line-soft)}
+.compare > *:nth-child(-n+2){border-top:0}
+.compare > *:nth-child(even){border-left:1px solid var(--line);padding-left:2rem}
+.compare .ch{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:1.7rem 2rem .5rem 0}
+.compare > *:nth-child(2).ch{color:var(--accent);padding-left:2rem}
+.compare .l,.compare .r{font-size:16px;line-height:1.35}
+.compare .l{color:var(--muted)}
+.compare .r{color:var(--ink)}
+.compare .r::before{content:'';display:inline-block;width:6px;height:6px;background:var(--accent);margin-right:.6rem;vertical-align:middle}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.6rem}
+.chips span{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:2px;padding:.4rem .6rem}
+.blocks h3{font-size:22px;margin:.9rem 0 .6rem}
 .failures{list-style:none;border-top:1px solid var(--line)}
 .failures li{display:grid;grid-template-columns:44px 1fr;gap:1rem;padding:1.15rem 0;border-bottom:1px solid var(--line-soft);align-items:baseline}
 .failures li:hover .num{color:var(--accent)}

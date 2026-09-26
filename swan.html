@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Humsana Swan: voice screening for recordings and voice messages</title>
-<meta name="description" content="Swan screens a recording for signs of a synthetic voice, reports the quality of the evidence, and recommends an action. Submitted to the Muse connector platform for review.">
+<title>Swan: screening for synthetic voices. Humsana</title>
+<meta name="description" content="Screen a recording before you act on it. Swan reports what the audio supports, and says so when it cannot.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <nav><div class="wrap nav-in">
-  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
+  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana"></a>
   <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
   <div class="nav-links" id="nav">
     <a href="swan.html">Swan</a>
@@ -18,57 +18,58 @@
   </div>
 </div></nav>
 
-<header class="hero"><div class="wrap"><div class="inner">
-  <span class="label"><span class="n">Swan</span>Screening for synthetic voices</span>
+<header class="hero"><div class="wrap">
+  <span class="label">Swan</span>
   <h1>Screen a recording before you act on it.</h1>
-  <p class="lead">Swan examines a voice message, a voicemail, or a call recording and reports what the audio supports. Each response states the finding, the quality of the evidence behind it, and one recommended action. When a recording cannot support a finding, the response says so.</p>
-  <div class="cta-row">
+  <p class="lead" style="margin-top:1.4rem">Swan examines a voice message, a voicemail or a call recording and reports what the audio supports: the finding, the quality of the evidence behind it, and one recommended action. When a recording cannot support a finding, it says so.</p>
+  <div class="cta-row" style="margin-top:2rem">
     <a class="btn btn-primary" href="swanscreen.html">Screen a recording</a>
-    <a class="btn btn-ghost" href="https://muse.ai/platform">Muse connector platform</a>
-    <a class="btn btn-ghost" href="#returns">What it returns</a>
+    <a class="btn btn-ghost arrow-after" href="https://muse.ai/platform">Muse connector platform</a>
   </div>
-</div></div></header>
+</div></header>
 
 <section><div class="wrap">
   <div class="metrics">
     <div class="m"><div class="mv">10s</div><div class="mk">Minimum length assessed</div></div>
     <div class="m"><div class="mv">3</div><div class="mk">Results stated per screening</div></div>
-    <div class="m"><div class="mv">30 days</div><div class="mk">Metadata kept, audio never</div></div>
+    <div class="m"><div class="mv">30 days</div><div class="mk">Metadata kept. Audio, never.</div></div>
   </div>
 </div></section>
 
-<section class="alt"><div class="wrap">
+<section><div class="wrap">
   <div class="head">
     <span class="label"><span class="n">01</span>Why it is needed</span>
     <h2>Short recordings are enough to clone a voice.</h2>
-    <p>Voice cloning tools need only a brief sample of speech to produce a usable imitation. The result usually arrives as an ordinary voice message or voicemail, and the person receiving it has to decide how to respond. Swan measures the recording and reports what the audio supports.</p>
   </div>
+  <p>Voice cloning needs only a brief sample to produce a usable imitation, and it arrives as an ordinary voice message or voicemail. Swan measures the recording and reports what the audio supports.</p>
 </div></section>
 
 <section id="returns"><div class="wrap">
   <div class="head">
     <span class="label"><span class="n">02</span>What a screening returns</span>
     <h2>Three results, stated separately.</h2>
-    <p>Detectors commonly return a single number and leave its meaning to the reader. Swan returns three separate results, so a screening cannot be read as more than it is.</p>
   </div>
   <div class="rows">
-    <div class="row"><div class="rn">01</div><div><h3>Authenticity</h3><p>One of three values: likely human, likely synthetic, or inconclusive. Inconclusive is a normal outcome, returned whenever the recording does not support either of the other two.</p></div></div>
-    <div class="row"><div class="rn">02</div><div><h3>Evidence quality</h3><p>Strong, adequate, limited, or insufficient. This describes the recording itself: its length, its bandwidth, and how much of it is speech.</p></div></div>
-    <div class="row"><div class="rn">03</div><div><h3>Recommended action</h3><p>Proceed, verify, or hold. In the Muse connector this is the field the assistant acts on, so it is stated in the same response rather than inferred from a score.</p></div></div>
+    <div class="row"><div class="rn">01</div><div><h3>Authenticity</h3>
+      <p>Likely human, likely synthetic, or inconclusive. Inconclusive is a normal outcome, returned whenever the recording does not support either of the other two.</p></div></div>
+    <div class="row"><div class="rn">02</div><div><h3>Evidence quality</h3>
+      <p>Strong, adequate, limited or insufficient. This describes the recording: its length, its bandwidth, and how much of it is speech.</p></div></div>
+    <div class="row"><div class="rn">03</div><div><h3>Recommended action</h3>
+      <p>Proceed, verify or hold. In the Muse connector this is the field the assistant acts on, so it is stated in the same response rather than inferred from a score.</p></div></div>
   </div>
+  <p class="note">A single score leaves its meaning to the reader. Three results cannot be read as more than they are.</p>
 </div></section>
 
-<section class="alt"><div class="wrap">
+<section><div class="wrap">
   <div class="head">
     <span class="label"><span class="n">03</span>Limits</span>
     <h2>What the service does not claim.</h2>
-    <p>These limits are enforced by the service rather than listed as disclaimers beside it.</p>
   </div>
-  <div class="rows">
-    <div class="row"><div class="rn">01</div><div><h3>No speaker identification</h3><p>Swan does not report who is speaking. It does not build a voiceprint, and it does not compare a recording against any other recording.</p></div></div>
-    <div class="row"><div class="rn">02</div><div><h3>No calibrated probability</h3><p>The detector score is not a probability, so it is withheld when the evidence is limited or insufficient. The service does not publish a confidence percentage.</p></div></div>
-    <div class="row"><div class="rn">03</div><div><h3>No finding below ten seconds</h3><p>Recordings shorter than ten seconds are returned as inconclusive, with the reason stated. In our testing the errors that matter sit in the shortest clips, so the service declines to decide on them.</p></div></div>
-    <div class="row"><div class="rn">04</div><div><h3>No finding from degraded audio</h3><p>A telephone line, a compressed voice note, or a noisy room reduces what the service is willing to say. When speech sits too close to the background for a voice to be judged, the service returns no determination at all and asks for a quieter recording, because a clearance drawn from unreadable audio is worse than an abstention. Poor audio can lower confidence. It is never a reason for the service to report a synthetic voice, nor a reason to say a voice is human.</p></div></div>
+  <div class="deflist">
+    <div class="item"><h4>No speaker identification</h4><p>It does not report who is speaking, build a voiceprint, or compare this recording against another.</p></div>
+    <div class="item"><h4>No calibrated probability</h4><p>The detector score is not a probability, so it is withheld when the evidence is limited or insufficient. No confidence percentage is published.</p></div>
+    <div class="item"><h4>No finding below ten seconds</h4><p>Shorter recordings return inconclusive, with the reason stated. The errors that matter sit in the shortest clips.</p></div>
+    <div class="item"><h4>No finding from degraded audio</h4><p>A telephone line, a compressed voice note or a noisy room reduces what the service will say. Below the noise floor it returns no determination and asks for a quieter recording. Poor audio can lower confidence. It is never a reason to report a synthetic voice, or to call one human.</p></div>
   </div>
 </div></section>
 
@@ -76,52 +77,40 @@
   <div class="head">
     <span class="label"><span class="n">04</span>Inside Muse</span>
     <h2>Screening where the recording arrives.</h2>
-    <p>Voice messages arrive in a chat, so the screening belongs in the same place. The Swan connector is submitted to the Muse connector platform and is under review. It is not yet listed in the directory. Once it is approved, a person can point at a recording in Muse and ask about it in ordinary language.</p>
   </div>
-  <div class="rows">
-    <div class="row"><div class="rn">01</div><div><h3>Typical requests</h3>
-      <ul class="plain" style="margin-top:.4rem">
-        <li>Is this voice message AI generated?</li>
-        <li>Check this voice message before I respond.</li>
-        <li>Does this recording show signs of synthetic speech?</li>
-        <li>Screen this voicemail for an AI generated voice.</li>
-        <li>I received a suspicious call. Should I verify the caller another way?</li>
-      </ul>
-    </div></div>
-    <div class="row"><div class="rn">02</div><div><h3>What comes back</h3><p>A short summary that can be read in a chat, followed by the three results above. When the recommended action is verify, the response asks the person to confirm the caller through a channel they already trust.</p></div></div>
-    <div class="row"><div class="rn">03</div><div><h3>How it connects</h3><p>Swan runs as a hosted HTTPS service. Muse reaches it through its connector framework. Nothing is required from the person using it: no account, no key and no payment. A key for your own client, or for a higher hourly limit, is issued at <a class="accent" href="swankey.html">Get an API key</a>. A single recording can also be screened in the browser, without a key: <a class="accent" href="swanscreen.html">Screen a recording</a>.</p></div></div><div class="row"><div class="rn">04</div><div><h3>Audio that is still arriving</h3><p>A socket accepts audio as it is captured, for a call or a recording in progress, and answers every few seconds while it continues. The answer may only escalate: once a window has found synthetic speech, nothing later in the session returns a cleaner verdict. Bandwidth still decides, so a wideband call can carry a finding and a telephone line is answered as inconclusive.</p></div></div>
+  <p>Voice messages arrive in a chat, so the screening belongs in the same place. The Swan connector is submitted to the Muse connector platform and is under review, and it is not yet listed in the directory. Once approved, a person can point at a recording in Muse and ask about it in ordinary language.</p>
+  <div class="chips" style="margin-top:1.8rem">
+    <span>Is this voice message AI generated?</span><span>Check this voicemail before I respond</span><span>Should I verify the caller another way?</span>
   </div>
+  <p>What comes back is a summary that reads in a chat, then the three results above. When the action is verify, the response asks the person to confirm the caller through a channel they already trust.</p>
+  <p style="margin-top:1rem">Swan runs as a hosted HTTPS service reached through Muse's connector framework. Nothing is required from the person using it: no account, no key and no payment. A key for your own client, or for a higher hourly limit, is issued at <a href="swankey.html">Get an API key</a>, and a single recording can be screened in the browser at <a href="swanscreen.html">Screen a recording</a>.</p>
+  <p style="margin-top:1rem">A socket accepts audio as it is captured, for a call in progress, and answers every few seconds while it continues. The answer may only escalate: once a window has found synthetic speech, nothing later in the session returns a cleaner verdict. Bandwidth still decides, so a wideband call can carry a finding and a telephone line is answered as inconclusive.</p>
 </div></section>
 
-<section class="alt"><div class="wrap">
+<section><div class="wrap">
   <div class="head">
     <span class="label"><span class="n">05</span>Data</span>
     <h2>Recordings are not kept.</h2>
-    <p>Audio is decoded in memory to produce the result and then discarded. It is not written to disk and is not used to train any model. A metadata record is kept for 30 days so that a result can be explained later. That record contains no audio and no fingerprint of the audio.</p>
   </div>
-  <div class="rows">
-    <div class="row"><div class="rn">01</div><div><h3>Privacy policy</h3><p>What a screening receives and keeps, in detail: <a class="accent" href="swanprivacy.html">Swan privacy policy</a></p></div></div>
-    <div class="row"><div class="rn">02</div><div><h3>Terms of service</h3><p>Acceptable use, access, and the limits of what a result means: <a class="accent" href="swanterms.html">Swan terms of service</a></p></div></div>
+  <p>Audio is decoded in memory to produce the result and then discarded. It is not written to disk and is not used to train any model. A metadata record is kept for 30 days so a result can be explained later, and it contains no audio and no fingerprint of the audio.</p>
+  <div class="deflist" style="margin-top:2.4rem">
+    <div class="item"><h4>Privacy policy</h4><p>What a screening receives and keeps, in detail: <a href="swanprivacy.html">Swan privacy policy</a>.</p></div>
+    <div class="item"><h4>Terms of service</h4><p>Acceptable use, access, and what a result means: <a href="swanterms.html">Swan terms of service</a>.</p></div>
+  </div>
+  <p class="statement" style="margin-top:3rem">A screening result is evidence, not proof. Swan describes a recording. It does not identify the speaker, and it reports when it cannot reach a finding.</p>
+  <div class="cta-row" style="margin-top:2.4rem">
+    <a class="btn btn-primary" href="swanscreen.html">Screen a recording</a>
+    <a class="btn btn-ghost" href="mailto:contact@humsana.com">Contact</a>
   </div>
 </div></section>
 
-<div class="cta-band alt"><div class="wrap">
-  <h2>A screening result is evidence, not proof.</h2>
-  <p>Swan describes a recording. It does not identify the speaker, and it reports when it cannot reach a finding.</p>
-  <div class="cta-row" style="justify-content:center;display:flex;gap:.8rem;flex-wrap:wrap">
-    <a class="btn btn-primary" href="https://muse.ai/platform">Muse connector platform</a>
-    <a class="btn btn-ghost" href="mailto:contact@humsana.com">Contact</a>
-  </div>
-</div></div>
-
 <footer><div class="wrap foot-in">
-  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
+  <div class="brand"><img src="logo.png" alt="Humsana"></div>
   <div class="foot-links">
-    <a href="swan.html">Swan</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a>
+    <a href="swanprivacy.html">Swan privacy</a><a href="swanterms.html">Swan terms</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a>
   </div>
-  <div class="foot-copy">&copy; 2026 Humsana</div>
+  <div class="foot-copy">Swan. One evidence capability inside Humsana.</div>
 </div></footer>
-
 <script src="site.js"></script>
 </body>
 </html>
