@@ -53,27 +53,11 @@ consumed: false</div>
     <div class="item"><h4>No approval</h4><p>Refused before the rail. No grant found.</p></div>
     <div class="item"><h4>Past the window</h4><p>Refused by the boundary's own expiry rule.</p></div>
     <div class="item"><h4>Replayed</h4><p>Refused. A grant is spent once.</p></div>
-    <div class="item"><h4>Straight to the rail</h4><p>Refused for want of a grant. That is the integration requirement, not something we can enforce on a rail we do not control.</p></div>
+    <div class="item"><h4>Straight to the rail</h4><p>Refused for want of a grant. The rail is yours, and requiring one is the integration.</p></div>
   </div>
 </div></section>
 
-<section><div class="wrap">
-  <div class="head">
-    <span class="label"><span class="n">03</span>Simulated, and real</span>
-    <h2>Which parts are which.</h2>
-  </div>
-  <div class="compare">
-    <div class="ch">Simulated</div><div class="ch">Real</div>
-    <div class="l">The payment rail</div><div class="r">The deterministic policy, the grants, the refusals, the receipts</div>
-    <div class="l">The approval signing</div><div class="r">The model calls, with their tokens and latency</div>
-    <div class="l">The name check, which your systems run</div><div class="r">The read back of the provider's own record</div>
-  </div>
-  <p class="note">When a provider credential is present the executor calls that provider in test mode and reads its record back at the end. Otherwise it falls back to the simulated rail, and the log says so.</p>
-  <div class="cta-row" style="margin-top:2.6rem">
-    <a class="btn btn-primary arrow-after" href="https://api.humsana.com/sandbox/gregg/">Open the walkthrough</a>
-    <a class="btn btn-ghost" href="developers.html">Integrate it</a>
-  </div>
-</div></section>
+
 
 <footer><div class="wrap foot-in">
   <div class="brand"><img src="logo.png" alt="Humsana"></div>
