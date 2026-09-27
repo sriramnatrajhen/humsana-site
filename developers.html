@@ -76,12 +76,22 @@ POST /v1/authorize/effectuate
 }
 
 <span class="c">// 200, the action is the one that was authorized</span>
-{ "decision": "EXECUTED",
-  "effectuation": { "matched": true,
-                    "presented": { "digest": "sha256:bf35..." } } }
+{ "code": "MATCHED",
+  "decision": "ALLOW",
+  "matched": true,
+  "consumed": true,
+  "grant_id": "grant_v2RT39_NY3B84w_oZ4OMA-s9_Y_YvM7b",
+  "confirmed_by": { "subject": "reviewer@northwind.example",
+                    "adapter": "reference", "method": "hmac-sha256" },
+  "effectuation": { "presented": { "digest": "sha256:bf35...", "stated": true } } }
 
-<span class="c">// 409, a material value moved</span>
+<span class="c">// 200, a material value moved. A refusal is an answer, not a transport error, so it carries a code
+// and the field that differed rather than an HTTP status a caller has to interpret.</span>
 { "code": "GRANT_DOES_NOT_COVER_THIS_ACTION",
+  "decision": "DENY",
+  "matched": false,
+  "consumed": false,
+  "policy_version": 1,
   "drift": [ { "field": "parameters.payee_account",
                "authorized": "GB00SUPPLIER00004821",
                "final": "GB00SUPPLIER00009137",

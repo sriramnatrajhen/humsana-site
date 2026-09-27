@@ -26,7 +26,6 @@
     <span class="label"><span class="n">01</span> Authorization</span>
     <h1>When AI acts on your behalf, authority has to travel with the action.</h1>
     <p class="lead">An agent can have permission to act and still execute an action nobody approved. Humsana binds authority to the action itself, checks that action again before execution, and refuses it when it no longer matches.</p>
-    <p>The principal grants authority. Humsana records it, binds it to the action, and enforces it at the point where the action would happen.</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="https://api.humsana.com/sandbox/">See it refuse</a>
       <a class="btn btn-ghost" href="how-it-works.html">How it works</a>
@@ -61,158 +60,72 @@
   <p>Every figure below is published, dated and linked. None of it is our estimate.</p>
   <div class="evid">
   <div class="e"><div class="fig">$2.7bn</div><div><span class="t">Business email compromise, the class where an authorized payment is redirected to a different account.</span><span class="d">21,442 complaints in one year. The payment was authorized. The account was not the one approved.</span><span class="src">FBI Internet Crime Complaint Center, 2024 annual report <a href="https://www.ic3.gov/Outreach/Brochures/ic3-brochure.pdf" rel="noopener">Source</a></span></div></div>
-  <div class="e"><div class="fig">&pound;1.28bn</div><div><span class="t">Payment fraud losses reported by UK Finance members in 2025.</span><span class="d">Up four per cent on 2024. The release describes fraud as a national security threat.</span><span class="src">UK Finance, Annual Fraud Report 2026 <a href="https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2026-press-release" rel="noopener">Source</a></span></div></div>
-  <div class="e"><div class="fig">&pound;257.5m</div><div><span class="t">Authorized push payment fraud losses in the United Kingdom in the first half of 2025.</span><span class="d">Up 12 per cent, across 110,747 cases. 62 per cent of the amount stolen was reimbursed to victims.</span><span class="src">UK Finance, Half Year Fraud Report 2025 <a href="https://www.ukfinance.org.uk/news-and-insight/press-release/over-ps600-million-stolen-fraudsters-in-first-half-2025" rel="noopener">Source</a></span></div></div>
-  <div class="e"><div class="fig">&pound;85,000</div><div><span class="t">Maximum reimbursement per claim once the UK reimbursement requirement took effect in October 2024.</span><span class="d">The loss moves to the paying institution. Reimbursement is the default now, so the question becomes what the institution can show about the action it processed.</span><span class="src">Payment Systems Regulator, PS24/7, in force 7 October 2024 <a href="https://www.psr.org.uk/publications/policy-statements/ps24-7-fighting-authorised-push-payment-fraud-a-new-reimbursement-requirement/" rel="noopener">Source</a></span></div></div>
+  <div class="e"><div class="fig">&pound;1.28bn</div><div><span class="t">Payment fraud losses reported by UK Finance members in 2025.</span><span class="d">Up four per cent on 2024.</span><span class="src">UK Finance, Annual Fraud Report 2026 <a href="https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2026-press-release" rel="noopener">Source</a></span></div></div>
+  <div class="e"><div class="fig">&pound;257.5m</div><div><span class="t">Authorized push payment fraud losses in the United Kingdom in the first half of 2025.</span><span class="d">110,747 cases, and 62 per cent of the amount stolen was reimbursed to victims.</span><span class="src">UK Finance, Half Year Fraud Report 2025 <a href="https://www.ukfinance.org.uk/news-and-insight/press-release/over-ps600-million-stolen-fraudsters-in-first-half-2025" rel="noopener">Source</a></span></div></div>
+  <div class="e"><div class="fig">&pound;85,000</div><div><span class="t">Maximum reimbursement per claim once the UK reimbursement requirement took effect in October 2024.</span><span class="d">The loss moves to the paying institution, so the question becomes what it can show about the action.</span><span class="src">Payment Systems Regulator, PS24/7, in force 7 October 2024 <a href="https://www.psr.org.uk/publications/policy-statements/ps24-7-fighting-authorised-push-payment-fraud-a-new-reimbursement-requirement/" rel="noopener">Source</a></span></div></div>
   <div class="e"><div class="fig">HK$200m</div><div><span class="t">A finance employee at Arup transferred about 25 million US dollars after a video conference with a deepfaked chief financial officer.</span><span class="d">The approval was given by a person. The person was not who the approval appeared to come from.</span><span class="src">CNN and South China Morning Post, February 2024 <a href="https://www.cnn.com/2024/02/04/asia/deepfake-cfo-scam-hong-kong-intl-hnk" rel="noopener">Source</a></span></div></div>
-  <div class="e"><div class="fig">1,300%</div><div><span class="t">Reported increase in deepfake fraud attempts.</span><span class="d">Voice and video are now the cheapest way to manufacture an approval.</span><span class="src">Pindrop, Voice Intelligence and Security Report, June 2025 <a href="https://www.prnewswire.com/news-releases/pindrops-2025-voice-intelligence--security-report-reveals-1-300-surge-in-deepfake-fraud-302479482.html" rel="noopener">Source</a></span></div></div>
+  <div class="e"><div class="fig">1,300%</div><div><span class="t">Reported increase in deepfake fraud attempts.</span><span class="d">Voice and video became the cheapest way to manufacture an approval.</span><span class="src">Pindrop, Voice Intelligence and Security Report, June 2025 <a href="https://www.prnewswire.com/news-releases/pindrops-2025-voice-intelligence--security-report-reveals-1-300-surge-in-deepfake-fraud-302479482.html" rel="noopener">Source</a></span></div></div>
   <div class="e"><div class="fig">July 2025</div><div><span class="t">An AI coding agent deleted a company's production database during a code freeze, then misreported what it had done.</span><span class="d">The agent had permission to run. Nothing bound it to an authorized action.</span><span class="src">Fortune, 23 July 2025 <a href="https://fortune.com/2025/07/23/ai-coding-tool-replit-wiped-database-called-it-a-catastrophic-failure/" rel="noopener">Source</a></span></div></div>
-  <div class="e"><div class="fig">February 2024</div><div><span class="t">A tribunal held Air Canada liable for information its website chatbot gave a customer.</span><span class="d">When an agent acts, the organization carries the consequence, whether or not a person was watching.</span><span class="src">Moffatt v. Air Canada, British Columbia Civil Resolution Tribunal, 2024 <a href="https://www.canlii.org/w/canlii/2025CanLIIDocs1963.pdf" rel="noopener">Source</a></span></div></div>
 </div><div class="sources">
   <div class="label">Sources</div>
   <ol>
-    <li>FBI Internet Crime Complaint Center, 2024 annual report. ic3.gov</li>
-    <li>UK Finance, Annual Fraud Report 2026 and Half Year Fraud Report 2025. ukfinance.org.uk</li>
-    <li>CNN, 4 February 2024, and South China Morning Post, on the Arup deepfake transfer.</li>
+    <li>FBI Internet Crime Complaint Center, 2024 annual report.</li>
+    <li>UK Finance, Annual Fraud Report 2026 and Half Year Fraud Report 2025.</li>
+    <li>Payment Systems Regulator, PS24/7, in force 7 October 2024.</li>
+    <li>CNN, 4 February 2024, and South China Morning Post, on the Arup transfer.</li>
     <li>Pindrop, Voice Intelligence and Security Report, June 2025.</li>
     <li>Fortune, 23 July 2025, on the Replit agent deleting production data.</li>
     <li>Moffatt v. Air Canada, British Columbia Civil Resolution Tribunal, 2024.</li>
-    <li>Payment Systems Regulator, PS24/7, in force 7 October 2024.</li>
-    <li>Mastercard, 29 April 2025. OpenAI and Stripe, Agentic Commerce Protocol, 29 September 2025. Swift, 2025.</li>
   </ol>
 </div>
 </div></section>
 
 <section><div class="wrap">
   <div class="head"><span class="label"><span class="n">03</span> Why now</span><h2>Agents are being handed the rails.</h2></div>
-  <p>Payments networks and model providers have spent 2025 building the paths that let an agent complete a purchase or a transfer. The checks that decide whether that action was authorized still live in queues, tickets and mailboxes.</p>
+  <p>Payments networks and model providers spent 2025 building the paths that let an agent complete a purchase or a transfer. The checks that decide whether that action was authorized still live in queues, tickets and mailboxes.</p>
   <div class="evid">
   <div class="e"><div class="fig">29 April 2025</div><div><span class="d">Mastercard announced Agent Pay, technology for payments made by AI agents.</span><span class="src">Mastercard newsroom <a href="https://newsroom.mastercard.com/news/press/2025/april/mastercard-unveils-agent-pay-pioneering-agentic-payments-technology-to-power-commerce-in-the-age-of-ai/" rel="noopener">Source</a></span></div></div>
   <div class="e"><div class="fig">29 September 2025</div><div><span class="d">OpenAI and Stripe published the Agentic Commerce Protocol, an open standard for agent-initiated checkout.</span><span class="src">Agentic Commerce Protocol, released under Apache 2.0 <a href="https://eco.com/support/en/articles/14845478-acp-agentic-commerce-protocol-explained" rel="noopener">Source</a></span></div></div>
   <div class="e"><div class="fig">2025</div><div><span class="d">Swift ran AI fraud detection across ten million test transactions with thirteen banks, and reported real time detection roughly doubled.</span><span class="src">Swift, press release <a href="https://www.swift.com/news-events/press-releases/swift-ai-innovation-creates-blueprint-banks-stop-fraud-faster-through-cross-border-collaboration" rel="noopener">Source</a></span></div></div>
 </div>
-  <div class="metrics" style="margin-top:3.4rem">
-    <div class="m"><div class="mv">5.8 ms</div><div class="mk">Median time to authorize one exact action</div></div>
-    <div class="m"><div class="mv">2.9 ms</div><div class="mk">Median time to check it at execution</div></div>
-    <div class="m"><div class="mv">12.9 ms</div><div class="mk">Worst case over 40 actions</div></div>
-  </div>
-  <p class="note">A check that sits at the execution seam has to be cheaper than the action it guards. These figures are from the current single host deployment, 40 actions, timed at the boundary. <a href="how-it-works.html#measured">Method and limits</a>.</p>
+  <p class="note">The check at the execution seam has to be cheap enough to sit on the path. Ours runs in single digit milliseconds, and the method and its limits are <a href="how-it-works.html#measured">stated in full</a>.</p>
 </div></section>
 
 <section><div class="wrap">
   <div class="head"><span class="label"><span class="n">04</span> The gap</span><h2>Permission answers a different question from authorization.</h2></div>
   <div class="compare">
-  <div class="col">
-    <div class="ch">Permission</div>
-    <ul><li>Can call the payment API</li><li>Has a credential</li><li>Access persists</li><li>Logs what happened</li></ul>
-  </div>
-  <div class="col">
-    <div class="ch">Authorization</div>
-    <ul><li>Can make this payment</li><li>Has authority</li><li>The grant is bounded</li><li>Binds what was approved</li></ul>
-  </div>
-</div>
-  <p style="margin-top:3rem">The system that performs the action already decides whether the action can run.</p>
-  <div class="deflist" style="margin-top:2.4rem">
-  <div class="item"><div class="mono">Balance and availability</div><p>Whether the account exists and holds what the action needs.</p></div>
-  <div class="item"><div class="mono">Format and state</div><p>Whether the request is well formed and whether the record is in a state that allows the change.</p></div>
-  <div class="item"><div class="mono">Its own limits</div><p>Whether the amount or the scope is inside the ceilings the system sets for itself.</p></div>
-  <div class="item"><div class="mono">Screening and duplication</div><p>Whether the counterparty is allowed and whether this looks like a repeat.</p></div>
-</div>
-  <p class="callout" style="margin-top:3rem">None of those rules answer whether the principal authorized this action. That authority sits in a queue, a ticket, a message or a flag on a row, and it can change before the action runs.</p>
-</div></section>
-
-<section><div class="wrap">
-  <div class="head"><span class="label"><span class="n">05</span> The mechanism</span><h2>From authority to execution.</h2></div>
-  <div class="rail" role="tablist">
-  <button class="step" role="tab" aria-selected="true"><span class="sn">01</span><span class="st">Claim</span></button>
-  <button class="step" role="tab" aria-selected="false"><span class="sn">02</span><span class="st">Establish</span></button>
-  <button class="step" role="tab" aria-selected="false"><span class="sn">03</span><span class="st">Confirm</span></button>
-  <button class="step" role="tab" aria-selected="false"><span class="sn">04</span><span class="st">Bind</span></button>
-  <button class="step" role="tab" aria-selected="false"><span class="sn">05</span><span class="st">Enforce</span></button>
-</div>
-<div class="step-body"><p>The agent says who it is, who it acts for, what it wants to do, and what authority it has.</p></div>
-<div class="step-body" hidden><p>Humsana separates what is established from what is claimed and what remains unknown.</p></div>
-<div class="step-body" hidden><p>The consequence decides whether a person has to approve. Where one does, the approval is signed over the exact action.</p></div>
-<div class="step-body" hidden><p>The approval is tied to the action, its bound values and its expiry. It can be spent once.</p></div>
-<div class="step-body" hidden><p>The executor presents the action immediately before it runs. A material change is refused and the changed field is named.</p></div>
-
-  <div class="match" style="margin-top:3.6rem">
-    <div class="side">
-      <h4>Authorized</h4>
-      <dl><dt>action</dt><dd>payments.release</dd><dt>account</dt><dd>GB00SUPPLIER00004821</dd><dt>amount</dt><dd>&pound;1,800</dd></dl>
+    <div class="col">
+      <div class="ch">Permission</div>
+      <ul><li>Can call the payment API</li><li>Has a credential</li><li>Access persists</li><li>Logs what happened</li></ul>
     </div>
-    <div class="mid"><span>Does not match</span></div>
-    <div class="side">
-      <h4>Attempted</h4>
-      <dl><dt>action</dt><dd>payments.release</dd><dt>account</dt><dd class="changed">GB00SUPPLIER00009137</dd><dt>amount</dt><dd>&pound;1,800</dd></dl>
+    <div class="col">
+      <div class="ch">Authorization</div>
+      <ul><li>Can make this payment</li><li>Has authority</li><li>The grant is bounded</li><li>Binds what was approved</li></ul>
     </div>
   </div>
-  <div class="code-line">GRANT_DOES_NOT_COVER_THIS_ACTION &middot; parameters.payee_account &middot; authorized GB00SUPPLIER00004821 &middot; presented GB00SUPPLIER00009137 &middot; rule MAY_NOT_CHANGE</div>
-  <p class="note">The refusal names the field, both values and the rule. The payment API was not called, and the authorization was not spent, so the approved action can still be executed as approved.</p>
-  <p>This is the refusal the sandbox returns today. <a href="https://api.humsana.com/sandbox/">Run the same action yourself.</a></p>
+  <p style="margin-top:3rem">The system that performs the action already decides whether the action can run. It checks the balance, the format, its own limits, screening and duplicates.</p>
+  <p class="callout" style="margin-top:2rem">None of those rules answer whether the principal authorized this action. That authority sits in a queue, a ticket, a message or a flag on a row, and it can change before the action runs.</p>
 </div></section>
 
 <section><div class="wrap">
-  <div class="head"><span class="label"><span class="n">06</span> The record</span><h2>One record from approval to execution.</h2></div>
-  <div class="receipt">
-  <div class="receipt-head"><b>swan.authz/1</b><span>one action, refused</span></div>
-  <ul class="counts">
-    <li><span class="ck">Claimed</span><span class="cv">5</span></li>
-    <li class="zero"><span class="ck">Established</span><span class="cv">0</span></li>
-    <li><span class="ck">Authorized</span><span class="cv">1</span></li>
-    <li><span class="ck">Presented</span><span class="cv">1</span></li>
-    <li class="zero"><span class="ck">Executed</span><span class="cv">0</span></li>
-    <li class="no"><span class="ck">Refused</span><span class="cv">1</span></li>
-  </ul>
-  <details><summary>principal</summary><div class="det">northwind:finance, acting through agent payout-repair-1. Five claims were made by the caller. The service established none of them on its own, and says so.</div></details>
-  <details><summary>delegation</summary><div class="det">payments.release, consequence C3, human step required. Bound values: amount_gbp, beneficiary, expiry, payee_account, reference.</div></details>
-  <details><summary>binding</summary><div class="det">action digest, authorized  sha256:be49de0e...898de3
-action digest, presented  sha256:bf353324...9aaa4aa
-policy version 1</div></details>
-  <details><summary>confirmation</summary><div class="det">reviewer@northwind.example, method hmac-sha256, confirmation conf_3mgQhEwaprJRHWavDG52jQ. The approval is signed over the action, not over the request.</div></details>
-  <details><summary>effectuation</summary><div class="det">presented payee_account GB00SUPPLIER00009137 against an authorization of GB00SUPPLIER00004821
-rule MAY_NOT_CHANGE
-code GRANT_DOES_NOT_COVER_THIS_ACTION
-payment API: not called</div></details>
-</div>
-  <p class="note">Counts and values from one refused action in the live sandbox. The states stay separate, and a refusal stays in the record. That record is what answers the question afterwards, whether the ask comes from an auditor, a regulator or a court.</p>
-</div></section>
-
-<section><div class="wrap">
-  <div class="head"><span class="label"><span class="n">07</span> Where it applies</span><h2>For actions that are hard to undo.</h2></div>
-  <div class="blocks">
-  <div class="blk"><div class="bn">01</div><h3>Money movement</h3><p>Payments, releases, beneficiary changes and payout exceptions. The account is bound at approval, so a later change is refused before the rail is called.</p><div class="flow">bound at approval &rarr; presented later &rarr; refuse</div></div>
-  <div class="blk"><div class="bn">02</div><h3>Regulated communication</h3><p>Notices, demands and filings. The approved words and the recipient set both matter, and either can change between approval and send.</p><div class="flow">recipient set 14 &rarr; 15 &rarr; refuse</div></div>
-  <div class="blk"><div class="bn">03</div><h3>Destructive actions</h3><p>Deleting records, revoking access, closing accounts, destroying keys. There is no second action that undoes them.</p><div class="flow">scope one account &rarr; all accounts &rarr; refuse</div></div>
-</div>
-<div class="thin-row">
-  <div><div class="tr-t">Any other action class the principal registers</div><p>Access, provisioning, records, commitments. The class decides which values are bound. The check is the same.</p></div>
-  <a class="btn btn-ghost arrow-after" href="use-cases.html">See the classes</a>
-</div>
-</div></section>
-
-<section><div class="wrap">
-  <div class="head"><span class="label"><span class="n">08</span> The boundary</span><h2>Where the boundary sits.</h2></div>
-  <div class="split">
-  <div class="side">
-    <h4>Who authenticates the approving human</h4>
-    <div class="path">the principal's identity system</div>
-    <div class="status">not Humsana</div>
-    <p>Humsana verifies what it is handed and records who was authenticated, by what method, and over which exact action. A production integration accepts the customer's identity, assertion or signature. The sandbox uses a reference confirmer and labels it.</p>
+  <div class="head"><span class="label"><span class="n">05</span> The refusal</span><h2>An approved action can still be refused.</h2></div>
+  <p>&pound;1,800 to Supplier X was approved against account 4821. Before the release ran, the executor presented the same action with account 9137.</p>
+  <div class="code-line" style="margin-top:2.4rem">GRANT_DOES_NOT_COVER_THIS_ACTION &middot; parameters.payee_account &middot; authorized 4821 &middot; presented 9137 &middot; rule MAY_NOT_CHANGE &middot; payment API not called</div>
+  <p class="note">The authorization was not spent, so the approved action can still be executed as approved. The refusal names the field, both values and the rule.</p>
+  <div class="cta-row" style="margin-top:2.6rem">
+    <a class="btn btn-primary arrow-after" href="https://api.humsana.com/sandbox/">Change the account yourself</a>
+    <a class="btn btn-ghost" href="how-it-works.html">Read the mechanism</a>
   </div>
-  <div class="side">
-    <h4>Who owns the executor</h4>
-    <div class="path">the integrating party</div>
-    <div class="status">enforced at the seam</div>
-    <p>Humsana enforces at the execution seam controlled by the integrating party. We cannot enforce an executor we do not control. The reference executor exists to demonstrate the seam and to be replaced by yours.</p>
-  </div>
-</div>
-  <p class="callout" style="margin-top:3rem">The principal grants the authority. Humsana records it, binds it and enforces it.</p>
+</div></section>
+
+<section><div class="wrap">
+  <p class="callout">The principal grants the authority. Humsana records it, binds it to the exact action and enforces it where the action would happen. Humsana verifies the authenticated identity or assertion the customer supplies, records who was authenticated and by which method, and binds that confirmation to the action. Authentication itself belongs to the principal's identity system. <a href="how-it-works.html#boundary">Where the boundary sits</a>.</p>
+  <p style="margin-top:2.6rem">For money movement, regulated communication, destructive actions, and any other class the principal registers. <a href="use-cases.html">See the classes</a>.</p>
 </div></section>
 
 <section><div class="wrap">
   <div class="head"><h2>Watch it refuse on the action you care about.</h2></div>
-  <p>The sandbox is one action class, run against the live service. No login, no persistent state, synthetic data only.</p>
+  <p>The sandbox runs one action class against the live service. No login, no persistent state, synthetic data only.</p>
   <div class="cta-row" style="margin-top:2.6rem">
     <a class="btn btn-primary arrow-after" href="https://api.humsana.com/sandbox/">Open the sandbox</a>
     <a class="btn btn-ghost" href="mailto:ram@humsana.com">Talk to us</a>

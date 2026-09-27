@@ -21,109 +21,149 @@ How it works: Humsana
 </div></nav>
 
 <header class="hero"><div class="wrap">
-  <span class="label"><span class="n">The mechanism</span> </span>
-  <h1 style="max-width:24ch">From authority to execution.</h1>
-  <p class="lead" style="max-width:62ch">One action, followed the whole way. The action below is a payout release, and the same six steps hold for any class the principal registers.</p>
+  <span class="label"><span class="n">How it works</span></span>
+  <h1 style="max-width:26ch">From authority to execution.</h1>
+  <p class="lead" style="max-width:64ch">The principal grants authority over one action. Humsana records it, binds it to the action, and the executor asks again immediately before the action happens.</p>
+  <div class="cta-row" style="margin-top:2.2rem">
+    <a class="btn btn-primary" href="https://api.humsana.com/sandbox/">See it refuse</a>
+    <a class="btn btn-ghost" href="developers.html">The integration</a>
+  </div>
 </div></header>
 
-<section id="claim"><div class="wrap step-grid">
-  <div class="step-copy">
-    <div class="label"><span class="n">01</span> Claim</div>
-    <h2>The agent says who it is, who it acts for, what it wants to do and what authority it has.</h2>
-    <p>Everything that arrives from a caller is a claim until something establishes it.</p><p style="margin-top:.9rem">Humsana records the claims as claims, and never promotes one to evidence because it was repeated.</p>
-  </div>
-  <aside class="hero-panel"><div class="refusal"><div class="rf-head">Claim</div><ul class="rf-cmp" style="padding-top:1rem"><li><span>Actor</span><span class="v">agent payout-repair-1</span></li><li><span>Principal</span><span class="v">northwind:finance (declared)</span></li><li><span>Action</span><span class="v">payments.release</span></li><li><span>Authority</span><span class="v">declared</span></li></ul></div></aside>
-</div></section><section id="establish"><div class="wrap step-grid">
-  <div class="step-copy">
-    <div class="label"><span class="n">02</span> Establish</div>
-    <h2>Humsana separates what is established from what is claimed and what remains unknown.</h2>
-    <p>Each fact carries how it was arrived at: measured by the service, verified against something, reported by the caller, or unknown.</p><p style="margin-top:.9rem">The counts stay visible in the record. In a typical run the service establishes its own facts and leaves the caller's claims as claims.</p>
-  </div>
-  <aside class="hero-panel"><div class="refusal"><div class="rf-head">Establish</div><ul class="rf-cmp" style="padding-top:1rem"><li><span>Established</span><span class="v">0</span></li><li><span>Asserted</span><span class="v">5</span></li><li><span>Unresolved</span><span class="v">3</span></li></ul></div></aside>
-</div></section><section id="confirm"><div class="wrap step-grid">
-  <div class="step-copy">
-    <div class="label"><span class="n">03</span> Confirm</div>
-    <h2>The consequence decides whether a person has to approve.</h2>
-    <p>The action class carries a consequence level. Higher-consequence actions require a human step, and the approval is signed over the action rather than over the request.</p><p style="margin-top:.9rem">The approving human is authenticated by the principal's identity system. Humsana verifies what it is handed and records who approved, by what method, over which action.</p>
-  </div>
-  <aside class="hero-panel"><div class="refusal"><div class="rf-head">Decision</div><ul class="rf-cmp" style="padding-top:1rem"><li><span>Decision</span><span class="v chg">HUMAN_CONFIRM</span></li><li><span>Requires</span><span class="v">authenticated approval</span></li><li><span>Binds to</span><span class="v">the action digest</span></li></ul></div></aside>
-</div></section><section id="bind"><div class="wrap step-grid">
-  <div class="step-copy">
-    <div class="label"><span class="n">04</span> Bind</div>
-    <h2>The approval is tied to the action, its values and its expiry.</h2>
-    <p>The bounded values are fixed at approval. A value that is inside a limit can move within it, and the limit is applied at execution.</p><p style="margin-top:.9rem">The authorization is single use. Whatever happens, it cannot stand for a second action.</p>
-  </div>
-  <aside class="hero-panel"><div class="refusal"><div class="rf-head">Binding</div><ul class="rf-cmp" style="padding-top:1rem"><li><span>Bound</span><span class="v">amount, beneficiary, account, expiry</span></li><li><span>Rule</span><span class="v">MAY_NOT_CHANGE</span></li><li><span>Single use</span><span class="v">yes</span></li><li><span>Expires</span><span class="v">14:00</span></li></ul></div></aside>
-</div></section><section id="enforce"><div class="wrap step-grid">
-  <div class="step-copy">
-    <div class="label"><span class="n">05</span> Enforce</div>
-    <h2>The executor checks immediately before the action runs.</h2>
-    <p>The executor's own rules run first, exactly as they did before. Then the executor presents the action to Humsana and asks whether it is still the action that was authorized.</p><p style="margin-top:.9rem">An exact match proceeds. Bounded variance inside the limits proceeds with the limits applied. A material change is refused, and the refusal names the field, both values and the rule.</p>
-  </div>
-  <aside class="hero-panel"><div class="refusal"><div class="rf-head">Attempted</div><ul class="rf-cmp" style="padding-top:1rem"><li><span>Account</span><span class="v chg">GB00SUPPLIER00009137</span></li><li><span>Against</span><span class="v">GB00SUPPLIER00004821</span></li><li><span>Rule</span><span class="v">MAY_NOT_CHANGE</span></li><li><span>Decision</span><span class="v chg">REFUSED</span></li></ul></div></aside>
+<section><div class="wrap">
+  <div class="head"><span class="label"><span class="n">01</span> The mechanism</span><h2>Five steps, and the fifth is the one that matters.</h2></div>
+  <div class="rail" role="tablist">
+  <button class="step" role="tab" aria-selected="true"><span class="sn">01</span><span class="st">Claim</span></button>
+  <button class="step" role="tab" aria-selected="false"><span class="sn">02</span><span class="st">Establish</span></button>
+  <button class="step" role="tab" aria-selected="false"><span class="sn">03</span><span class="st">Confirm</span></button>
+  <button class="step" role="tab" aria-selected="false"><span class="sn">04</span><span class="st">Bind</span></button>
+  <button class="step" role="tab" aria-selected="false"><span class="sn">05</span><span class="st">Enforce</span></button>
+</div>
+<div class="step-body"><p>The agent says who it is, who it acts for, what it wants to do, and what authority it has.</p></div>
+<div class="step-body" hidden><p>Humsana separates what is established from what is claimed and what remains unknown.</p></div>
+<div class="step-body" hidden><p>The consequence decides whether a person has to approve. Where one does, the approval is signed over the exact action.</p></div>
+<div class="step-body" hidden><p>The approval is tied to the action, its bound values and its expiry. It can be spent once.</p></div>
+<div class="step-body" hidden><p>The executor presents the action immediately before it runs. A material change is refused and the changed field is named.</p></div>
+
 </div></section>
 
 <section><div class="wrap">
-  <div class="head"><span class="label"><span class="n">06</span> The comparison</span><h2>What the executor asks for.</h2></div>
+  <div class="head"><span class="label"><span class="n">02</span> The check</span><h2>Authorized against attempted.</h2></div>
   <div class="match">
     <div class="side">
       <h4>Authorized</h4>
-      <dl><dt>action</dt><dd>payments.release</dd><dt>payee</dt><dd>Supplier X</dd><dt>account</dt><dd>GB00SUPPLIER00004821</dd><dt>amount</dt><dd>&pound;1,800</dd></dl>
+      <dl><dt>action</dt><dd>payments.release</dd><dt>account</dt><dd>GB00SUPPLIER00004821</dd><dt>amount</dt><dd>&pound;1,800</dd></dl>
     </div>
     <div class="mid"><span>Does not match</span></div>
     <div class="side">
       <h4>Attempted</h4>
-      <dl><dt>action</dt><dd>payments.release</dd><dt>payee</dt><dd>Supplier X</dd><dt>account</dt><dd class="changed">GB00SUPPLIER00009137</dd><dt>amount</dt><dd>&pound;1,800</dd></dl>
+      <dl><dt>action</dt><dd>payments.release</dd><dt>account</dt><dd class="changed">GB00SUPPLIER00009137</dd><dt>amount</dt><dd>&pound;1,800</dd></dl>
     </div>
   </div>
   <div class="code-line">GRANT_DOES_NOT_COVER_THIS_ACTION &middot; parameters.payee_account &middot; authorized GB00SUPPLIER00004821 &middot; presented GB00SUPPLIER00009137 &middot; rule MAY_NOT_CHANGE</div>
-  <p class="note">The same comparison holds for any bound value of any action class. What changes is which values are bound.</p>
+  <p class="note">This is the refusal the sandbox returns today. The payment API was not called, and the authorization was not spent, so the approved action can still run as approved.</p>
 </div></section>
 
 <section><div class="wrap">
-<div class="head"><span class="label"></span><h2>What gets bound</h2></div>
-<p>An approval binds values, not intentions. The action class decides which values, and which rule applies to each one at execution.</p>
-<table class="tbl"><thead><tr><th>Action class</th><th>What is bound</th><th>Rule in force</th><th>Decision</th></tr></thead><tbody>
+  <div class="head"><span class="label"><span class="n">03</span> The record</span><h2>One record from approval to execution.</h2></div>
+  <div class="receipt">
+  <div class="receipt-head"><b>swan.authz/1</b><span>one action, refused</span></div>
+  <ul class="counts">
+    <li><span class="ck">Claimed</span><span class="cv">5</span></li>
+    <li class="zero"><span class="ck">Established</span><span class="cv">0</span></li>
+    <li><span class="ck">Authorized</span><span class="cv">1</span></li>
+    <li><span class="ck">Presented</span><span class="cv">1</span></li>
+    <li class="zero"><span class="ck">Executed</span><span class="cv">0</span></li>
+    <li class="no"><span class="ck">Refused</span><span class="cv">1</span></li>
+  </ul>
+  <details><summary>principal</summary><div class="det">northwind:finance, acting through agent payout-repair-1. Five claims were made by the caller. The service established none of them on its own, and says so.</div></details>
+  <details><summary>delegation</summary><div class="det">payments.release, consequence C3, human step required. Bound values: amount_gbp, beneficiary, expiry, payee_account, reference.</div></details>
+  <details><summary>binding</summary><div class="det">action digest, authorized  sha256:be49de0e...898de3
+action digest, presented  sha256:bf353324...9aaa4aa
+policy version 1</div></details>
+  <details><summary>confirmation</summary><div class="det">reviewer@northwind.example, method hmac-sha256, confirmation conf_3mgQhEwaprJRHWavDG52jQ. The approval is signed over the action, not over the request.</div></details>
+  <details><summary>effectuation</summary><div class="det">presented payee_account GB00SUPPLIER00009137 against an authorization of GB00SUPPLIER00004821
+rule MAY_NOT_CHANGE
+code GRANT_DOES_NOT_COVER_THIS_ACTION
+payment API: not called</div></details>
+</div>
+  <p class="note">Counts and values from one refused action in the live sandbox. The states stay separate, and a refusal stays in the record. That record is what answers the question afterwards, whether the ask comes from an auditor, a regulator or a court.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head"><span class="label"><span class="n">04</span> Binding</span><h2>What is bound, and what the rule allows.</h2></div>
+  <table class="tbl">
+    <thead><tr><th>Action class</th><th>What is bound</th><th>Rule in force</th><th>Decision</th></tr></thead>
+    <tbody>
 <tr><td>payments.release</td><td>amount, beneficiary, account, expiry, reference</td><td>MAY_NOT_CHANGE on the account</td><td class="rule">REFUSED</td></tr>
 <tr><td>payments.release</td><td>amount inside the authorized ceiling</td><td>MAY_NOT_INCREASE on the amount</td><td class="rule">ALLOWED WITH LIMITS</td></tr>
 <tr><td>filing.submit</td><td>document, recipient set, deadline</td><td>MAY_NOT_CHANGE on the recipient set</td><td class="rule">REFUSED</td></tr>
 <tr><td>access.revoke</td><td>target, scope</td><td>MAY_ONLY_SHRINK on the scope</td><td class="rule">REFUSED</td></tr>
 </tbody></table>
-<p class="note">Field names and rules as the service applies them.</p>
+  <p class="note">Field names and rules as the service applies them.</p>
 </div></section>
 
 <section id="measured"><div class="wrap">
-  <div class="head"><span class="label"><span class="n">07</span> Measurement</span><h2>How those numbers were taken.</h2></div>
-  <p>The authorize path and the enforce path were run against the running service on a single host, 40 actions, and timed at the boundary.</p><p style="margin-top:.9rem">Median authorize 5.8 ms. Median enforce 2.9 ms. Worst case over the 40 actions 12.9 ms.</p><p style="margin-top:.9rem">No claim is made here for the network between a customer's executor and the boundary, or for the cost of the customer's own execution path. Those belong to the integration.</p>
+  <div class="head"><span class="label"><span class="n">05</span> Measurement</span><h2>How those numbers were taken.</h2></div>
+  <div class="metrics">
+    <div class="m"><div class="mv">5.8 ms</div><div class="mk">Median time to authorize one exact action</div></div>
+    <div class="m"><div class="mv">2.9 ms</div><div class="mk">Median time to check it at execution</div></div>
+    <div class="m"><div class="mv">12.9 ms</div><div class="mk">Worst case over 40 actions</div></div>
+  </div>
+  <p style="margin-top:3rem">The authorize path and the enforce path were run against the running service on a single host, 40 actions, and timed at the boundary.</p>
+  <p style="margin-top:.9rem">No claim is made here for the network between a customer's executor and the boundary, or for the cost of the customer's own execution path. Those belong to the integration.</p>
   <p class="note">Single host deployment, 40 actions. Re-measure on your own host before you rely on these figures.</p>
 </div></section>
 
 <section id="refusals"><div class="wrap">
-  <div class="head"><span class="label"><span class="n">08</span> Refusals</span><h2>What a refusal says.</h2></div>
+  <div class="head"><span class="label"><span class="n">06</span> Refusals</span><h2>What a refusal says.</h2></div>
   <p>Every refusal carries a code. The code names which check failed and, where a field was involved, which field carried the difference.</p>
   <table class="tbl" style="margin-top:2.6rem">
     <thead><tr><th>Code</th><th>What failed</th></tr></thead>
     <tbody>
       <tr><td>EFFECTUATION_DRIFT</td><td>The presented action differs from the authorized action in at least one material field. The refusal carries the field, the authorized value, the presented value and the rule that was applied.</td></tr>
       <tr><td>MAY_NOT_CHANGE</td><td>The field is fixed by the authorization and cannot be altered at execution.</td></tr>
-      <tr><td>MAY_NOT_INCREASE</td><td>The field may be reduced but not raised beyond the authorized value.</td></tr>
-      <tr><td>MAY_ONLY_SHRINK</td><td>The field may only reduce the reach of the action that was authorized.</td></tr>
-      <tr><td>BINDING_MISMATCH</td><td>The binding digest presented at execution is not the digest that was approved.</td></tr>
-      <tr><td>RECEIPT_NOT_FOUND</td><td>There is no authorization with that identifier.</td></tr>
-      <tr><td>RECEIPT_EXPIRED</td><td>The authorization was valid when it was issued and is not valid now.</td></tr>
-      <tr><td>GRANT_ALREADY_USED</td><td>The authorization was spent. A second presentation does not spend it again.</td></tr>
-      <tr><td>GRANT_NOT_FOUND</td><td>The grant behind the action cannot be found.</td></tr>
-      <tr><td>GRANT_DOES_NOT_COVER_THIS_ACTION</td><td>The grant exists and does not cover the action that was presented.</td></tr>
-      <tr><td>AUTHORIZATION_NOT_GRANTED</td><td>The stored decision is not one that grants anything. A match proves the action is the one that was asked about, never that it was permitted.</td></tr>
-      <tr><td>CONFIRMATION_NOT_OBTAINED</td><td>The action required a human confirmation and no valid confirmation is bound to it.</td></tr>
-      <tr><td>ACTION_OUTSIDE_SCOPE</td><td>The action class is outside the scope the principal granted.</td></tr>
-      <tr><td>CONDITION_NOT_EVALUABLE</td><td>A condition in the authorization cannot be evaluated deterministically, so it is not assumed to hold.</td></tr>
-      <tr><td>CLOCK_NOT_SUPPLIED</td><td>Deciding needs a time and none was supplied.</td></tr>
-      <tr><td>PROVIDER_DEADLINE_EXCEEDED</td><td>An external check did not answer inside the boundary's deadline, so the boundary did not treat silence as consent.</td></tr>
-      <tr><td>BOUNDARY_STORE_UNAVAILABLE</td><td>The boundary could not read its own store, so it could not answer.</td></tr>
-    </tbody>
-  </table>
-  <p class="note">Codes are the names the service returns, read from the implementation.</p>
+      <tr><td>MAY_NOT_INCREASE</td><td>The field may be reduced but not raised above the authorized value.</td></tr>
+      <tr><td>MAY_ONLY_SHRINK</td><td>The scope may narrow but not widen.</td></tr>
+      <tr><td>GRANT_DOES_NOT_COVER_THIS_ACTION</td><td>The presented action is outside what this authorization covers.</td></tr>
+      <tr><td>GRANT_ALREADY_USED</td><td>The grant has been spent. A grant is spent once.</td></tr>
+      <tr><td>GRANT_NOT_FOUND</td><td>No grant exists for the identifier presented.</td></tr>
+      <tr><td>AUTHORIZATION_NOT_GRANTED</td><td>There is no authorization to spend. A receipt that asked for verification, or that was refused, answers this and no other code, because it was never spendable and so cannot have expired.</td></tr>
+      <tr><td>CONFIRMATION_NOT_OBTAINED</td><td>The action requires a human step and no bound approval was presented.</td></tr>
+      <tr><td>RECEIPT_EXPIRED</td><td>The authorization is past its expiry. It applies to an authorization that existed.</td></tr>
+      <tr><td>RECEIPT_NOT_FOUND</td><td>Unknown identifier, or one that belongs to another caller.</td></tr>
+      <tr><td>OUTSIDE_SCOPE</td><td>The action falls outside the scope the principal registered for this agent.</td></tr>
+      <tr><td>PROVIDER_DEADLINE_EXCEEDED</td><td>A provider did not answer inside the deadline. The boundary waits up to twenty seconds and records the expiry rather than treating silence as consent.</td></tr>
+    </tbody></table>
+  <p class="note">Thirteen codes are shown. The boundary answers in these plus the class and registry checks the deployment has enabled.</p>
+</div></section>
+
+<section id="boundary"><div class="wrap">
+  <div class="head"><span class="label"><span class="n">07</span> The boundary</span><h2>Where the boundary sits.</h2></div>
+  <div class="split">
+    <div class="side">
+      <h4>Who authenticates the approving human</h4>
+      <div class="path">the principal's identity system</div>
+      <div class="status">not Humsana</div>
+      <p>Humsana verifies the authenticated identity or assertion the customer supplies, records who was authenticated and by which method, and binds the confirmation to the action. Authentication itself belongs to the principal's identity system. A production integration accepts that system's identity, assertion or signature; the sandbox uses a reference confirmer and labels it as one.</p>
+    </div>
+    <div class="side">
+      <h4>Who owns the executor</h4>
+      <div class="path">the integrating party</div>
+      <div class="status">enforced at the seam</div>
+      <p>Humsana enforces at the execution seam controlled by the integrating party. We cannot enforce an executor we do not control. The reference executor exists to demonstrate the seam and to be replaced by yours.</p>
+    </div>
+  </div>
+  <p class="callout" style="margin-top:3rem">The principal grants the authority. Humsana records it, binds it and enforces it.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head"><h2>Watch it refuse on the action you care about.</h2></div>
+  <p>The sandbox runs one action class against the live service. No login, no persistent state, synthetic data only.</p>
+  <div class="cta-row" style="margin-top:2.6rem">
+    <a class="btn btn-primary arrow-after" href="https://api.humsana.com/sandbox/">Open the sandbox</a>
+    <a class="btn btn-ghost" href="developers.html">Build against it</a>
+  </div>
 </div></section>
 
 <footer><div class="wrap foot-in">
