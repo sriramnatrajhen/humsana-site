@@ -58,10 +58,9 @@
         tab.setAttribute('tabindex', on ? '0' : '-1');
         var panel = document.getElementById(tab.getAttribute('aria-controls'));
         if (panel) { if (on) { panel.removeAttribute('hidden'); } else { panel.setAttribute('hidden', ''); } }
-        var when = tab.getAttribute('data-case');
+        var when = on ? tab.getAttribute('data-case') : null;
         if (when) {
           var scope = tab.closest('[data-scene-scope]') || document;
-          var scene = scope.querySelector('[data-case]');
           var target = scope.querySelector('.scene');
           if (target) { target.setAttribute('data-case', when); }
         }
