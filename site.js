@@ -42,3 +42,44 @@
   }, { threshold: 0.6 });
   once.observe(changed);
 }());
+
+/* Generic tablists: the boundary switch, the recorded-answer toggle and the case list.
+   Each button names its panel with aria-controls, so one implementation covers all three.
+   Arrow keys move and select, which is what a tablist owes a keyboard. */
+(function () {
+  var lists = Array.prototype.slice.call(document.querySelectorAll('[role="tablist"]'));
+  lists.forEach(function (list) {
+    var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+    if (!tabs.length || tabs.some(function (t) { return !t.getAttribute('aria-controls'); })) { return; }
+    var select = function (index, focus) {
+      tabs.forEach(function (tab, i) {
+        var on = i === index;
+        tab.setAttribute('aria-selected', on ? 'true' : 'false');
+        tab.setAttribute('tabindex', on ? '0' : '-1');
+        var panel = document.getElementById(tab.getAttribute('aria-controls'));
+        if (panel) { if (on) { panel.removeAttribute('hidden'); } else { panel.setAttribute('hidden', ''); } }
+        var when = tab.getAttribute('data-case');
+        if (when) {
+          var scope = tab.closest('[data-scene-scope]') || document;
+          var scene = scope.querySelector('[data-case]');
+          var target = scope.querySelector('.scene');
+          if (target) { target.setAttribute('data-case', when); }
+        }
+      });
+      if (focus) { tabs[index].focus(); }
+    };
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener('click', function () { select(i, false); });
+      tab.addEventListener('keydown', function (e) {
+        var last = tabs.length - 1, next = null;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { next = i === last ? 0 : i + 1; }
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { next = i === 0 ? last : i - 1; }
+        else if (e.key === 'Home') { next = 0; }
+        else if (e.key === 'End') { next = last; }
+        if (next === null) { return; }
+        e.preventDefault();
+        select(next, true);
+      });
+    });
+  });
+}());

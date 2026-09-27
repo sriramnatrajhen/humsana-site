@@ -13,15 +13,14 @@ How it works: Humsana
   <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
   <div class="nav-links" id="nav">
     <a href="index.html">Home</a>
+    <a href="the-execution-boundary.html">Execution boundary</a>
     <a href="how-it-works.html">How it works</a>
-    <a href="use-cases.html">Use cases</a>
     <a href="developers.html">Developers</a>
     <a class="nav-cta" href="https://api.humsana.com/sandbox/">Sandbox</a>
   </div>
 </div></nav>
 
 <header class="hero"><div class="wrap">
-  <span class="label"><span class="n">How it works</span></span>
   <h1 style="max-width:26ch">From authority to execution.</h1>
   <p class="lead" style="max-width:64ch">The principal grants authority over one action. Humsana records it, binds it to the action, and the executor asks again immediately before the action happens.</p>
   <div class="cta-row" style="margin-top:2.2rem">
@@ -31,7 +30,7 @@ How it works: Humsana
 </div></header>
 
 <section><div class="wrap">
-  <div class="head"><span class="label"><span class="n">01</span> The mechanism</span><h2>Five steps, and the fifth is the one that matters.</h2></div>
+  <div class="head"><h2>Five steps, and the fifth is the one that matters.</h2></div>
   <div class="rail" role="tablist">
   <button class="step" role="tab" aria-selected="true"><span class="sn">01</span><span class="st">Claim</span></button>
   <button class="step" role="tab" aria-selected="false"><span class="sn">02</span><span class="st">Establish</span></button>
@@ -48,7 +47,7 @@ How it works: Humsana
 </div></section>
 
 <section><div class="wrap">
-  <div class="head"><span class="label"><span class="n">02</span> The check</span><h2>Authorized against attempted.</h2></div>
+  <div class="head"><h2>Authorized against attempted.</h2></div>
   <div class="match">
     <div class="side">
       <h4>Authorized</h4>
@@ -65,7 +64,7 @@ How it works: Humsana
 </div></section>
 
 <section><div class="wrap">
-  <div class="head"><span class="label"><span class="n">03</span> The record</span><h2>One record from approval to execution.</h2></div>
+  <div class="head"><h2>One record from approval to execution.</h2></div>
   <div class="receipt">
   <div class="receipt-head"><b>swan.authz/1</b><span>one action, refused</span></div>
   <ul class="counts">
@@ -91,7 +90,7 @@ payment API: not called</div></details>
 </div></section>
 
 <section><div class="wrap">
-  <div class="head"><span class="label"><span class="n">04</span> Binding</span><h2>What is bound, and what the rule allows.</h2></div>
+  <div class="head"><h2>What is bound, and what the rule allows.</h2></div>
   <table class="tbl">
     <thead><tr><th>Action class</th><th>What is bound</th><th>Rule in force</th><th>Decision</th></tr></thead>
     <tbody>
@@ -104,19 +103,22 @@ payment API: not called</div></details>
 </div></section>
 
 <section id="measured"><div class="wrap">
-  <div class="head"><span class="label"><span class="n">05</span> Measurement</span><h2>How those numbers were taken.</h2></div>
-  <div class="metrics">
-    <div class="m"><div class="mv">5.8 ms</div><div class="mk">Median time to authorize one exact action</div></div>
-    <div class="m"><div class="mv">2.9 ms</div><div class="mk">Median time to check it at execution</div></div>
-    <div class="m"><div class="mv">12.9 ms</div><div class="mk">Worst case over 40 actions</div></div>
-  </div>
+  <div class="head"><h2>How those numbers were taken.</h2></div>
+  <table class="measure">
+    <thead><tr><th>Measurement</th><th>Value</th><th>Scope</th></tr></thead>
+    <tbody>
+      <tr><td>Median, authorize one exact action</td><td>5.8 ms</td><td>40 actions, one host</td></tr>
+      <tr><td>Median, check it at execution</td><td>2.9 ms</td><td>40 actions, one host</td></tr>
+      <tr><td>Worst case across the run</td><td>12.9 ms</td><td>40 actions, one host</td></tr>
+    </tbody>
+  </table>
   <p style="margin-top:3rem">The authorize path and the enforce path were run against the running service on a single host, 40 actions, and timed at the boundary.</p>
   <p style="margin-top:.9rem">No claim is made here for the network between a customer's executor and the boundary, or for the cost of the customer's own execution path. Those belong to the integration.</p>
   <p class="note">Single host deployment, 40 actions. Re-measure on your own host before you rely on these figures.</p>
 </div></section>
 
 <section id="refusals"><div class="wrap">
-  <div class="head"><span class="label"><span class="n">06</span> Refusals</span><h2>What a refusal says.</h2></div>
+  <div class="head"><h2>What a refusal says.</h2></div>
   <p>Every refusal carries a code. The code names which check failed and, where a field was involved, which field carried the difference.</p>
   <table class="tbl" style="margin-top:2.6rem">
     <thead><tr><th>Code</th><th>What failed</th></tr></thead>
@@ -139,7 +141,7 @@ payment API: not called</div></details>
 </div></section>
 
 <section id="boundary"><div class="wrap">
-  <div class="head"><span class="label"><span class="n">07</span> The boundary</span><h2>Where the boundary sits.</h2></div>
+  <div class="head"><h2>Where the boundary sits.</h2></div>
   <div class="split">
     <div class="side">
       <h4>Who authenticates the approving human</h4>

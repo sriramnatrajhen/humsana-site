@@ -13,22 +13,21 @@ Developers: Humsana
   <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
   <div class="nav-links" id="nav">
     <a href="index.html">Home</a>
+    <a href="the-execution-boundary.html">Execution boundary</a>
     <a href="how-it-works.html">How it works</a>
-    <a href="use-cases.html">Use cases</a>
     <a href="developers.html">Developers</a>
     <a class="nav-cta" href="https://api.humsana.com/sandbox/">Sandbox</a>
   </div>
 </div></nav>
 
 <header class="hero"><div class="wrap">
-  <span class="label"><span class="n">Developers</span> </span>
   <h1 style="max-width:24ch">The integration is two calls and one rule.</h1>
   <p class="lead" style="max-width:62ch">The agent proposes an action. Humsana binds the authority to that exact action. Before the action runs, the executor checks it again.</p>
   <p class="callout" style="margin-top:2.2rem">No grant. No execution.</p>
 </div></header>
 
 <section><div class="wrap">
-<div class="head"><span class="label"><span class="n">01</span> The sequence</span><h2>How a caller uses it.</h2></div>
+<div class="head"><h2>How a caller uses it.</h2></div>
 <div class="list-rows">
   <div class="row"><div class="num">01</div><div><h3>Register the action class</h3><p>The class names which values are bound, what consequence it carries, whether a human step is required, and which executor checks the decision. Registration is data, so the boundary holds no code path per action type.</p></div></div>
   <div class="row"><div class="num">02</div><div><h3>Authorize the exact action</h3><p>POST /v1/authorize with the principal, the agent, the action name and its parameters. The answer is one of the six decisions, the action digest, the binding and the expiry.</p></div></div>
@@ -39,7 +38,7 @@ Developers: Humsana
 </div></section>
 
 <section><div class="wrap">
-<div class="head"><span class="label"><span class="n">02</span> The action class</span><h2>One engine, any action the principal registers.</h2></div>
+<div class="head"><h2>One engine, any action the principal registers.</h2></div>
 <p>An action class is a registration: a name, the values that are bound, a consequence level, and the rules that apply at execution.</p><p style="margin-top:.9rem">The two calls are identical for every class. Nothing in the boundary is written per action type, so adding a class does not add a code path.</p>
 <table class="tbl"><thead><tr><th>Action class</th><th>Values carried in the binding</th></tr></thead><tbody>
 <tr><td>payments.release</td><td>amount, beneficiary, account, expiry, reference</td></tr>
@@ -51,7 +50,7 @@ Developers: Humsana
 </div></section>
 
 <section><div class="wrap">
-<div class="head"><span class="label"><span class="n">03</span> The decisions</span><h2>The vocabulary the boundary answers in.</h2></div>
+<div class="head"><h2>The vocabulary the boundary answers in.</h2></div>
 <p>Every response carries one of six decisions. Two of them are an authorization, and only those two can be executed on.</p>
 <table class="tbl"><thead><tr><th>Decision</th><th>What it means</th></tr></thead><tbody>
 <tr><td>ALLOW</td><td>The action proceeds.</td></tr>
@@ -64,7 +63,7 @@ Developers: Humsana
 </div></section>
 
 <section><div class="wrap">
-<div class="head"><span class="label"><span class="n">04</span> The seam</span><h2>The check has to be on the path that acts.</h2></div>
+<div class="head"><h2>The check has to be on the path that acts.</h2></div>
 <p>Humsana enforces at the execution seam controlled by the integrating party. The reference executor exists to demonstrate the seam and to be replaced by yours.</p><p style="margin-top:.9rem">The boundary answers a question. The integrating party decides what happens when the answer is a refusal, and that decision is theirs to own.</p>
 <pre class="code"><span class="c">// The executor presents the action immediately before it acts.</span>
 POST /v1/authorize/effectuate
@@ -99,7 +98,7 @@ POST /v1/authorize/effectuate
 </div></section>
 
 <section><div class="wrap">
-<div class="head"><span class="label"><span class="n">05</span> The surface</span><h2>What the service exposes.</h2></div>
+<div class="head"><h2>What the service exposes.</h2></div>
 <table class="tbl"><thead><tr><th>Endpoint</th><th>Purpose</th></tr></thead><tbody>
 <tr><td>POST /v1/authorize</td><td>Propose an action and receive a decision, a binding and an expiry.</td></tr>
 <tr><td>POST /v1/authorize/effectuate</td><td>Present the action at execution and receive the decision and, where it moved, the field.</td></tr>

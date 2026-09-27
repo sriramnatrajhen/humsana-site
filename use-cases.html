@@ -1,55 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-Use cases: Humsana
-<meta name="description" content="Money movement, regulated communication, destructive actions, access, records and commitments.">
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>Where the boundary appears | Humsana</title>
+<link rel="canonical" href="https://humsana.com/the-execution-boundary.html">
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url=the-execution-boundary.html">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="style.css">
 </head><body>
-
-<nav><div class="wrap nav-in">
-  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana"></a>
-  <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
-  <div class="nav-links" id="nav">
-    <a href="index.html">Home</a>
-    <a href="how-it-works.html">How it works</a>
-    <a href="use-cases.html">Use cases</a>
-    <a href="developers.html">Developers</a>
-    <a class="nav-cta" href="https://api.humsana.com/sandbox/">Sandbox</a>
-  </div>
-</div></nav>
-
-<header class="hero"><div class="wrap">
-  <span class="label"><span class="n">Use cases</span> </span>
-  <h1 style="max-width:22ch">Actions that are hard to undo.</h1>
-  <p class="lead" style="max-width:62ch">If an action can be reversed with a second action, a log is usually enough. These are the cases where it cannot. The boundary is the same in every one of them. What changes is the action, and the values that were bound when it was approved.</p>
-</div></header>
-
 <section><div class="wrap">
-<div class="list-rows">
-  <div class="row"><div class="num">01</div><div><h3>Money movement</h3><p>Payments, releases, beneficiary changes and payout exceptions.</p><p style="margin-top:.6rem">An exception waits in a queue after approval and is released later. The account in the queue row is not the account that was approved.</p><p style="margin-top:.6rem"><span class="mono" style="color:var(--accent)">The refusal names the account field and both values.</span></p></div></div>
-  <div class="row"><div class="num">02</div><div><h3>Regulated communication</h3><p>Notices, demands, filings and outbound batches.</p><p style="margin-top:.6rem">The approved words and the recipient set both matter, and either can change between approval and send.</p><p style="margin-top:.6rem"><span class="mono" style="color:var(--accent)">The refusal names the recipient set or the document that no longer matches.</span></p></div></div>
-  <div class="row"><div class="num">03</div><div><h3>Destructive actions</h3><p>Deleting records, revoking access, closing accounts, destroying keys.</p><p style="margin-top:.6rem">There is no second action that undoes them, so the check has to happen before the action rather than after it.</p><p style="margin-top:.6rem"><span class="mono" style="color:var(--accent)">The refusal names the scope the action had grown to.</span></p></div></div>
-  <div class="row"><div class="num">04</div><div><h3>Access and provisioning</h3><p>Creating an account, granting a role, issuing a credential.</p><p style="margin-top:.6rem">The grant was approved for one person and arrives covering three.</p><p style="margin-top:.6rem"><span class="mono" style="color:var(--accent)">The refusal names the principal or the scope that changed.</span></p></div></div>
-  <div class="row"><div class="num">05</div><div><h3>Records</h3><p>Retention changes, bulk edits, exports of personal data.</p><p style="margin-top:.6rem">The approved record set is not the set the action reaches.</p><p style="margin-top:.6rem"><span class="mono" style="color:var(--accent)">The refusal names the record set that changed.</span></p></div></div>
-  <div class="row"><div class="num">06</div><div><h3>Commitments</h3><p>Purchases, contracts, bookings and subscriptions.</p><p style="margin-top:.6rem">The commitment outlives the session that made it, and the terms can move before it is signed or sent.</p><p style="margin-top:.6rem"><span class="mono" style="color:var(--accent)">The refusal names the amount, the counterparty or the term that changed.</span></p></div></div>
-</div></div></section>
-
-<section><div class="wrap">
-<div class="head"><span class="label"></span><h2>The action changes. The question does not.</h2></div>
-<p>Is this the action the principal authorized?</p><p style="margin-top:.9rem">A grant answers it. The record proves the answer.</p><p style="margin-top:.9rem">The same question holds whether the action moves money, sends a document, deletes a record, grants access or commits the company.</p>
-  <p class="callout" style="margin-top:2.8rem">No grant. No execution.</p>
-  <div class="cta-row" style="margin-top:2.6rem"><a class="btn btn-primary arrow-after" href="https://api.humsana.com/sandbox/">See it refuse</a><a class="btn btn-ghost" href="how-it-works.html">How it works</a></div>
+  <h1>Where the boundary appears</h1>
+  <p>This page has moved. The cases now sit on <a href="the-execution-boundary.html">the execution boundary</a>.</p>
 </div></section>
-
-<footer><div class="wrap foot-in">
-  <div class="brand"><img src="logo.png" alt="Humsana"></div>
-  <div class="foot-links">
-    <a href="swan.html">Swan</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a>
-  </div>
-  <div class="foot-copy">Humsana. Authority travels with the action.</div>
-</div></footer>
-<script src="site.js"></script>
-</body>
-</html>
+</body></html>
