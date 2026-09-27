@@ -316,12 +316,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .sources ol{margin:0;padding-left:1.4rem;font-family:var(--mono);font-size:12px;line-height:1.95;color:var(--dim);max-width:96ch}
 .sources a{color:var(--muted)}
 .hero-panel .panel + .panel{margin-top:1.2rem}
-.tw{overflow-x:auto}
-@media(max-width:760px){
-  .code{white-space:pre-wrap;overflow-wrap:anywhere}
-  .tbl,.measure{min-width:0}
-  .tbl td,.tbl th{white-space:normal}
-}
 @media(max-width:760px){.evid .e{grid-template-columns:1fr;gap:.45rem}}
 
 /* ---------------------------------------------------------------- the boundary

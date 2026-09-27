@@ -1,0 +1,167 @@
+Home
+Execution boundary
+How it works
+Developers
+Sandbox
+Humsana makes AI agents accountable for the actions they take.
+
+Inside your own stack, identity, policy and application controls can govern what an agent does. The hard part begins when the agent leaves it. Humsana binds authority to the action, checks that binding where the action reaches its executor, and stops execution when the action is not covered.
+
+If a payment was authorized for account 4821 and arrives asking for 9137, it is refused before the payment system is called.
+
+See it refuse
+The execution boundary
+COMPANY A
+Principal
+Authority
+Agent
+consequential action →
+BOUNDARY
+COMPANY B
+Executor
+← the same action, presented
+
+Different systems. Different owners. One action. What proves the authority travelled with it?
+
+What proves the authority travelled with it?
+
+Inside one boundary the answers line up. As the boundary hardens, the system that executes the action can establish less and less about the authority behind it. Move the boundary and watch what the executor is left holding.
+
+Same system
+Different systems
+Different organizations
+COMPANY A
+Principal
+Authority
+Agent
+consequential action →
+BOUNDARY
+COMPANY B
+Executor
+← the same action, presented
+
+Company A's agent asks Company B's executor to act. The executor holds the request and almost nothing else: not the principal, not the delegation, not the approval behind it.
+
+no
+who authorized the agent
+no
+what authority reached it
+no
+whether that authority was narrowed on the way
+no
+whether the action presented is the one that was approved
+no
+what evidence to rely on afterwards
+An approved action can still be refused.
+
+Company A approves a payout: £1,800 to Supplier X, account 4821. The action that reaches Company B's executor is the same instruction with account 9137.
+
+Account changed, 9137
+As approved, 4821
+REFUSED
+GRANT_DOES_NOT_COVER_THIS_ACTION
+field
+parameters.payee_account
+approved by Company A
+GB00SUPPLIER00004821
+presented to Company B
+GB00SUPPLIER00009137
+rule
+MAY_NOT_CHANGE
+matched
+false
+consumed
+false
+refusal
+this grant covers a different action: parameters.payee_account
+Payment API: not called
+
+Nothing was spent, so the action that was approved can still run as approved.
+
+Both answers were recorded from the live service at 08:42 UTC on 27 September 2026, by presenting those two values. Run the same action yourself.
+
+INSIDE ONE BOUNDARY
+yes
+Identity knows the actor
+yes
+The agent runtime knows which tools it can call
+yes
+The business system knows its own rules
+yes
+The executor knows whether it can technically perform the action
+ACROSS A BOUNDARY
+no
+Who actually authorized the agent
+no
+What authority reached it
+no
+Whether that authority was narrowed along the way
+no
+Whether the action presented is the one that was approved
+no
+What evidence another organization should rely on later
+BOUNDARY
+
+Those answers stop lining up across a boundary. Humsana carries authority to the point of execution: the execution boundary, in three cases and six stages. The record is what answers the question afterwards, without the agent's own transcript.
+
+This is already happening, at scale.
+
+Every figure below is published, dated and linked. None of it is our estimate.
+
+$2.7bn
+Business email compromise, the class where an authorized payment is redirected to a different account.
+21,442 complaints in one year. The payment was authorized. The account was not the one approved.
+FBI Internet Crime Complaint Center, 2024 annual report Source
+£1.28bn
+Payment fraud losses reported by UK Finance members in 2025.
+Up four per cent on 2024.
+UK Finance, Annual Fraud Report 2026 Source
+£257.5m
+Authorized push payment fraud losses in the United Kingdom in the first half of 2025.
+110,747 cases, and 62 per cent of the amount stolen was reimbursed to victims.
+UK Finance, Half Year Fraud Report 2025 Source
+£85,000
+Maximum reimbursement per claim once the UK reimbursement requirement took effect in October 2024.
+The loss moves to the paying institution, so the question becomes what it can show about the action.
+Payment Systems Regulator, PS24/7, in force 7 October 2024 Source
+HK$200m
+A finance employee at Arup transferred about 25 million US dollars after a video conference with a deepfaked chief financial officer.
+The approval was given by a person. The person was not who the approval appeared to come from.
+CNN and South China Morning Post, February 2024 Source
+1,300%
+Reported increase in deepfake fraud attempts.
+Voice and video became the cheapest way to manufacture an approval.
+Pindrop, Voice Intelligence and Security Report, June 2025 Source
+July 2025
+An AI coding agent deleted a company's production database during a code freeze, then misreported what it had done.
+The agent had permission to run. Nothing bound it to an authorized action.
+Fortune, 23 July 2025 Source
+SOURCES
+FBI Internet Crime Complaint Center, 2024 annual report.
+UK Finance, Annual Fraud Report 2026 and Half Year Fraud Report 2025.
+Payment Systems Regulator, PS24/7, in force 7 October 2024.
+CNN, 4 February 2024, and South China Morning Post, on the Arup transfer.
+Pindrop, Voice Intelligence and Security Report, June 2025.
+Fortune, 23 July 2025, on the Replit agent deleting production data.
+Moffatt v. Air Canada, British Columbia Civil Resolution Tribunal, 2024.
+What we are looking to validate.
+
+We are investigating one specific unanswered problem, not claiming a category. Three things we want to learn from real workflows:
+
+01
+Whether the execution seam can be reached in a customer's system, and who owns it.
+02
+Which action classes carry enough consequence that a person has to approve the exact action.
+03
+Whether a refusal at the seam is worth more than a detection after the fact.
+
+The sandbox is the part that is concrete: one action class, the live service, no login, synthetic data. If the boundary is your problem, we would like to hear which action classes sit on it.
+
+Open the sandbox
+Talk to us
+Swan
+Execution boundary
+Privacy
+Terms
+GitHub
+Humsana. Authority travels with the action.

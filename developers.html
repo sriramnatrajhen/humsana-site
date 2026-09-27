@@ -30,7 +30,7 @@ Developers: Humsana
 <div class="head"><h2>How a caller uses it.</h2></div>
 <div class="list-rows">
   <div class="row"><div class="num">01</div><div><h3>Register the action class</h3><p>The class names which values are bound, what consequence it carries, whether a human step is required, and which executor checks the decision. Registration is data, so the boundary holds no code path per action type.</p></div></div>
-  <div class="row"><div class="num">02</div><div><h3>Authorize the exact action</h3><p>POST /v1/authorize with the principal, the agent, the action name and its parameters. The answer is one of the six decisions, the action digest, the binding and the expiry.</p></div></div>
+  <div class="row"><div class="num">02</div><div><h3>Authorize the exact action</h3><p>POST /v1/authorize/verify with the principal, the agent, the action name and its parameters. The answer is one of the six decisions, the action digest, the binding and the expiry.</p></div></div>
   <div class="row"><div class="num">03</div><div><h3>Confirm where the consequence requires it</h3><p>The approving human is authenticated by the principal's identity system. Humsana verifies what it is handed and signs the approval over the action digest, not over the request.</p></div></div>
   <div class="row"><div class="num">04</div><div><h3>Check at the seam, immediately before acting</h3><p>POST /v1/authorize/effectuate with the receipt and the action the executor is about to perform. An exact match proceeds. A material change is refused, and the changed field is returned.</p></div></div>
   <div class="row"><div class="num">05</div><div><h3>Keep the record</h3><p>The receipt carries what was claimed, established, authorized, presented, executed or refused, the policy version, both action digests, the approving identity and the timestamps.</p></div></div>
@@ -100,10 +100,11 @@ POST /v1/authorize/effectuate
 <section><div class="wrap">
 <div class="head"><h2>What the service exposes.</h2></div>
 <table class="tbl"><thead><tr><th>Endpoint</th><th>Purpose</th></tr></thead><tbody>
-<tr><td>POST /v1/authorize</td><td>Propose an action and receive a decision, a binding and an expiry.</td></tr>
+<tr><td>POST /v1/authorize/verify</td><td>Propose an action and receive a decision, a binding and an expiry.</td></tr>
 <tr><td>POST /v1/authorize/effectuate</td><td>Present the action at execution and receive the decision and, where it moved, the field.</td></tr>
-<tr><td>POST /v1/confirm</td><td>Record an approval signed over an exact action digest.</td></tr>
-<tr><td>GET /v1/receipts/{id}</td><td>Read the record for one authorization.</td></tr>
+<tr><td>POST /v1/authorize/confirm</td><td>Record the confirmation, bound to the digest of the approved action.</td></tr>
+<tr><td>POST /v1/authorize/challenge</td><td>Ask for the challenge when an action requires a human decision.</td></tr>
+<tr><td>POST /v1/authorize/confirm/request</td><td>Request the confirmation step for an action that requires a person.</td></tr>
 <tr><td>GET /v1/health</td><td>What the deployment is running: policy version, confirmation mode, router mode.</td></tr>
 </tbody></table>
 <p class="note">Bearer key authentication. The integration guide and the reference executor are available on request.</p>

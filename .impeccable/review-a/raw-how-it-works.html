@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How it works: Humsana</title>
+How it works: Humsana
 <meta name="description" content="From a granted authority to a refused action. The exact action is claimed, established, confirmed, bound, presented and checked.">
 <link rel="stylesheet" href="style.css">
 </head><body>
@@ -91,27 +91,27 @@ payment API: not called</div></details>
 
 <section><div class="wrap">
   <div class="head"><h2>What is bound, and what the rule allows.</h2></div>
-  <div class="tw"><table class="tbl">
+  <table class="tbl">
     <thead><tr><th>Action class</th><th>What is bound</th><th>Rule in force</th><th>Decision</th></tr></thead>
     <tbody>
 <tr><td>payments.release</td><td>amount, beneficiary, account, expiry, reference</td><td>MAY_NOT_CHANGE on the account</td><td class="rule">REFUSED</td></tr>
 <tr><td>payments.release</td><td>amount inside the authorized ceiling</td><td>MAY_NOT_INCREASE on the amount</td><td class="rule">ALLOWED WITH LIMITS</td></tr>
 <tr><td>filing.submit</td><td>document, recipient set, deadline</td><td>MAY_NOT_CHANGE on the recipient set</td><td class="rule">REFUSED</td></tr>
 <tr><td>access.revoke</td><td>target, scope</td><td>MAY_ONLY_SHRINK on the scope</td><td class="rule">REFUSED</td></tr>
-</tbody></table></div>
+</tbody></table>
   <p class="note">Field names and rules as the service applies them.</p>
 </div></section>
 
 <section id="measured"><div class="wrap">
   <div class="head"><h2>How those numbers were taken.</h2></div>
-  <div class="tw"><table class="measure">
+  <table class="measure">
     <thead><tr><th>Measurement</th><th>Value</th><th>Scope</th></tr></thead>
     <tbody>
       <tr><td>Median, authorize one exact action</td><td>5.8 ms</td><td>40 actions, one host</td></tr>
       <tr><td>Median, check it at execution</td><td>2.9 ms</td><td>40 actions, one host</td></tr>
       <tr><td>Worst case across the run</td><td>12.9 ms</td><td>40 actions, one host</td></tr>
     </tbody>
-  </table></div>
+  </table>
   <p style="margin-top:3rem">The authorize path and the enforce path were run against the running service on a single host, 40 actions, and timed at the boundary.</p>
   <p style="margin-top:.9rem">No claim is made here for the network between a customer's executor and the boundary, or for the cost of the customer's own execution path. Those belong to the integration.</p>
   <p class="note">Single host deployment, 40 actions. Re-measure on your own host before you rely on these figures.</p>
@@ -120,7 +120,7 @@ payment API: not called</div></details>
 <section id="refusals"><div class="wrap">
   <div class="head"><h2>What a refusal says.</h2></div>
   <p>Every refusal carries a code. The code names which check failed and, where a field was involved, which field carried the difference.</p>
-  <div class="tw"><table class="tbl" style="margin-top:2.6rem">
+  <table class="tbl" style="margin-top:2.6rem">
     <thead><tr><th>Code</th><th>What failed</th></tr></thead>
     <tbody>
       <tr><td>EFFECTUATION_DRIFT</td><td>The presented action differs from the authorized action in at least one material field. The refusal carries the field, the authorized value, the presented value and the rule that was applied.</td></tr>
@@ -136,7 +136,7 @@ payment API: not called</div></details>
       <tr><td>RECEIPT_NOT_FOUND</td><td>Unknown identifier, or one that belongs to another caller.</td></tr>
       <tr><td>OUTSIDE_SCOPE</td><td>The action falls outside the scope the principal registered for this agent.</td></tr>
       <tr><td>PROVIDER_DEADLINE_EXCEEDED</td><td>A provider did not answer inside the deadline. The boundary waits up to twenty seconds and records the expiry rather than treating silence as consent.</td></tr>
-    </tbody></table></div>
+    </tbody></table>
   <p class="note">Thirteen codes are shown. The boundary answers in these plus the class and registry checks the deployment has enabled.</p>
 </div></section>
 
@@ -161,7 +161,7 @@ payment API: not called</div></details>
 
 <section><div class="wrap">
   <div class="head"><h2>Watch it refuse on the action you care about.</h2></div>
-  <p>The sandbox runs one action class against the live service. No account and no login, synthetic data only, and no money moves. Each run keeps its own state on the host for a short time so the page survives a reload.</p>
+  <p>The sandbox runs one action class against the live service. No login, no persistent state, synthetic data only.</p>
   <div class="cta-row" style="margin-top:2.6rem">
     <a class="btn btn-primary arrow-after" href="https://api.humsana.com/sandbox/">Open the sandbox</a>
     <a class="btn btn-ghost" href="developers.html">Build against it</a>

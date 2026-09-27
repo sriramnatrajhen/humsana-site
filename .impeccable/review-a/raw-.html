@@ -24,8 +24,8 @@
 <header class="hero"><div class="wrap hero-grid">
   <div class="hero-copy">
     <h1>Humsana makes AI agents accountable for the actions they take.</h1>
-    <p class="lead">Inside your own stack, identity, policy and application controls can govern what an agent does. The hard part begins when the agent leaves it. Humsana binds authority to the action, checks that binding where the action reaches its executor, and refuses the action, naming what does not match, when it is not covered.</p>
-    <p style="margin-top:1.2rem">If a payment was authorized for account 4821 and arrives asking for 9137, it is refused at the boundary, before the executor reaches the payment system. The check runs where the integrating party places it, on the path that acts.</p>
+    <p class="lead">Inside your own stack, identity, policy and application controls can govern what an agent does. The hard part begins when the agent leaves it. Humsana binds authority to the action, checks that binding where the action reaches its executor, and stops execution when the action is not covered.</p>
+    <p style="margin-top:1.2rem">If a payment was authorized for account 4821 and arrives asking for 9137, it is refused before the payment system is called.</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="https://api.humsana.com/sandbox/">See it refuse</a>
       <a class="btn btn-ghost" href="the-execution-boundary.html">The execution boundary</a>
@@ -45,12 +45,12 @@
     <span class="act">&larr; the same action, presented</span>
   </div>
 </div>
-    <p class="note">Different systems. Different owners. One action. What proves the authority traveled with it?</p>
+    <p class="note">Different systems. Different owners. One action. What proves the authority travelled with it?</p>
   </aside>
 </div></header>
 
 <section data-scene-scope><div class="wrap">
-  <h2>What proves the authority traveled with it?</h2>
+  <h2>What proves the authority travelled with it?</h2>
   <p style="margin-top:1.4rem">Inside one boundary the answers line up. As the boundary hardens, the system that executes the action can establish less and less about the authority behind it. Move the boundary and watch what the executor is left holding.</p>
   <div class="switch" role="tablist" aria-label="Where the boundary sits">
     <button role="tab" id="tab-c1" aria-controls="case-1" aria-selected="false" tabindex="-1" data-case="1">Same system</button>
@@ -104,13 +104,12 @@
 
 <section><div class="wrap">
   <h2>An approved action can still be refused.</h2>
-  <p style="margin-top:1.4rem">Company A approves a payout: &pound;1,800 to Supplier X, account 4821. What reaches Company B's executor is one instruction, and the boundary compares it against the action that was approved.</p>
+  <p style="margin-top:1.4rem">Company A approves a payout: &pound;1,800 to Supplier X, account 4821. The action that reaches Company B's executor is the same instruction with account 9137.</p>
   <div class="switch" role="tablist" aria-label="The action presented to the executor" style="margin-top:2.6rem">
     <button role="tab" aria-controls="ans-refused" aria-selected="true" tabindex="0">Account changed, 9137</button>
     <button role="tab" aria-controls="ans-allowed" aria-selected="false" tabindex="-1">As approved, 4821</button>
   </div>
   <div id="ans-refused" role="tabpanel" style="margin-top:2.4rem">
-    <p style="margin-bottom:1.6rem">The instruction that arrives carries account 9137. The action that was approved carries 4821.</p>
     <div class="verdict"><span class="v-refuse">Refused</span><span class="code">GRANT_DOES_NOT_COVER_THIS_ACTION</span></div>
     <ul class="cmp">
       <li><span class="k">field</span><span class="v">parameters.payee_account</span></li>
@@ -188,6 +187,7 @@
     <li>CNN, 4 February 2024, and South China Morning Post, on the Arup transfer.</li>
     <li>Pindrop, Voice Intelligence and Security Report, June 2025.</li>
     <li>Fortune, 23 July 2025, on the Replit agent deleting production data.</li>
+    <li>Moffatt v. Air Canada, British Columbia Civil Resolution Tribunal, 2024.</li>
   </ol>
 </div>
 </div></section>

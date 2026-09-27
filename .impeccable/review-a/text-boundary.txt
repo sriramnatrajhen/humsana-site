@@ -1,0 +1,135 @@
+Home
+Execution boundary
+How it works
+Developers
+Sandbox
+The execution boundary.
+
+Humsana is not trying to replace the identity system, the agent runtime or the executor. It sits at the point where a consequential action crosses from one authority context into another and asks whether the authority actually covers what is being executed.
+
+Where it does not, the action is stopped before the executor reaches the system that would perform it, and the refusal names the field, both values and the rule.
+
+See it refuse
+How the check runs
+The same problem, at three depths.
+
+Not every boundary is the same problem. Inside one system, existing controls can govern an agent. Two systems inside one organization is a reconciliation problem. Two organizations is where authority and execution stop sharing anything, and where this question stops having an answer today.
+
+1. Same system
+2. Different systems
+3. Different organizations
+COMPANY A
+Principal
+Authority
+Agent
+consequential action →
+BOUNDARY
+COMPANY B
+Executor
+← the same action, presented
+
+This is where the problem appears. The executor holds the request and almost nothing else: not the principal, not the delegation, not the approval behind it.
+
+Two owners. Neither can inspect the other's identity system, policy or logs.
+Identity
+The counterparty's identity is asserted, not inspectable.
+Authority
+Nothing about the approval reaches the executor unless it is carried.
+The action
+The executor cannot tell whether this is the approved action.
+Evidence
+Two organizations, two records, no shared basis.
+Accountable
+Contested, and settled after the fact, if at all.
+
+This is where the problem appears. The executor holds the request and almost nothing else: not the principal, not the delegation, not the approval behind it.
+
+Six stages carry authority to the point of execution.
+
+Each stage can be checked, and each can be lost. The boundary's job is the fifth one: to know what arrives at the executor and whether it is still covered.
+
+01
+Authority
+
+Who is acting and on whose behalf.
+
+02
+Delegation
+
+How that authority reached the actor.
+
+03
+Action
+
+What the agent is actually trying to do.
+
+04
+Binding
+
+What the authority covers.
+
+05
+Execution
+
+What arrives at the executor.
+
+06
+Evidence
+
+What can later be reconstructed.
+
+Where the boundary appears.
+
+The action changes, the boundary changes, and the question stays the same: what authority actually covers this action?
+
+B2B payments
+Company A's agent → Company B's payment system
+Procurement
+Company A's agent → a supplier's ordering system
+Third-party APIs
+Agent → a system the customer does not own
+Cross-company operations
+Autonomous workflow → another organization's action
+Delegated agents
+Agent → agent → executor
+Where it acts
+
+Company A's agent → Company B's payment system.
+
+What crosses
+
+One company's agent instructs another company's payment system, and the instruction is a payment.
+
+What a refusal looks like at a boundary.
+REFUSED
+GRANT_DOES_NOT_COVER_THIS_ACTION
+field
+parameters.payee_account
+approved by Company A
+GB00SUPPLIER00004821
+presented to Company B
+GB00SUPPLIER00009137
+rule
+MAY_NOT_CHANGE
+Payment API: not called
+
+Recorded from the live service on 27 September 2026. The record behind it holds what was claimed, established, authorized, presented, executed and refused, with both action digests, the approving identity, the method, the policy version and the timestamps. The record.
+
+What has to be true for this to matter.
+01
+The integrating party can place a check on the path that acts, on their side of the irreversible call.
+02
+An authority established for one system can be presented, and re-checked, in another.
+03
+A refusal at that seam is cheaper than reconstructing what happened afterwards.
+
+We are testing those three with real workflows. The sandbox is the concrete part: one action class, the live service, no login, synthetic data.
+
+Open the sandbox
+Talk to us
+Swan
+Execution boundary
+Privacy
+Terms
+GitHub
+Humsana. Authority travels with the action.

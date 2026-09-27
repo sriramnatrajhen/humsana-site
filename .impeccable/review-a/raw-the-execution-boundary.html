@@ -24,7 +24,7 @@
 <header class="hero"><div class="wrap">
   <h1 style="max-width:24ch">The execution boundary.</h1>
   <p class="lead" style="max-width:64ch">Humsana is not trying to replace the identity system, the agent runtime or the executor. It sits at the point where a consequential action crosses from one authority context into another and asks whether the authority actually covers what is being executed.</p>
-  <p style="margin-top:1.2rem">Where it does not, the action is refused before the executor reaches the system that would perform it, and the refusal names the field, both values and the rule. Honoring that refusal is the executor's job, which is why the seam matters as much as the check.</p>
+  <p style="margin-top:1.2rem">Where it does not, the action is stopped before the executor reaches the system that would perform it, and the refusal names the field, both values and the rule.</p>
   <div class="cta-row" style="margin-top:2.2rem">
     <a class="btn btn-primary" href="https://api.humsana.com/sandbox/">See it refuse</a>
     <a class="btn btn-ghost" href="how-it-works.html">How the check runs</a>
@@ -160,7 +160,7 @@
     <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE</span></li>
   </ul>
   <span class="api no">Payment API: not called</span>
-  <p class="note">Recorded from the live service on 27 September 2026. The authorization record holds the decision, the binding, the digest of the action it covers, the evidence with what was claimed kept apart from what was established, the presented action and its own digest, the policy version and the timestamps. The effectuation answer carries the refusal code, the field and both values. <a href="how-it-works.html">The record</a>.</p>
+  <p class="note">Recorded from the live service on 27 September 2026. The record behind it holds what was claimed, established, authorized, presented, executed and refused, with both action digests, the approving identity, the method, the policy version and the timestamps. <a href="how-it-works.html">The record</a>.</p>
 </div></section>
 
 <section><div class="wrap">

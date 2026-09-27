@@ -1,0 +1,137 @@
+How it works: Humsana
+Home
+Execution boundary
+How it works
+Developers
+Sandbox
+From authority to execution.
+
+The principal grants authority over one action. Humsana records it, binds it to the action, and the executor asks again immediately before the action happens.
+
+See it refuse
+The integration
+Five steps, and the fifth is the one that matters.
+01
+Claim
+02
+Establish
+03
+Confirm
+04
+Bind
+05
+Enforce
+
+The agent says who it is, who it acts for, what it wants to do, and what authority it has.
+
+Authorized against attempted.
+Authorized
+action
+payments.release
+account
+GB00SUPPLIER00004821
+amount
+£1,800
+DOES NOT MATCH
+Attempted
+action
+payments.release
+account
+GB00SUPPLIER00009137
+amount
+£1,800
+GRANT_DOES_NOT_COVER_THIS_ACTION · parameters.payee_account · authorized GB00SUPPLIER00004821 · presented GB00SUPPLIER00009137 · rule MAY_NOT_CHANGE
+
+This is the refusal the sandbox returns today. The payment API was not called, and the authorization was not spent, so the approved action can still run as approved.
+
+One record from approval to execution.
+SWAN.AUTHZ/1
+ONE ACTION, REFUSED
+CLAIMED
+5
+ESTABLISHED
+0
+AUTHORIZED
+1
+PRESENTED
+1
+EXECUTED
+0
+REFUSED
+1
+principal
+delegation
+binding
+confirmation
+effectuation
+
+Counts and values from one refused action in the live sandbox. The states stay separate, and a refusal stays in the record. That record is what answers the question afterwards, whether the ask comes from an auditor, a regulator or a court.
+
+What is bound, and what the rule allows.
+ACTION CLASS	WHAT IS BOUND	RULE IN FORCE	DECISION
+payments.release	amount, beneficiary, account, expiry, reference	MAY_NOT_CHANGE on the account	REFUSED
+payments.release	amount inside the authorized ceiling	MAY_NOT_INCREASE on the amount	ALLOWED WITH LIMITS
+filing.submit	document, recipient set, deadline	MAY_NOT_CHANGE on the recipient set	REFUSED
+access.revoke	target, scope	MAY_ONLY_SHRINK on the scope	REFUSED
+
+Field names and rules as the service applies them.
+
+How those numbers were taken.
+MEASUREMENT	VALUE	SCOPE
+Median, authorize one exact action	5.8 ms	40 actions, one host
+Median, check it at execution	2.9 ms	40 actions, one host
+Worst case across the run	12.9 ms	40 actions, one host
+
+The authorize path and the enforce path were run against the running service on a single host, 40 actions, and timed at the boundary.
+
+No claim is made here for the network between a customer's executor and the boundary, or for the cost of the customer's own execution path. Those belong to the integration.
+
+Single host deployment, 40 actions. Re-measure on your own host before you rely on these figures.
+
+What a refusal says.
+
+Every refusal carries a code. The code names which check failed and, where a field was involved, which field carried the difference.
+
+CODE	WHAT FAILED
+EFFECTUATION_DRIFT	The presented action differs from the authorized action in at least one material field. The refusal carries the field, the authorized value, the presented value and the rule that was applied.
+MAY_NOT_CHANGE	The field is fixed by the authorization and cannot be altered at execution.
+MAY_NOT_INCREASE	The field may be reduced but not raised above the authorized value.
+MAY_ONLY_SHRINK	The scope may narrow but not widen.
+GRANT_DOES_NOT_COVER_THIS_ACTION	The presented action is outside what this authorization covers.
+GRANT_ALREADY_USED	The grant has been spent. A grant is spent once.
+GRANT_NOT_FOUND	No grant exists for the identifier presented.
+AUTHORIZATION_NOT_GRANTED	There is no authorization to spend. A receipt that asked for verification, or that was refused, answers this and no other code, because it was never spendable and so cannot have expired.
+CONFIRMATION_NOT_OBTAINED	The action requires a human step and no bound approval was presented.
+RECEIPT_EXPIRED	The authorization is past its expiry. It applies to an authorization that existed.
+RECEIPT_NOT_FOUND	Unknown identifier, or one that belongs to another caller.
+OUTSIDE_SCOPE	The action falls outside the scope the principal registered for this agent.
+PROVIDER_DEADLINE_EXCEEDED	A provider did not answer inside the deadline. The boundary waits up to twenty seconds and records the expiry rather than treating silence as consent.
+
+Thirteen codes are shown. The boundary answers in these plus the class and registry checks the deployment has enabled.
+
+Where the boundary sits.
+WHO AUTHENTICATES THE APPROVING HUMAN
+the principal's identity system
+NOT HUMSANA
+
+Humsana verifies the authenticated identity or assertion the customer supplies, records who was authenticated and by which method, and binds the confirmation to the action. Authentication itself belongs to the principal's identity system. A production integration accepts that system's identity, assertion or signature; the sandbox uses a reference confirmer and labels it as one.
+
+WHO OWNS THE EXECUTOR
+the integrating party
+ENFORCED AT THE SEAM
+
+Humsana enforces at the execution seam controlled by the integrating party. We cannot enforce an executor we do not control. The reference executor exists to demonstrate the seam and to be replaced by yours.
+
+The principal grants the authority. Humsana records it, binds it and enforces it.
+
+Watch it refuse on the action you care about.
+
+The sandbox runs one action class against the live service. No login, no persistent state, synthetic data only.
+
+Open the sandbox
+Build against it
+Swan
+Privacy
+Terms
+GitHub
+Humsana. Authority travels with the action.
