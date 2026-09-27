@@ -301,3 +301,17 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   .cases .c{grid-template-columns:1fr;gap:.3rem}
   .cases .c .rule{text-align:left}
 }
+
+/* evidence rows: a figure, what happened, and where the figure came from */
+.evid{border-top:1px solid var(--line)}
+.evid .e{display:grid;grid-template-columns:158px 1fr;gap:1.7rem;padding:1.5rem 0;border-bottom:1px solid var(--line-soft);align-items:baseline}
+.evid .fig{font-family:var(--mono);font-size:19px;line-height:1.2;color:var(--accent)}
+.evid .t{font-size:17px;color:var(--ink);display:block;font-weight:500}
+.evid .d{font-size:15px;color:var(--muted);display:block;margin-top:.3rem;max-width:74ch}
+.evid .src{font-family:var(--mono);font-size:12px;line-height:1.6;color:var(--dim);display:block;margin-top:.55rem}
+.evid .src a{color:var(--muted);border-bottom:1px solid var(--line)}
+.sources{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1.5rem}
+.sources ol{margin:0;padding-left:1.4rem;font-family:var(--mono);font-size:12px;line-height:1.95;color:var(--dim);max-width:96ch}
+.sources a{color:var(--muted)}
+.hero-panel .panel + .panel{margin-top:1.2rem}
+@media(max-width:760px){.evid .e{grid-template-columns:1fr;gap:.45rem}}
