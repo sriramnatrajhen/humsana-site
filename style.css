@@ -285,3 +285,19 @@ table.tbl td.rule{color:var(--accent)}
   .flowrow .fi{border-left:0;border-top:1px solid var(--line)}
   .flowrow .fi:first-child{border-top:0}
 }
+
+/* the refusal strip: one shape across action classes, plus focus states */
+.cases{border-top:1px solid var(--line);margin-top:2.6rem}
+.cases .c{display:grid;grid-template-columns:7.5rem minmax(9rem,1fr) 1.7fr auto;gap:1.4rem;align-items:baseline;
+  padding:1.2rem 0;border-bottom:1px solid var(--line-soft)}
+.cases .c .dec{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.cases .c .cls{font-family:var(--mono);font-size:13px;color:var(--ink)}
+.cases .c .what{font-size:16px;color:var(--muted)}
+.cases .c .rule{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:right}
+.cases .c .rule .v{color:var(--ink)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.step-copy p + p{margin-top:.9rem}
+@media(max-width:820px){
+  .cases .c{grid-template-columns:1fr;gap:.3rem}
+  .cases .c .rule{text-align:left}
+}

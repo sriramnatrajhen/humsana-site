@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Humsana: authority travels with the action</title>
-<meta name="description" content="An agent can have permission to act and still execute an action nobody approved. Humsana binds authority to the action itself, checks it again before execution, and refuses it when it no longer matches.">
+<meta name="description" content="An agent can have permission to act and still execute an action nobody approved. Humsana binds authority to the action itself, checks that action again before execution, and refuses it when it no longer matches.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -31,96 +31,105 @@
     </div>
   </div>
   <aside class="hero-panel">
-    <div class="refusal">
-      <div class="rf-head">Approved</div>
-      <div class="rf-block">
-        <p class="who">Pay &pound;1,800 to Supplier X</p>
-        <ul class="rf-kv"><li><span>Account</span><span class="v">4821</span></li><li><span>Valid until</span><span class="v">14:00</span></li></ul>
-      </div>
-      <div class="rf-head">Presented for execution</div>
-      <div class="rf-block">
-        <p class="who">Pay &pound;1,800 to Supplier X</p>
-        <ul class="rf-kv"><li><span>Account</span><span class="v rf-changed">9137</span></li></ul>
-      </div>
-      <div class="rf-verdict"><span class="k">Decision</span>REFUSED</div>
-      <p class="rf-reason">Destination account changed</p>
-      <ul class="rf-cmp">
-        <li><span class="k">Approved:</span><span class="v">4821</span></li>
-        <li><span class="k">Presented:</span><span class="v chg">9137</span></li>
-        <li><span class="k">Rule:</span><span class="v">MAY_NOT_CHANGE</span></li>
-      </ul>
-      <div class="rf-foot">Payment API: NOT CALLED</div>
+  <div class="refusal">
+    <div class="rf-head">Approved</div>
+    <div class="rf-block">
+      <p class="who">Pay &pound;1,800 to Supplier X</p>
+      <ul class="rf-kv"><li><span>Account</span><span class="v">4821</span></li><li><span>Valid until</span><span class="v">14:00</span></li></ul>
     </div>
-  </aside>
+    <div class="rf-head">Presented for execution</div>
+    <div class="rf-block">
+      <p class="who">Pay &pound;1,800 to Supplier X</p>
+      <ul class="rf-kv"><li><span>Account</span><span class="v chg rf-changed">9137</span></li></ul>
+    </div>
+    <div class="rf-verdict"><span class="k">Decision</span>REFUSED</div>
+    <p class="rf-reason">Destination account changed</p>
+    <ul class="rf-cmp">
+      <li><span class="k">Approved:</span><span class="v">4821</span></li>
+      <li><span class="k">Presented:</span><span class="v chg">9137</span></li>
+      <li><span class="k">Rule:</span><span class="v">MAY_NOT_CHANGE</span></li>
+    </ul>
+    <div class="rf-foot">Payment API: NOT CALLED</div>
+  </div>
+</aside>
 </div></header>
 
 <section><div class="wrap">
-  <div class="head">
-    <h2>Access tells you who can act. It does not tell you what this action was authorized to do.</h2>
-  </div>
-  <p>An agent may have permission to call a payment API.</p>
-  <p style="margin-top:.9rem">That does not prove that this payment, to this account, for this amount, was authorized.</p>
-  <p style="margin-top:.9rem">That distinction matters when the action reaches the system that performs it.</p>
-  <p class="callout" style="margin-top:2.8rem">Humsana checks the action there.</p>
+  <div class="head"><h2>The executor already has rules. It does not have your authority.</h2></div>
+  <p>The system that performs the action already decides a lot.</p><p style="margin-top:.9rem">Whether the account exists and holds funds.</p><p style="margin-top:.9rem">Whether the amount is inside a limit the system sets.</p><p style="margin-top:.9rem">Whether the request is well formed, and whether the record is in a state that allows the change.</p><p style="margin-top:.9rem">Those rules answer whether the action can run.</p><p style="margin-top:.9rem">They do not answer whether someone authorized this action.</p><p style="margin-top:.9rem">That authority sits somewhere else. An approval in a queue. A ticket. A message. A flag on a row.</p><p style="margin-top:.9rem">Between the approval and the execution, the action can change.</p>
+  <p class="callout" style="margin-top:2.8rem">The authority does not travel with the action. Humsana makes it travel.</p>
 </div></section>
 
 <section><div class="wrap">
-  <div class="head">
-    <h2>Where Humsana sits</h2>
-  </div>
+  <div class="head"><h2>One refusal, any action class.</h2></div>
+  <p>The same check applies to every action class the principal registers. The refusal names the field that changed.</p>
+  <div class="cases">
+  <div class="c"><div class="dec">REFUSED</div><div class="cls">payments.release</div><div class="what">The destination account changed after approval.</div><div class="rule">Rule <span class="v">MAY_NOT_CHANGE</span></div></div>
+  <div class="c"><div class="dec">REFUSED</div><div class="cls">filing.submit</div><div class="what">The recipient set grew from 14 to 15 after approval.</div><div class="rule">Rule <span class="v">MAY_NOT_CHANGE</span></div></div>
+  <div class="c"><div class="dec">REFUSED</div><div class="cls">access.revoke</div><div class="what">The scope moved from one account to all accounts.</div><div class="rule">Rule <span class="v">MAY_ONLY_SHRINK</span></div></div>
+</div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head"><h2>Where Humsana sits</h2></div>
   <div class="flowrow">
-    <div class="fi">Principal</div>
-    <div class="fi">Authority</div>
-    <div class="fi">Agent</div>
-    <div class="fi hs">Humsana<small>Is this action covered by the authority?</small></div>
-    <div class="fi">Executor<small>No grant. No execution.</small></div>
-  </div>
-</div></section>
-
-<section><div class="wrap">
-  <div class="head">
-    <h2>The model</h2>
-  </div>
+  <div class="fi">Principal</div>
+  <div class="fi">Authority</div>
+  <div class="fi">Agent</div>
+  <div class="fi hs">Humsana<small>Is this action covered by the authority?</small></div>
+  <div class="fi">Executor<small>No grant. No execution.</small></div>
+</div>
+<p class="note" style="margin-top:1.8rem">The same action, end to end. Each step links to the mechanism.</p>
   <div class="modelrow">
-    <a href="how-it-works.html#authority">Who</a><span class="arrow">&rarr;</span>
-    <a href="how-it-works.html#authority">Authority</a><span class="arrow">&rarr;</span>
-    <a href="how-it-works.html#action">Action</a><span class="arrow">&rarr;</span>
-    <a href="how-it-works.html#decision">Approved</a><span class="arrow">&rarr;</span>
-    <a href="how-it-works.html#execution">Presented</a><span class="arrow">&rarr;</span>
-    <a href="how-it-works.html#evidence">Outcome</a>
-  </div>
+  <a href="how-it-works.html#authority">Who</a><span class="arrow">&rarr;</span>
+  <a href="how-it-works.html#authority">Authority</a><span class="arrow">&rarr;</span>
+  <a href="how-it-works.html#action">Action</a><span class="arrow">&rarr;</span>
+  <a href="how-it-works.html#decision">Approved</a><span class="arrow">&rarr;</span>
+  <a href="how-it-works.html#execution">Presented</a><span class="arrow">&rarr;</span>
+  <a href="how-it-works.html#evidence">Outcome</a>
+</div>
 </div></section>
 
 <section><div class="wrap">
-  <div class="head">
-    <h2>Evidence</h2>
-  </div>
+  <div class="head"><h2>Two kinds of rule</h2></div>
+  <p>A system enforces its own rules. A principal grants authority. The two are not the same, and only one of them is bound to the action.</p>
+  <div class="compare">
+  <div class="ch">The executing system</div>
+  <div class="ch">The principal's authority</div>
+  <div class="l">Can this action run here?</div>
+  <div class="r">Did the principal authorize this action?</div>
+  <div class="l">Held by the system that acts</div>
+  <div class="r">Held by the person or company that granted it</div>
+  <div class="l">Changes when the system changes</div>
+  <div class="r">Changes only when the principal says so</div>
+  <div class="l">Deterministic, built into the executor</div>
+  <div class="r">Bound to the action, single use, expiring</div>
+</div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head"><h2>Evidence</h2></div>
   <table class="tbl">
-    <thead><tr><th>State</th><th>What it means</th></tr></thead>
-    <tbody>
-      <tr><td>Claimed</td><td>What the agent presented as its authority</td></tr>
-      <tr><td>Established</td><td>What Humsana could establish from available evidence</td></tr>
-      <tr><td>Authorized</td><td>What the principal actually approved</td></tr>
-      <tr><td>Presented</td><td>What arrived at the executor</td></tr>
-      <tr><td>Executed</td><td>What the executor accepted</td></tr>
-      <tr><td>Refused</td><td>What was stopped and why</td></tr>
-    </tbody>
-  </table>
+  <thead><tr><th>State</th><th>What it means</th></tr></thead>
+  <tbody>
+    <tr><td>Claimed</td><td>What the agent presented as its authority</td></tr>
+    <tr><td>Established</td><td>What Humsana could establish from available evidence</td></tr>
+    <tr><td>Authorized</td><td>What the principal actually approved</td></tr>
+    <tr><td>Presented</td><td>What arrived at the executor</td></tr>
+    <tr><td>Executed</td><td>What the executor accepted</td></tr>
+    <tr><td>Refused</td><td>What was stopped and why</td></tr>
+  </tbody>
+</table>
 </div></section>
 
 <section><div class="wrap">
-  <div class="head">
-    <h2>The check sits between the agent and the system that executes the action.</h2>
-  </div>
-  <p>The agent presents the action to Humsana.</p>
-  <p style="margin-top:.9rem">The executor checks the decision before acting.</p>
-  <p style="margin-top:.9rem">For enforced action classes, no grant means no execution.</p>
+  <div class="head"><h2>What changes when authority travels with the action.</h2></div>
+  <p>An approval covers one action and nothing else.</p><p style="margin-top:.9rem">An approval can be spent once.</p><p style="margin-top:.9rem">An agent can be given latitude, because the boundary holds it to the action rather than to the session.</p><p style="margin-top:.9rem">The record answers the question later, in the same terms it was asked: what was authorized, what arrived, what was refused, and why.</p><p style="margin-top:.9rem">The same two calls serve every action class the principal registers.</p>
   <div class="cta-row" style="margin-top:2.6rem">
-    <a class="btn btn-primary" href="mailto:ram@humsana.com">Talk to us</a>
-    <a class="btn btn-ghost" href="developers.html">Read the integration</a>
+    <a class="btn btn-primary" href="https://api.humsana.com/sandbox/">See it refuse</a>
+    <a class="btn btn-ghost" href="mailto:ram@humsana.com">Talk to us</a>
   </div>
 </div></section>
-
 <footer><div class="wrap foot-in">
   <div class="brand"><img src="logo.png" alt="Humsana"></div>
   <div class="foot-links">

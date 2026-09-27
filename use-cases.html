@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-Use cases: Humsana
-<meta name="description" content="Payment releases, beneficiary changes, batch sends, regulated communication and destructive actions.">
+<title>Use cases: Humsana</title>
+<meta name="description" content="Payment releases, beneficiary changes, filings, destructive actions, provisioning and commitments.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -24,22 +24,36 @@ Use cases: Humsana
 <header class="hero"><div class="wrap">
   <div class="label">Use cases</div>
   <h1 style="max-width:22ch">Actions that are hard to undo.</h1>
-  <p class="lead" style="max-width:62ch">If an action can be reversed with a second action, a log is usually enough. These are the cases where it cannot.</p>
+  <p class="lead" style="max-width:62ch">If an action can be reversed with a second action, a log is usually enough. These are the cases where it cannot. The boundary is the same in every one of them. What changes is the action, and the fields that were bound when it was approved.</p>
 </div></header>
 
-<section><div class="wrap list-rows">
-  <div class="row"><div class="num">01</div><div><h3>Payment releases</h3><p>An exception sits in a queue after approval. The executor releases it later, sometimes the next morning. The account in the queue row is not the account that was approved. The release is refused, and the queue row keeps the reason.</p></div></div>
-  <div class="row"><div class="num">02</div><div><h3>Beneficiary and vendor changes</h3><p>A payee account is amended after approval. The instruction that reaches the executor is not the instruction the approver signed. The changed field is named in the refusal.</p></div></div>
-  <div class="row"><div class="num">03</div><div><h3>Scheduled and batch actions</h3><p>A batch is approved and sent later. A recipient is added, or an amount is raised, between approval and send. The batch no longer matches the approved one.</p></div></div>
-  <div class="row"><div class="num">04</div><div><h3>Regulated communication</h3><p>A notice, a demand or a filing. The approved words and the recipient set both matter, and either can change after approval.</p></div></div>
-  <div class="row"><div class="num">05</div><div><h3>Destructive actions</h3><p>Deleting records, revoking access, closing accounts, destroying keys. There is no undo, so the check has to happen before the action rather than after it.</p></div></div>
+<section><div class="wrap">
+<div class="list-rows">
+  <div class="row"><div class="num">01</div><div><h3>Payment releases</h3><p>An exception sits in a queue after approval and is released later, sometimes the next morning. The account in the queue row is not the account that was approved.</p><p style="margin-top:.6rem"><span class="mono" style="color:var(--accent)">The refusal names the account field and both values.</span></p></div></div>
+  <div class="row"><div class="num">02</div><div><h3>Beneficiary and vendor changes</h3><p>A payee account is amended after approval. The instruction that reaches the executor is not the instruction the approver signed.</p><p style="margin-top:.6rem"><span class="mono" style="color:var(--accent)">The refusal names the changed field and the rule that fixed it.</span></p></div></div>
+  <div class="row"><div class="num">03</div><div><h3>Regulated communication</h3><p>A notice, a demand or a filing. The approved words and the recipient set both matter, and either can change between approval and send.</p><p style="margin-top:.6rem"><span class="mono" style="color:var(--accent)">The refusal names the recipient set or the document that no longer matches.</span></p></div></div>
+  <div class="row"><div class="num">04</div><div><h3>Destructive actions</h3><p>Deleting records, revoking access, closing accounts, destroying keys. There is no second action that undoes them.</p><p style="margin-top:.6rem"><span class="mono" style="color:var(--accent)">The refusal names the scope the action had grown to.</span></p></div></div>
+  <div class="row"><div class="num">05</div><div><h3>Access and provisioning</h3><p>An agent creates an account, grants a role or issues a credential. The grant was approved for one person and arrives covering three.</p><p style="margin-top:.6rem"><span class="mono" style="color:var(--accent)">The refusal names the principal or the scope that changed.</span></p></div></div>
+  <div class="row"><div class="num">06</div><div><h3>Commitments</h3><p>An agent commits the company to a purchase, a contract or a booking. The commitment is the action, and it outlives the session that made it.</p><p style="margin-top:.6rem"><span class="mono" style="color:var(--accent)">The refusal names the amount, the counterparty or the term that changed.</span></p></div></div>
+</div></div></section>
+
+<section><div class="wrap">
+<div class="head"><h2>What gets bound</h2></div>
+<p>An approval binds values, not intentions. The action class decides which values.</p>
+<table class="tbl"><thead><tr><th>Action class</th><th>What is bound</th><th>Rule</th><th>Decision</th></tr></thead><tbody>
+<tr><td>payments.release</td><td>payee, account, amount, expiry</td><td>MAY_NOT_CHANGE on the account</td><td class="rule">REFUSED</td></tr>
+<tr><td>filing.submit</td><td>document, recipient set, deadline</td><td>MAY_NOT_CHANGE on the recipient set</td><td class="rule">REFUSED</td></tr>
+<tr><td>access.revoke</td><td>target, scope</td><td>MAY_ONLY_SHRINK on the scope</td><td class="rule">REFUSED</td></tr>
+<tr><td>payments.release</td><td>amount inside the authorized ceiling</td><td>MAY_NOT_INCREASE on the amount</td><td class="rule">ALLOWED WITH LIMITS</td></tr>
+</tbody></table>
+<p class="note">Field names and rules as the service applies them.</p>
 </div></section>
 
 <section><div class="wrap">
-  <div class="head"><h2>The action changes. The question does not.</h2></div>
-  <p>Is this the action the principal authorized?</p>
-  <p style="margin-top:.9rem">A grant answers it. A record proves the answer.</p>
+<div class="head"><h2>The action changes. The question does not.</h2></div>
+<p>Is this the action the principal authorized?</p><p style="margin-top:.9rem">A grant answers it. The record proves the answer.</p><p style="margin-top:.9rem">The same question holds whether the action moves money, sends a document, deletes a record, grants access or commits the company.</p>
   <p class="callout" style="margin-top:2.8rem">No grant. No execution.</p>
+  <div class="cta-row" style="margin-top:2.6rem"><a class="btn btn-primary" href="https://api.humsana.com/sandbox/">See it refuse</a><a class="btn btn-ghost" href="how-it-works.html">How it works</a></div>
 </div></section>
 <footer><div class="wrap foot-in">
   <div class="brand"><img src="logo.png" alt="Humsana"></div>

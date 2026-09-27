@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-Developers: Humsana
+<title>Developers: Humsana</title>
 <meta name="description" content="Integrate the authorization boundary: authorize the action, bind it, check it at the execution seam.">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -29,23 +29,32 @@ Developers: Humsana
 </div></header>
 
 <section><div class="wrap">
-  <div class="head"><div class="label">01 / The sequence</div><h2>How a caller uses it.</h2></div>
-  
-  <div class="list-rows">
-  <div class="row"><div class="num">01</div><div><h3>Register the action class and the executor</h3><p>The integrating party names the action class, its consequence class, whether a human step is required, and which executor checks the decision.</p></div></div>
+<div class="head"><div class="label">01 / The sequence</div><h2>How a caller uses it.</h2></div>
+<div class="list-rows">
+  <div class="row"><div class="num">01</div><div><h3>Register the action class</h3><p>The action class names which fields are bound, what consequence class it carries, whether a human step is required, and which executor checks the decision. Registration is data. The engine has no per-class code path.</p></div></div>
   <div class="row"><div class="num">02</div><div><h3>Authorize the exact action</h3><p>POST /v1/authorize with the principal, the agent, the action name and its parameters. The answer is one of the six decisions, the action digest, the binding and the expiry.</p></div></div>
   <div class="row"><div class="num">03</div><div><h3>Confirm where the consequence requires it</h3><p>The approving human is authenticated by the principal's identity system. Humsana verifies what it is handed and binds the approval to the action digest, not to a request.</p></div></div>
   <div class="row"><div class="num">04</div><div><h3>Check at the seam, immediately before acting</h3><p>POST /v1/authorize/effectuate with the receipt and the action the executor is about to perform. An exact match proceeds. A material change is refused, and the changed field is returned.</p></div></div>
   <div class="row"><div class="num">05</div><div><h3>Keep the record</h3><p>The receipt carries what was claimed, established, authorized, presented, executed or refused, the policy version, the action digest, the approving identity and the timestamps.</p></div></div>
 </div>
-  
 </div></section>
 
 <section><div class="wrap">
-  <div class="head"><div class="label">02 / The seam</div><h2>The check has to be on the path that acts.</h2></div>
-  <p>Humsana enforces at the execution seam controlled by the integrating party. The reference executor exists to demonstrate the seam and to be replaced by yours.</p><p style="margin-top:.9rem">The boundary answers a question. The integrating party decides what happens when the answer is a refusal, and that decision is theirs to own.</p>
-  
-  <pre class="code"><span class="c">// The executor presents the action immediately before it acts.</span>
+<div class="head"><div class="label">02 / The action class</div><h2>One engine, any action the principal registers.</h2></div>
+<p>An action class is a registration: a name, the fields that are bound, a consequence class, and the rules that apply at execution.</p><p style="margin-top:.9rem">The two calls are the same for every class. Nothing in the boundary is written per action type.</p>
+<table class="tbl"><thead><tr><th>Action class</th><th>Fields carried in the binding</th></tr></thead><tbody>
+<tr><td>payments.release</td><td>payee, account, amount, expiry</td></tr>
+<tr><td>filing.submit</td><td>document, recipient set, deadline</td></tr>
+<tr><td>access.revoke</td><td>target, scope</td></tr>
+<tr><td>records.delete</td><td>record set, retention class</td></tr>
+</tbody></table>
+<p class="note">Examples of registered classes, with the fields the binding carries.</p>
+</div></section>
+
+<section><div class="wrap">
+<div class="head"><div class="label">03 / The seam</div><h2>The check has to be on the path that acts.</h2></div>
+<p>Humsana enforces at the execution seam controlled by the integrating party. The reference executor exists to demonstrate the seam and to be replaced by yours.</p><p style="margin-top:.9rem">The boundary answers a question. The integrating party decides what happens when the answer is a refusal, and that decision is theirs to own.</p>
+<pre class="code"><span class="c">// The executor presents the action immediately before it acts.</span>
 POST /v1/authorize/effectuate
 {
   "receipt_id": "rcpt_8f21c0",
@@ -66,9 +75,8 @@ POST /v1/authorize/effectuate
 </div></section>
 
 <section><div class="wrap">
-  <div class="head"><div class="label">03 / The surface</div><h2>What the service exposes.</h2></div>
-  
-  <table class="tbl"><thead><tr><th>Endpoint</th><th>Purpose</th></tr></thead><tbody>
+<div class="head"><div class="label">04 / The surface</div><h2>What the service exposes.</h2></div>
+<table class="tbl"><thead><tr><th>Endpoint</th><th>Purpose</th></tr></thead><tbody>
 <tr><td>POST /v1/authorize</td><td>Propose an action and receive a decision, a binding and an expiry.</td></tr>
 <tr><td>POST /v1/authorize/effectuate</td><td>Present the action at execution and receive ALLOWED or REFUSED.</td></tr>
 <tr><td>POST /v1/confirm</td><td>Record an approval bound to an exact action digest.</td></tr>
@@ -77,7 +85,6 @@ POST /v1/authorize/effectuate
 </tbody></table>
 <p class="note">Bearer key authentication. The integration guide and the reference executor are available on request.</p>
 <div class="cta-row" style="margin-top:2.6rem"><a class="btn btn-primary" href="mailto:ram@humsana.com">Request the integration guide</a><a class="btn btn-ghost" href="https://api.humsana.com/sandbox/">See it refuse</a></div>
-  
 </div></section>
 <footer><div class="wrap foot-in">
   <div class="brand"><img src="logo.png" alt="Humsana"></div>
