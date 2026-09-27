@@ -349,6 +349,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 .scene .gap{position:relative}
 .scene .gap i{position:absolute;top:50%;left:0;right:0;height:2px;background:var(--ink)}
 .scene .gap span{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--bg);padding:.3rem .1rem;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);writing-mode:vertical-rl}
+.scene[data-case="2"] .gap i{background:repeating-linear-gradient(180deg,var(--ink) 0 12px,transparent 12px 22px)}
 .scene[data-case="1"] .gap i{background:var(--line)}
 .scene[data-case="1"] .gap span{color:var(--dim)}
 
