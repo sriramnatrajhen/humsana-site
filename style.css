@@ -28,7 +28,7 @@ h4{font-size:17px;line-height:1.38;font-weight:500}
 p{color:var(--muted);max-width:68ch}
 p strong{color:var(--ink);font-weight:500}
 .lead{font-size:19px;color:var(--muted);max-width:56ch}
-.label{display:flex;align-items:baseline;gap:.7rem;font-family:var(--mono);font-size:12px;line-height:1.2;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:1.4rem}
+.label{display:flex;align-items:baseline;gap:.7rem;font-family:var(--mono);font-size:12px;line-height:1.4;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:1.4rem}
 .label .n{color:var(--accent-text)}
 .mono{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums}
 .note{font-family:var(--mono);font-size:12px;line-height:1.6;color:var(--dim);margin-top:1.1rem;max-width:70ch}
@@ -150,9 +150,9 @@ nav.scrolled{border-bottom-color:var(--line)}
 .thin-row p{font-size:15px;max-width:60ch}
 
 .split{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);background:#fff}
-.split .side{padding:1.8rem}
+.split .side{padding:0 0 0 1.6rem;padding:1.8rem}
 .split .side + .side{border-left:1px solid var(--line)}
-.split h4{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem}
+.split h3{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem}
 .split .path{font-family:var(--mono);font-size:13px;color:var(--muted);margin-bottom:1.2rem}
 .status{font-family:var(--mono);font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
 .split .side + .side .status{color:var(--accent-text)}
@@ -306,11 +306,12 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 /* evidence rows: a figure, what happened, and where the figure came from */
 .evid{border-top:1px solid var(--line)}
 .evid .e{display:grid;grid-template-columns:158px 1fr;gap:1.7rem;padding:1.5rem 0;border-bottom:1px solid var(--line-soft);align-items:baseline}
-.evid .fig{font-family:var(--mono);font-size:19px;line-height:1.2;color:var(--accent-text)}
+.evid .fig{font-family:var(--mono);font-size:19px;line-height:1.35;color:var(--accent-text)}
 .evid .t{font-size:17px;color:var(--ink);display:block;font-weight:500}
 .evid .d{font-size:15px;color:var(--muted);display:block;margin-top:.3rem;max-width:74ch}
 .evid .src{font-family:var(--mono);font-size:12px;line-height:1.6;color:var(--dim);display:block;margin-top:.55rem}
 .evid .src a{color:var(--muted);border-bottom:1px solid var(--line)}
+.sources .cap{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:.9rem}
 .sources{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1.5rem}
 .sources ol{margin:0;padding-left:1.4rem;font-family:var(--mono);font-size:12px;line-height:1.95;color:var(--dim);max-width:96ch}
 .sources a{color:var(--muted)}

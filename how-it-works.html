@@ -50,12 +50,12 @@ How it works: Humsana
   <div class="head"><h2>Authorized against attempted.</h2></div>
   <div class="match">
     <div class="side">
-      <h4>Authorized</h4>
+      <h3>Authorized</h3>
       <dl><dt>action</dt><dd>payments.release</dd><dt>account</dt><dd>GB00SUPPLIER00004821</dd><dt>amount</dt><dd>&pound;1,800</dd></dl>
     </div>
     <div class="mid"><span>Does not match</span></div>
     <div class="side">
-      <h4>Attempted</h4>
+      <h3>Attempted</h3>
       <dl><dt>action</dt><dd>payments.release</dd><dt>account</dt><dd class="changed">GB00SUPPLIER00009137</dd><dt>amount</dt><dd>&pound;1,800</dd></dl>
     </div>
   </div>
@@ -144,13 +144,13 @@ payment API: not called</div></details>
   <div class="head"><h2>Where the boundary sits.</h2></div>
   <div class="split">
     <div class="side">
-      <h4>Who authenticates the approving human</h4>
+      <h3>Who authenticates the approving human</h3>
       <div class="path">the principal's identity system</div>
       <div class="status">not Humsana</div>
       <p>Humsana verifies the authenticated identity or assertion the customer supplies, records who was authenticated and by which method, and binds the confirmation to the action. Authentication itself belongs to the principal's identity system. A production integration accepts that system's identity, assertion or signature; the sandbox uses a reference confirmer and labels it as one.</p>
     </div>
     <div class="side">
-      <h4>Who owns the executor</h4>
+      <h3>Who owns the executor</h3>
       <div class="path">the integrating party</div>
       <div class="status">enforced at the seam</div>
       <p>Humsana enforces at the execution seam controlled by the integrating party. We cannot enforce an executor we do not control. The reference executor exists to demonstrate the seam and to be replaced by yours.</p>
