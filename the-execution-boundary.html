@@ -107,6 +107,7 @@
     <button role="tab" id="cl-1" aria-controls="clp-1" aria-selected="false" tabindex="-1">Procurement<span class="who">Company A's agent &rarr; a supplier's ordering system</span></button>
     <button role="tab" id="cl-2" aria-controls="clp-2" aria-selected="false" tabindex="-1">Third-party APIs<span class="who">Agent &rarr; a system the customer does not own</span></button>
     <button role="tab" id="cl-3" aria-controls="clp-3" aria-selected="false" tabindex="-1">Cross-company operations<span class="who">Autonomous workflow &rarr; another organization's action</span></button>
+    <button role="tab" id="cl-5" aria-controls="clp-5" aria-selected="false" tabindex="-1">Machine dispatch<span class="who">A fleet order &rarr; the machine that moves</span></button>
     <button role="tab" id="cl-4" aria-controls="clp-4" aria-selected="false" tabindex="-1">Delegated agents<span class="who">Agent &rarr; agent &rarr; executor</span></button>
   </div>  <div id="clp-0" role="tabpanel" aria-labelledby="cl-0">
     <div class="casepanel">
@@ -140,6 +141,14 @@
       </div>
     </div>
   </div>
+  <div id="clp-5" role="tabpanel" aria-labelledby="cl-5" hidden>
+    <div class="casepanel">
+      <div class="row">
+        <div><h3>Where it acts</h3><p>A fleet manager's order, in front of the machine that executes it.</p></div>
+        <div class="r"><h3>What crosses</h3><p>A route, a speed ceiling, a payload and a time window, published to a machine on a site the operator owns.</p></div>
+      </div>
+    </div>
+  </div>
   <div id="clp-4" role="tabpanel" aria-labelledby="cl-4" hidden>
     <div class="casepanel">
       <div class="row">
@@ -148,6 +157,29 @@
       </div>
     </div>
   </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>The same primitive, a different action schema.</h2>
+  <p style="margin-top:1.4rem">Nothing in the engine is specific to payments. A dispatch command carries the same kind of authority: a machine, a route, a speed ceiling, a payload, a window. The rules are the three the payment case already uses, applied to the fields that are consequential here.</p>
+  <ul class="cmp" style="margin-top:2.6rem">
+    <li><span class="k">authorized</span><span class="v">move pallet P1842 to aisle-4, 1.5 m/s, 400 kg, 14:00-14:10</span></li>
+    <li><span class="k">presented</span><span class="v chg">move pallet P1842 to aisle-7, 2.0 m/s, 400 kg, 14:00-14:10</span></li>
+  </ul>
+  <div class="verdict" style="margin-top:1.6rem"><span class="v-refuse">Drift</span><span class="code">EFFECTUATION_DRIFT</span></div>
+  <ul class="cmp">
+    <li><span class="k">field</span><span class="v">parameters.destination</span></li>
+    <li><span class="k">authorized</span><span class="v">aisle-4</span></li>
+    <li><span class="k">presented</span><span class="v chg">aisle-7</span></li>
+    <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE</span></li>
+  </ul>
+  <ul class="cmp">
+    <li><span class="k">field</span><span class="v">parameters.speed_cap_mps</span></li>
+    <li><span class="k">authorized</span><span class="v">1.5</span></li>
+    <li><span class="k">presented</span><span class="v chg">2.0</span></li>
+    <li><span class="k">rule</span><span class="v">MAY_NOT_INCREASE</span></li>
+  </ul>
+  <p class="note">The attempt spent nothing: the command as authorized still executed once afterwards, and then was spent. Every value above is the service's own, taken from a run of the same service on 27 September 2026 with the engine unchanged and a new action schema declared by the caller. The public demo runs the payout action class. <a href="how-it-works.html">How the check runs</a>.</p>
 </div></section>
 
 <section><div class="wrap">
