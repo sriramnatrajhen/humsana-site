@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How it works. Humsana</title>
-<meta name="description" content="Claim, establish, confirm, bind, enforce. What the boundary refuses to infer.">
+How it works: Humsana
+<meta name="description" content="From a granted authority to a refused action. The exact action is bound, signed, presented and checked.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,78 +13,109 @@
   <a class="brand" href="index.html"><img src="logo.png" alt="Humsana"></a>
   <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
   <div class="nav-links" id="nav">
-    <a href="swan.html">Swan</a>
-    <a class="nav-cta" href="sandbox.html">See it work</a>
+    <a href="index.html">Home</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="use-cases.html">Use cases</a>
+    <a href="developers.html">Developers</a>
+    <a class="nav-cta" href="https://api.humsana.com/sandbox/">Sandbox</a>
   </div>
 </div></nav>
 
 <header class="hero"><div class="wrap">
-  <span class="label"><span class="n">01</span>Mechanism</span>
-  <h1>From authority to action.</h1>
-  <p class="lead" style="margin-top:1.4rem">What the caller presents, what the boundary establishes, and what it refuses to infer.</p>
+  <div class="label">The mechanism</div>
+  <h1 style="max-width:20ch">From authority to execution.</h1>
+  <p class="lead" style="max-width:62ch">One action, followed the whole way. The payout below is the same action at every step.</p>
 </div></header>
 
-<section><div class="wrap">
-  <div class="rows">
-    <div class="row"><div class="rn">01</div><div>
-      <h3>The request</h3>
-      <p>An agent presents a claim, not a proof: who it acts for, the action as structured fields, and the authority it says it holds. A presented delegation is recorded as unverified today.</p>
-      <p>The consequence class it declares is recorded. A declaration can never lower what that class requires.</p>
-    </div></div>
-    <div class="row"><div class="rn">02</div><div>
-      <h3>Evidence</h3>
-      <p>Five states, never blended: measured, verified, reported, unverified, unknown. Measured outranks reported, which outranks silence.</p>
-      <p>A claim can make a decision stricter. It can never make one more permissive.</p>
-    </div></div>
-    <div class="row"><div class="rn">03</div><div>
-      <h3>Consequence</h3>
-      <p>The action class sets the floor: how much evidence it needs, and whether a person must confirm.</p>
-      <p>A read or a draft stays cheap. Irreversible actions floor at a person by construction, not by a model's confidence.</p>
-    </div></div>
-    <div class="row"><div class="rn">04</div><div>
-      <h3>Confirmation</h3>
-      <p>The approver sees the fields that will be bound and approves that instruction as it stands. The approval is single use, and it expires.</p>
-      <p>Humsana does not authenticate the approver. That belongs to your identity system.</p>
-    </div></div>
-    <div class="row"><div class="rn">05</div><div>
-      <h3>The grant</h3>
-      <p>Every bound field is named with its digest, so a changed byte is a changed field. The bound set may shrink. It may not grow.</p>
-      <p>A refusal carries the field, both values and the rule as a structure, not as a sentence.</p>
-    </div></div>
-    <div class="row"><div class="rn">06</div><div>
-      <h3>Execution</h3>
-      <p>The executor presents the action and its grant immediately before the send, the payment or the deletion. A field that moved stops it, and the grant is not consumed.</p>
-      <p>A second presentation is refused, so a retry cannot release twice. The rail is yours. Making it require a grant is the integration.</p>
-    </div></div>
-    <div class="row"><div class="rn">07</div><div>
-      <h3>The provider</h3>
-      <p>The deployment ships deterministic and runs that way. Where a model is enabled it can only ask for a stricter outcome, and nothing it returns can hold a decision.</p>
-      <p>The boundary waits for a provider only to its own deadline, and records a timeout by name.</p>
-    </div></div>
+<section id="authority"><div class="wrap step-grid">
+  <div class="step-copy">
+    <div class="label">01 / Authority</div>
+    <h2>The principal grants authority.</h2>
+    <p>A person or a company decides what an agent may do on its behalf.</p><p style="margin-top:.9rem">Humsana records that grant. It does not create it, widen it or renew it.</p><p style="margin-top:.9rem">From this point the question is not who the agent is. It is whether this action is inside the grant.</p>
   </div>
+  <aside class="hero-panel"><div class="refusal"><div class="rf-head">Grant</div><ul class="rf-cmp" style="padding-top:1rem"><li><span>Principal</span><span class="v">northwind:finance</span></li><li><span>Agent</span><span class="v">procurement-agent-3</span></li><li><span>Authority</span><span class="v">granted by the principal</span></li><li><span>Recorded by</span><span class="v">Humsana</span></li></ul></div></aside>
+</div></section><section id="delegation"><div class="wrap step-grid">
+  <div class="step-copy">
+    <div class="label">02 / Delegation</div>
+    <h2>What the agent may do, and within what limits.</h2>
+    <p>The grant names the action class, the limits and the period it is valid for.</p><p style="margin-top:.9rem">A limit can be a maximum amount, a route, a destination, or a condition that has to hold when the action runs.</p><p style="margin-top:.9rem">A grant is single use. Spending it consumes it.</p>
+  </div>
+  <aside class="hero-panel"><div class="refusal"><div class="rf-head">Delegation</div><ul class="rf-cmp" style="padding-top:1rem"><li><span>Action class</span><span class="v">payments.release</span></li><li><span>Limit</span><span class="v">&pound;10,000 per action</span></li><li><span>Valid until</span><span class="v">2026-09-27T14:00Z</span></li><li><span>Use</span><span class="v">once</span></li></ul></div></aside>
+</div></section><section id="action"><div class="wrap step-grid">
+  <div class="step-copy">
+    <div class="label">03 / Action</div>
+    <h2>The exact action, not the idea of the action.</h2>
+    <p>An action is a set of values: what is being done, to whom, for how much, by when, and under what conditions.</p><p style="margin-top:.9rem">Canonicalised, that set has one digest. The digest is what the approval signs and what the executor is checked against.</p><p style="margin-top:.9rem">Change one value and the digest changes.</p>
+  </div>
+  <aside class="hero-panel"><div class="refusal"><div class="rf-head">Action</div><ul class="rf-cmp" style="padding-top:1rem"><li><span>Action</span><span class="v">payments.release</span></li><li><span>Payee</span><span class="v">Supplier X</span></li><li><span>Account</span><span class="v">4821</span></li><li><span>Amount</span><span class="v">&pound;1,800</span></li><li><span>Expires</span><span class="v">14:00</span></li></ul></div></aside>
+</div></section><section id="decision"><div class="wrap step-grid">
+  <div class="step-copy">
+    <div class="label">04 / Decision</div>
+    <h2>The consequence decides whether a person has to approve.</h2>
+    <p>Low-consequence actions can proceed on the grant alone. Higher-consequence actions require a human confirmation, and the confirmation signs the action itself rather than a flag on a request.</p><p style="margin-top:.9rem">The approving human is authenticated by the principal's identity system. Humsana verifies what it is handed and records who approved, by what method, and over which exact action.</p><p style="margin-top:.9rem">The decision is one of six: ALLOW, ALLOW WITH LIMITS, VERIFY, HUMAN CONFIRM, HOLD, DENY.</p>
+  </div>
+  <aside class="hero-panel"><div class="refusal"><div class="rf-head">Decision</div><ul class="rf-cmp" style="padding-top:1rem"><li><span>Decision</span><span class="v chg">HUMAN_CONFIRM</span></li><li><span>Requires</span><span class="v">authenticated approval</span></li><li><span>Binds to</span><span class="v">the action digest</span></li><li><span>Approver</span><span class="v">authenticated by the principal</span></li></ul></div></aside>
+</div></section><section id="execution"><div class="wrap step-grid">
+  <div class="step-copy">
+    <div class="label">05 / Execution</div>
+    <h2>The executor checks immediately before the action runs.</h2>
+    <p>The executor presents the action to Humsana at the moment it is about to act.</p><p style="margin-top:.9rem">Humsana compares the presented action against the authorized one and answers: ALLOWED on an exact match, ALLOWED WITH LIMITS on legitimate bounded variance, REFUSED on a material change.</p><p style="margin-top:.9rem">A refusal does not consume the authorization. The approved action can still be executed as approved.</p>
+  </div>
+  <aside class="hero-panel"><div class="refusal"><div class="rf-head">APPROVED</div><ul class="rf-cmp" style="padding-top:1rem"><li><span>Payee</span><span class="v">Supplier X</span></li><li><span>Account</span><span class="v">4821</span></li><li><span>Amount</span><span class="v">&pound;1,800</span></li></ul></div></aside>
+</div></section><div class="wrap" style="margin-bottom:4rem">
+  <div class="match">
+    <div class="side"><div class="label">AUTHORIZED</div>
+      <ul class="rf-cmp"><li><span>account</span><span class="v">GB00SUPPLIERA0001</span></li><li><span>amount</span><span class="v">&pound;50,000</span></li></ul></div>
+    <div class="mid">DOES NOT MATCH</div>
+    <div class="side"><div class="label">ATTEMPTED</div>
+      <ul class="rf-cmp"><li><span>account</span><span class="v chg">GB00REDIRECT0000099</span></li><li><span>amount</span><span class="v">&pound;50,000</span></li></ul></div>
+  </div>
+</div>
+<section id="evidence"><div class="wrap step-grid">
+  <div class="step-copy">
+    <div class="label">06 / Evidence</div>
+    <h2>One record, from grant to execution.</h2>
+    <p>The record keeps the states apart: what was claimed, what was established, what was authorized, what was presented, what executed, what was refused, and why.</p><p style="margin-top:.9rem">It carries the policy version, the action digest, the approving identity and the timestamps.</p><p style="margin-top:.9rem">A refusal stays in the record. A claim never becomes evidence because it was repeated.</p>
+  </div>
+  <aside class="hero-panel"><div class="refusal"><div class="rf-head">Record</div><ul class="rf-cmp" style="padding-top:1rem"><li><span>Claimed</span><span class="v">the agent's own account</span></li><li><span>Established</span><span class="v">from evidence</span></li><li><span>Authorized</span><span class="v">what was approved</span></li><li><span>Presented</span><span class="v">what arrived</span></li><li><span>Decision</span><span class="v chg">REFUSED</span></li><li><span>Rule</span><span class="v">MAY_NOT_CHANGE</span></li></ul></div></aside>
 </div></section>
 
-<section><div class="wrap">
+<section id="refusals"><div class="wrap">
   <div class="head">
-    <span class="label"><span class="n">02</span>The calls</span>
-    <h2>Four calls, and a refusal you can read.</h2>
+    <div class="label">Refusals</div>
+    <h2>What a refusal says.</h2>
   </div>
-  <div class="code">POST /v1/authorize/verify            decide whether this exact action may proceed
-POST /v1/authorize/confirm/request   ask the authenticated approver
-POST /v1/authorize/confirm           record that approval against that instruction
-POST /v1/authorize/effectuate        release, only if the arriving action matches the grant</div>
-  <div class="cta-row" style="margin-top:2.4rem">
-    <a class="btn btn-primary arrow-after" href="sandbox.html">Run it against a real service</a>
-    <a class="btn btn-ghost" href="developers.html">Integrate it</a>
-  </div>
+  <p>Every refusal carries a code. The code names which check failed and, where a field was involved, which field carried the difference.</p>
+  <table class="tbl" style="margin-top:2.6rem">
+    <thead><tr><th>Code</th><th>What failed</th></tr></thead>
+    <tbody>
+      <tr><td>EFFECTUATION_DRIFT</td><td>The presented action differs from the authorized action in at least one material field. The refusal carries the field, the authorized value, the presented value and the rule that was applied.</td></tr>
+      <tr><td>MAY_NOT_CHANGE</td><td>The field is fixed by the authorization and cannot be altered at execution.</td></tr>
+      <tr><td>MAY_NOT_INCREASE</td><td>The field may be reduced but not raised beyond the authorized value.</td></tr>
+      <tr><td>MAY_ONLY_SHRINK</td><td>The field may only reduce the reach of the action that was authorized.</td></tr>
+      <tr><td>BINDING_MISMATCH</td><td>The binding digest presented at execution is not the digest that was approved.</td></tr>
+      <tr><td>RECEIPT_NOT_FOUND</td><td>There is no authorization with that identifier.</td></tr>
+      <tr><td>RECEIPT_EXPIRED</td><td>The authorization was valid when it was issued and is not valid now.</td></tr>
+      <tr><td>GRANT_ALREADY_USED</td><td>The authorization was spent. A second presentation does not spend it again.</td></tr>
+      <tr><td>GRANT_NOT_FOUND</td><td>The grant behind the action cannot be found.</td></tr>
+      <tr><td>GRANT_DOES_NOT_COVER_THIS_ACTION</td><td>The grant exists and does not cover the action that was presented.</td></tr>
+      <tr><td>AUTHORIZATION_NOT_GRANTED</td><td>The stored decision is not one that grants anything. A match proves the action is the one that was asked about, never that it was permitted.</td></tr>
+      <tr><td>CONFIRMATION_NOT_OBTAINED</td><td>The action required a human confirmation and no valid confirmation is bound to it.</td></tr>
+      <tr><td>ACTION_OUTSIDE_SCOPE</td><td>The action class is outside the scope the principal granted.</td></tr>
+      <tr><td>CONDITION_NOT_EVALUABLE</td><td>A condition in the authorization cannot be evaluated deterministically, so it is not assumed to hold.</td></tr>
+      <tr><td>CLOCK_NOT_SUPPLIED</td><td>Deciding needs a time and none was supplied.</td></tr>
+      <tr><td>PROVIDER_DEADLINE_EXCEEDED</td><td>An external check did not answer inside the boundary's deadline, so the boundary did not treat silence as consent.</td></tr>
+      <tr><td>BOUNDARY_STORE_UNAVAILABLE</td><td>The boundary could not read its own store, so it could not answer.</td></tr>
+    </tbody>
+  </table>
+  <p class="note">Codes are the names the service returns, read from the implementation.</p>
 </div></section>
-
 <footer><div class="wrap foot-in">
   <div class="brand"><img src="logo.png" alt="Humsana"></div>
   <div class="foot-links">
     <a href="swan.html">Swan</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a>
   </div>
-  <div class="foot-copy">Humsana. Authorization for autonomous actors.</div>
+  <div class="foot-copy">Humsana. Authority travels with the action.</div>
 </div></footer>
 <script src="site.js"></script>
 </body>

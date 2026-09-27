@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sandbox. Humsana</title>
-<meta name="description" content="One payout, one approval, one refusal, on the live authorization service.">
+Sandbox: Humsana
+<meta name="description" content="One action, one authorization, one refusal. Synthetic data, no login, no persistent state.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,58 +13,55 @@
   <a class="brand" href="index.html"><img src="logo.png" alt="Humsana"></a>
   <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
   <div class="nav-links" id="nav">
-    <a href="swan.html">Swan</a>
-    <a class="nav-cta" href="sandbox.html">See it work</a>
+    <a href="index.html">Home</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="use-cases.html">Use cases</a>
+    <a href="developers.html">Developers</a>
+    <a class="nav-cta" href="https://api.humsana.com/sandbox/">Sandbox</a>
   </div>
 </div></nav>
 
 <header class="hero"><div class="wrap">
-  <span class="label"><span class="n">01</span>Sandbox</span>
-  <h1>One payout, one approval, one refusal.</h1>
-  <p class="lead" style="margin-top:1.4rem">A live deployment. Generated data, no real money, and the authorization service is the real one.</p>
+  <div class="label">Sandbox</div>
+  <h1 style="max-width:22ch">Change one field. Watch it refuse.</h1>
+  <p class="lead" style="max-width:62ch">One approved payment. You change the destination account, and the executor asks Humsana whether the action is still the one that was approved.</p>
+  <div class="cta-row" style="margin-top:2.2rem"><a class="btn btn-primary" href="https://api.humsana.com/sandbox/">Open the sandbox</a><a class="btn btn-ghost" href="how-it-works.html">How it works</a></div>
 </div></header>
 
-<section><div class="wrap">
-  <div class="rows">
-    <div class="row"><div class="rn">01</div><div><h3>The hold</h3>
-      <p>A payout is held because the beneficiary name does not match the account. That check belongs to the paying bank, and it already ran.</p></div></div>
-    <div class="row"><div class="rn">02</div><div><h3>The repair</h3>
-      <p>An agent reads the signed mandate and proposes a new destination account. Live mode is a real model call, and the claim is recorded as asserted.</p></div></div>
-    <div class="row"><div class="rn">03</div><div><h3>The approval</h3>
-      <p>A person approves the repaired instruction as it stands. The approval is single use, and it expires.</p></div></div>
-    <div class="row"><div class="rn">04</div><div><h3>The release</h3>
-      <p>The screen arrives holding the account on file, so the first press is a refusal. From there you can send the queue's copy, the version the agent read after the mandate was re-issued, an instruction whose name check now fails, an expired approval, or the instruction that was actually approved.</p></div></div>
-    <div class="row"><div class="rn">05</div><div><h3>The record</h3>
-      <p>Claimed, established, authorized, refused and executed, with the digest the grant was bound to. Downloadable.</p></div></div>
+<section><div class="wrap step-grid">
+  <div class="step-copy">
+    <div class="label">What happens</div>
+    <h2>Four fields, four outcomes.</h2>
+    <p>The approved action is a payment: &pound;1,800 to Supplier X, account 4821, valid until 14:00.</p>
+    <p style="margin-top:.9rem">Change the amount, the beneficiary, the account or the expiry. The page presents the action to the live service and shows the answer it returns.</p>
+    <p style="margin-top:.9rem">Restore the approved value and the same action is allowed, once.</p>
   </div>
-  <p class="note">One window, with the real exchange between the agent, the executor and the boundary underneath it, timestamped.</p>
+  <aside class="hero-panel"><div class="refusal">
+    <div class="rf-head">Approved</div>
+    <div class="rf-block"><p class="who">Pay &pound;1,800 to Supplier X</p>
+      <ul class="rf-kv"><li><span>Account</span><span class="v">4821</span></li><li><span>Valid until</span><span class="v">14:00</span></li></ul></div>
+    <div class="rf-head">Presented</div>
+    <div class="rf-block"><p class="who">Pay &pound;1,800 to Supplier X</p>
+      <ul class="rf-kv"><li><span>Account</span><span class="v chg rf-changed">9137</span></li></ul></div>
+    <div class="rf-verdict"><span class="k">Decision</span>REFUSED</div>
+    <p class="rf-reason">Destination account changed</p>
+    <ul class="rf-cmp"><li><span class="k">Approved:</span><span class="v">4821</span></li><li><span class="k">Presented:</span><span class="v chg">9137</span></li><li><span class="k">Rule:</span><span class="v">MAY_NOT_CHANGE</span></li></ul>
+    <div class="rf-foot">Payment API: NOT CALLED</div>
+  </div></aside>
 </div></section>
 
 <section><div class="wrap">
-  <div class="head">
-    <span class="label"><span class="n">02</span>The refusal</span>
-    <h2>What it names.</h2>
-  </div>
-  <div class="code">refused:  GRANT_DOES_NOT_COVER_THIS_ACTION
-field:    payee_account   authorized ...   arrived ...   rule MAY_NOT_CHANGE
-consumed: false</div>
-  <p class="note">The field, both values and the rule, as a structure. Nothing is consumed, so the approved instruction can still be sent.</p>
-  <div class="deflist" style="margin-top:2.6rem">
-    <div class="item"><h4>No approval</h4><p>Refused before the rail. No grant found.</p></div>
-    <div class="item"><h4>Past the window</h4><p>Refused by the boundary's own expiry rule.</p></div>
-    <div class="item"><h4>Replayed</h4><p>Refused. A grant is spent once.</p></div>
-    <div class="item"><h4>Straight to the rail</h4><p>Refused for want of a grant. The rail is yours, and requiring one is the integration.</p></div>
-  </div>
+  <div class="head"><h2>What the sandbox is.</h2></div>
+  <p>No login. No persistent state. Synthetic data only, and no real money moves.</p><p style="margin-top:.9rem">The refusal you see is the service's own answer, not a scripted screen.</p><p style="margin-top:.9rem">Where a confirmation is shown, the sandbox uses a reference confirmer and labels it. A production integration accepts the principal's authenticated identity, assertion or signature.</p>
+  
+  <p class="note">Reference confirmer, demo only.</p>
 </div></section>
-
-
-
 <footer><div class="wrap foot-in">
   <div class="brand"><img src="logo.png" alt="Humsana"></div>
   <div class="foot-links">
     <a href="swan.html">Swan</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a>
   </div>
-  <div class="foot-copy">Humsana. Authorization for autonomous actors.</div>
+  <div class="foot-copy">Humsana. Authority travels with the action.</div>
 </div></footer>
 <script src="site.js"></script>
 </body>

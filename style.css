@@ -242,3 +242,46 @@ footer{border-top:1px solid var(--line);padding:2.6rem 0}
 
 /* components still used by the Swan pages, carried over from the previous stylesheet */
 .accent{color:var(--accent)}
+
+/* the refusal block, the flow, the model row, tables */
+.flowrow{display:flex;align-items:stretch;border:1px solid var(--line);background:#fff;margin-bottom:1.6rem}
+.flowrow .fi{flex:1;padding:1.1rem 1rem;border-left:1px solid var(--line);font-family:var(--mono);font-size:13px;color:var(--muted)}
+.flowrow .fi:first-child{border-left:0}
+.flowrow .fi.hs{background:var(--accent-pale);color:var(--accent);font-weight:500}
+.flowrow .fi small{display:block;font-family:var(--sans);font-size:13.5px;line-height:1.4;color:var(--muted);margin-top:.5rem}
+.flowrow .fi.hs small{color:var(--ink)}
+.modelrow{display:flex;flex-wrap:wrap;gap:.55rem;align-items:center;font-family:var(--mono);font-size:13px}
+.modelrow a{color:var(--ink);border-bottom:1px solid var(--line);padding-bottom:.15rem}
+.modelrow a:hover{color:var(--accent);border-color:var(--accent);text-decoration:none}
+.modelrow .arrow{color:var(--dim)}
+table.tbl{width:100%;border-collapse:collapse}
+table.tbl th,table.tbl td{text-align:left;padding:.85rem 1.2rem .85rem 0;border-bottom:1px solid var(--line-soft);vertical-align:top}
+table.tbl th{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:400}
+table.tbl td{color:var(--muted);font-size:16px}
+table.tbl td:first-child{font-family:var(--mono);font-size:13px;color:var(--ink);white-space:nowrap;padding-right:2.5rem}
+table.tbl td.rule{color:var(--accent)}
+.refusal{border:1px solid var(--line);background:#fff}
+.rf-head{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);padding:.95rem 1.2rem .35rem}
+.rf-block{padding:0 1.2rem 1.15rem;border-bottom:1px solid var(--line-soft)}
+.rf-block .who{color:var(--ink);font-size:17px;margin-bottom:.45rem}
+.rf-kv{list-style:none;font-family:var(--mono);font-size:13px;color:var(--dim)}
+.rf-kv li{display:flex;gap:.6rem}
+.rf-kv .v{color:var(--ink)}
+.rf-kv .v.chg{color:var(--accent);background:var(--accent-pale);padding:0 .3rem}
+.rf-verdict{padding:1.5rem 1.2rem .3rem;font-size:clamp(26px,3.2vw,34px);font-weight:500;letter-spacing:-0.01em;color:var(--accent)}
+.rf-verdict .k{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:400;margin-bottom:.5rem}
+.rf-reason{padding:0 1.2rem .85rem;color:var(--ink);font-size:16px}
+.rf-cmp{list-style:none;padding:0 1.2rem 1.2rem;font-family:var(--mono);font-size:13px}
+.rf-cmp li{display:grid;grid-template-columns:auto 1fr;gap:.9rem;padding:.15rem 0}
+.rf-cmp .k{color:var(--dim)}
+.rf-cmp .v{color:var(--ink)}
+.rf-cmp .v.chg{color:var(--accent);background:var(--accent-pale);padding:0 .3rem}
+.rf-foot{border-top:1px solid var(--line);padding:.9rem 1.2rem;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.hl-once{animation:hl 400ms ease-out 1}
+@keyframes hl{from{background:var(--accent-pale)}to{background:transparent}}
+@media(prefers-reduced-motion:reduce){.hl-once{animation:none}}
+@media(max-width:900px){
+  .flowrow{flex-direction:column}
+  .flowrow .fi{border-left:0;border-top:1px solid var(--line)}
+  .flowrow .fi:first-child{border-top:0}
+}

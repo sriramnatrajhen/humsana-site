@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+Use cases: Humsana
+<meta name="description" content="Payment releases, beneficiary changes, batch sends, regulated communication and destructive actions.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav><div class="wrap nav-in">
+  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana"></a>
+  <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
+  <div class="nav-links" id="nav">
+    <a href="index.html">Home</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="use-cases.html">Use cases</a>
+    <a href="developers.html">Developers</a>
+    <a class="nav-cta" href="https://api.humsana.com/sandbox/">Sandbox</a>
+  </div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div class="label">Use cases</div>
+  <h1 style="max-width:22ch">Actions that are hard to undo.</h1>
+  <p class="lead" style="max-width:62ch">If an action can be reversed with a second action, a log is usually enough. These are the cases where it cannot.</p>
+</div></header>
+
+<section><div class="wrap list-rows">
+  <div class="row"><div class="num">01</div><div><h3>Payment releases</h3><p>An exception sits in a queue after approval. The executor releases it later, sometimes the next morning. The account in the queue row is not the account that was approved. The release is refused, and the queue row keeps the reason.</p></div></div>
+  <div class="row"><div class="num">02</div><div><h3>Beneficiary and vendor changes</h3><p>A payee account is amended after approval. The instruction that reaches the executor is not the instruction the approver signed. The changed field is named in the refusal.</p></div></div>
+  <div class="row"><div class="num">03</div><div><h3>Scheduled and batch actions</h3><p>A batch is approved and sent later. A recipient is added, or an amount is raised, between approval and send. The batch no longer matches the approved one.</p></div></div>
+  <div class="row"><div class="num">04</div><div><h3>Regulated communication</h3><p>A notice, a demand or a filing. The approved words and the recipient set both matter, and either can change after approval.</p></div></div>
+  <div class="row"><div class="num">05</div><div><h3>Destructive actions</h3><p>Deleting records, revoking access, closing accounts, destroying keys. There is no undo, so the check has to happen before the action rather than after it.</p></div></div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head"><h2>The action changes. The question does not.</h2></div>
+  <p>Is this the action the principal authorized?</p>
+  <p style="margin-top:.9rem">A grant answers it. A record proves the answer.</p>
+  <p class="callout" style="margin-top:2.8rem">No grant. No execution.</p>
+</div></section>
+<footer><div class="wrap foot-in">
+  <div class="brand"><img src="logo.png" alt="Humsana"></div>
+  <div class="foot-links">
+    <a href="swan.html">Swan</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a>
+  </div>
+  <div class="foot-copy">Humsana. Authority travels with the action.</div>
+</div></footer>
+<script src="site.js"></script>
+</body>
+</html>

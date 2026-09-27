@@ -24,3 +24,21 @@
     });
   });
 }());
+
+/* The refusal block: one 400ms highlight of the changed field, once, when it enters the viewport.
+   Static when the visitor prefers reduced motion. */
+(function () {
+  var changed = document.querySelector('.rf-changed');
+  if (!changed || !window.matchMedia) { return; }
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { return; }
+  if (!('IntersectionObserver' in window)) { return; }
+  var once = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('hl-once');
+        once.disconnect();
+      }
+    });
+  }, { threshold: 0.6 });
+  once.observe(changed);
+}());
