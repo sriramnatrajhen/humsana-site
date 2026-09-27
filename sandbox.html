@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sandbox: Humsana</title>
+Sandbox: Humsana
 <meta name="description" content="One action, one authorization, one refusal. Synthetic data, no login, no persistent state.">
 <link rel="stylesheet" href="style.css">
-</head>
-<body>
+</head><body>
 
 <nav><div class="wrap nav-in">
   <a class="brand" href="index.html"><img src="logo.png" alt="Humsana"></a>
@@ -22,40 +21,41 @@
 </div></nav>
 
 <header class="hero"><div class="wrap">
-  <div class="label">Sandbox</div>
-  <h1 style="max-width:22ch">Change one field. Watch it refuse.</h1>
-  <p class="lead" style="max-width:62ch">One approved payment. You change the destination account, and the executor asks Humsana whether the action is still the one that was approved.</p>
-  <div class="cta-row" style="margin-top:2.2rem"><a class="btn btn-primary" href="https://api.humsana.com/sandbox/">Open the sandbox</a><a class="btn btn-ghost" href="how-it-works.html">How it works</a></div>
+  <span class="label"><span class="n">Sandbox</span> </span>
+  <h1 style="max-width:22ch">Change one value. Watch it refuse.</h1>
+  <p class="lead" style="max-width:62ch">One approved payout release. You change the destination account, and the executor asks Humsana whether the action is still the one that was approved.</p>
+  <div class="cta-row" style="margin-top:2.2rem"><a class="btn btn-primary arrow-after" href="https://api.humsana.com/sandbox/">Open the sandbox</a><a class="btn btn-ghost" href="how-it-works.html">How it works</a></div>
 </div></header>
 
 <section><div class="wrap step-grid">
   <div class="step-copy">
     <div class="label">What happens</div>
-    <h2>Four fields, four outcomes.</h2>
-    <p>The approved action is a payment: &pound;1,800 to Supplier X, account 4821, valid until 14:00.</p>
+    <h2>Four values, four outcomes.</h2>
+    <p>The approved action is a payout release: &pound;1,800 to Supplier X, account 4821, valid until 14:00.</p>
     <p style="margin-top:.9rem">Change the amount, the beneficiary, the account or the expiry. The page presents the action to the live service and shows the answer it returns.</p>
     <p style="margin-top:.9rem">Restore the approved value and the same action is allowed, once.</p>
-    <p style="margin-top:.9rem">The sandbox demonstrates one action class. The calls are the same for every class the principal registers.</p>
+    <p style="margin-top:.9rem">The sandbox demonstrates one action class. The calls are identical for every class the principal registers.</p>
   </div>
   <aside class="hero-panel"><div class="refusal">
     <div class="rf-head">Approved</div>
     <div class="rf-block"><p class="who">Pay &pound;1,800 to Supplier X</p>
-      <ul class="rf-kv"><li><span>Account</span><span class="v">4821</span></li><li><span>Valid until</span><span class="v">14:00</span></li></ul></div>
+      <ul class="rf-kv"><li><span>Account</span><span class="v">GB00SUPPLIER00004821</span></li><li><span>Valid until</span><span class="v">14:00</span></li></ul></div>
     <div class="rf-head">Presented</div>
     <div class="rf-block"><p class="who">Pay &pound;1,800 to Supplier X</p>
-      <ul class="rf-kv"><li><span>Account</span><span class="v chg rf-changed">9137</span></li></ul></div>
+      <ul class="rf-kv"><li><span>Account</span><span class="v chg rf-changed">GB00SUPPLIER00009137</span></li></ul></div>
     <div class="rf-verdict"><span class="k">Decision</span>REFUSED</div>
-    <p class="rf-reason">Destination account changed</p>
-    <ul class="rf-cmp"><li><span class="k">Approved:</span><span class="v">4821</span></li><li><span class="k">Presented:</span><span class="v chg">9137</span></li><li><span class="k">Rule:</span><span class="v">MAY_NOT_CHANGE</span></li></ul>
-    <div class="rf-foot">Payment API: NOT CALLED</div>
+    <p class="rf-reason">The destination account changed</p>
+    <ul class="rf-cmp"><li><span class="k">Approved:</span><span class="v">GB00SUPPLIER00004821</span></li><li><span class="k">Presented:</span><span class="v chg">GB00SUPPLIER00009137</span></li><li><span class="k">Rule:</span><span class="v">MAY_NOT_CHANGE</span></li></ul>
+    <div class="rf-foot">Payment API: not called</div>
   </div></aside>
 </div></section>
 
 <section><div class="wrap">
-<div class="head"><h2>What the sandbox is.</h2></div>
-<p>No login. No persistent state. Synthetic data only, and no real money moves.</p><p style="margin-top:.9rem">The refusal you see is the service's own answer, not a scripted screen.</p><p style="margin-top:.9rem">Where a confirmation is shown, the sandbox uses a reference confirmer and labels it. A production integration accepts the principal's authenticated identity, assertion or signature.</p>
+<div class="head"><span class="label"></span><h2>What the sandbox is.</h2></div>
+<p>No login. No persistent state. Synthetic data only, and no money moves.</p><p style="margin-top:.9rem">The refusal you see is the service's own answer, not a scripted screen.</p><p style="margin-top:.9rem">Where a confirmation is shown, the sandbox uses a reference confirmer and labels it. A production integration accepts the principal's authenticated identity, assertion or signature.</p>
   <p class="note">Reference confirmer, demo only.</p>
 </div></section>
+
 <footer><div class="wrap foot-in">
   <div class="brand"><img src="logo.png" alt="Humsana"></div>
   <div class="foot-links">
