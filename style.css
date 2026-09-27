@@ -332,14 +332,14 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 
 /* the topology: one action crossing one boundary */
 .scene{display:grid;grid-template-columns:1fr 76px 1fr;align-items:stretch;margin-top:2.6rem}
-.scene .party{padding:1.8rem 1.9rem;border:1px solid var(--line)}
+.scene .party{padding:1.8rem 1.9rem;border:1px solid var(--line);display:flex;flex-direction:column}
 .scene .party.b{background:var(--warm)}
 .scene .party .pname{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink);display:block}
 .scene ol{list-style:none;margin:1.3rem 0 0}
 .scene ol li{position:relative;padding:.55rem 0 .55rem 1.5rem;font-size:16px;color:var(--ink);border-top:1px solid var(--line-soft)}
 .scene ol li:first-child{border-top:0}
 .scene ol li::before{content:"";position:absolute;left:.45rem;top:.95rem;width:.45rem;height:1px;background:var(--dim)}
-.scene .act{display:block;margin-top:1.3rem;padding-top:1.2rem;border-top:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--muted)}
+.scene .act{display:block;margin-top:auto;padding-top:1.2rem;padding-top:1.2rem;border-top:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--muted)}
 .scene .gap{position:relative}
 .scene .gap i{position:absolute;top:50%;left:0;right:0;height:2px;background:var(--ink)}
 .scene .gap span{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--bg);padding:.3rem .1rem;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);writing-mode:vertical-rl}
