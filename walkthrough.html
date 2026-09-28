@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Five steps from your own command to a signed record: Humsana</title>
+<meta name="description" content="Drive an action class of your own through the live service, change one field and read the refusal, download the signed record and check it offline, change one word of it and watch the check fail, then run an executor whose rail runs once.">
+<link rel="stylesheet" href="style.css?v=4">
+</head>
+<body>
+
+<nav><div class="wrap nav-in">
+  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana"></a>
+  <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
+  <div class="nav-links" id="nav">
+    <a href="index.html">Home</a>
+    <a href="the-execution-boundary.html">Execution boundary</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="developers.html">Developers</a>
+    <a class="nav-cta" href="https://api.humsana.com/sandbox/">Sandbox</a>
+  </div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <h1 style="max-width:24ch">Five steps from your own command to a signed record.</h1>
+  <p class="lead" style="max-width:64ch;margin-top:1.9rem">You define an action class of your own and send it to the live service. You change one field and read the refusal, with the field, both values and the rule. You download the signed record for that press and check it offline. You change one word of the record and watch the check fail. You run an executor that asks before it acts, and read the count that says its rail ran once.</p>
+  <p style="margin-top:1.2rem">No account, no key and nothing installed: the client and the verifier are the standard library only.</p>
+  <div class="cta-row" style="margin-top:2.2rem">
+    <a class="btn btn-primary arrow-after" href="https://api.humsana.com/sandbox/">Open the sandbox</a>
+    <a class="btn btn-ghost" href="mailto:ram@humsana.com">Ask for the two files</a>
+  </div>
+  <p class="note">Every command on this page was run on 28 September 2026 against https://api.humsana.com, from one directory holding a copy of the boundary client and the offline verifier and nothing else. Every line of output under a step is that run, copied unedited. Step 1, step 2 and step 5 need the boundary client, which is standard library only. Step 3 and step 4 need the verifier and the two files it checks: the record and the public key, both downloaded from the sandbox. The client and the verifier are handed to an integrator today rather than published for download, so if you want them in your own hands, ask.</p>
+</div></header>
+
+<section><div class="wrap">
+  <div class="label"><span class="n">Step 01</span><span>your own action class, anonymously</span></div>
+  <h2>Drive your action through the live service.</h2>
+  <p style="margin-top:1.4rem">The action class is a name you choose. In the run below it is yourteam.release, with three parameters bound to it: an amount, an account and a reference.</p>
+  <p style="margin-top:.9rem">The client sends one call to POST /v1/authorize/verify and reads the answer back. No key, no account and no signup: the public service accepts anonymous calls, rate limited per caller.</p>
+  <pre class="code" style="margin-top:1.8rem"><span class="c">$ python3 -m clients.swan_boundary --demo --anonymous --action yourteam.release</span>
+================================================================================================
+Testing the authorization boundary with your own action
+  service      https://api.humsana.com
+  your action  yourteam.release
+================================================================================================
+
+1. no key, no account, no signup: this service accepts anonymous calls, rate limited per caller.
+   the action as authorized: {"amount_gbp": 1800, "destination_account": "4821", "reference": "INV-1DFC32"}
+
+2. POST /v1/authorize/verify, for the action as you intended it
+  decision    ALLOW   code -   matched None   consumed None
+  receipt     authz_585GcVURKYRNliWupLho1w   issued 2026-09-28T15:52:15Z
+  bound to    sha256:33c5df764997b88d6227ce09ff03c9d306f3854894a11c98be0c1d4c0dcf0592
+  policy      version 1</pre>
+  <p class="note">Run on 28 September 2026 at 15:52 UTC against https://api.humsana.com. The decision, the receipt id, the binding digest and the policy version in that output are the service's own values, read out of its answer.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="label"><span class="n">Step 02</span><span>one field changed</span></div>
+  <h2>Change one field and read the refusal.</h2>
+  <p style="margin-top:1.4rem">The same run then presents the action with the destination account moved from 4821 to 9137, the way it would arrive if something altered it on the way.</p>
+  <p style="margin-top:.9rem">The answer names the field, both values and the rule it applied. The refusal spends nothing, so the action as authorized still runs afterwards, and a third attempt with the same action is answered as spent.</p>
+  <pre class="code" style="margin-top:1.8rem"><span class="c">$ python3 -m clients.swan_boundary --demo --anonymous --action yourteam.release</span>
+  effectuation {"checked": false, "reason": "NOT_YET_SUBMITTED"}
+   authorized. the executor may now present the action it received.
+
+3. POST /v1/authorize/effectuate with ONE field changed, as it would arrive if something altered it on the way
+   presented: {"amount_gbp": 1800, "destination_account": "9137", "reference": "INV-1DFC32"}
+  decision    HUMAN_CONFIRM   code EFFECTUATION_DRIFT   matched False   consumed False
+  drift       parameters.destination_account: authorized 4821 -> presented 9137   rule MAY_NOT_CHANGE
+  reason      EFFECTUATION_DRIFT: 1 field(s) outside the authorized tuple
+  effectuation {"checked": true, "checked_at": "2026-09-28T15:52:15Z", "matched": false, "decision": "HUMAN_CONFIRM", "drift": [{"field": "parameters.destination_account", "au
+   your executor does not run, because your code asks the service first.
+
+4. POST /v1/authorize/effectuate again, presenting the action as authorized
+  decision    ALLOW   code MATCHED   matched True   consumed True
+  effectuation {"checked": true, "checked_at": "2026-09-28T15:52:15Z", "matched": true, "decision": "ALLOW", "drift": [], "reasons": []}
+   a refusal spent nothing, so the authorized action still ran.
+
+5. POST /v1/authorize/effectuate a third time, with the same action
+  decision    DENY   code RECEIPT_ALREADY_USED   matched False   consumed False
+  reason      RECEIPT_ALREADY_USED: this authorization has been spent
+  effectuation {"checked": true, "checked_at": "2026-09-28T15:52:15Z", "matched": false, "decision": "DENY", "drift": [], "reasons": [{"code": "RECEIPT_ALREADY_USED", "detail"
+   an authorization is spent once.</pre>
+  <p class="note">The same command and the same run as step 1, on 28 September 2026 at 15:52 UTC. A change made after the authorization is refused in the answer, with the service's own code and the field named. The run's own closing lines, after those five answers, name the same two limits this page ends with.</p>
+  <ul class="cmp" style="margin-top:1.6rem">
+    <li><span class="k">the refusal</span><span class="v chg">decision HUMAN_CONFIRM, code EFFECTUATION_DRIFT, matched False, consumed False</span></li>
+    <li><span class="k">the field</span><span class="v chg">parameters.destination_account</span></li>
+    <li><span class="k">authorized, then presented</span><span class="v">4821, then 9137, rule MAY_NOT_CHANGE</span></li>
+    <li><span class="k">the transport</span><span class="v">HTTP 200, carried as a code rather than as an error status</span></li>
+  </ul>
+</div></section>
+
+<section><div class="wrap">
+  <div class="label"><span class="n">Step 03</span><span>the record, and the check</span></div>
+  <h2>Download the record for that press and check it offline.</h2>
+  <p style="margin-top:1.4rem">The sandbox issues a signed record for the action it presented. The file is served beside the page at /sandbox/gregg/record.receipt.json, and the public key beside it at /sandbox/gregg/key.pub.json.</p>
+  <p style="margin-top:.9rem">The record route answers only in a session that has pressed, so the calls before the download carry the cookie the sandbox set, kept in jar.txt by curl. The press below changes the same field as step 2, the account from 4821 to 9137.</p>
+  <pre class="code" style="margin-top:1.8rem">$ curl -s -c jar.txt -o /dev/null -w 'GET  %{url_effective}  %{http_code}\n' https://api.humsana.com/sandbox/gregg/
+GET  https://api.humsana.com/sandbox/gregg/  200
+
+$ curl -s -b jar.txt -c jar.txt -o pressed.html -w 'POST %{url_effective}  %{http_code}\n' -d 'do=execute' -d 'amount_gbp=1800' -d 'beneficiary=Supplier X' -d 'account_four=9137' -d 'expiry=14:00' https://api.humsana.com/sandbox/gregg/
+POST https://api.humsana.com/sandbox/gregg/  200
+
+the two rows the press wrote into the case record on the page it returned:
+  verdict REFUSED code GRANT_DOES_NOT_COVER_THIS_ACTION
+  presented payments.release (amount_gbp=1800, beneficiary=Supplier X, expiry=14:00, payee_account=GB00SUPPLIER00009137, reference=INV-88213); digest sha256:b05f8abf4c1655ca1fadc6e1e1ec47d08afb00a4340be82ea477c9852c9b591c at 2026-09-28T15:53:32Z
+  executed  code GRANT_DOES_NOT_COVER_THIS_ACTION, matched False, consumed False
+  refused   GRANT_DOES_NOT_COVER_THIS_ACTION (this grant covers a different action: parameters.payee_account)
+
+$ curl -s -b jar.txt -o record.receipt.json -w 'GET  %{url_effective}  %{http_code}\n' https://api.humsana.com/sandbox/gregg/record.receipt.json
+GET  https://api.humsana.com/sandbox/gregg/record.receipt.json  200
+$ curl -s -b jar.txt -o key.pub.json -w 'GET  %{url_effective}  %{http_code}\n' https://api.humsana.com/sandbox/gregg/key.pub.json
+GET  https://api.humsana.com/sandbox/gregg/key.pub.json  200
+
+$ python3 -m receipt.verify record.receipt.json --key key.pub.json
+SIGNATURE VERIFIES: the signature verifies against the published key
+  schema          swan.authz/1
+  receipt         rcpt__1jUHq9QT1X725H0  issued 2026-09-28T15:53:32Z
+  issuer          Humsana  key swan-authz-2026
+  authority ref   grant_0SHGNAlUz5Pb2sBgqzqLLl3pst85Im0t  action class payments.release  policy version 1
+  authorized      sha256:12423cf78b4d083b  sha256:5fabbb701e3b2afb
+  presented       sha256:b05f8abf4c1655ca  (the comparison decides, the digests differ by construction)
+  decision        REFUSED  GRANT_DOES_NOT_COVER_THIS_ACTION  matched False  consumed False
+    drift         parameters.payee_account: GB00SUPPLIER00004821 -> GB00SUPPLIER00009137  MAY_NOT_CHANGE
+  execution       NOT_EXECUTED  rail called False
+  executor        acknowledged_unsigned
+                  the executor recorded what it received but did not sign back, so this is not yet a two-party record
+  record digest   sha256:1db82f9285fff41da170305522174b80fd734bd590788ec3861b0f202cd506cd
+  scope           This signature attests that Humsana issued this record and that it has not been altered since. It does not establish that the authority behind the action was legitimate, and it does not show that an executor relied on the decision. The acknowledgment block states whether the executor signed back.
+exit status: 0</pre>
+  <p class="note">Run on 28 September 2026 at 15:53 UTC. The verifier reads two files, needs no network and no account, and exits 0. The record names the authority the action ran under, the authorized and the presented digests, the drift, the decision and the executor's side of the event.</p>
+  <ul class="cmp" style="margin-top:1.6rem">
+    <li><span class="k">the press</span><span class="v chg">REFUSED, code GRANT_DOES_NOT_COVER_THIS_ACTION, consumed False</span></li>
+    <li><span class="k">in the record</span><span class="v">execution outcome NOT_EXECUTED, rail_called False</span></li>
+    <li><span class="k">the check</span><span class="v chg">python3 -m receipt.verify record.receipt.json --key key.pub.json, exit 0</span></li>
+  </ul>
+</div></section>
+
+<section><div class="wrap">
+  <div class="label"><span class="n">Step 04</span><span>one word changed in the record</span></div>
+  <h2>Change one word of the record and watch the check fail.</h2>
+  <p style="margin-top:1.4rem">The record is signed over its canonical body, so every value in it is covered by the signature. Change the verdict from REFUSED to ALLOWED, leave every digest as it was, and the check fails.</p>
+  <p style="margin-top:.9rem">The verifier also recomputes the record's own digest and reports that it no longer matches the contents it is supposed to describe.</p>
+  <pre class="code" style="margin-top:1.8rem">---- step 4: tamper with the record and verify again ----
+$ python3 -c "import json,pathlib; d=json.loads(pathlib.Path('record.receipt.json').read_text()); d['decision']['verdict']='ALLOWED'; pathlib.Path('tampered.json').write_text(json.dumps(d,indent=2))"
+
+$ python3 -m receipt.verify tampered.json --key key.pub.json
+SIGNATURE DOES NOT VERIFY: the signature does not verify against this key
+  schema          swan.authz/1
+  receipt         rcpt__1jUHq9QT1X725H0  issued 2026-09-28T15:53:32Z
+  issuer          Humsana  key swan-authz-2026
+  authority ref   grant_0SHGNAlUz5Pb2sBgqzqLLl3pst85Im0t  action class payments.release  policy version 1
+  authorized      sha256:12423cf78b4d083b  sha256:5fabbb701e3b2afb
+  presented       sha256:b05f8abf4c1655ca  (the comparison decides, the digests differ by construction)
+  decision        ALLOWED  GRANT_DOES_NOT_COVER_THIS_ACTION  matched False  consumed False
+    drift         parameters.payee_account: GB00SUPPLIER00004821 -> GB00SUPPLIER00009137  MAY_NOT_CHANGE
+  execution       NOT_EXECUTED  rail called False
+  executor        acknowledged_unsigned
+                  the executor recorded what it received but did not sign back, so this is not yet a two-party record
+  RECORD DIGEST DOES NOT MATCH the record's own contents
+  record digest   sha256:1db82f9285fff41da170305522174b80fd734bd590788ec3861b0f202cd506cd
+  scope           This signature attests that Humsana issued this record and that it has not been altered since. It does not establish that the authority behind the action was legitimate, and it does not show that an executor relied on the decision. The acknowledgment block states whether the executor signed back.
+exit status: 1</pre>
+  <p class="note">Run on 28 September 2026 at 15:53 UTC, on the record from step 3. One word was changed, the verdict from REFUSED to ALLOWED. The verifier printed SIGNATURE DOES NOT VERIFY and exited 1.</p>
+</div></section>
+
+<section><div class="wrap">
+  <div class="label"><span class="n">Step 05</span><span>the seam, and the rail</span></div>
+  <h2>Run an executor that asks before it acts.</h2>
+  <p style="margin-top:1.4rem">The executor is the seam. It presents the action to the service immediately before the rail call, and calls the rail only when the service says the action presented is the action authorized.</p>
+  <p style="margin-top:.9rem">Three attempts go through it: an altered action, the action as authorized, then the same action again. rail() is the one function an integrator replaces, and in this run it is ours, a stand-in that returns a transaction reference.</p>
+  <pre class="code" style="margin-top:1.8rem"><span class="c">$ python3 -m clients.reference_executor --demo</span>
+================================================================================================
+The seam: three attempts through the executor, and what the rail actually saw
+  service  https://api.humsana.com
+================================================================================================
+
+ASK      POST /v1/authorize/verify for the action the principal intended
+  decision    ALLOW   code -   matched None   consumed None
+  receipt     authz_V1FFmooBBbllRG7vp0yUzA   issued 2026-09-28T15:52:19Z
+  bound to    sha256:ff73b8fb9c8a5b648289c5b2df183e577233c41651d2bb40e9efdcbd64ff10a5
+  policy      version 1
+  effectuation {"checked": false, "reason": "NOT_YET_SUBMITTED"}
+
+ATTEMPT 1  an action altered on the way (destination 4821 -> 9137)
+  rail      not_called   code EFFECTUATION_DRIFT   parameters.destination_account: authorized 4821 -> presented 9137 (MAY_NOT_CHANGE)
+
+ATTEMPT 2  the action as authorized
+  rail      called   code MATCHED   {'executed': True, 'reference': 'TXN-0001'}
+
+ATTEMPT 3  the same action again
+  rail      not_called   code RECEIPT_ALREADY_USED   this authorization has been spent
+
+------------------------------------------------------------------------------------------------
+the ledger: [
+ {
+  "at": "2026-09-28T15:52:19Z",
+  "event": "refused",
+  "action": "yourteam.release",
+  "code": "EFFECTUATION_DRIFT",
+  "detail": "parameters.destination_account: authorized 4821 -> presented 9137 (MAY_NOT_CHANGE)"
+ },
+ {
+  "at": "2026-09-28T15:52:19Z",
+  "event": "executed",
+  "action": "yourteam.release",
+  "code": "MATCHED",
+  "rail": {
+   "executed": true,
+   "reference": "TXN-0001"
+  }
+ },
+ {
+  "at": "2026-09-28T15:52:20Z",
+  "event": "refused",
+  "action": "yourteam.release",
+  "code": "RECEIPT_ALREADY_USED",
+  "detail": "this authorization has been spent"
+ }
+]
+the rail ran 1 time(s) across 3 attempts, and never on a refusal.
+That count is the claim. Everything else is our page talking.</pre>
+  <p class="note">Run on 28 September 2026 at 15:52 UTC against https://api.humsana.com. Three attempts, one rail call, and the two refusals carry the code the service returned for each attempt.</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2>What these five steps do not establish.</h2>
+  <p style="margin-top:1.4rem">Three things are true of the run above, and none of them is closed by it.</p>
+  <div class="deflist" style="margin-top:2.4rem">
+    <div class="item">
+      <h3>The actor is declared, not verified.</h3>
+      <p>The public service runs with the agent register off, so the identity on a request is what the caller says it is rather than something a credential bound. The record downloaded in step 3 says so in its own words, and the boundary client says the same at the end of its run: this service runs the shipped default, which is the register off. Nothing on this page shows that the caller is the agent it claims to be.</p>
+    </div>
+    <div class="item">
+      <h3>The rail is ours.</h3>
+      <p>The rail in step 5 is a function inside our reference executor, and the executor behind the sandbox page is the sandbox app itself. Honoring a refusal is the integrating party's side of the seam, and a page cannot show their code deciding. What the count in step 5 shows is what our executor did when the service refused: nothing reached the rail.</p>
+    </div>
+    <div class="item">
+      <h3>The record is one party's account.</h3>
+      <p>The acknowledgment block in the record downloaded in step 3 reads acknowledged_unsigned, with the note that the executor recorded what it received but did not sign back. Until an executor counter-signs with its own key, the record is Humsana's account of the action and the decision, not a two-party record.</p>
+    </div>
+  </div>
+  <ul class="cmp" style="margin-top:2.6rem">
+    <li><span class="k">agent.identity, from the record</span><span class="v chg">declared by the caller, not verified at the boundary</span></li>
+    <li><span class="k">acknowledgment status</span><span class="v">acknowledged_unsigned</span></li>
+    <li><span class="k">acknowledgment signature</span><span class="v">null, and the note says so</span></li>
+    <li><span class="k">the record's own scope</span><span class="v">it attests that Humsana issued the record and that it has not been altered since</span></li>
+  </ul>
+  <p class="note">The scope line of the record downloaded in step 3, in full: "This signature attests that Humsana issued this record and that it has not been altered since. It does not establish that the authority behind the action was legitimate, and it does not show that an executor relied on the decision. The acknowledgment block states whether the executor signed back."</p>
+</div></section>
+
+<footer><div class="wrap foot-in">
+  <div class="brand"><img src="logo.png" alt="Humsana"></div>
+  <div class="foot-links"><a href="walkthrough.html">Walkthrough</a><a href="swan.html">Swan</a><a href="the-execution-boundary.html">Execution boundary</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a></div>
+  <div class="foot-copy">Humsana. Authority travels with the action.</div>
+</div></footer>
+<script src="site.js"></script>
+</body>
+</html>
