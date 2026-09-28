@@ -95,7 +95,7 @@ Testing the authorization boundary with your own action
   <div class="label"><span class="n">Step 03</span><span>the record, and the check</span></div>
   <h2>Download the record for that press and check it offline.</h2>
   <p style="margin-top:1.4rem">The sandbox issues a signed record for the action it presented. The file is served beside the page at /sandbox/gregg/record.receipt.json, and the public key beside it at /sandbox/gregg/key.pub.json.</p>
-  <p style="margin-top:.9rem">The record route answers only in a session that has pressed, so the calls before the download carry the cookie the sandbox set, kept in jar.txt by curl. The press below changes the same field as step 2, the account from 4821 to 9137.</p>
+  <p style="margin-top:.9rem">The record route answers only in a session that has pressed, so the calls before the download carry the cookie the sandbox set, kept in jar.txt by curl. The press below changes the same field as step 2, the account from 4821 to 9137. It answers with a different code, GRANT_DOES_NOT_COVER_THIS_ACTION rather than EFFECTUATION_DRIFT, for a reason worth knowing: this press presents an action the grant in this session does not cover, and the service answers that the grant does not cover it rather than comparing field by field. The same change, sent against a binding the caller established itself, is the comparison that names the field and the rule, which is what step 2 shows.</p>
   <pre class="code" style="margin-top:1.8rem">$ curl -s -c jar.txt -o /dev/null -w 'GET  %{url_effective}  %{http_code}\n' https://api.humsana.com/sandbox/gregg/
 GET  https://api.humsana.com/sandbox/gregg/  200
 
@@ -140,7 +140,7 @@ exit status: 0</pre>
 <section><div class="wrap">
   <div class="label"><span class="n">Step 04</span><span>one word changed in the record</span></div>
   <h2>Change one word of the record and watch the check fail.</h2>
-  <p style="margin-top:1.4rem">The record is signed over its canonical body, so every value in it is covered by the signature. Change the verdict from REFUSED to ALLOWED, leave every digest as it was, and the check fails.</p>
+  <p style="margin-top:1.4rem">The record is signed over its canonical body, so every value in it is covered by the signature except the record's own digest field, which is the hash of exactly the bytes that were signed. Change the verdict from REFUSED to ALLOWED, leave every digest as it was, and the check fails.</p>
   <p style="margin-top:.9rem">The verifier also recomputes the record's own digest and reports that it no longer matches the contents it is supposed to describe.</p>
   <pre class="code" style="margin-top:1.8rem">---- step 4: tamper with the record and verify again ----
 $ python3 -c "import json,pathlib; d=json.loads(pathlib.Path('record.receipt.json').read_text()); d['decision']['verdict']='ALLOWED'; pathlib.Path('tampered.json').write_text(json.dumps(d,indent=2))"

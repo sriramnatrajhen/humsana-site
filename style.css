@@ -321,6 +321,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   .code{white-space:pre-wrap;overflow-wrap:anywhere}
   .tbl,.measure{min-width:0}
   .tbl td,.tbl th{white-space:normal}
+  /* the base rule carries the same specificity as this one and a nowrap cell, so the first cell of a
+     table has to be reset by name or it pushes the page wider than the viewport */
+  table.tbl td:first-child{white-space:normal;padding-right:1rem}
 }
 @media(max-width:760px){.evid .e{grid-template-columns:1fr;gap:.45rem}}
 
