@@ -23,23 +23,20 @@
 
 <header class="hero"><div class="wrap">
   <h1>Where it comes from, and how it is measured.</h1>
-  <p class="lead" style="margin-top:1.4rem">Every number on this site carries its method. The sources and the test corpora are named.</p>
+  <p class="lead" style="margin-top:1.4rem">Every number here carries its method.</p>
 </div></header>
 
 <section><div class="wrap">
   <div class="cols3" style="grid-template-columns:repeat(2,1fr)">
     <div>
-      <div class="ch">Regulation</div>
-      <h3>The principle is not new</h3>
-      <p>The FCA's 2026 Mills Review discusses the move from AI assistance to AI delegation, and the need for accountability, audit trails, explainable outcomes and meaningful human approval. <a href="https://www.fca.org.uk">fca.org.uk</a></p>
-      <p style="margin-top:1rem">Strong customer authentication, RTS Article 5, requires certain remote payments to be dynamically linked to the amount and the payee. Change either and the authentication is invalid.</p>
-      <p style="margin-top:1rem">Confirmation of Payee, Specific Direction 17, applies when a new payee is added or an existing payee's details change. <a href="https://www.wearepay.uk">wearepay.uk</a></p>
-      <p style="margin-top:1rem">Humsana applies the same shape to autonomous execution: make the approval explicit, bind it to the action, and check it again when the action happens.</p>
+      <h2>The principle is not new.</h2>
+      <p>The FCA's 2026 Mills Review covers the move from AI assistance to AI delegation, and the need for accountability, audit trails and human approval. <a href="https://www.fca.org.uk">fca.org.uk</a></p>
+      <p style="margin-top:1rem">Strong customer authentication, RTS Article 5, binds certain remote payments to the amount and the payee. Change either and the authentication is invalid.</p>
+      <p style="margin-top:1rem">Confirmation of Payee, Specific Direction 17, applies when a payee is new or their details change. <a href="https://www.wearepay.uk">wearepay.uk</a></p>
     </div>
     <div>
-      <div class="ch">Measurement</div>
-      <h3>Authorization cost</h3>
-      <p>5.8 ms median to authorize one exact action, 2.9 ms median to check it at execution, worst case 12.9 ms over a run of 40 actions, on the current single-host deployment. The work is a deterministic comparison of bound fields, not a model call.</p>
+      <h2>What is measured.</h2>
+      <p>On the current single-host deployment, 5.8 ms median to authorize one exact action and 2.9 ms median to check it at execution. Worst case 12.9 ms over a run of 40 actions. The work is a deterministic comparison of bound fields, not a model call.</p>
       <h3>Agent variance</h3>
       <p>Seven runs of one autonomous task, on one provider, in one day. Seven distinct artifacts, and the recipient set was the same every time. All 42 presentations were refused before the send API: zero matched, zero grants consumed, and 14 messages that the unwatched executor really sent.</p>
       <h3>Voice</h3>
@@ -54,7 +51,7 @@
     <h2>What is kept, and for how long.</h2>
   </div>
   <div class="deflist">
-    <div class="item"><h4>A record holds</h4><p>What the caller claimed, what was established, the grant with the digest of every bound field, the confirmation with its approver, and the receipt for what executed or was refused.</p></div>
+    <div class="item"><h4>A record holds</h4><p>What the caller claimed, what was established, the grant with the digest of every bound field, the confirmation with its approver, and the receipt.</p></div>
     <div class="item"><h4>Voice audio</h4><p>Decoded in memory to reach a verdict and then discarded. It is never written to disk, and no voiceprint is built.</p></div>
     <div class="item"><h4>Metadata</h4><p>Kept for 30 days, so a result can be explained later. It contains no audio and no fingerprint of the audio.</p></div>
     <div class="item"><h4>The sandbox</h4><p>Uses generated data. The authorization service is the real one.</p></div>
@@ -62,14 +59,6 @@
 </div></section>
 
 <section><div class="wrap">
-  <div class="head">
-    <h2>Three things to ask for.</h2>
-  </div>
-  <ul class="plain">
-    <li>Run the sandbox and try to make a changed field pass. Nothing you can do makes it pass.</li>
-    <li>Ask for a receipt, and for who would accept it. The record is a structure, not a log line.</li>
-    <li>Ask for the method behind any number. It is on this page, and the corpora are in the repository.</li>
-  </ul>
   <p class="statement" style="margin-top:3rem">The principle is an approval bound to the exact action, enforceable for actions no person performs.</p>
   <div class="cta-row" style="margin-top:2.4rem">
     <a class="btn btn-primary arrow-after" href="sandbox.html">Open the sandbox</a>

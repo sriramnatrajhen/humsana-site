@@ -23,20 +23,19 @@
 
 <header class="hero"><div class="wrap">
   <h1 style="max-width:24ch">Five steps from your own command to a signed record.</h1>
-  <p class="lead" style="max-width:64ch;margin-top:1.9rem">You define an action class of your own and send it to the live service. You change one field and read the refusal, with the field, both values and the rule. You download the signed record for that press and check it offline. You change one word of the record and watch the check fail. You run an executor that asks before it acts, and read the count that says its rail ran once.</p>
-  <p style="margin-top:1.2rem">No account, no key and nothing installed: the client and the verifier are the standard library only.</p>
+  <p class="lead" style="max-width:64ch;margin-top:1.9rem">You define an action class and send it to the live service. Change one field and read the refusal. Download the signed record and check it offline. Change one word of it and watch the check fail. Run an executor whose rail runs once.</p>
+  <p style="margin-top:1.2rem">The client and the verifier are the standard library only, so nothing is installed.</p>
   <div class="cta-row" style="margin-top:2.2rem">
     <a class="btn btn-primary arrow-after" href="https://api.humsana.com/sandbox/">Open the sandbox</a>
     <a class="btn btn-ghost" href="mailto:ram@humsana.com">Ask for the two files</a>
   </div>
-  <p class="note">Every command on this page was run on 28 September 2026 against https://api.humsana.com, from one directory holding a copy of the boundary client and the offline verifier and nothing else. Every line of output under a step is that run, copied unedited. Step 1, step 2 and step 5 need the boundary client, which is standard library only. Step 3 and step 4 need the verifier and the two files it checks: the record and the public key, both downloaded from the sandbox. The client and the verifier are handed to an integrator today rather than published for download, so if you want them in your own hands, ask.</p>
+  <p class="note">Every command was run on 28 September 2026 against https://api.humsana.com, in one directory holding the boundary client and the offline verifier. The directory holds nothing else. Every line of output under a step is that run, copied unedited. Steps 1, 2 and 5 need the client. Steps 3 and 4 need the verifier and the two files it checks, the record and the public key. Neither is published for download yet, so ask if you want them.</p>
 </div></header>
 
 <section><div class="wrap">
   <div class="label"><span class="n">Step 01</span><span>your own action class, anonymously</span></div>
   <h2>Drive your action through the live service.</h2>
-  <p style="margin-top:1.4rem">The action class is a name you choose. In the run below it is yourteam.release, with three parameters bound to it: an amount, an account and a reference.</p>
-  <p style="margin-top:.9rem">The client sends one call to POST /v1/authorize/verify and reads the answer back. No key, no account and no signup: the public service accepts anonymous calls, rate limited per caller.</p>
+  <p style="margin-top:1.4rem">The action class is a name you choose. This run uses yourteam.release, with three parameters bound to it.</p>
   <pre class="code" style="margin-top:1.8rem"><span class="c">$ python3 -m clients.swan_boundary --demo --anonymous --action yourteam.release</span>
 ================================================================================================
 Testing the authorization boundary with your own action
@@ -52,14 +51,12 @@ Testing the authorization boundary with your own action
   receipt     authz_585GcVURKYRNliWupLho1w   issued 2026-09-28T15:52:15Z
   bound to    sha256:33c5df764997b88d6227ce09ff03c9d306f3854894a11c98be0c1d4c0dcf0592
   policy      version 1</pre>
-  <p class="note">Run on 28 September 2026 at 15:52 UTC against https://api.humsana.com. The decision, the receipt id, the binding digest and the policy version in that output are the service's own values, read out of its answer.</p>
+  <p class="note">Run on 28 September 2026 at 15:52 UTC against https://api.humsana.com. The decision, the receipt id, the digest and the policy version are the service's own values.</p>
 </div></section>
 
 <section><div class="wrap">
   <div class="label"><span class="n">Step 02</span><span>one field changed</span></div>
   <h2>Change one field and read the refusal.</h2>
-  <p style="margin-top:1.4rem">The same run then presents the action with the destination account moved from 4821 to 9137, the way it would arrive if something altered it on the way.</p>
-  <p style="margin-top:.9rem">The answer names the field, both values and the rule it applied. The refusal spends nothing, so the action as authorized still runs afterwards, and a third attempt with the same action is answered as spent.</p>
   <pre class="code" style="margin-top:1.8rem"><span class="c">$ python3 -m clients.swan_boundary --demo --anonymous --action yourteam.release</span>
   effectuation {"checked": false, "reason": "NOT_YET_SUBMITTED"}
    authorized. the executor may now present the action it received.
@@ -82,20 +79,14 @@ Testing the authorization boundary with your own action
   reason      RECEIPT_ALREADY_USED: this authorization has been spent
   effectuation {"checked": true, "checked_at": "2026-09-28T15:52:15Z", "matched": false, "decision": "DENY", "drift": [], "reasons": [{"code": "RECEIPT_ALREADY_USED", "detail"
    an authorization is spent once.</pre>
-  <p class="note">The same command and the same run as step 1, on 28 September 2026 at 15:52 UTC. A change made after the authorization is refused in the answer, with the service's own code and the field named. The run's own closing lines, after those five answers, name the same two limits this page ends with.</p>
-  <ul class="cmp" style="margin-top:1.6rem">
-    <li><span class="k">the refusal</span><span class="v chg">decision HUMAN_CONFIRM, code EFFECTUATION_DRIFT, matched False, consumed False</span></li>
-    <li><span class="k">the field</span><span class="v chg">parameters.destination_account</span></li>
-    <li><span class="k">authorized, then presented</span><span class="v">4821, then 9137, rule MAY_NOT_CHANGE</span></li>
-    <li><span class="k">the transport</span><span class="v">HTTP 200, carried as a code rather than as an error status</span></li>
-  </ul>
+  <p class="note">The same command and the same run as step 1, on 28 September 2026 at 15:52 UTC. A change made after the authorization is refused in the answer, with the field named. The refusal arrives as HTTP 200 with a code, not as an error status.</p>
 </div></section>
 
 <section><div class="wrap">
   <div class="label"><span class="n">Step 03</span><span>the record, and the check</span></div>
   <h2>Download the record for that press and check it offline.</h2>
-  <p style="margin-top:1.4rem">The sandbox issues a signed record for the action it presented. The file is served beside the page at /sandbox/gregg/record.receipt.json, and the public key beside it at /sandbox/gregg/key.pub.json.</p>
-  <p style="margin-top:.9rem">The record route answers only in a session that has pressed, so the calls before the download carry the cookie the sandbox set, kept in jar.txt by curl. The press below changes the same field as step 2, the account from 4821 to 9137. It answers with a different code, GRANT_DOES_NOT_COVER_THIS_ACTION rather than EFFECTUATION_DRIFT, for a reason worth knowing: this press presents an action the grant in this session does not cover, and the service answers that the grant does not cover it rather than comparing field by field. The same change, sent against a binding the caller established itself, is the comparison that names the field and the rule, which is what step 2 shows.</p>
+  <p style="margin-top:1.4rem">The sandbox issues a signed record for the action it presented, and serves the public key beside it.</p>
+  <p style="margin-top:.9rem">The record route answers only in a session that has pressed, so curl keeps the cookie in jar.txt. This press changes the same field as step 2, and the code differs: the grant in this session covers a different action, so the service answers that rather than comparing field by field. In step 2 the caller establishes the binding itself, so there the comparison names the field and the rule.</p>
   <pre class="code" style="margin-top:1.8rem">$ curl -s -c jar.txt -o /dev/null -w 'GET  %{url_effective}  %{http_code}\n' https://api.humsana.com/sandbox/gregg/
 GET  https://api.humsana.com/sandbox/gregg/  200
 
@@ -129,19 +120,13 @@ SIGNATURE VERIFIES: the signature verifies against the published key
   record digest   sha256:1db82f9285fff41da170305522174b80fd734bd590788ec3861b0f202cd506cd
   scope           This signature attests that Humsana issued this record and that it has not been altered since. It does not establish that the authority behind the action was legitimate, and it does not show that an executor relied on the decision. The acknowledgment block states whether the executor signed back.
 exit status: 0</pre>
-  <p class="note">Run on 28 September 2026 at 15:53 UTC. The verifier reads two files, needs no network and no account, and exits 0. The record names the authority the action ran under, the authorized and the presented digests, the drift, the decision and the executor's side of the event.</p>
-  <ul class="cmp" style="margin-top:1.6rem">
-    <li><span class="k">the press</span><span class="v chg">REFUSED, code GRANT_DOES_NOT_COVER_THIS_ACTION, consumed False</span></li>
-    <li><span class="k">in the record</span><span class="v">execution outcome NOT_EXECUTED, rail_called False</span></li>
-    <li><span class="k">the check</span><span class="v chg">python3 -m receipt.verify record.receipt.json --key key.pub.json, exit 0</span></li>
-  </ul>
+  <p class="note">Run on 28 September 2026 at 15:53 UTC. The verifier reads two files, needs no network and no account.</p>
 </div></section>
 
 <section><div class="wrap">
   <div class="label"><span class="n">Step 04</span><span>one word changed in the record</span></div>
   <h2>Change one word of the record and watch the check fail.</h2>
-  <p style="margin-top:1.4rem">The record is signed over its canonical body, so every value in it is covered by the signature except the record's own digest field, which is the hash of exactly the bytes that were signed. Change the verdict from REFUSED to ALLOWED, leave every digest as it was, and the check fails.</p>
-  <p style="margin-top:.9rem">The verifier also recomputes the record's own digest and reports that it no longer matches the contents it is supposed to describe.</p>
+  <p style="margin-top:1.4rem">The signature covers the record's canonical body, which is every value except the record's own digest field.</p>
   <pre class="code" style="margin-top:1.8rem">---- step 4: tamper with the record and verify again ----
 $ python3 -c "import json,pathlib; d=json.loads(pathlib.Path('record.receipt.json').read_text()); d['decision']['verdict']='ALLOWED'; pathlib.Path('tampered.json').write_text(json.dumps(d,indent=2))"
 
@@ -162,14 +147,14 @@ SIGNATURE DOES NOT VERIFY: the signature does not verify against this key
   record digest   sha256:1db82f9285fff41da170305522174b80fd734bd590788ec3861b0f202cd506cd
   scope           This signature attests that Humsana issued this record and that it has not been altered since. It does not establish that the authority behind the action was legitimate, and it does not show that an executor relied on the decision. The acknowledgment block states whether the executor signed back.
 exit status: 1</pre>
-  <p class="note">Run on 28 September 2026 at 15:53 UTC, on the record from step 3. One word was changed, the verdict from REFUSED to ALLOWED. The verifier printed SIGNATURE DOES NOT VERIFY and exited 1.</p>
+  <p class="note">Run on 28 September 2026 at 15:53 UTC, on the record from step 3. One word was changed, the verdict from REFUSED to ALLOWED.</p>
 </div></section>
 
 <section><div class="wrap">
   <div class="label"><span class="n">Step 05</span><span>the seam, and the rail</span></div>
   <h2>Run an executor that asks before it acts.</h2>
-  <p style="margin-top:1.4rem">The executor is the seam. It presents the action to the service immediately before the rail call, and calls the rail only when the service says the action presented is the action authorized.</p>
-  <p style="margin-top:.9rem">Three attempts go through it: an altered action, the action as authorized, then the same action again. rail() is the one function an integrator replaces, and in this run it is ours, a stand-in that returns a transaction reference.</p>
+  <p style="margin-top:1.4rem">The executor is the seam: it presents the action to the service before the rail call, and calls the rail only when the service says the two match.</p>
+  <p style="margin-top:.9rem">rail() is the one function an integrator replaces, and here it is a stand-in that returns a transaction reference.</p>
   <pre class="code" style="margin-top:1.8rem"><span class="c">$ python3 -m clients.reference_executor --demo</span>
 ================================================================================================
 The seam: three attempts through the executor, and what the rail actually saw
@@ -221,28 +206,27 @@ the ledger: [
 ]
 the rail ran 1 time(s) across 3 attempts, and never on a refusal.
 That count is the claim. Everything else is our page talking.</pre>
-  <p class="note">Run on 28 September 2026 at 15:52 UTC against https://api.humsana.com. Three attempts, one rail call, and the two refusals carry the code the service returned for each attempt.</p>
+  <p class="note">Run on 28 September 2026 at 15:52 UTC against https://api.humsana.com.</p>
 </div></section>
 
 <section><div class="wrap">
   <h2>What these five steps do not establish.</h2>
-  <p style="margin-top:1.4rem">Three things are true of the run above, and none of them is closed by it.</p>
+  <p style="margin-top:1.4rem">Three limits apply to the run above, and it does not close them.</p>
   <div class="deflist" style="margin-top:2.4rem">
     <div class="item">
       <h3>The actor is declared, not verified.</h3>
-      <p>The public service runs with the agent register off, so the identity on a request is what the caller says it is rather than something a credential bound. The record downloaded in step 3 says so in its own words, and the boundary client says the same at the end of its run: this service runs the shipped default, which is the register off. Nothing on this page shows that the caller is the agent it claims to be.</p>
+      <p>The public service runs with the agent register off. The identity on a request is what the caller says it is, not something a credential bound. The record from step 3 states this, and the client says the same at the end of its run. Nothing here shows that the caller is the agent it claims to be.</p>
     </div>
     <div class="item">
       <h3>The rail is ours.</h3>
-      <p>The rail in step 5 is a function inside our reference executor, and the executor behind the sandbox page is the sandbox app itself. Honoring a refusal is the integrating party's side of the seam, and a page cannot show their code deciding. What the count in step 5 shows is what our executor did when the service refused: nothing reached the rail.</p>
+      <p>The rail in step 5 is a function inside our reference executor, and the sandbox page runs the sandbox app itself. Honoring a refusal is the integrating party's side of the seam, and a page cannot show their code deciding. The count shows what our executor did: nothing reached the rail.</p>
     </div>
     <div class="item">
       <h3>The record is one party's account.</h3>
-      <p>The acknowledgment block in the record downloaded in step 3 reads acknowledged_unsigned, with the note that the executor recorded what it received but did not sign back. Until an executor counter-signs with its own key, the record is Humsana's account of the action and the decision, not a two-party record.</p>
+      <p>The acknowledgment block in the record from step 3 reads acknowledged_unsigned, and its signature is null: the executor recorded what it received but did not sign back. Until an executor counter-signs with its own key, the record is Humsana's account of the action and the decision, not a two-party record.</p>
     </div>
   </div>
   <ul class="cmp" style="margin-top:2.6rem">
-    <li><span class="k">agent.identity, from the record</span><span class="v chg">declared by the caller, not verified at the boundary</span></li>
     <li><span class="k">acknowledgment status</span><span class="v">acknowledged_unsigned</span></li>
     <li><span class="k">acknowledgment signature</span><span class="v">null, and the note says so</span></li>
     <li><span class="k">the record's own scope</span><span class="v">it attests that Humsana issued the record and that it has not been altered since</span></li>

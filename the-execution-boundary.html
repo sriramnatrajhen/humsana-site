@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The execution boundary: where authority and execution stop sharing a system | Humsana</title>
-<meta name="description" content="Humsana sits at the point where a consequential action crosses from one authority context into another and asks whether the authority actually covers what is being executed.">
-<link rel="stylesheet" href="style.css?v=4">
+<meta name="description" content="The boundary at three depths, the six stages that carry authority to the point of execution, and the published fraud losses behind it.">
+<link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 
@@ -23,8 +23,9 @@
 
 <header class="hero"><div class="wrap">
   <h1 style="max-width:24ch">The execution boundary.</h1>
-  <p class="lead" style="max-width:64ch;margin-top:1.9rem">Humsana binds authority to consequential actions, then checks that the action reaching execution is still within that authority. It is not trying to replace the identity system, the agent runtime or the executor. It sits at the point where a consequential action crosses from one authority context into another and asks whether the authority actually covers what is being executed.</p>
-  <p style="margin-top:1.2rem">Where it does not, the action is refused before the executor reaches the system that would perform it, and the refusal names the field, both values and the rule. Honoring that refusal is the executor's job, which is why the seam matters as much as the check.</p>
+  <p class="lead" style="max-width:64ch;margin-top:1.9rem">Humsana sits at the point where a consequential action crosses from one authority context into another. It asks whether the authority still covers what is being executed, and refuses when it does not.</p>
+  <p style="margin-top:1.2rem">The refusal names the field, both values and the rule, and it spends nothing. Honoring that refusal is the executor's job, which is why the seam matters as much as the check.</p>
+  <p style="margin-top:1.2rem">It does not replace the identity system, the agent runtime or the executor.</p>
   <div class="cta-row" style="margin-top:2.2rem">
     <a class="btn btn-primary" href="https://api.humsana.com/sandbox/">See it refuse</a>
     <a class="btn btn-ghost" href="how-it-works.html">How the check runs</a>
@@ -33,11 +34,11 @@
 
 <section data-scene-scope><div class="wrap">
   <h2>The same problem, at three depths.</h2>
-  <p style="margin-top:1.4rem">Not every boundary is the same problem. Inside one system, existing controls can govern an agent. Two systems inside one organization is a reconciliation problem. Two organizations is where authority and execution stop sharing anything, and where this question stops having an answer today.</p>
-  <div class="switch" role="tablist" aria-label="How hard the boundary is">
-    <button role="tab" id="bt-1" aria-controls="bc-1" aria-selected="false" tabindex="-1" data-case="1">1. Same system</button>
-    <button role="tab" id="bt-2" aria-controls="bc-2" aria-selected="false" tabindex="-1" data-case="2">2. Different systems</button>
-    <button role="tab" id="bt-3" aria-controls="bc-3" aria-selected="true" tabindex="0" data-case="3">3. Different organizations</button>
+  <p style="margin-top:1.4rem">The boundary hardens as the two sides stop sharing a system. At each depth the executor can settle less about the authority behind the action.</p>
+  <div class="caselist" role="tablist" aria-label="How hard the boundary is">
+    <button role="tab" id="bt-1" aria-controls="bc-1" aria-selected="false" tabindex="-1" data-case="1">1. Same system<span class="who">one owner, one authority context</span></button>
+    <button role="tab" id="bt-2" aria-controls="bc-2" aria-selected="false" tabindex="-1" data-case="2">2. Different systems<span class="who">two systems, one organization</span></button>
+    <button role="tab" id="bt-3" aria-controls="bc-3" aria-selected="true" tabindex="0" data-case="3">3. Different organizations<span class="who">two owners, no shared basis</span></button>
   </div>
 <div class="scene" data-case="3">
   <div class="party a"><span class="pname">Company A</span>
@@ -49,50 +50,41 @@
     <span class="act">&larr; the same action, presented</span></div>
 </div>
   <div id="bc-1" role="tabpanel" aria-labelledby="bt-1" hidden>
-    <p style="margin-top:2rem">The stack holds the actor, the tool, the rule, the approval and the request. Existing controls can govern this case, and they often do.</p>
-    <div class="verdict" style="margin-top:1.6rem"><span class="code">Agent and executor inside one system, one owner, one authority context.</span></div>
-    <ul class="cmp">
-      <li><span class="k">Identity</span><span class="v">One directory holds the actor.</span></li>
-      <li><span class="k">Authority</span><span class="v">The same system issues and holds it.</span></li>
-      <li><span class="k">The action</span><span class="v">The request and the approval can be compared in place.</span></li>
-      <li><span class="k">Evidence</span><span class="v">One log, one owner.</span></li>
-      <li><span class="k">Accountable</span><span class="v">One organization, end to end.</span></li>
-    </ul>
-    <p class="note">The stack holds the actor, the tool, the rule, the approval and the request. Existing controls can govern this case, and they often do.</p>
+    <div class="casepanel">
+      <p>The stack holds the actor, the tool, the rule, the approval and the request. Existing controls can govern this case, and they often do.</p>
+      <div class="row">
+        <div><h3>What the executor settles</h3><p>Everything. Identity, authority, the request and the approval sit in one log, under one owner.</p></div>
+        <div class="r"><h3>What has to be carried</h3><p>Nothing. The authority context never leaves the system that issued it.</p></div>
+      </div>
+    </div>
   </div>
   <div id="bc-2" role="tabpanel" aria-labelledby="bt-2" hidden>
-    <p style="margin-top:2rem">Identity travels, but the authority for a specific action does not necessarily arrive with it. The approval is in another system, and the executor is asked to trust that it exists.</p>
-    <div class="verdict" style="margin-top:1.6rem"><span class="code">Two systems inside one organization. The code boundary is real; the owner is shared.</span></div>
-    <ul class="cmp">
-      <li><span class="k">Identity</span><span class="v">Identity travels with the actor, or it can be made to.</span></li>
-      <li><span class="k">Authority</span><span class="v">The approval stays in the system that made it, unless it is carried.</span></li>
-      <li><span class="k">The action</span><span class="v">Compared only if something at the seam compares it.</span></li>
-      <li><span class="k">Evidence</span><span class="v">Two logs, one owner: reconcilable afterwards, by hand.</span></li>
-      <li><span class="k">Accountable</span><span class="v">The organization is accountable, and internal.</span></li>
-    </ul>
-    <p class="note">Identity travels, but the authority for a specific action does not necessarily arrive with it. The approval is in another system, and the executor is asked to trust that it exists.</p>
+    <div class="casepanel">
+      <p>Identity travels, but the authority for this specific action does not necessarily arrive with it. The approval stays in the system that made it.</p>
+      <div class="row">
+        <div><h3>What the executor settles</h3><p>Who the actor is. The authority behind the action is asserted by the calling system, not shown.</p></div>
+        <div class="r"><h3>What has to be carried</h3><p>The approval itself, or the executor is asked to trust that it exists somewhere.</p></div>
+      </div>
+    </div>
   </div>
   <div id="bc-3" role="tabpanel" aria-labelledby="bt-3">
-    <p style="margin-top:2rem">This is where the problem appears. The executor holds the request and almost nothing else: not the principal, not the delegation, not the approval behind it.</p>
-    <div class="verdict" style="margin-top:1.6rem"><span class="code">Two owners. Neither can inspect the other's identity system, policy or logs.</span></div>
-    <ul class="cmp">
-      <li><span class="k">Identity</span><span class="v">The counterparty's identity is asserted, not inspectable.</span></li>
-      <li><span class="k">Authority</span><span class="v">Nothing about the approval reaches the executor unless it is carried.</span></li>
-      <li><span class="k">The action</span><span class="v">The executor cannot tell whether this is the approved action.</span></li>
-      <li><span class="k">Evidence</span><span class="v">Two organizations, two records, no shared basis.</span></li>
-      <li><span class="k">Accountable</span><span class="v">Contested, and settled after the fact, if at all.</span></li>
-    </ul>
-    <p class="note">This is where the problem appears. The executor holds the request and almost nothing else: not the principal, not the delegation, not the approval behind it.</p>
+    <div class="casepanel">
+      <p>This is where the problem appears. The executor holds the request and almost nothing else: not the principal, not the delegation, not the approval behind it.</p>
+      <div class="row">
+        <div><h3>What the executor settles</h3><p>That a request arrived. The counterparty's identity, policy and logs are not inspectable.</p></div>
+        <div class="r"><h3>What has to be carried</h3><p>The authority, the binding and the evidence, or the action is taken on trust.</p></div>
+      </div>
+    </div>
   </div>
 </div></section>
 
 <section><div class="wrap">
-  <h2>Six stages carry authority to the point of execution.</h2>
-  <p style="margin-top:1.4rem">Each stage can be checked, and each can be lost. The boundary's job is the fifth one: to know what arrives at the executor and whether it is still covered.</p>
+  <h2>Six stages carry authority to execution.</h2>
+  <p style="margin-top:1.4rem">Each stage can be held, checked or lost. The boundary's job is the fifth one: to know what arrives at the executor and whether it is still covered.</p>
   <ol class="chain">
-    <li><span class="num">01</span><h3>Authority</h3><p>Who is acting and on whose behalf.</p></li>
+    <li><span class="num">01</span><h3>Authority</h3><p>Who is acting, and on whose behalf.</p></li>
     <li><span class="num">02</span><h3>Delegation</h3><p>How that authority reached the actor.</p></li>
-    <li><span class="num">03</span><h3>Action</h3><p>What the agent is actually trying to do.</p></li>
+    <li><span class="num">03</span><h3>Action</h3><p>What the agent is trying to do.</p></li>
     <li><span class="num">04</span><h3>Binding</h3><p>What the authority covers.</p></li>
     <li><span class="num">05</span><h3>Execution</h3><p>What arrives at the executor.</p></li>
     <li><span class="num">06</span><h3>Evidence</h3><p>What can later be reconstructed.</p></li>
@@ -100,109 +92,18 @@
 </div></section>
 
 <section><div class="wrap">
-  <h2>Where the boundary appears.</h2>
-  <p style="margin-top:1.4rem">The action changes, the boundary changes, and the question stays the same: what authority actually covers this action?</p>
-  <div class="caselist" role="tablist" aria-label="Where the boundary appears">
-    <button role="tab" id="cl-0" aria-controls="clp-0" aria-selected="true" tabindex="0">B2B payments<span class="who">Company A's agent &rarr; Company B's payment system</span></button>
-    <button role="tab" id="cl-1" aria-controls="clp-1" aria-selected="false" tabindex="-1">Procurement<span class="who">Company A's agent &rarr; a supplier's ordering system</span></button>
-    <button role="tab" id="cl-2" aria-controls="clp-2" aria-selected="false" tabindex="-1">Third-party APIs<span class="who">Agent &rarr; a system the customer does not own</span></button>
-    <button role="tab" id="cl-3" aria-controls="clp-3" aria-selected="false" tabindex="-1">Cross-company operations<span class="who">Autonomous workflow &rarr; another organization's action</span></button>
-    <button role="tab" id="cl-5" aria-controls="clp-5" aria-selected="false" tabindex="-1">Machine dispatch<span class="who">A fleet order &rarr; the machine that moves</span></button>
-    <button role="tab" id="cl-4" aria-controls="clp-4" aria-selected="false" tabindex="-1">Delegated agents<span class="who">Agent &rarr; agent &rarr; executor</span></button>
-  </div>  <div id="clp-0" role="tabpanel" aria-labelledby="cl-0">
-    <div class="casepanel">
-      <div class="row">
-        <div><h3>Where it acts</h3><p>Company A's agent &rarr; Company B's payment system.</p></div>
-        <div class="r"><h3>What crosses</h3><p>One company's agent instructs another company's payment system, and the instruction is a payment.</p></div>
-      </div>
-    </div>
+  <h2>The failure is on the record.</h2>
+  <p style="margin-top:1.4rem">Authorized push payment fraud is the class where a payment the account holder approved is redirected to an account they never named. UK Finance reports the losses every half year.</p>
+  <div class="evid" style="margin-top:2rem">
+    <div class="e"><div class="fig">&pound;257.5m</div><div><span class="t">Authorized push payment fraud losses reported by UK Finance members in the first half of 2025.</span><span class="d">110,747 cases in six months. The payment was authorized by the person who held the account.</span><span class="src">UK Finance, Half Year Fraud Report 2025 <a href="https://www.ukfinance.org.uk/news-and-insight/press-release/over-ps600-million-stolen-fraudsters-in-first-half-2025" rel="noopener">Source</a></span></div></div>
+    <div class="e"><div class="fig">&pound;1.28bn</div><div><span class="t">Payment fraud losses reported by UK Finance members in 2025.</span><span class="d">Up four percent on 2024, and reported for a full year rather than a half.</span><span class="src">UK Finance, Annual Fraud Report 2026 <a href="https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2026-press-release" rel="noopener">Source</a></span></div></div>
   </div>
-  <div id="clp-1" role="tabpanel" aria-labelledby="cl-1" hidden>
-    <div class="casepanel">
-      <div class="row">
-        <div><h3>Where it acts</h3><p>Company A's agent &rarr; a supplier's ordering system.</p></div>
-        <div class="r"><h3>What crosses</h3><p>An agent commits its principal to an order on a partner's system, where the terms were fixed earlier.</p></div>
-      </div>
-    </div>
-  </div>
-  <div id="clp-2" role="tabpanel" aria-labelledby="cl-2" hidden>
-    <div class="casepanel">
-      <div class="row">
-        <div><h3>Where it acts</h3><p>Agent &rarr; a system the customer does not own.</p></div>
-        <div class="r"><h3>What crosses</h3><p>An agent causes a consequential change in a platform it has no authority over, and the platform sees only an API call.</p></div>
-      </div>
-    </div>
-  </div>
-  <div id="clp-3" role="tabpanel" aria-labelledby="cl-3" hidden>
-    <div class="casepanel">
-      <div class="row">
-        <div><h3>Where it acts</h3><p>Autonomous workflow &rarr; another organization's action.</p></div>
-        <div class="r"><h3>What crosses</h3><p>One organization's autonomous workflow triggers an action inside another organization's operations.</p></div>
-      </div>
-    </div>
-  </div>
-  <div id="clp-5" role="tabpanel" aria-labelledby="cl-5" hidden>
-    <div class="casepanel">
-      <div class="row">
-        <div><h3>Where it acts</h3><p>A fleet manager's order, in front of the machine that executes it.</p></div>
-        <div class="r"><h3>What crosses</h3><p>A route, a speed ceiling, a payload and a time window, published to a machine on a site the operator owns.</p></div>
-      </div>
-    </div>
-  </div>
-  <div id="clp-4" role="tabpanel" aria-labelledby="cl-4" hidden>
-    <div class="casepanel">
-      <div class="row">
-        <div><h3>Where it acts</h3><p>Agent &rarr; agent &rarr; executor.</p></div>
-        <div class="r"><h3>What crosses</h3><p>Authority passes from one actor to another before execution, and each hop can narrow or stretch it.</p></div>
-      </div>
-    </div>
-  </div>
+  <p class="note">Both figures are published, dated and linked. <a href="how-it-works.html">The check that answers them</a>.</p>
 </div></section>
 
 <section><div class="wrap">
-  <h2>The same primitive, a different action schema.</h2>
-  <p style="margin-top:1.4rem">Nothing in the engine is specific to payments. A dispatch command carries the same kind of authority: a machine, a route, a speed ceiling, a payload, a window. The rules are the three the payment case already uses, applied to the fields that are consequential here.</p>
-  <ul class="cmp" style="margin-top:2.6rem">
-    <li><span class="k">authorized</span><span class="v">move pallet P1842 to aisle-4, 1.5 m/s, 400 kg, 14:00-14:10</span></li>
-    <li><span class="k">presented</span><span class="v chg">move pallet P1842 to aisle-7, 2.0 m/s, 400 kg, 14:00-14:10</span></li>
-  </ul>
-  <div class="verdict" style="margin-top:1.6rem"><span class="v-refuse">Drift</span><span class="code">EFFECTUATION_DRIFT</span></div>
-  <ul class="cmp">
-    <li><span class="k">field</span><span class="v">parameters.destination</span></li>
-    <li><span class="k">authorized</span><span class="v">aisle-4</span></li>
-    <li><span class="k">presented</span><span class="v chg">aisle-7</span></li>
-    <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE</span></li>
-  </ul>
-  <ul class="cmp">
-    <li><span class="k">field</span><span class="v">parameters.speed_cap_mps</span></li>
-    <li><span class="k">authorized</span><span class="v">1.5</span></li>
-    <li><span class="k">presented</span><span class="v chg">2.0</span></li>
-    <li><span class="k">rule</span><span class="v">MAY_NOT_INCREASE</span></li>
-  </ul>
-  <p class="note">The attempt spent nothing: the command as authorized still executed once afterwards, and then was spent. Every value above is the service's own, taken from a run of the same service on 27 September 2026 with the engine unchanged and a new action schema declared by the caller. The public demo runs the payout action class. <a href="how-it-works.html">How the check runs</a>.</p>
-</div></section>
-
-<section><div class="wrap">
-  <h2>What a refusal looks like at a boundary.</h2>
-  <div class="verdict" style="margin-top:2rem"><span class="v-refuse">Refused</span><span class="code">GRANT_DOES_NOT_COVER_THIS_ACTION</span></div>
-  <ul class="cmp">
-    <li><span class="k">field</span><span class="v">parameters.payee_account</span></li>
-    <li><span class="k">approved by Company A</span><span class="v">GB00SUPPLIER00004821</span></li>
-    <li><span class="k">presented to Company B</span><span class="v chg">GB00SUPPLIER00009137</span></li>
-    <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE</span></li>
-  </ul>
-  <span class="api no">Payment API: not called</span>
-  <p class="note">Recorded from the live service on 27 September 2026. The authorization record holds the decision, the binding, the digest of the action it covers, the evidence with what was claimed kept apart from what was established, the presented action and its own digest, the policy version and the timestamps. The effectuation answer carries the refusal code, the field and both values. <a href="how-it-works.html">The record</a>.</p>
-</div></section>
-
-<section><div class="wrap">
-  <h2>What has to be true for this to matter.</h2>
-  <ul class="knows" style="margin-top:2rem">
-    <li><span class="mark">01</span><span>The integrating party can place a check on the path that acts, on their side of the irreversible call.</span></li>
-    <li><span class="mark">02</span><span>An authority established for one system can be presented, and re-checked, in another.</span></li>
-    <li><span class="mark">03</span><span>A refusal at that seam is cheaper than reconstructing what happened afterwards.</span></li>
-  </ul>
-  <p style="margin-top:2.4rem">Those three are the conditions an integration has to satisfy. The sandbox is the concrete part: one action class, the live service, no account and no login, synthetic data.</p>
+  <h2>Where the check has to sit.</h2>
+  <p style="margin-top:1.4rem">The integrating party places the check on the path that acts, on its own side of the irreversible call. A refusal there is cheaper than reconstructing what happened afterwards.</p>
   <div class="cta-row" style="margin-top:2.6rem">
     <a class="btn btn-primary arrow-after" href="https://api.humsana.com/sandbox/">Open the sandbox</a>
     <a class="btn btn-ghost" href="mailto:ram@humsana.com">Talk to us</a>
