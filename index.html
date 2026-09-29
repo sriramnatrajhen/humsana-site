@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Humsana: the authorization boundary for autonomous actors</title>
-<meta name="description" content="Humsana binds authority to consequential actions, then checks that the action reaching execution is still within that authority.">
-<link rel="stylesheet" href="style.css?v=4">
+<title>Humsana: the authorization boundary for autonomous action</title>
+<meta name="description" content="Humsana binds authority to a consequential action, checks that the action reaching execution is still within that authority, and refuses when it is not.">
+<link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 
@@ -23,12 +23,12 @@
 
 <header class="hero"><div class="wrap hero-grid">
   <div class="hero-copy">
-    <h1>Humsana makes AI agents accountable for the actions they take.</h1>
-    <p class="lead">Inside your own stack, identity, policy and application controls can govern what an agent does. The hard part begins when the agent leaves it. Humsana binds authority to the action, checks that binding where the action reaches its executor, and refuses the action, naming what does not match, when it is not covered.</p>
-    <p style="margin-top:1.2rem">If a payment was authorized for account 4821 and arrives asking for 9137, it is refused at the boundary, before the executor reaches the payment system. The check runs where the integrating party places it, on the path that acts.</p>
+    <h1>The hard part begins when an AI agent leaves your system.</h1>
+    <p class="lead">Humsana binds authority to a consequential action, checks that the action reaching execution is still within that authority, and refuses when it is not.</p>
+    <p>A refusal names the field, both values and the rule, and it runs where the integrating party places it.</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="https://api.humsana.com/sandbox/">See it refuse</a>
-      <a class="btn btn-ghost" href="the-execution-boundary.html">The execution boundary</a>
+      <a class="btn btn-ghost" href="how-it-works.html">How it works</a>
     </div>
   </div>
   <aside class="hero-panel">
@@ -45,81 +45,25 @@
     <span class="act">&larr; the same action, presented</span>
   </div>
 </div>
-    <p class="note">Different systems. Different owners. One action. What proves the authority traveled with it?</p>
+    <p class="note">One action. Two organizations. What proves the authority traveled with it?</p>
   </aside>
 </div></header>
 
-<section data-scene-scope><div class="wrap">
-  <h2>What proves the authority traveled with it?</h2>
-  <p style="margin-top:1.4rem">Inside one boundary the answers line up. As the boundary hardens, the system that executes the action can establish less and less about the authority behind it. Move the boundary and watch what the executor is left holding.</p>
-  <div class="switch" role="tablist" aria-label="Where the boundary sits">
-    <button role="tab" id="tab-c1" aria-controls="case-1" aria-selected="false" tabindex="-1" data-case="1">Same system</button>
-    <button role="tab" id="tab-c2" aria-controls="case-2" aria-selected="false" tabindex="-1" data-case="2">Different systems</button>
-    <button role="tab" id="tab-c3" aria-controls="case-3" aria-selected="true" tabindex="0" data-case="3">Different organizations</button>
-  </div>
-  <div class="scene" data-case="3">
-  <div class="party a">
-    <span class="pname">Company A</span>
-    <ol><li>Principal</li><li>Authority</li><li>Agent</li></ol>
-    <span class="act">consequential action &rarr;</span>
-  </div>
-  <div class="gap" aria-hidden="true"><i></i><span>boundary</span></div>
-  <div class="party b">
-    <span class="pname">Company B</span>
-    <ol><li>Executor</li></ol>
-    <span class="act">&larr; the same action, presented</span>
-  </div>
-</div>
-  <div id="case-3" role="tabpanel" aria-labelledby="tab-c3">
-    <p style="margin-top:2rem">Company A's agent asks Company B's executor to act. The executor holds the request and almost nothing else: not the principal, not the delegation, not the approval behind it.</p>
-    <ul class="knows">
-    <li class="no"><span class="mark">no</span><span>who authorized the agent</span></li>
-    <li class="no"><span class="mark">no</span><span>what authority reached it</span></li>
-    <li class="no"><span class="mark">no</span><span>whether that authority was narrowed on the way</span></li>
-    <li class="no"><span class="mark">no</span><span>whether the action presented is the one that was approved</span></li>
-    <li class="no"><span class="mark">no</span><span>what evidence to rely on afterwards</span></li>
-  </ul>
-  </div>
-  <div id="case-2" role="tabpanel" aria-labelledby="tab-c2" hidden>
-    <p style="margin-top:2rem">Two systems inside one organization. Identity travels, but the authority for this action does not necessarily arrive with it, and the approval stays in the system that made it.</p>
-    <ul class="knows">
-    <li class="yes"><span class="mark">yes</span><span>who authorized the agent</span></li>
-    <li class="part"><span class="mark">not bound</span><span>what authority reached it</span></li>
-    <li class="no"><span class="mark">no</span><span>whether that authority was narrowed on the way</span></li>
-    <li class="no"><span class="mark">no</span><span>whether the action presented is the one that was approved</span></li>
-    <li class="part"><span class="mark">partly</span><span>what evidence to rely on afterwards</span></li>
-  </ul>
-  </div>
-  <div id="case-1" role="tabpanel" aria-labelledby="tab-c1" hidden>
-    <p style="margin-top:2rem">One system. The stack holds the actor, the tool, the rule, the approval and the request, and can decide inside one authority context.</p>
-    <ul class="knows">
-    <li class="yes"><span class="mark">yes</span><span>who authorized the agent</span></li>
-    <li class="yes"><span class="mark">yes</span><span>what authority reached it</span></li>
-    <li class="yes"><span class="mark">yes</span><span>whether that authority was narrowed on the way</span></li>
-    <li class="yes"><span class="mark">yes</span><span>whether the action presented is the one that was approved</span></li>
-    <li class="yes"><span class="mark">yes</span><span>what evidence to rely on afterwards</span></li>
-  </ul>
-  </div>
-</div></section>
-
 <section><div class="wrap">
   <h2>An approved action can still be refused.</h2>
-  <p style="margin-top:1.4rem">Company A approves a payout: &pound;1,800 to Supplier X, account 4821. What reaches Company B's executor is one instruction, and the boundary compares it against the action that was approved.</p>
-  <div class="switch" role="tablist" aria-label="The action presented to the executor" style="margin-top:2.6rem">
+  <p>Company A approves a payout of &pound;1,800 to Supplier X, account 4821. One instruction reaches Company B's executor.</p>
+  <div class="switch" role="tablist" aria-label="The action presented to the executor">
     <button role="tab" aria-controls="ans-refused" aria-selected="true" tabindex="0">Account changed, 9137</button>
     <button role="tab" aria-controls="ans-allowed" aria-selected="false" tabindex="-1">As approved, 4821</button>
   </div>
   <div id="ans-refused" role="tabpanel" style="margin-top:2.4rem">
-    <p style="margin-bottom:1.6rem">The instruction that arrives carries account 9137. The action that was approved carries 4821.</p>
     <div class="verdict"><span class="v-refuse">Refused</span><span class="code">GRANT_DOES_NOT_COVER_THIS_ACTION</span></div>
     <ul class="cmp">
       <li><span class="k">field</span><span class="v">parameters.payee_account</span></li>
-      <li><span class="k">approved by Company A</span><span class="v">GB00SUPPLIER00004821</span></li>
-      <li><span class="k">presented to Company B</span><span class="v chg">GB00SUPPLIER00009137</span></li>
+      <li><span class="k">approved</span><span class="v">GB00SUPPLIER00004821</span></li>
+      <li><span class="k">presented</span><span class="v chg">GB00SUPPLIER00009137</span></li>
       <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE</span></li>
-      <li><span class="k">matched</span><span class="v">false</span></li>
       <li><span class="k">consumed</span><span class="v">false</span></li>
-      <li><span class="k">refusal</span><span class="v">this grant covers a different action: parameters.payee_account</span></li>
     </ul>
     <span class="api no">Payment API: not called</span>
     <p class="note">Nothing was spent, so the action that was approved can still run as approved.</p>
@@ -128,75 +72,92 @@
     <div class="verdict"><span class="v-allow">Allowed</span><span class="code">MATCHED</span></div>
     <ul class="cmp">
       <li><span class="k">field</span><span class="v">parameters.payee_account</span></li>
-      <li><span class="k">approved by Company A</span><span class="v">GB00SUPPLIER00004821</span></li>
-      <li><span class="k">presented to Company B</span><span class="v">GB00SUPPLIER00004821</span></li>
+      <li><span class="k">approved</span><span class="v">GB00SUPPLIER00004821</span></li>
+      <li><span class="k">presented</span><span class="v">GB00SUPPLIER00004821</span></li>
       <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE, satisfied</span></li>
-      <li><span class="k">matched</span><span class="v">true</span></li>
       <li><span class="k">consumed</span><span class="v">true</span></li>
-      <li><span class="k">grant</span><span class="v">grant_0fD8lhnwQX4aodsxShkdrY-uJUns43ua</span></li>
     </ul>
     <span class="api yes">Payment API: accepted INV-88213, GBP 1,800 to ...4821</span>
-    <p class="note">The action that arrived was the action that was approved, so the executor reached the rail once.</p>
   </div>
-  <p class="note">Both answers were recorded from the live service at 08:42 UTC on 27 September 2026, by presenting those two values. <a href="https://api.humsana.com/sandbox/">Run the same action yourself.</a></p>
+  <p class="note">Both answers are the service's own, recorded from the live boundary at 08:42 UTC on 27 September 2026. <a href="https://api.humsana.com/sandbox/">Run the same action yourself.</a></p>
 </div></section>
 
 <section><div class="wrap">
-  <div class="two">
-    <div class="side">
-      <span class="zone-h">Inside one boundary</span>
-      <ul class="knows">
-        <li class="yes"><span class="mark">yes</span><span>Identity knows the actor</span></li>
-        <li class="yes"><span class="mark">yes</span><span>The agent runtime knows which tools it can call</span></li>
-        <li class="yes"><span class="mark">yes</span><span>The business system knows its own rules</span></li>
-        <li class="yes"><span class="mark">yes</span><span>The executor knows whether it can technically perform the action</span></li>
-      </ul>
+  <h2>What the boundary checks.</h2>
+  <div class="rows">
+    <div class="row">
+      <div class="rn">01</div>
+      <div>
+        <h3>The authority</h3>
+        <p>Who granted it, what it covers, when it lapses.</p>
+        <div class="chips"><span>principal</span><span>scope</span><span>expiry</span><span>consent</span></div>
+      </div>
     </div>
-    <div class="side">
-      <span class="zone-h">Across a boundary</span>
-      <ul class="knows">
-        <li class="no"><span class="mark">no</span><span>Who actually authorized the agent</span></li>
-        <li class="no"><span class="mark">no</span><span>What authority reached it</span></li>
-        <li class="no"><span class="mark">no</span><span>Whether that authority was narrowed along the way</span></li>
-        <li class="no"><span class="mark">no</span><span>Whether the action presented is the one that was approved</span></li>
-        <li class="no"><span class="mark">no</span><span>What evidence another organization should rely on later</span></li>
-      </ul>
+    <div class="row">
+      <div class="rn">02</div>
+      <div>
+        <h3>The actor</h3>
+        <p>Who the action is attributed to, bound or declared.</p>
+        <div class="chips"><span>declared</span><span>credential</span><span>one per action</span></div>
+      </div>
     </div>
-    <div class="bdry" aria-hidden="true"><span>boundary</span></div>
+    <div class="row">
+      <div class="rn">03</div>
+      <div>
+        <h3>The action</h3>
+        <p>The arriving action against the authorized one, field by field.</p>
+        <div class="chips"><span>field</span><span>both values</span><span>rule</span></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="rn">04</div>
+      <div>
+        <h3>The decision</h3>
+        <p>Allow, refuse, or hold for confirmation before it runs.</p>
+        <div class="chips"><span>allow</span><span>refuse</span><span>confirm</span></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="rn">05</div>
+      <div>
+        <h3>The record</h3>
+        <p>What was authorized, what arrived, and the rule that decided it.</p>
+        <div class="chips"><span>signed</span><span>offline</span><span>no vendor</span></div>
+      </div>
+    </div>
   </div>
-  <p style="margin-top:2.6rem">Those answers stop lining up across a boundary. Humsana carries authority to the point of execution: <a href="the-execution-boundary.html">the execution boundary, in three cases and six stages</a>. The record is what answers the question afterwards, without the agent's own transcript.</p>
 </div></section>
 
 <section><div class="wrap">
-  <h2>This is already happening, at scale.</h2>
-  <p style="margin-top:1.4rem">Every figure below is published, dated and linked. None of it is our estimate.</p>
+  <h2>The difference is at the point of execution.</h2>
+  <div class="compare">
+    <div class="ch">Without a boundary</div>
+    <div class="ch">With Humsana</div>
+    <div class="l">The executor trusts that the request is the approved one.</div>
+    <div class="r">The arriving action is compared with the authorized one, field by field.</div>
+    <div class="l">An approval is a claim inside the request.</div>
+    <div class="r">The grant is single use and names what it covers.</div>
+    <div class="l">A refusal is advice the caller may ignore.</div>
+    <div class="r">A refusal is a code naming the field and both values, and it spends nothing.</div>
+    <div class="l">The evidence is the agent's own log.</div>
+    <div class="r">The record is signed, and a third party verifies it offline.</div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>The same failure, already on the record.</h2>
   <div class="evid">
   <div class="e"><div class="fig">$2.7bn</div><div><span class="t">Business email compromise, the class where an authorized payment is redirected to a different account.</span><span class="d">21,442 complaints in one year. The payment was authorized. The account was not the one approved.</span><span class="src">FBI Internet Crime Complaint Center, 2024 annual report <a href="https://www.ic3.gov/Outreach/Brochures/ic3-brochure.pdf" rel="noopener">Source</a></span></div></div>
-  <div class="e"><div class="fig">&pound;1.28bn</div><div><span class="t">Payment fraud losses reported by UK Finance members in 2025.</span><span class="d">Up four per cent on 2024.</span><span class="src">UK Finance, Annual Fraud Report 2026 <a href="https://www.ukfinance.org.uk/news-and-insight/press-release/fraud-report-2026-press-release" rel="noopener">Source</a></span></div></div>
-  <div class="e"><div class="fig">&pound;257.5m</div><div><span class="t">Authorized push payment fraud losses in the United Kingdom in the first half of 2025.</span><span class="d">110,747 cases, and 62 per cent of the amount stolen was reimbursed to victims.</span><span class="src">UK Finance, Half Year Fraud Report 2025 <a href="https://www.ukfinance.org.uk/news-and-insight/press-release/over-ps600-million-stolen-fraudsters-in-first-half-2025" rel="noopener">Source</a></span></div></div>
   <div class="e"><div class="fig">&pound;85,000</div><div><span class="t">Maximum reimbursement per claim once the UK reimbursement requirement took effect in October 2024.</span><span class="d">The loss moves to the paying institution, so the question becomes what it can show about the action.</span><span class="src">Payment Systems Regulator, PS24/7, in force 7 October 2024 <a href="https://www.psr.org.uk/publications/policy-statements/ps24-7-fighting-authorised-push-payment-fraud-a-new-reimbursement-requirement/" rel="noopener">Source</a></span></div></div>
-  <div class="e"><div class="fig">HK$200m</div><div><span class="t">A finance employee at Arup transferred about 25 million US dollars after a video conference with a deepfaked chief financial officer.</span><span class="d">The approval was given by a person. The person was not who the approval appeared to come from.</span><span class="src">CNN and South China Morning Post, February 2024 <a href="https://www.cnn.com/2024/02/04/asia/deepfake-cfo-scam-hong-kong-intl-hnk" rel="noopener">Source</a></span></div></div>
-  <div class="e"><div class="fig">1,300%</div><div><span class="t">Reported increase in deepfake fraud attempts.</span><span class="d">Voice and video became the cheapest way to manufacture an approval.</span><span class="src">Pindrop, Voice Intelligence and Security Report, June 2025 <a href="https://www.prnewswire.com/news-releases/pindrops-2025-voice-intelligence--security-report-reveals-1-300-surge-in-deepfake-fraud-302479482.html" rel="noopener">Source</a></span></div></div>
-  <div class="e"><div class="fig">July 2025</div><div><span class="t">An AI coding agent deleted a company's production database during a code freeze, then misreported what it had done.</span><span class="d">The agent had permission to run. Nothing bound it to an authorized action.</span><span class="src">Fortune, 23 July 2025 <a href="https://fortune.com/2025/07/23/ai-coding-tool-replit-wiped-database-called-it-a-catastrophic-failure/" rel="noopener">Source</a></span></div></div>
-</div>
-  <div class="sources">
-  <div class="cap">Sources</div>
-  <ol>
-    <li>FBI Internet Crime Complaint Center, 2024 annual report.</li>
-    <li>UK Finance, Annual Fraud Report 2026 and Half Year Fraud Report 2025.</li>
-    <li>Payment Systems Regulator, PS24/7, in force 7 October 2024.</li>
-    <li>CNN, 4 February 2024, and South China Morning Post, on the Arup transfer.</li>
-    <li>Pindrop, Voice Intelligence and Security Report, June 2025.</li>
-    <li>Fortune, 23 July 2025, on the Replit agent deleting production data.</li>
-  </ol>
-</div>
+  <div class="e"><div class="fig">July 2025</div><div><span class="t">An AI coding agent deleted a company's production database during a code freeze, then misreported what it did.</span><span class="d">The agent had permission to run. Nothing bound it to an authorized action.</span><span class="src">Fortune, 23 July 2025 <a href="https://fortune.com/2025/07/23/ai-coding-tool-replit-wiped-database-called-it-a-catastrophic-failure/" rel="noopener">Source</a></span></div></div>
+  </div>
+  <p class="note">Every figure is published, dated and linked. <a href="the-execution-boundary.html">The full case, in three depths and six stages.</a></p>
 </div></section>
 
-<section><div class="wrap">
+<section class="cta-band"><div class="wrap">
   <h2>Change one value, and watch it refuse.</h2>
-  <p style="margin-top:1.4rem">The sandbox is the concrete part: one action class, the live service, no account and no login, synthetic data, and no money moves. Leave the approved values alone and the payout executes once. Change the account and it is refused at the boundary, with the field, both values and the rule named, before anything reaches the payment system.</p>
-  <p style="margin-top:1rem">The refusal is the service's own answer, not a scripted screen. It takes about a minute and needs nothing from you.</p>
-  <div class="cta-row" style="margin-top:2.6rem">
+  <p>The sandbox runs one action class on the live service with synthetic data. Nothing needs installing, and no money moves. Humsana holds none of your policy and sits outside the agent's trust domain; what the signature does not prove is written on the record itself.</p>
+  <div class="cta-row">
     <a class="btn btn-primary arrow-after" href="https://api.humsana.com/sandbox/">Open the sandbox</a>
     <a class="btn btn-ghost" href="mailto:ram@humsana.com">Talk to us</a>
   </div>
