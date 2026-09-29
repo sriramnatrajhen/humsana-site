@@ -328,6 +328,13 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   /* the base rule carries the same specificity as this one and a nowrap cell, so the first cell of a
      table has to be reset by name or it pushes the page wider than the viewport */
   table.tbl td:first-child{white-space:normal;padding-right:1rem}
+  /* refusal codes are single tokens that cannot wrap, so at phone width the two columns stack: the
+     header goes, the code gets its own line, and the description sits underneath it */
+  table.tbl thead{display:none}
+  table.tbl,table.tbl tbody,table.tbl tr,table.tbl td{display:block;width:auto}
+  table.tbl tr{padding:.95rem 0;border-bottom:1px solid var(--line-soft)}
+  table.tbl td{padding:0;border-bottom:0;overflow-wrap:anywhere}
+  table.tbl td:first-child{white-space:normal;padding:0 0 .35rem;font-size:12.5px;color:var(--ink)}
 }
 @media(max-width:760px){.evid .e{grid-template-columns:1fr;gap:.45rem}}
 
