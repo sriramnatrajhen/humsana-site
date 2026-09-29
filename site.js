@@ -7,20 +7,28 @@
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
   }
-  var rail = document.querySelector('.rail');
-  if (!rail) { return; }
-  var steps = Array.prototype.slice.call(rail.querySelectorAll('.step'));
-  var bodies = Array.prototype.slice.call(document.querySelectorAll('.step-body'));
-  var select = function (i) {
-    steps.forEach(function (s, j) { s.setAttribute('aria-selected', i === j ? 'true' : 'false'); });
-    bodies.forEach(function (b, j) {
-      if (i === j) { b.removeAttribute('hidden'); } else { b.setAttribute('hidden', ''); }
-    });
-  };
-  steps.forEach(function (s, i) {
-    s.addEventListener('click', function () { select(i); });
-    s.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(i); }
+  /* Wire every rail that actually carries mechanism steps. Taking the first .rail on the page is not
+     enough: the action map also contains a .rail, and it holds no steps, so a page with a map would
+     hand the wiring an empty list and the mechanism would stop switching. */
+  var rails = Array.prototype.slice.call(document.querySelectorAll('.rail')).filter(function (r) {
+    return r.querySelector('.step');
+  });
+  if (!rails.length) { return; }
+  rails.forEach(function (rail) {
+    var steps = Array.prototype.slice.call(rail.querySelectorAll('.step'));
+    var scope = (rail.closest && rail.closest('section')) || document;
+    var bodies = Array.prototype.slice.call(scope.querySelectorAll('.step-body'));
+    var select = function (i) {
+      steps.forEach(function (s, j) { s.setAttribute('aria-selected', i === j ? 'true' : 'false'); });
+      bodies.forEach(function (b, j) {
+        if (i === j) { b.removeAttribute('hidden'); } else { b.setAttribute('hidden', ''); }
+      });
+    };
+    steps.forEach(function (s, i) {
+      s.addEventListener('click', function () { select(i); });
+      s.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(i); }
+      });
     });
   });
 }());

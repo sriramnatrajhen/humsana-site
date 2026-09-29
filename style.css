@@ -519,9 +519,12 @@ html{scrollbar-color:var(--line) var(--bg)}
 .acts-grid p{font-size:16px}
 .acts-grid .why{margin-top:1rem}
 .ic{width:20px;height:20px;flex:none;color:var(--accent-text);fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.st{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);
+/* Status chips live inside the action-class component only. This was a bare .st rule, which collided
+   with .st on the mechanism rail, where it is the step title: the five step names rendered as uppercase
+   mono chips. Scope every chip rule to .acts so the two can never mean each other. */
+.acts .st{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);
   border:1px solid var(--line);padding:.22rem .5rem;white-space:nowrap}
-.st.live{color:var(--accent-text);border-color:var(--accent-pale);background:var(--accent-pale)}
+.acts .st.live{color:var(--accent-text);border-color:var(--accent-pale);background:var(--accent-pale)}
 .acts-panel.enter .v.chg{animation:wash .6s ease-out both}
 @keyframes wash{from{background:var(--accent);color:var(--panel)}}
 @media(max-width:900px){.acts-grid{grid-template-columns:1fr;gap:1.6rem}}

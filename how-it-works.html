@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>How it works: Humsana</title>
 <meta name="description" content="The mechanism in five steps: claim, establish, confirm, bind, enforce. Authority is bound to one action and checked again immediately before that action runs.">
-<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 
@@ -14,8 +14,9 @@
   <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
   <div class="nav-links" id="nav">
     <a href="index.html">Home</a>
+    <a href="use-cases.html">Action classes</a>
     <a href="the-execution-boundary.html">Execution boundary</a>
-    <a href="how-it-works.html">How it works</a>
+    <a href="how-it-works.html" aria-current="page">How it works</a>
     <a href="developers.html">Developers</a>
     <a class="nav-cta" href="https://api.humsana.com/sandbox/">Sandbox</a>
   </div>
@@ -23,7 +24,7 @@
 
 <header class="hero"><div class="wrap">
   <h1 style="max-width:26ch">From authority to execution.</h1>
-  <p class="lead" style="max-width:64ch">The principal grants authority over one action. Humsana records it, binds it to that action, and the executor asks again immediately before it runs.</p>
+  <p class="lead" style="max-width:64ch">The principal grants authority over one action.</p>
   <div class="cta-row" style="margin-top:2.2rem">
     <a class="btn btn-primary" href="https://api.humsana.com/sandbox/">See it refuse</a>
     <a class="btn btn-ghost" href="developers.html">The integration</a>
@@ -32,18 +33,25 @@
 
 <section><div class="wrap">
   <div class="head"><h2>The mechanism in five steps.</h2></div>
-  <div class="rail" role="tablist">
-  <button class="step" role="tab" aria-selected="true"><span class="sn">01</span><span class="st">Claim</span></button>
-  <button class="step" role="tab" aria-selected="false"><span class="sn">02</span><span class="st">Establish</span></button>
-  <button class="step" role="tab" aria-selected="false"><span class="sn">03</span><span class="st">Confirm</span></button>
-  <button class="step" role="tab" aria-selected="false"><span class="sn">04</span><span class="st">Bind</span></button>
-  <button class="step" role="tab" aria-selected="false"><span class="sn">05</span><span class="st">Enforce</span></button>
+  <div class="flowrow">
+    <div class="fi">01 Claim<small><span class="mono">authority</span></small></div>
+    <div class="fi">02 Establish<small><span class="mono">agent acts</span></small></div>
+    <div class="fi">03 Confirm<small><span class="mono">check</span></small></div>
+    <div class="fi">04 Bind<small><span class="mono">decision</span></small></div>
+    <div class="fi">05 Enforce<small><span class="mono">record</span></small></div>
+  </div>
+  <div class="rail" role="tablist" aria-label="The mechanism in five steps">
+  <button class="step" role="tab" aria-controls="step-claim" aria-selected="true" tabindex="0"><span class="sn">01</span><span class="st">Claim</span></button>
+  <button class="step" role="tab" aria-controls="step-establish" aria-selected="false" tabindex="-1"><span class="sn">02</span><span class="st">Establish</span></button>
+  <button class="step" role="tab" aria-controls="step-confirm" aria-selected="false" tabindex="-1"><span class="sn">03</span><span class="st">Confirm</span></button>
+  <button class="step" role="tab" aria-controls="step-bind" aria-selected="false" tabindex="-1"><span class="sn">04</span><span class="st">Bind</span></button>
+  <button class="step" role="tab" aria-controls="step-enforce" aria-selected="false" tabindex="-1"><span class="sn">05</span><span class="st">Enforce</span></button>
 </div>
-<div class="step-body"><p>The agent says who it is, who it acts for, what it wants to do, and what authority it holds.</p></div>
-<div class="step-body" hidden><p>Humsana separates what is established from what is claimed and from what stays unknown.</p></div>
-<div class="step-body" hidden><p>The consequence decides whether a person has to approve. Where one does, the approval is signed over the exact action.</p></div>
-<div class="step-body" hidden><p>The approval is tied to the action, its bound values and its expiry. It can be spent once.</p></div>
-<div class="step-body" hidden><p>The executor presents the action immediately before it runs. A material change is refused and the changed field is named.</p></div>
+<div class="step-body" id="step-claim" role="tabpanel"><p>The agent says who it is, who it acts for, what it wants to do, and what authority it holds.</p></div>
+<div class="step-body" id="step-establish" role="tabpanel" hidden><p>Humsana separates what is established from what is claimed and from what stays unknown.</p></div>
+<div class="step-body" id="step-confirm" role="tabpanel" hidden><p>The consequence decides whether a person has to approve. Where one does, the approval is signed over the exact action.</p></div>
+<div class="step-body" id="step-bind" role="tabpanel" hidden><p>The approval is tied to the action, its bound values and its expiry. It can be spent once.</p></div>
+<div class="step-body" id="step-enforce" role="tabpanel" hidden><p>The executor presents the action immediately before it runs. A material change is refused and the changed field is named.</p></div>
 </div></section>
 
 <section><div class="wrap">
@@ -111,7 +119,7 @@ payment API: not called</div></details>
 
 <footer><div class="wrap foot-in">
   <div class="brand"><img src="logo.png" alt="Humsana"></div>
-  <div class="foot-links"><a href="walkthrough.html">Walkthrough</a><a href="swan.html">Swan</a><a href="the-execution-boundary.html">Execution boundary</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a></div>
+  <div class="foot-links"><a href="use-cases.html">Action classes</a><a href="walkthrough.html">Walkthrough</a><a href="swan.html">Swan</a><a href="the-execution-boundary.html">Execution boundary</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a></div>
   <div class="foot-copy">Humsana. Authority travels with the action.</div>
 </div></footer>
 <script src="site.js"></script>

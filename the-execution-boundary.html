@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The execution boundary: where authority and execution stop sharing a system | Humsana</title>
-<meta name="description" content="The boundary at three depths, the six stages that carry authority to the point of execution, and the published fraud losses behind it.">
-<link rel="stylesheet" href="style.css?v=5">
+<meta name="description" content="The boundary at three depths, one dispatch refused at the seam, the six stages that carry authority to execution, and the losses already on the record.">
+<link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 
@@ -14,7 +14,8 @@
   <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
   <div class="nav-links" id="nav">
     <a href="index.html">Home</a>
-    <a href="the-execution-boundary.html">Execution boundary</a>
+    <a href="use-cases.html">Action classes</a>
+    <a href="the-execution-boundary.html" aria-current="page">Execution boundary</a>
     <a href="how-it-works.html">How it works</a>
     <a href="developers.html">Developers</a>
     <a class="nav-cta" href="https://api.humsana.com/sandbox/">Sandbox</a>
@@ -26,53 +27,70 @@
   <p class="lead" style="max-width:64ch;margin-top:1.9rem">Humsana sits at the point where a consequential action crosses from one authority context into another. It asks whether the authority still covers what is being executed, and refuses when it does not.</p>
   <p style="margin-top:1.2rem">The refusal names the field, both values and the rule, and it spends nothing. Honoring that refusal is the executor's job, which is why the seam matters as much as the check.</p>
   <p style="margin-top:1.2rem">It does not replace the identity system, the agent runtime or the executor.</p>
+
+  <div class="bmap">
+    <div class="bmap-sides">
+      <div class="side a">
+        <span class="pname">Company A</span>
+        <ul>
+          <li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="7" r="3"/><path d="M4.2 17c0-3.2 2.6-5.8 5.8-5.8s5.8 2.6 5.8 5.8"/></svg>Principal</li>
+          <li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.2l5.6 1.9v4.4c0 3.1-2.2 5.7-5.6 6.6-3.4-.9-5.6-3.5-5.6-6.6V5.1z"/></svg>Authority</li>
+          <li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="4" width="15" height="12" rx="1.5"/><path d="M6 8.5l2.2 2L6 12.5M10.8 13h3.2"/></svg>Agent</li>
+        </ul>
+      </div>
+      <div class="side b">
+        <span class="pname">Company B</span>
+        <ul>
+          <li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="6" width="14" height="8" rx="1"/><path d="M4.5 16.5h2M13.5 16.5h2"/></svg>Executor</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bd" aria-hidden="true"><span>boundary</span></div>
+    <div class="rail" aria-hidden="true">
+      <span class="tok">dispatch P1842</span>
+      <span class="chip"><i class="stop"></i>aisle 4 &rarr; aisle 7 &middot; refused</span>
+    </div>
+    <p class="bmap-note">Cleared to move pallet P1842 to aisle 4 at 1.5 m/s. What arrived asked for aisle 7 at 2.0 m/s, so no instruction reached the fleet.</p>
+  </div>
+
   <div class="cta-row" style="margin-top:2.2rem">
     <a class="btn btn-primary" href="https://api.humsana.com/sandbox/">See it refuse</a>
     <a class="btn btn-ghost" href="how-it-works.html">How the check runs</a>
   </div>
 </div></header>
 
-<section data-scene-scope><div class="wrap">
+<section><div class="wrap">
   <h2>The same problem, at three depths.</h2>
   <p style="margin-top:1.4rem">The boundary hardens as the two sides stop sharing a system. At each depth the executor can settle less about the authority behind the action.</p>
   <div class="caselist" role="tablist" aria-label="How hard the boundary is">
-    <button role="tab" id="bt-1" aria-controls="bc-1" aria-selected="false" tabindex="-1" data-case="1">1. Same system<span class="who">one owner, one authority context</span></button>
-    <button role="tab" id="bt-2" aria-controls="bc-2" aria-selected="false" tabindex="-1" data-case="2">2. Different systems<span class="who">two systems, one organization</span></button>
-    <button role="tab" id="bt-3" aria-controls="bc-3" aria-selected="true" tabindex="0" data-case="3">3. Different organizations<span class="who">two owners, no shared basis</span></button>
+    <button role="tab" id="bt-1" aria-controls="bc-1" aria-selected="false" tabindex="-1">1. Same system<span class="who">one owner, one authority context</span></button>
+    <button role="tab" id="bt-2" aria-controls="bc-2" aria-selected="false" tabindex="-1">2. Different systems<span class="who">two systems, one organization</span></button>
+    <button role="tab" id="bt-3" aria-controls="bc-3" aria-selected="true" tabindex="0">3. Different organizations<span class="who">two owners, no shared basis</span></button>
   </div>
-<div class="scene" data-case="3">
-  <div class="party a"><span class="pname">Company A</span>
-    <ol><li>Principal</li><li>Authority</li><li>Agent</li></ol>
-    <span class="act">consequential action &rarr;</span></div>
-  <div class="gap" aria-hidden="true"><i></i><span>boundary</span></div>
-  <div class="party b"><span class="pname">Company B</span>
-    <ol><li>Executor</li></ol>
-    <span class="act">&larr; the same action, presented</span></div>
-</div>
   <div id="bc-1" role="tabpanel" aria-labelledby="bt-1" hidden>
     <div class="casepanel">
-      <p>The stack holds the actor, the tool, the rule, the approval and the request. Existing controls can govern this case, and they often do.</p>
+      <p>One owner holds the actor, the tool, the rule, the approval and the request in a single log. Controls inside that system govern this depth, and they often do.</p>
       <div class="row">
-        <div><h3>What the executor settles</h3><p>Everything. Identity, authority, the request and the approval sit in one log, under one owner.</p></div>
-        <div class="r"><h3>What has to be carried</h3><p>Nothing. The authority context never leaves the system that issued it.</p></div>
+        <div><h3>What one system settles</h3><p>Identity, authority, the request and the approval sit under one owner, so nothing about the action is out of reach.</p></div>
+        <div class="r"><h3>Nothing to carry</h3><p>The authority context never leaves the system that issued it.</p></div>
       </div>
     </div>
   </div>
   <div id="bc-2" role="tabpanel" aria-labelledby="bt-2" hidden>
     <div class="casepanel">
-      <p>Identity travels, but the authority for this specific action does not necessarily arrive with it. The approval stays in the system that made it.</p>
+      <p>Identity travels between the two systems, but the authority for this specific action does not necessarily arrive with it. The approval stays in the system that made it.</p>
       <div class="row">
-        <div><h3>What the executor settles</h3><p>Who the actor is. The authority behind the action is asserted by the calling system, not shown.</p></div>
-        <div class="r"><h3>What has to be carried</h3><p>The approval itself, or the executor is asked to trust that it exists somewhere.</p></div>
+        <div><h3>What identity settles</h3><p>Who the actor is. The authority behind the action is asserted by the calling system, not shown.</p></div>
+        <div class="r"><h3>What has to be carried</h3><p>The approval itself, or the executor is asked to trust that it exists somewhere in the company.</p></div>
       </div>
     </div>
   </div>
   <div id="bc-3" role="tabpanel" aria-labelledby="bt-3">
     <div class="casepanel">
-      <p>This is where the problem appears. The executor holds the request and almost nothing else: not the principal, not the delegation, not the approval behind it.</p>
+      <p>This is the depth the map shows. The executor holds the request and almost nothing else: not the principal, not the delegation, not the approval behind it.</p>
       <div class="row">
-        <div><h3>What the executor settles</h3><p>That a request arrived. The counterparty's identity, policy and logs are not inspectable.</p></div>
-        <div class="r"><h3>What has to be carried</h3><p>The authority, the binding and the evidence, or the action is taken on trust.</p></div>
+        <div><h3>What the request settles</h3><p>That a request arrived. The counterparty's identity, policy and logs are not inspectable from here.</p></div>
+        <div class="r"><h3>What has to be obeyed</h3><p>A refusal holds only if whoever owns the executor obeys it. The other side cannot enforce it for them.</p></div>
       </div>
     </div>
   </div>
@@ -80,7 +98,7 @@
 
 <section><div class="wrap">
   <h2>Six stages carry authority to execution.</h2>
-  <p style="margin-top:1.4rem">Each stage can be held, checked or lost. The boundary's job is the fifth one: to know what arrives at the executor and whether it is still covered.</p>
+  <p style="margin-top:1.4rem">Each stage can be held, checked or lost. The map above is the fifth one: what arrives at the executor, and whether the authority still covers it.</p>
   <ol class="chain">
     <li><span class="num">01</span><h3>Authority</h3><p>Who is acting, and on whose behalf.</p></li>
     <li><span class="num">02</span><h3>Delegation</h3><p>How that authority reached the actor.</p></li>
@@ -112,7 +130,7 @@
 
 <footer><div class="wrap foot-in">
   <div class="brand"><img src="logo.png" alt="Humsana"></div>
-  <div class="foot-links"><a href="walkthrough.html">Walkthrough</a><a href="swan.html">Swan</a><a href="the-execution-boundary.html">Execution boundary</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a></div>
+  <div class="foot-links"><a href="use-cases.html">Action classes</a><a href="walkthrough.html">Walkthrough</a><a href="swan.html">Swan</a><a href="the-execution-boundary.html" aria-current="page">Execution boundary</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a></div>
   <div class="foot-copy">Humsana. Authority travels with the action.</div>
 </div></footer>
 <script src="site.js"></script>
