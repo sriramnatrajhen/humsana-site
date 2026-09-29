@@ -511,6 +511,8 @@ html{scrollbar-color:var(--line) var(--bg)}
 .acts-tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
 .acts-tabs button[aria-selected="true"] .ic{color:var(--accent-text)}
 .acts-panel{padding-top:1.9rem}
+/* the panels carry data only now, so the row list is capped rather than stretched across the page */
+.acts-panel .cmp{max-width:680px}
 .acts-panel[hidden]{display:none}
 .act-head{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:1.3rem}
 .act-head h3{font-size:20px}

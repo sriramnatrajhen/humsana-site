@@ -3,8 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>Action classes: one check, eight kinds of action | Humsana</title>
-<meta name="description" content="Eight action classes, each one refused by the same check. What changes from one class to the next is the action, the field that drifts, and the rule.">
+<meta name="description" content="Eight action classes, each one refused by the same check.">
+<link rel="canonical" href="https://humsana.com/use-cases.html">
+<meta name="theme-color" content="#FCFAF7">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Humsana">
+<meta property="og:url" content="https://humsana.com/use-cases.html">
+<meta property="og:title" content="Action classes: one check, eight kinds of action | Humsana">
+<meta property="og:description" content="Eight action classes, each one refused by the same check.">
+<meta property="og:image" content="https://humsana.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
@@ -24,7 +37,7 @@
 
 <header class="hero"><div class="wrap">
   <h1>One check, eight kinds of action.</h1>
-  <p class="lead">The engine does not know domains. It compares the action that arrives with the action that was authorized, and refuses the difference. What changes from one class to the next is the action, the field that drifts, and the rule.</p>
+  <p class="lead">The engine does not know domains. It compares the action that arrives with the action that was authorized, and refuses the difference.</p>
 </div></header>
 
 <section><div class="wrap">
@@ -43,143 +56,98 @@
 
     <div class="acts-panel" id="act-pay" role="tabpanel">
       <div class="act-head"><h3>Release a payment</h3><span class="st live">live in the sandbox</span></div>
-      <div class="acts-grid">
-        <ul class="cmp">
-          <li><span class="k">authorized</span><span class="v">pay GBP 1,800 to account 4821</span></li>
-          <li><span class="k">presented</span><span class="v chg">pay GBP 1,800 to account 9137</span></li>
-          <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE, parameters.payee_account</span></li>
-          <li><span class="k">answer</span><span class="v">GRANT_DOES_NOT_COVER_THIS_ACTION</span></li>
-        </ul>
-        <div>
-          <p>The account is part of the action, so the grant carries it. The check compares the account in the grant with the account on the instruction.</p>
-          <p class="why">Two accounts are two actions, and only the first was authorized.</p>
-        </div>
-      </div>
+      <ul class="cmp">
+        <li><span class="k">authorized</span><span class="v">pay GBP 1,800 to account 4821</span></li>
+        <li><span class="k">presented</span><span class="v chg">pay GBP 1,800 to account 9137</span></li>
+        <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE, parameters.payee_account</span></li>
+        <li><span class="k">answer</span><span class="v">GRANT_DOES_NOT_COVER_THIS_ACTION</span></li>
+      </ul>
     </div>
 
     <div class="acts-panel" id="act-rob" role="tabpanel" hidden>
       <div class="act-head"><h3>Dispatch a machine</h3><span class="st">ran clean, 18 checks on a local run</span></div>
-      <div class="acts-grid">
-        <ul class="cmp">
-          <li><span class="k">authorized</span><span class="v">pallet P1842 to aisle 4, max 1.5 m/s</span></li>
-          <li><span class="k">presented</span><span class="v chg">pallet P1842 to aisle 7, max 2.0 m/s</span></li>
-          <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE and MAY_NOT_INCREASE</span></li>
-          <li><span class="k">answer</span><span class="v">refused on parameters.destination and parameters.speed_cap_mps</span></li>
-        </ul>
-        <div>
-          <p>A dispatch carries a destination and a speed cap, and both are bound before the machine moves. The check reads the two fields and refuses the drift.</p>
-          <p class="why">Nothing in the engine knows what a warehouse is, and it answered the same way it answers a payment.</p>
-        </div>
-      </div>
+      <ul class="cmp">
+        <li><span class="k">authorized</span><span class="v">pallet P1842 to aisle 4, max 1.5 m/s</span></li>
+        <li><span class="k">presented</span><span class="v chg">pallet P1842 to aisle 7, max 2.0 m/s</span></li>
+        <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE and MAY_NOT_INCREASE</span></li>
+        <li><span class="k">answer</span><span class="v">refused on parameters.destination and parameters.speed_cap_mps</span></li>
+      </ul>
     </div>
 
     <div class="acts-panel" id="act-tool" role="tabpanel" hidden>
       <div class="act-head"><h3>Call a tool on your behalf</h3><span class="st">not yet run</span></div>
-      <div class="acts-grid">
-        <ul class="cmp">
-          <li><span class="k">authorized</span><span class="v">refund order ACME-4471, up to USD 200</span></li>
-          <li><span class="k">presented</span><span class="v chg">refund order ACME-4471, USD 1,850</span></li>
-          <li><span class="k">rule</span><span class="v">MAY_ONLY_SHRINK</span></li>
-          <li><span class="k">answer</span><span class="v">GRANT_DOES_NOT_COVER_THIS_ACTION</span></li>
-        </ul>
-        <div>
-          <p>A tool call carries a value, and the grant names the ceiling it may spend. The check compares the two.</p>
-          <p class="why">A smaller refund fits inside the grant. A larger one is another action, and it does not run.</p>
-        </div>
-      </div>
+      <ul class="cmp">
+        <li><span class="k">authorized</span><span class="v">refund order ACME-4471, up to USD 200</span></li>
+        <li><span class="k">presented</span><span class="v chg">refund order ACME-4471, USD 1,850</span></li>
+        <li><span class="k">rule</span><span class="v">MAY_ONLY_SHRINK</span></li>
+        <li><span class="k">answer</span><span class="v">GRANT_DOES_NOT_COVER_THIS_ACTION</span></li>
+      </ul>
     </div>
 
     <div class="acts-panel" id="act-hire" role="tabpanel" hidden>
       <div class="act-head"><h3>Reject or advance a candidate</h3><span class="st">not yet run</span></div>
-      <div class="acts-grid">
-        <ul class="cmp">
-          <li><span class="k">authorized</span><span class="v">reject candidate 88-402 on a reason inside the authorized screening set</span></li>
-          <li><span class="k">presented</span><span class="v chg">reject candidate 88-402, question 4 was never asked</span></li>
-          <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE, the stated reason</span></li>
-          <li><span class="k">answer</span><span class="v">refused, the screening set is incomplete</span></li>
-        </ul>
-        <div>
-          <p>A hiring decision carries a stated reason, and that reason cites the screening steps behind it. The check compares the steps with the set the requisition authorized.</p>
-          <p class="why">Where the reason rests on a step that never ran, the screening set is incomplete and the decision is refused.</p>
-        </div>
-      </div>
+      <ul class="cmp">
+        <li><span class="k">authorized</span><span class="v">reject candidate 88-402 on a reason inside the authorized screening set</span></li>
+        <li><span class="k">presented</span><span class="v chg">reject candidate 88-402, question 4 was never asked</span></li>
+        <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE, the stated reason</span></li>
+        <li><span class="k">answer</span><span class="v">refused, the screening set is incomplete</span></li>
+      </ul>
     </div>
 
     <div class="acts-panel" id="act-infra" role="tabpanel" hidden>
       <div class="act-head"><h3>Change infrastructure</h3><span class="st">not yet run</span></div>
-      <div class="acts-grid">
-        <ul class="cmp">
-          <li><span class="k">authorized</span><span class="v">drop table sessions_archive in staging</span></li>
-          <li><span class="k">presented</span><span class="v chg">drop table sessions_archive in production</span></li>
-          <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE, parameters.target_environment</span></li>
-          <li><span class="k">answer</span><span class="v">refused, the environment is not the authorized one</span></li>
-        </ul>
-        <div>
-          <p>A change names an environment and an object. Both are bound when the change is authorized.</p>
-          <p class="why">The same statement in staging and in production are two actions, and only one of them was authorized.</p>
-        </div>
-      </div>
+      <ul class="cmp">
+        <li><span class="k">authorized</span><span class="v">drop table sessions_archive in staging</span></li>
+        <li><span class="k">presented</span><span class="v chg">drop table sessions_archive in production</span></li>
+        <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE, parameters.target_environment</span></li>
+        <li><span class="k">answer</span><span class="v">refused, the environment is not the authorized one</span></li>
+      </ul>
     </div>
 
     <div class="acts-panel" id="act-claim" role="tabpanel" hidden>
       <div class="act-head"><h3>Settle a claim</h3><span class="st">not yet run</span></div>
-      <div class="acts-grid">
-        <ul class="cmp">
-          <li><span class="k">authorized</span><span class="v">settle claim C-2291 at USD 4,200, reason: policy clause 7.2</span></li>
-          <li><span class="k">presented</span><span class="v chg">settle claim C-2291 at USD 12,400</span></li>
-          <li><span class="k">rule</span><span class="v">MAY_NOT_INCREASE</span></li>
-          <li><span class="k">answer</span><span class="v">refused, above the authorized amount</span></li>
-        </ul>
-        <div>
-          <p>A settlement carries an amount and a reason. The check holds the amount to the one authorized.</p>
-          <p class="why">A claim may settle below the authorized figure. It may not settle above it.</p>
-        </div>
-      </div>
+      <ul class="cmp">
+        <li><span class="k">authorized</span><span class="v">settle claim C-2291 at USD 4,200, reason: policy clause 7.2</span></li>
+        <li><span class="k">presented</span><span class="v chg">settle claim C-2291 at USD 12,400</span></li>
+        <li><span class="k">rule</span><span class="v">MAY_NOT_INCREASE</span></li>
+        <li><span class="k">answer</span><span class="v">refused, above the authorized amount</span></li>
+      </ul>
     </div>
 
     <div class="acts-panel" id="act-pa" role="tabpanel" hidden>
       <div class="act-head"><h3>Determine a prior authorization</h3><span class="st">not yet run</span></div>
-      <div class="acts-grid">
-        <ul class="cmp">
-          <li><span class="k">authorized</span><span class="v">deny request PA-77310 on the documented criteria set</span></li>
-          <li><span class="k">presented</span><span class="v chg">deny request PA-77310, criterion not evaluated on the record</span></li>
-          <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE, the stated basis</span></li>
-          <li><span class="k">answer</span><span class="v">refused, the basis is not on the record</span></li>
-        </ul>
-        <div>
-          <p>A determination rests on a criteria set, and the stated basis has to sit on the record. The check compares the basis with that set.</p>
-          <p class="why">A denial whose basis is missing from the record is refused before it is issued.</p>
-        </div>
-      </div>
+      <ul class="cmp">
+        <li><span class="k">authorized</span><span class="v">deny request PA-77310 on the documented criteria set</span></li>
+        <li><span class="k">presented</span><span class="v chg">deny request PA-77310, criterion not evaluated on the record</span></li>
+        <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE, the stated basis</span></li>
+        <li><span class="k">answer</span><span class="v">refused, the basis is not on the record</span></li>
+      </ul>
     </div>
 
     <div class="acts-panel" id="act-vendor" role="tabpanel" hidden>
       <div class="act-head"><h3>Change a vendor account</h3><span class="st">not yet run</span></div>
-      <div class="acts-grid">
-        <ul class="cmp">
-          <li><span class="k">authorized</span><span class="v">change remittance account for supplier 4471 to 4821, verified by call-back</span></li>
-          <li><span class="k">presented</span><span class="v chg">change remittance account for supplier 4471 to 9137, no call-back recorded</span></li>
-          <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE, parameters.account and the verification step</span></li>
-          <li><span class="k">answer</span><span class="v">refused, the verification step is missing</span></li>
-        </ul>
-        <div>
-          <p>A remittance change carries an account and a verification step. The check holds both to what was authorized.</p>
-          <p class="why">Where the call-back is not on the record, the change is refused and the existing account stands.</p>
-        </div>
-      </div>
+      <ul class="cmp">
+        <li><span class="k">authorized</span><span class="v">change remittance account for supplier 4471 to 4821, verified by call-back</span></li>
+        <li><span class="k">presented</span><span class="v chg">change remittance account for supplier 4471 to 9137, no call-back recorded</span></li>
+        <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE, parameters.account and the verification step</span></li>
+        <li><span class="k">answer</span><span class="v">refused, the verification step is missing</span></li>
+      </ul>
     </div>
   </div>
 </div></section>
 
 <section><div class="wrap">
-  <h2>What is not built.</h2>
-  <ul class="xlist">
-    <li>One class runs on the live service, and that class is payments.</li>
-    <li>Machine dispatch has run on a local reference run, not against the live service.</li>
-    <li>The hiring class is being scoped with a recruitment platform. It has not run.</li>
-    <li>The record names the actor as the caller declared it, not as Humsana verified it.</li>
-    <li>Enforcement sits in the integrating party's code, on the path they place it on.</li>
-  </ul>
+  <h2>Status.</h2>
+  <table class="tbl">
+    <thead><tr><th>Class</th><th>Status</th><th>Scope</th></tr></thead>
+    <tbody>
+      <tr><td>Payments</td><td>live</td><td>runs on the live service</td></tr>
+      <tr><td>Machine dispatch</td><td>ran clean</td><td>one local reference run only, not against the live service</td></tr>
+      <tr><td>Hiring decisions</td><td>not yet run</td><td>being scoped with a recruitment platform</td></tr>
+      <tr><td>Actor identity</td><td>declared, not verified</td><td>the record names the actor as the caller declared it, not as Humsana verified it</td></tr>
+      <tr><td>Enforcement</td><td>in the integrating party&#39;s code</td><td>on the path they place it on</td></tr>
+    </tbody>
+  </table>
 </div></section>
 
 <section class="cta-band"><div class="wrap">

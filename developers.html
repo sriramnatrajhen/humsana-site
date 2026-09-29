@@ -3,8 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>Developers: Humsana</title>
 <meta name="description" content="The integration: authorize the action, check it at the execution seam, read the code.">
+<link rel="canonical" href="https://humsana.com/developers.html">
+<meta name="theme-color" content="#FCFAF7">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Humsana">
+<meta property="og:url" content="https://humsana.com/developers.html">
+<meta property="og:title" content="Developers: Humsana">
+<meta property="og:description" content="The integration: authorize the action, check it at the execution seam, read the code.">
+<meta property="og:image" content="https://humsana.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="style.css?v=6">
 </head><body>
 
@@ -48,7 +61,7 @@
 <tr><td>HOLD</td><td>It waits until something changes.</td></tr>
 <tr><td>DENY</td><td>It does not proceed.</td></tr>
 </tbody></table>
-<p class="note">Every response carries one of six decisions. Two authorize the action. The grant is single use: the check that passes spends it.</p>
+<p class="note">The grant is single use: the check that passes spends it.</p>
 </div></section>
 
 <section><div class="wrap">
@@ -93,9 +106,9 @@
 <tr><td>POST /v1/authorize/confirm/request</td><td>Request the confirmation step.</td></tr>
 <tr><td>GET /v1/health</td><td>What the deployment runs: policy version, confirmation mode, router mode.</td></tr>
 </tbody></table>
-<p class="note">Bearer key authentication. The reference executor asks before every write, so its rail runs only on a grant. The offline verifier reads two files, the record and the key, and exits 0.</p>
+<p class="note">Bearer key authentication.</p>
 <pre class="code">python3 -m receipt.verify record.receipt.json --key key.pub.json</pre>
-<p class="note">The integration guide is available on request. The walkthrough runs the boundary and the verifier against the live service.</p>
+<p class="note">The integration guide is available on request.</p>
 <div class="cta-row" style="margin-top:2.6rem"><a class="btn btn-primary arrow-after" href="walkthrough.html">Run the five steps</a><a class="btn btn-ghost" href="mailto:ram@humsana.com">Request the integration guide</a></div>
 </div></section>
 

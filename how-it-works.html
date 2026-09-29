@@ -3,8 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>How it works: Humsana</title>
 <meta name="description" content="The mechanism in five steps: claim, establish, confirm, bind, enforce. Authority is bound to one action and checked again immediately before that action runs.">
+<link rel="canonical" href="https://humsana.com/how-it-works.html">
+<meta name="theme-color" content="#FCFAF7">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Humsana">
+<meta property="og:url" content="https://humsana.com/how-it-works.html">
+<meta property="og:title" content="How it works: Humsana">
+<meta property="og:description" content="The mechanism in five steps: claim, establish, confirm, bind, enforce. Authority is bound to one action and checked again immediately before that action runs.">
+<meta property="og:image" content="https://humsana.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
@@ -66,18 +79,18 @@
     <li class="zero"><span class="ck">Executed</span><span class="cv">0</span></li>
     <li class="no"><span class="ck">Refused</span><span class="cv">1</span></li>
   </ul>
-  <details><summary>principal</summary><div class="det">northwind:finance, acting through agent payout-repair-1. Five claims came from the caller; the service established none.</div></details>
+  <details><summary>principal</summary><div class="det">northwind:finance, acting through agent payout-repair-1.</div></details>
   <details><summary>delegation</summary><div class="det">payments.release, consequence C3, human step required. Bound values: amount_gbp, beneficiary, expiry, payee_account, reference.</div></details>
   <details><summary>binding</summary><div class="det">action digest, authorized  sha256:be49de0e...898de3
 action digest, presented  sha256:bf353324...9aaa4aa
 policy version 1</div></details>
-  <details><summary>confirmation</summary><div class="det">reviewer@northwind.example, method hmac-sha256, confirmation conf_3mgQhEwaprJRHWavDG52jQ. The approval is signed over the action.</div></details>
+  <details><summary>confirmation</summary><div class="det">reviewer@northwind.example, method hmac-sha256, confirmation conf_3mgQhEwaprJRHWavDG52jQ.</div></details>
   <details><summary>effectuation</summary><div class="det">field parameters.payee_account, authorized GB00SUPPLIER00004821, presented GB00SUPPLIER00009137
 rule MAY_NOT_CHANGE
 code GRANT_DOES_NOT_COVER_THIS_ACTION
 payment API: not called</div></details>
 </div>
-  <p class="note">Values from one refused action in the live sandbox. The states stay separate and the refusal stays in the record. <a href="walkthrough.html">Replay the run.</a></p>
+  <p class="note">Values from one refused action in the live sandbox. <a href="walkthrough.html">Replay the run.</a></p>
 </div></section>
 
 <section id="refusals"><div class="wrap">
@@ -105,12 +118,11 @@ payment API: not called</div></details>
 <section id="boundary"><div class="wrap">
   <div class="head"><h2>Where the check sits.</h2></div>
   <p>Humsana enforces at the seam the integrating party controls, and cannot enforce an executor it does not control.</p>
-  <p class="note">The latency figures cover the boundary on one host, not the network or the customer's execution path. <a href="trust.html">Method and figures.</a></p>
+  <p class="note"><a href="trust.html">Method and figures.</a></p>
 </div></section>
 
 <section><div class="wrap">
   <div class="head"><h2>Watch it refuse on one action.</h2></div>
-  <p>The sandbox runs one action class against the live service, with the values on this page.</p>
   <div class="cta-row" style="margin-top:2.6rem">
     <a class="btn btn-primary arrow-after" href="https://api.humsana.com/sandbox/">Open the sandbox</a>
     <a class="btn btn-ghost" href="sandbox.html">What it runs</a>
