@@ -66,7 +66,6 @@
       <span class="tok">pay 4821</span>
       <span class="chip"><i class="stop"></i>4821 &rarr; 9137 &middot; refused</span>
     </div>
-    <p class="bmap-note">Approved for account 4821. What reached the boundary carried 9137. The executor was never called.</p>
   </div>
 </div></header>
 
@@ -87,7 +86,6 @@
       <li><span class="k">consumed</span><span class="v">false</span></li>
     </ul>
     <span class="api no">Payment API: not called</span>
-    <p class="note">Nothing was spent, so the action that was approved can still run as approved.</p>
   </div>
   <div id="ans-allowed" role="tabpanel" style="margin-top:2.4rem" hidden>
     <div class="verdict"><span class="v-allow">Allowed</span><span class="code">MATCHED</span></div>
@@ -100,8 +98,7 @@
     </ul>
     <span class="api yes">Payment API: accepted INV-88213, GBP 1,800 to ...4821</span>
   </div>
-  <p class="note">Both answers are the service's own, recorded from the live boundary at 08:42 UTC on 27 September 2026. <a href="https://api.humsana.com/sandbox/">Run the same action yourself.</a></p>
-  <p class="note">The same check applies across action classes, each listed with its run status. <a href="use-cases.html">Every action class, in full.</a></p>
+  <p class="note">Recorded from the live boundary at 08:42 UTC on 27 September 2026. <a href="use-cases.html">Every action class</a>. <a href="https://api.humsana.com/sandbox/">Run it yourself</a>.</p>
 </div></section>
 
 <section><div class="wrap">
@@ -120,31 +117,9 @@
   </div>
 </div></section>
 
-<section><div class="wrap">
-  <h2>The same failure, already on the record.</h2>
-  <div class="figstrip">
-    <div>
-      <span class="f">$2.7bn</span>
-      <span class="t">Business email compromise, where an authorized payment is redirected to a different account.</span>
-      <span class="s">21,442 complaints in one year. <a href="https://www.ic3.gov/Outreach/Brochures/ic3-brochure.pdf" rel="noopener">FBI Internet Crime Complaint Center, 2024</a></span>
-    </div>
-    <div>
-      <span class="f">&pound;85,000</span>
-      <span class="t">Maximum reimbursement per claim under the UK reimbursement requirement.</span>
-      <span class="s">In force 7 October 2024. <a href="https://www.psr.org.uk/publications/policy-statements/ps24-7-fighting-authorised-push-payment-fraud-a-new-reimbursement-requirement/" rel="noopener">Payment Systems Regulator, PS24/7</a></span>
-    </div>
-    <div>
-      <span class="f">July 2025</span>
-      <span class="t">An AI coding agent deleted a production database during a code freeze, then misreported what it did.</span>
-      <span class="s">The agent had permission to run. <a href="https://fortune.com/2025/07/23/ai-coding-tool-replit-wiped-database-called-it-a-catastrophic-failure/" rel="noopener">Fortune, 23 July 2025</a></span>
-    </div>
-  </div>
-  <p class="note">Every figure is published, dated and linked. <a href="the-execution-boundary.html">The full case, in three depths and six stages.</a></p>
-</div></section>
-
 <section class="cta-band"><div class="wrap">
   <h2>Change one value, and watch it refuse.</h2>
-  <p>The sandbox runs one action class on the live service with synthetic data. Nothing needs installing, and no money moves. Humsana holds none of your policy and sits outside the agent's trust domain; what the signature does not prove is written on the record itself.</p>
+  <p>One action class on the live service, with synthetic data. Nothing needs installing, and no money moves. Humsana holds none of your policy.</p>
   <div class="cta-row">
     <a class="btn btn-primary arrow-after" href="https://api.humsana.com/sandbox/">Open the sandbox</a>
     <a class="btn btn-ghost" href="mailto:ram@humsana.com">Talk to us</a>
