@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Humsana share card</title>
+<link rel="stylesheet" href="../style.css?v=6">
+<style>
+  /* Not a page. This renders exactly 1200 by 630 and is screenshotted to og.png, which is what a link
+     preview shows when somebody posts a Humsana URL. Fixed sizes only, no responsive behaviour. */
+  html,body{margin:0;padding:0;background:var(--bg)}
+  .card{width:1200px;height:630px;background:var(--bg);padding:64px 72px;box-sizing:border-box;
+        display:flex;flex-direction:column;justify-content:space-between;position:relative}
+  .card .mark{height:30px}
+  .card .kick{font-family:var(--mono);font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-top:44px}
+  .card h1{font-family:var(--sans);font-weight:600;font-size:64px;line-height:1.06;letter-spacing:-.025em;
+           color:var(--ink);margin:18px 0 0;max-width:19ch}
+  .card .rule{position:relative;height:64px;margin-top:auto;border-top:1px solid var(--line)}
+  .card .rule::before{content:'';position:absolute;left:0;right:0;top:30px;border-top:1px dashed var(--line)}
+  .card .bd{position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--ink)}
+  .card .tok{position:absolute;left:50%;top:16px;transform:translateX(-50%);font-family:var(--mono);font-size:15px;
+             background:var(--panel);border:1px solid var(--ink);padding:.35rem .6rem;color:var(--ink)}
+  .card .foot{display:flex;justify-content:space-between;align-items:flex-end;margin-top:26px;
+              font-family:var(--mono);font-size:15px;color:var(--muted)}
+  .card .foot b{color:var(--accent-text);font-weight:400}
+</style>
+</head>
+<body>
+<div class="card">
+  <div>
+    <img class="mark" src="../logo.png" alt="Humsana">
+    <div class="kick">The authorization boundary</div>
+    <h1>The hard part begins when an AI agent leaves your system.</h1>
+  </div>
+  <div>
+    <div class="rule"><span class="bd"></span><span class="tok">pay 4821</span></div>
+    <div class="foot"><span>humsana.com</span><span><b>4821 &rarr; 9137</b> &middot; refused</span></div>
+  </div>
+</div>
+</body>
+</html>

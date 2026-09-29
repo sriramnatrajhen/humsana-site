@@ -5,7 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Humsana: the authorization boundary for autonomous action</title>
 <meta name="description" content="Humsana binds authority to a consequential action, checks that the action reaching execution is still within that authority, and refuses when it is not.">
-<link rel="stylesheet" href="style.css?v=5">
+<link rel="canonical" href="https://humsana.com/">
+<meta name="theme-color" content="#FCFAF7">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Humsana">
+<meta property="og:url" content="https://humsana.com/">
+<meta property="og:title" content="Humsana: the authorization boundary for autonomous action">
+<meta property="og:description" content="One check between an AI agent and the action it takes. It compares the action that arrives with the action that was authorized, refuses the difference, and leaves a record a third party verifies offline.">
+<meta property="og:image" content="https://humsana.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 
@@ -14,6 +25,7 @@
   <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
   <div class="nav-links" id="nav">
     <a href="index.html">Home</a>
+    <a href="use-cases.html">Action classes</a>
     <a href="the-execution-boundary.html">Execution boundary</a>
     <a href="how-it-works.html">How it works</a>
     <a href="developers.html">Developers</a>
@@ -21,32 +33,41 @@
   </div>
 </div></nav>
 
-<header class="hero"><div class="wrap hero-grid">
+<header class="hero"><div class="wrap">
   <div class="hero-copy">
     <h1>The hard part begins when an AI agent leaves your system.</h1>
     <p class="lead">Humsana binds authority to a consequential action, checks that the action reaching execution is still within that authority, and refuses when it is not.</p>
-    <p>A refusal names the field, both values and the rule, and it runs where the integrating party places it.</p>
+    <p>A refusal names the field, both values and the rule. It runs where the integrating party places it, and it spends nothing.</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="https://api.humsana.com/sandbox/">See it refuse</a>
       <a class="btn btn-ghost" href="how-it-works.html">How it works</a>
     </div>
   </div>
-  <aside class="hero-panel">
-    <div class="scene" data-case="3">
-  <div class="party a">
-    <span class="pname">Company A</span>
-    <ol><li>Principal</li><li>Authority</li><li>Agent</li></ol>
-    <span class="act">consequential action &rarr;</span>
+
+  <div class="bmap">
+    <div class="bmap-sides">
+      <div class="side a">
+        <span class="pname">Company A</span>
+        <ul>
+          <li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="7" r="3"/><path d="M4.2 17c0-3.2 2.6-5.8 5.8-5.8s5.8 2.6 5.8 5.8"/></svg>Principal</li>
+          <li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.2l5.6 1.9v4.4c0 3.1-2.2 5.7-5.6 6.6-3.4-.9-5.6-3.5-5.6-6.6V5.1z"/></svg>Authority</li>
+          <li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="4" width="15" height="12" rx="1.5"/><path d="M6 8.5l2.2 2L6 12.5M10.8 13h3.2"/></svg>Agent</li>
+        </ul>
+      </div>
+      <div class="side b">
+        <span class="pname">Company B</span>
+        <ul>
+          <li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="6" width="14" height="8" rx="1"/><path d="M4.5 16.5h2M13.5 16.5h2"/></svg>Executor</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bd" aria-hidden="true"><span>boundary</span></div>
+    <div class="rail" aria-hidden="true">
+      <span class="tok">pay 4821</span>
+      <span class="chip"><i class="stop"></i>4821 &rarr; 9137 &middot; refused</span>
+    </div>
+    <p class="bmap-note">Approved for account 4821. What reached the boundary carried 9137. The executor was never called.</p>
   </div>
-  <div class="gap" aria-hidden="true"><i></i><span>boundary</span></div>
-  <div class="party b">
-    <span class="pname">Company B</span>
-    <ol><li>Executor</li></ol>
-    <span class="act">&larr; the same action, presented</span>
-  </div>
-</div>
-    <p class="note">One action. Two organizations. What proves the authority traveled with it?</p>
-  </aside>
 </div></header>
 
 <section><div class="wrap">
@@ -83,49 +104,81 @@
 </div></section>
 
 <section><div class="wrap">
-  <h2>What the boundary checks.</h2>
-  <div class="rows">
-    <div class="row">
-      <div class="rn">01</div>
-      <div>
-        <h3>The authority</h3>
-        <p>Who granted it, what it covers, when it lapses.</p>
-        <div class="chips"><span>principal</span><span>scope</span><span>expiry</span><span>consent</span></div>
+  <h2>One check. Every action that leaves.</h2>
+  <p>The engine does not know domains. It compares the action that arrives with the action that was authorized, and refuses the difference, whatever the action is.</p>
+  <div class="acts">
+    <div class="acts-tabs" role="tablist" aria-label="Action classes">
+      <button role="tab" aria-controls="act-pay" aria-selected="true" tabindex="0"><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="5" width="15" height="10" rx="1.5"/><path d="M2.5 8.5h15"/></svg>Payments<span class="st live">live</span></button>
+      <button role="tab" aria-controls="act-rob" aria-selected="false" tabindex="-1"><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="6" width="14" height="8" rx="1"/><path d="M4.5 16.5h2M13.5 16.5h2"/></svg>Machine dispatch<span class="st">ran clean</span></button>
+      <button role="tab" aria-controls="act-tool" aria-selected="false" tabindex="-1"><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="4" width="15" height="12" rx="1.5"/><path d="M6 8.5l2.2 2L6 12.5M10.8 13h3.2"/></svg>Agent tool calls<span class="st">not yet run</span></button>
+      <button role="tab" aria-controls="act-hire" aria-selected="false" tabindex="-1"><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="7" r="3"/><path d="M4.2 17c0-3.2 2.6-5.8 5.8-5.8s5.8 2.6 5.8 5.8"/></svg>Hiring decisions<span class="st">not yet run</span></button>
+    </div>
+
+    <div class="acts-panel" id="act-pay" role="tabpanel">
+      <div class="act-head"><h3>Release a payment</h3><span class="st live">live in the sandbox</span></div>
+      <div class="acts-grid">
+        <ul class="cmp">
+          <li><span class="k">authorized</span><span class="v">pay GBP 1,800 to account 4821</span></li>
+          <li><span class="k">presented</span><span class="v chg">pay GBP 1,800 to account 9137</span></li>
+          <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE, parameters.payee_account</span></li>
+          <li><span class="k">answer</span><span class="v">GRANT_DOES_NOT_COVER_THIS_ACTION</span></li>
+        </ul>
+        <div>
+          <p>The payment was authorized. The account was not. Every step in the chain looks approved, and the money still leaves for somewhere nobody approved.</p>
+          <p class="why">This is the class behind business email compromise, and behind every payment instruction that was genuine until one field changed.</p>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="rn">02</div>
-      <div>
-        <h3>The actor</h3>
-        <p>Who the action is attributed to, bound or declared.</p>
-        <div class="chips"><span>declared</span><span>credential</span><span>one per action</span></div>
+
+    <div class="acts-panel" id="act-rob" role="tabpanel" hidden>
+      <div class="act-head"><h3>Dispatch a machine</h3><span class="st">18 checks, local run</span></div>
+      <div class="acts-grid">
+        <ul class="cmp">
+          <li><span class="k">authorized</span><span class="v">pallet P1842 to aisle 4, max 1.5 m/s</span></li>
+          <li><span class="k">presented</span><span class="v chg">pallet P1842 to aisle 7, max 2.0 m/s</span></li>
+          <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE and MAY_NOT_INCREASE</span></li>
+          <li><span class="k">answer</span><span class="v">two refusals, parameters.destination and parameters.speed_cap_mps</span></li>
+        </ul>
+        <div>
+          <p>The same engine answered this without one line of it changing. Nothing about a warehouse was known to it in advance.</p>
+          <p class="why">A machine sent to the wrong place, or faster than it was cleared to move, is the same failure as a payment sent to the wrong account. Only the executor differs.</p>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="rn">03</div>
-      <div>
-        <h3>The action</h3>
-        <p>The arriving action against the authorized one, field by field.</p>
-        <div class="chips"><span>field</span><span>both values</span><span>rule</span></div>
+
+    <div class="acts-panel" id="act-tool" role="tabpanel" hidden>
+      <div class="act-head"><h3>Call a tool on your behalf</h3><span class="st">not yet run</span></div>
+      <div class="acts-grid">
+        <ul class="cmp">
+          <li><span class="k">authorized</span><span class="v">refund order ACME-4471, up to USD 200</span></li>
+          <li><span class="k">presented</span><span class="v chg">refund order ACME-4471, USD 1,850</span></li>
+          <li><span class="k">rule</span><span class="v">MAY_ONLY_SHRINK</span></li>
+          <li><span class="k">answer</span><span class="v">GRANT_DOES_NOT_COVER_THIS_ACTION</span></li>
+        </ul>
+        <div>
+          <p>An agent calling a tool is taking an action, not making a suggestion. The amount either sits inside the grant or the call does not run.</p>
+          <p class="why">The ceiling is what makes the grant safe to issue once and spend once.</p>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="rn">04</div>
-      <div>
-        <h3>The decision</h3>
-        <p>Allow, refuse, or hold for confirmation before it runs.</p>
-        <div class="chips"><span>allow</span><span>refuse</span><span>confirm</span></div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="rn">05</div>
-      <div>
-        <h3>The record</h3>
-        <p>What was authorized, what arrived, and the rule that decided it.</p>
-        <div class="chips"><span>signed</span><span>offline</span><span>no vendor</span></div>
+
+    <div class="acts-panel" id="act-hire" role="tabpanel" hidden>
+      <div class="act-head"><h3>Reject or advance a candidate</h3><span class="st">not yet run</span></div>
+      <div class="acts-grid">
+        <ul class="cmp">
+          <li><span class="k">authorized</span><span class="v">reject 88-402, reason inside the authorized screening set</span></li>
+          <li><span class="k">presented</span><span class="v chg">reject 88-402, question 4 was never asked</span></li>
+          <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE, the stated reason</span></li>
+          <li><span class="k">answer</span><span class="v">refused, the screening set is incomplete</span></li>
+        </ul>
+        <div>
+          <p>A hiring decision carries a reason, and the reason either sits inside the criteria the requisition authorized or it does not.</p>
+          <p class="why">This is the action class we are scoping with the first recruitment platform. It has not run yet, and we will say so here when it does.</p>
+        </div>
       </div>
     </div>
   </div>
+  <p class="note">A status is a fact about the run, not a promise. Payments runs live. Machine dispatch passed 18 checks against the unmodified engine on a local run. <a href="use-cases.html">Every action class, in full.</a></p>
 </div></section>
 
 <section><div class="wrap">
@@ -146,10 +199,22 @@
 
 <section><div class="wrap">
   <h2>The same failure, already on the record.</h2>
-  <div class="evid">
-  <div class="e"><div class="fig">$2.7bn</div><div><span class="t">Business email compromise, the class where an authorized payment is redirected to a different account.</span><span class="d">21,442 complaints in one year. The payment was authorized. The account was not the one approved.</span><span class="src">FBI Internet Crime Complaint Center, 2024 annual report <a href="https://www.ic3.gov/Outreach/Brochures/ic3-brochure.pdf" rel="noopener">Source</a></span></div></div>
-  <div class="e"><div class="fig">&pound;85,000</div><div><span class="t">Maximum reimbursement per claim once the UK reimbursement requirement took effect in October 2024.</span><span class="d">The loss moves to the paying institution, so the question becomes what it can show about the action.</span><span class="src">Payment Systems Regulator, PS24/7, in force 7 October 2024 <a href="https://www.psr.org.uk/publications/policy-statements/ps24-7-fighting-authorised-push-payment-fraud-a-new-reimbursement-requirement/" rel="noopener">Source</a></span></div></div>
-  <div class="e"><div class="fig">July 2025</div><div><span class="t">An AI coding agent deleted a company's production database during a code freeze, then misreported what it did.</span><span class="d">The agent had permission to run. Nothing bound it to an authorized action.</span><span class="src">Fortune, 23 July 2025 <a href="https://fortune.com/2025/07/23/ai-coding-tool-replit-wiped-database-called-it-a-catastrophic-failure/" rel="noopener">Source</a></span></div></div>
+  <div class="figstrip">
+    <div>
+      <span class="f">$2.7bn</span>
+      <span class="t">Business email compromise, where an authorized payment is redirected to a different account.</span>
+      <span class="s">21,442 complaints in one year. <a href="https://www.ic3.gov/Outreach/Brochures/ic3-brochure.pdf" rel="noopener">FBI Internet Crime Complaint Center, 2024</a></span>
+    </div>
+    <div>
+      <span class="f">&pound;85,000</span>
+      <span class="t">Maximum reimbursement per claim under the UK reimbursement requirement.</span>
+      <span class="s">In force 7 October 2024. <a href="https://www.psr.org.uk/publications/policy-statements/ps24-7-fighting-authorised-push-payment-fraud-a-new-reimbursement-requirement/" rel="noopener">Payment Systems Regulator, PS24/7</a></span>
+    </div>
+    <div>
+      <span class="f">July 2025</span>
+      <span class="t">An AI coding agent deleted a production database during a code freeze, then misreported what it did.</span>
+      <span class="s">The agent had permission to run. <a href="https://fortune.com/2025/07/23/ai-coding-tool-replit-wiped-database-called-it-a-catastrophic-failure/" rel="noopener">Fortune, 23 July 2025</a></span>
+    </div>
   </div>
   <p class="note">Every figure is published, dated and linked. <a href="the-execution-boundary.html">The full case, in three depths and six stages.</a></p>
 </div></section>
@@ -165,7 +230,7 @@
 
 <footer><div class="wrap foot-in">
   <div class="brand"><img src="logo.png" alt="Humsana"></div>
-  <div class="foot-links"><a href="walkthrough.html">Walkthrough</a><a href="swan.html">Swan</a><a href="the-execution-boundary.html">Execution boundary</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a></div>
+  <div class="foot-links"><a href="use-cases.html">Action classes</a><a href="walkthrough.html">Walkthrough</a><a href="swan.html">Swan</a><a href="the-execution-boundary.html">Execution boundary</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a></div>
   <div class="foot-copy">Humsana. Authority travels with the action.</div>
 </div></footer>
 <script src="site.js"></script>

@@ -58,6 +58,81 @@ One accent color exists and it means one thing: a value that changed, or a refus
   mechanism, `.note` for a provenance line in mono, `.code` for a command block, `.verdict` / `.cmp` / `.api`
   for a recorded decision.
 
+## The graphics, and when to use which
+
+Three components carry the visuals. They exist in `style.css` already, and `index.html` is the worked
+example of all three. Use them instead of inventing new markup, and never edit `style.css` yourself.
+
+**The action map** shows the topology of one action: the two sides, the rule between them, and a token
+that travels to the boundary and is stopped there. Use it where a page needs to show *where* the check
+sits, at most once per page. The finished diagram is the default state and the animation only adds
+motion, so it is safe for reduced motion and no javascript.
+
+```html
+<div class="bmap">
+  <div class="bmap-sides">
+    <div class="side a"><span class="pname">Company A</span>
+      <ul><li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true">…</svg>Principal</li></ul>
+    </div>
+    <div class="side b"><span class="pname">Company B</span>
+      <ul><li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true">…</svg>Executor</li></ul>
+    </div>
+  </div>
+  <div class="bd" aria-hidden="true"><span>boundary</span></div>
+  <div class="rail" aria-hidden="true">
+    <span class="tok">pay 4821</span>
+    <span class="chip"><i class="stop"></i>4821 &rarr; 9137 &middot; refused</span>
+  </div>
+  <p class="bmap-note">One line of mono stating what the picture shows.</p>
+</div>
+```
+
+**The action-class tablist** is how the site shows that one check covers many kinds of action. Each tab
+is a domain plus a status chip, each panel is four rows and two short paragraphs. The changed value must
+carry `.chg` so the panel flashes it when the tab changes. Status words are only `live`, `ran clean` (the
+parenthetical says how), or `not yet run`. A status is a fact about a run, never a promise.
+
+```html
+<div class="acts">
+  <div class="acts-tabs" role="tablist" aria-label="Action classes">
+    <button role="tab" aria-controls="act-x" aria-selected="true" tabindex="0">
+      <svg class="ic" viewBox="0 0 20 20" aria-hidden="true">…</svg>Payments<span class="st live">live</span></button>
+    <button role="tab" aria-controls="act-y" aria-selected="false" tabindex="-1">…</button>
+  </div>
+  <div class="acts-panel" id="act-x" role="tabpanel">
+    <div class="act-head"><h3>Release a payment</h3><span class="st live">live in the sandbox</span></div>
+    <div class="acts-grid">
+      <ul class="cmp">
+        <li><span class="k">authorized</span><span class="v">…</span></li>
+        <li><span class="k">presented</span><span class="v chg">…</span></li>
+        <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE, parameters.payee_account</span></li>
+        <li><span class="k">answer</span><span class="v">GRANT_DOES_NOT_COVER_THIS_ACTION</span></li>
+      </ul>
+      <div><p>What the check does, in two sentences.</p><p class="why">Why it matters in this domain.</p></div>
+    </div>
+  </div>
+</div>
+```
+
+**Icons** are inline SVG, `viewBox="0 0 20 20"`, `class="ic"`, no `fill`, `stroke-width: 1.5`, round caps
+and joins, `aria-hidden="true"`, and they inherit colour. Draw them on that grid and keep them at the same
+weight: a 20px box with 2.5px of margin all round. Do not use an icon library, an emoji, or a raster image.
+
+**The figure strip** carries three published numbers with their sources, one line each:
+
+```html
+<div class="figstrip">
+  <div><span class="f">$2.7bn</span><span class="t">What the figure is.</span>
+    <span class="s">Where it came from, dated. <a href="…">Source</a></span></div>
+</div>
+```
+
+Motion rules. One authored moment per page, which is the action map if the page has one; everything else
+is a state change tied to an interaction, not an entrance effect on scroll. Any new animation must define
+its finished state in plain CSS and animate *from* the start state, so a visitor with reduced motion sees
+the complete picture. Use `cubic-bezier(.16,1,.3,1)` and keep anything under 1.6s. No animation may move
+the layout or change a number.
+
 ## Verify before you report
 
 1. Run the detector on the file and report its score and any `high` issue:

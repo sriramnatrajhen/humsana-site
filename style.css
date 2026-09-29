@@ -457,3 +457,84 @@ html{scrollbar-color:var(--line) var(--bg)}
 
 .scene[data-case="1"] .party.b{background:var(--bg)}
 .knows li.part .mark{color:var(--muted)}
+
+/* ---------------------------------------------------------------- the action map
+   The topology of one action, drawn rather than described: the sides, the rule between them, and a
+   token that travels to the boundary and stops there. The finished picture is the default state and
+   the animation runs *from* the start state, so a visitor with reduced motion, an old browser or
+   javascript off lands on the completed diagram instead of an empty one. */
+.bmap{position:relative;border:1px solid var(--line);background:var(--panel);overflow:hidden}
+.hero .bmap{margin-top:3.6rem;max-width:960px}
+.bmap-sides{display:grid;grid-template-columns:1fr 1fr}
+.bmap .side{padding:1.3rem 1.5rem}
+.bmap .side.b{background:var(--warm)}
+.bmap .pname{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink);display:block}
+.bmap ul{list-style:none;margin-top:.9rem;display:flex;flex-direction:column;gap:.45rem}
+.bmap li{font-size:15px;color:var(--ink);display:flex;align-items:center;gap:.55rem}
+.bmap li .ic{width:15px;height:15px;color:var(--dim)}
+.bmap .bd{position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--ink);transform:translateX(-1px)}
+.bmap .bd span{position:absolute;top:.9rem;right:.8rem;background:var(--ink);color:var(--bg);
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:.28rem .45rem;white-space:nowrap}
+.bmap .rail{position:relative;height:88px;border-top:1px solid var(--line)}
+.bmap .rail::before{content:'';position:absolute;left:0;right:0;top:30px;border-top:1px dashed var(--line)}
+.bmap .tok{position:absolute;left:50%;top:16px;transform:translateX(-50%);font-family:var(--mono);font-size:12px;
+  color:var(--ink);background:var(--panel);border:1px solid var(--ink);padding:.32rem .55rem;white-space:nowrap}
+.bmap .chip{position:absolute;left:50%;top:56px;transform:translateX(-50%);font-family:var(--mono);font-size:12px;
+  color:var(--accent-text);white-space:nowrap;display:flex;align-items:center;gap:.5rem}
+.bmap .chip .stop{width:9px;height:9px;border:2px solid var(--accent-text);flex:none}
+.bmap.play .tok{animation:bmTravel 1.5s cubic-bezier(.16,1,.3,1) both}
+.bmap.play .chip{animation:bmChip .5s cubic-bezier(.16,1,.3,1) 1.25s both}
+@keyframes bmTravel{from{left:7%}}
+@keyframes bmChip{from{opacity:0;transform:translate(-50%,-6px)}}
+.bmap-note{font-family:var(--mono);font-size:12px;line-height:1.65;color:var(--dim);padding:.85rem 1.5rem;border-top:1px solid var(--line)}
+@media(max-width:760px){
+  .bmap .bd{left:0;right:0;top:auto;bottom:50%;width:auto;height:2px;transform:none}
+  .bmap .bd span{top:-.85rem;left:1rem;right:auto;transform:none}
+  .bmap .rail{height:104px}
+  .bmap .tok{font-size:11px}
+  .bmap .chip{white-space:normal;justify-content:center;text-align:center;width:100%;left:0;transform:none;padding:0 1rem}
+  .bmap.play .chip{animation:bmChipM .5s cubic-bezier(.16,1,.3,1) 1.25s both}
+  @keyframes bmChipM{from{opacity:0;transform:translateY(-6px)}}
+}
+
+/* ---------------------------------------------------------------- action classes
+   One tablist over every kind of action the boundary checks. The tab carries the domain, the panel
+   carries the four answers, and the changed value flashes once when the panel arrives, so switching
+   tabs shows the drift rather than describing it. */
+.acts{border-top:1px solid var(--line)}
+.acts-tabs{display:flex;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.acts-tabs button{appearance:none;background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;
+  display:inline-flex;align-items:center;gap:.5rem;padding:.95rem 1.1rem .9rem 0;font-family:var(--sans);
+  font-size:15px;font-weight:500;color:var(--muted);cursor:pointer;text-align:left}
+.acts-tabs button + button{padding-left:1.1rem;border-left:1px solid var(--line-soft)}
+.acts-tabs button:hover{color:var(--ink)}
+.acts-tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.acts-tabs button[aria-selected="true"] .ic{color:var(--accent-text)}
+.acts-panel{padding-top:1.9rem}
+.acts-panel[hidden]{display:none}
+.act-head{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:1.3rem}
+.act-head h3{font-size:20px}
+.acts-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:2.6rem;align-items:start}
+.acts-grid .cmp{margin-top:0}
+.acts-grid p{font-size:16px}
+.acts-grid .why{margin-top:1rem}
+.ic{width:20px;height:20px;flex:none;color:var(--accent-text);fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.st{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);
+  border:1px solid var(--line);padding:.22rem .5rem;white-space:nowrap}
+.st.live{color:var(--accent-text);border-color:var(--accent-pale);background:var(--accent-pale)}
+.acts-panel.enter .v.chg{animation:wash .6s ease-out both}
+@keyframes wash{from{background:var(--accent);color:var(--panel)}}
+@media(max-width:900px){.acts-grid{grid-template-columns:1fr;gap:1.6rem}}
+
+/* a three figure evidence strip */
+.figstrip{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.figstrip > div{padding:1.5rem 1.6rem 1.5rem 0}
+.figstrip > div + div{border-left:1px solid var(--line);padding-left:1.6rem}
+.figstrip .f{font-family:var(--mono);font-size:20px;color:var(--accent-text)}
+.figstrip .t{display:block;font-size:15px;color:var(--muted);margin-top:.45rem;max-width:34ch}
+.figstrip .s{display:block;font-family:var(--mono);font-size:11.5px;line-height:1.6;color:var(--dim);margin-top:.6rem}
+.figstrip .s a{color:var(--muted)}
+@media(max-width:760px){
+  .figstrip{grid-template-columns:1fr}
+  .figstrip > div + div{border-left:0;border-top:1px solid var(--line-soft);padding-left:0}
+}
