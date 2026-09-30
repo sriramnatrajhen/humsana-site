@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Humsana: the authorization boundary for autonomous action</title>
-<meta name="description" content="Humsana binds authority to a consequential action, checks that the action reaching execution is still within that authority, and refuses when it is not.">
+<meta name="description" content="Humsana binds an approval to one exact action, compares the action arriving at execution against it, refuses any drift with a code naming the field and both values, and issues a signed record a third party verifies offline.">
 <link rel="canonical" href="https://humsana.com/">
 <link rel="icon" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -37,15 +37,20 @@
 
 <header class="hero"><div class="wrap">
   <div class="hero-copy">
-    <h1>The hard part begins when an AI agent leaves your system.</h1>
-    <p class="lead">Humsana binds authority to a consequential action, checks that the action reaching execution is still within that authority, and refuses when it is not.</p>
-    <p>A refusal names the field, both values and the rule. It runs where the integrating party places it, and it spends nothing.</p>
+    <h1>Humsana checks the action your AI takes against the action you authorized.</h1>
+    <p class="lead">The risk in an agent begins where it leaves your system. Inside your own boundary you control the agent, the tools it can reach and the log it writes. None of that travels with an action that crosses to a party which has to execute it, so the receiving side is asked to trust a request it cannot verify.</p>
+    <p>Humsana sits on that path. It binds an approval to one exact action, compares the action arriving at execution against the action that was authorized, refuses any drift with a code naming the field, both values and the rule, and issues a signed record a third party verifies offline without contacting us. We hold none of your policy, and we do not sit between you and your executor.</p>
     <div class="cta-row">
-      <a class="btn btn-primary" href="https://api.humsana.com/sandbox/">See it refuse</a>
+      <a class="btn btn-primary" href="https://api.humsana.com/sandbox/">Open the sandbox</a>
       <a class="btn btn-ghost" href="how-it-works.html">How it works</a>
     </div>
   </div>
 
+</div></header>
+
+<section><div class="wrap">
+  <h2>Where the check runs</h2>
+  <p>An action leaves the party that authorized it and arrives at the party that executes it. The check sits on the executing side, immediately before the call that cannot be taken back.</p>
   <div class="bmap">
     <div class="bmap-sides">
       <div class="side a">
@@ -69,11 +74,12 @@
       <span class="chip"><i class="stop"></i>4821 &rarr; 9137 &middot; refused</span>
     </div>
   </div>
-</div></header>
+</div></section>
+
 
 <section><div class="wrap">
   <h2>An approved action can still be refused.</h2>
-  <p>Company A approves a payout of &pound;1,800 to Supplier X, account 4821. One instruction reaches Company B's executor.</p>
+  <p>A payment is approved for &pound;1,800 to Supplier X at account 4821. The instruction that arrives at Company B's executor carries account 9137, and nothing else about the action has changed. The service compares the two, names the field it disagrees on, and refuses.</p>
   <div class="switch" role="tablist" aria-label="The action presented to the executor">
     <button role="tab" aria-controls="ans-refused" aria-selected="true" tabindex="0">Account changed, 9137</button>
     <button role="tab" aria-controls="ans-allowed" aria-selected="false" tabindex="-1">As approved, 4821</button>
@@ -105,6 +111,7 @@
 
 <section><div class="wrap">
   <h2>The difference is at the point of execution.</h2>
+  <p>A control inside the agent's own system cannot answer for the action once the action has left that system. This check is placed where the action is executed, and it decides there.</p>
   <div class="compare">
     <div class="ch">Without a boundary</div>
     <div class="ch">With Humsana</div>
@@ -120,8 +127,8 @@
 </div></section>
 
 <section class="cta-band"><div class="wrap">
-  <h2>Change one value, and watch it refuse.</h2>
-  <p>One action class on the live service, with synthetic data. Nothing needs installing, and no money moves. Humsana holds none of your policy.</p>
+  <h2>Run the boundary yourself.</h2>
+  <p>The sandbox runs one action class against the live service with synthetic data. Change the destination account and the service refuses it, naming the field, both values and the rule. Change it back and the same authorization proceeds. Nothing needs installing, and no money moves.</p>
   <div class="cta-row">
     <a class="btn btn-primary arrow-after" href="https://api.humsana.com/sandbox/">Open the sandbox</a>
     <a class="btn btn-ghost" href="mailto:ram@humsana.com">Talk to us</a>
