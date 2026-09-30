@@ -3,9 +3,24 @@
 Read this before editing any page here. It is the contract for copy and markup. `index.html` is the worked
 example: read it first, then write the page.
 
+## What gets published
+
+GitHub Pages runs Jekyll over this directory, so every file that is not inside a dot-directory is public:
+the pages, the stylesheet, the script, the icons, and anything else you leave here. A markdown file at the
+root is rendered into a page of its own, wrapped in a default theme named after the repository.
+
+So: saved pages, reference material, tooling and notes belong in a dot-directory (`.hermes/`) or outside
+this repository, never at the root. Three files were live on humsana.com for weeks because of this: a saved
+copy of a third-party design checklist, and two saved GOV.UK guidance pages. Before pushing, list what the
+push would publish:
+
+    git ls-files | grep -E "^[^._]" | grep -Ev "\.(html|css|js|png|jpg|svg|xml|txt|ico|mp3)$"
+
+The only entries that belong in that output are `CNAME` and `README.md`.
+
 ## What this site is
 
-A static site, published from this directory to humsana.com. Warm paper, near-black ink, IBM Plex Sans for
+A static site, published from this directory to humsana.com. Warm paper, near-black ink, Manrope for
 text and IBM Plex Mono for identifiers, codes, counts and measurements. Hairline rules carry structure.
 There are no cards, no shadows, no rounded containers, no gradients, no glass, no decorative imagery.
 
