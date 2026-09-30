@@ -103,9 +103,9 @@
 <tr><td>POST /v1/authorize/confirm</td><td>Record the confirmation, bound to the digest.</td></tr>
 <tr><td>POST /v1/authorize/challenge</td><td>Ask for the challenge.</td></tr>
 <tr><td>POST /v1/authorize/confirm/request</td><td>Request the confirmation step.</td></tr>
-<tr><td>GET /v1/health</td><td>What the deployment runs: policy version, confirmation mode, router mode.</td></tr>
+<tr><td>GET /v1/health</td><td>The service summary: policy version, confirmation mode, and the limits a caller is held to. Send a key for the running configuration: detector, detector version, gates, queue depth.</td></tr>
 </tbody></table>
-<p class="note">Bearer key authentication.</p>
+<p class="note">Bearer key authentication, except for GET /v1/health, which answers without one.</p>
 <pre class="code">python3 -m receipt.verify record.receipt.json --key key.pub.json</pre>
 <p class="note">The integration guide is available on request.</p>
 <div class="cta-row" style="margin-top:2.6rem"><a class="btn btn-primary arrow-after" href="walkthrough.html">Run the five steps</a><a class="btn btn-ghost" href="mailto:contact@humsana.com">Contact us</a></div>
