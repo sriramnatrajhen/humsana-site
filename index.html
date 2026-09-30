@@ -18,7 +18,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
 
@@ -80,22 +80,8 @@
 <section><div class="wrap">
   <h2>An approved action can still be refused.</h2>
   <p>A payment is approved for &pound;1,800 to Supplier X at account 4821. The instruction that arrives at Company B's executor carries account 9137, and nothing else about the action has changed. The service compares the two, names the field it disagrees on, and refuses.</p>
-  <div class="switch" role="tablist" aria-label="The action presented to the executor">
-    <button role="tab" aria-controls="ans-refused" aria-selected="true" tabindex="0">Account changed, 9137</button>
-    <button role="tab" aria-controls="ans-allowed" aria-selected="false" tabindex="-1">As approved, 4821</button>
-  </div>
-  <div id="ans-refused" role="tabpanel" style="margin-top:2.4rem">
-    <div class="verdict"><span class="v-refuse">Refused</span><span class="code">GRANT_DOES_NOT_COVER_THIS_ACTION</span></div>
-    <ul class="cmp">
-      <li><span class="k">field</span><span class="v">parameters.payee_account</span></li>
-      <li><span class="k">approved</span><span class="v">GB00SUPPLIER00004821</span></li>
-      <li><span class="k">presented</span><span class="v chg">GB00SUPPLIER00009137</span></li>
-      <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE</span></li>
-      <li><span class="k">consumed</span><span class="v">false</span></li>
-    </ul>
-    <span class="api no">Payment API: not called</span>
-  </div>
-  <div id="ans-allowed" role="tabpanel" style="margin-top:2.4rem" hidden>
+  <p class="note" style="margin-top:2.4rem">The action as approved</p>
+  <div id="ans-allowed" style="margin-top:1rem">
     <div class="verdict"><span class="v-allow">Allowed</span><span class="code">MATCHED</span></div>
     <ul class="cmp">
       <li><span class="k">field</span><span class="v">parameters.payee_account</span></li>
@@ -105,6 +91,18 @@
       <li><span class="k">consumed</span><span class="v">true</span></li>
     </ul>
     <span class="api yes">Payment API: accepted INV-88213, GBP 1,800 to ...4821</span>
+  </div>
+  <p class="note" style="margin-top:2.4rem">The action that arrived</p>
+  <div id="ans-refused" style="margin-top:1rem">
+    <div class="verdict"><span class="v-refuse">Refused</span><span class="code">GRANT_DOES_NOT_COVER_THIS_ACTION</span></div>
+    <ul class="cmp">
+      <li><span class="k">field</span><span class="v">parameters.payee_account</span></li>
+      <li><span class="k">approved</span><span class="v">GB00SUPPLIER00004821</span></li>
+      <li><span class="k">presented</span><span class="v chg">GB00SUPPLIER00009137</span></li>
+      <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE</span></li>
+      <li><span class="k">consumed</span><span class="v">false</span></li>
+    </ul>
+    <span class="api no">Payment API: not called</span>
   </div>
   <p class="note">Recorded from the live boundary at 08:42 UTC on 27 September 2026. <a href="use-cases.html">Every action class</a>. <a href="https://api.humsana.com/sandbox/">Run it yourself</a>.</p>
 </div></section>
