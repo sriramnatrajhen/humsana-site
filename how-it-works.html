@@ -67,32 +67,6 @@
 <div class="step-body" id="step-enforce" role="tabpanel" hidden><p>The executor presents the action immediately before it runs. A material change is refused and the changed field is named.</p></div>
 </div></section>
 
-<section><div class="wrap">
-  <div class="head"><h2>One action, refused.</h2></div>
-  <div class="receipt">
-  <div class="receipt-head"><b>swan.authz/1</b><span>one action, refused</span></div>
-  <ul class="counts">
-    <li><span class="ck">Claimed</span><span class="cv">5</span></li>
-    <li class="zero"><span class="ck">Established</span><span class="cv">0</span></li>
-    <li><span class="ck">Authorized</span><span class="cv">1</span></li>
-    <li><span class="ck">Presented</span><span class="cv">1</span></li>
-    <li class="zero"><span class="ck">Executed</span><span class="cv">0</span></li>
-    <li class="no"><span class="ck">Refused</span><span class="cv">1</span></li>
-  </ul>
-  <details><summary>principal</summary><div class="det">northwind:finance, acting through agent payout-repair-1.</div></details>
-  <details><summary>delegation</summary><div class="det">payments.release, consequence C3, human step required. Bound values: amount_gbp, beneficiary, expiry, payee_account, reference.</div></details>
-  <details><summary>binding</summary><div class="det">action digest, authorized  sha256:be49de0e...898de3
-action digest, presented  sha256:bf353324...9aaa4aa
-policy version 1</div></details>
-  <details><summary>confirmation</summary><div class="det">reviewer@northwind.example, method hmac-sha256, confirmation conf_3mgQhEwaprJRHWavDG52jQ.</div></details>
-  <details><summary>effectuation</summary><div class="det">field parameters.payee_account, authorized GB00SUPPLIER00004821, presented GB00SUPPLIER00009137
-rule MAY_NOT_CHANGE
-code GRANT_DOES_NOT_COVER_THIS_ACTION
-payment API: not called</div></details>
-</div>
-  <p class="note">Values from one refused action in the live sandbox. <a href="walkthrough.html">Replay the run.</a></p>
-</div></section>
-
 <section id="refusals"><div class="wrap">
   <div class="head"><h2>What a refusal says.</h2></div>
   <div class="tw"><table class="tbl">
@@ -119,14 +93,6 @@ payment API: not called</div></details>
   <div class="head"><h2>Where the check sits.</h2></div>
   <p>Humsana enforces at the seam the integrating party controls, and cannot enforce an executor it does not control.</p>
   <p class="note"><a href="trust.html">Method and figures.</a></p>
-</div></section>
-
-<section><div class="wrap">
-  <div class="head"><h2>Watch it refuse on one action.</h2></div>
-  <div class="cta-row" style="margin-top:2.6rem">
-    <a class="btn btn-primary arrow-after" href="https://api.humsana.com/sandbox/">Open the sandbox</a>
-    <a class="btn btn-ghost" href="sandbox.html">What it runs</a>
-  </div>
 </div></section>
 
 <footer><div class="wrap foot-in">

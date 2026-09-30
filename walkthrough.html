@@ -40,7 +40,7 @@
   <p style="margin-top:1.2rem">The client and the verifier are the standard library only, so nothing is installed.</p>
   <div class="cta-row" style="margin-top:2.2rem">
     <a class="btn btn-primary arrow-after" href="https://api.humsana.com/sandbox/">Open the sandbox</a>
-    <a class="btn btn-ghost" href="mailto:ram@humsana.com">Contact us</a>
+    <a class="btn btn-ghost" href="mailto:contact@humsana.com">Contact us</a>
   </div>
   <p class="note">Every command was run on 28 September 2026 against https://api.humsana.com, in one directory holding the boundary client and the offline verifier. Steps 1, 2 and 5 need the client. Steps 3 and 4 need the verifier and the two files it checks, the record and the public key.</p>
 </div></header>
@@ -219,29 +219,6 @@ the ledger: [
 the rail ran 1 time(s) across 3 attempts, and never on a refusal.
 That count is the claim. Everything else is our page talking.</pre>
   <p class="note">Run on 28 September 2026 at 15:52 UTC against https://api.humsana.com.</p>
-</div></section>
-
-<section><div class="wrap">
-  <h2>What these five steps do not establish.</h2>
-  <div class="deflist" style="margin-top:2.4rem">
-    <div class="item">
-      <h3>The actor is declared, not verified.</h3>
-      <p>The public service runs with the agent register off. The identity on a request is what the caller says it is, not something a credential bound.</p>
-    </div>
-    <div class="item">
-      <h3>The rail is ours.</h3>
-      <p>The rail in step 5 is a function inside our reference executor, and the sandbox page runs the sandbox app itself.</p>
-    </div>
-    <div class="item">
-      <h3>The record is one party's account.</h3>
-      <p>The acknowledgment block in the record from step 3 reads acknowledged_unsigned, and its signature is null.</p>
-    </div>
-  </div>
-  <ul class="cmp" style="margin-top:2.6rem">
-    <li><span class="k">acknowledgment status</span><span class="v">acknowledged_unsigned</span></li>
-    <li><span class="k">acknowledgment signature</span><span class="v">null, and the note says so</span></li>
-    <li><span class="k">the record's own scope</span><span class="v">it attests that Humsana issued the record and that it has not been altered since</span></li>
-  </ul>
 </div></section>
 
 <footer><div class="wrap foot-in">
