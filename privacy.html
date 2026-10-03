@@ -6,14 +6,14 @@
 <link rel="icon" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>Privacy policy: Humsana</title>
-<meta name="description" content="Humsana privacy policy. Behavioral context without content capture or surveillance.">
+<meta name="description" content="What the Humsana website loads, what the authorization boundary keeps in its record store, and how a signed record is checked offline.">
 <link rel="canonical" href="https://humsana.com/privacy.html">
 <meta name="theme-color" content="#FCFAF7">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Humsana">
 <meta property="og:url" content="https://humsana.com/privacy.html">
 <meta property="og:title" content="Privacy policy: Humsana">
-<meta property="og:description" content="Humsana privacy policy. Behavioral context without content capture or surveillance.">
+<meta property="og:description" content="What the Humsana website loads, what the authorization boundary keeps in its record store, and how a signed record is checked offline.">
 <meta property="og:image" content="https://humsana.com/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -36,55 +36,36 @@
 </div></nav>
 
 <section style="padding-top:5rem"><div class="wrap"><div class="prose">
-  <span class="label"><span class="n">Privacy</span>Policy</span>
   <h1 style="font-size:clamp(2.2rem,5vw,3.2rem);font-weight:600;letter-spacing:-0.03em;margin:1rem 0 .5rem">Privacy Policy</h1>
-  <p class="updated">Last updated: March 2025</p>
+  <p class="note">Last updated: October 2026</p>
 
-  <p style="margin-top:1.5rem;color:var(--ink);font-weight:400">Humsana is built to infer context without capturing content. We design our systems so sensitive data is never collected in the first place.</p>
+  <p style="margin-top:1.5rem;color:var(--ink);font-weight:400">This policy covers the website at humsana.com and the authorization boundary the site describes.</p>
 
-  <h2>What we do not collect</h2>
-  <ul>
-    <li>Keystroke content or text input</li>
-    <li>Messages, prompts, or screen data</li>
-    <li>Audio, video, or biometric identifiers</li>
-    <li>Personal identifiers such as name, email, or phone</li>
-    <li>Credentials, passwords, or tokens</li>
-  </ul>
+  <h2>What the site loads</h2>
+  <p>This site serves static pages and loads one thing from a third party: the stylesheet requests the Manrope and IBM Plex Mono webfonts from Google Fonts, so the browser contacts fonts.googleapis.com and fonts.gstatic.com. The pages set no cookies and run no analytics or tracking script. There is no account or form, and site.js makes no network request.</p>
 
-  <h2>What we observe</h2>
-  <p>Behavioral timing signals only:</p>
-  <ul>
-    <li>Keystroke timing intervals, not characters</li>
-    <li>Typing rhythm and correction frequency</li>
-    <li>Scroll velocity and dwell time</li>
-    <li>Interaction and task-switch timing</li>
-  </ul>
+  <h2>What the boundary keeps</h2>
+  <p>The boundary keeps a signed record of each authorization and each execution in an append-only store. In production the store is a file at <span class="mono">/var/swan/records.jsonl</span> with mode 600. A record names the principal, the agent, the action and its parameters, the decision, and the comparison that ran. Each record is signed with Ed25519 under the deployment's key, and the deployment publishes the matching public key, so a third party can check a record offline against it.</p>
+  <p>The demo space keeps the records of a visitor's own demo runs in its own store, separate from the production store. A demo run uses synthetic data and the real authorization service.</p>
 
-  <h2>How data is processed</h2>
-  <p><strong style="color:var(--ink);font-weight:500">Developer Tools:</strong> entirely on-device. No raw data is transmitted. Local audit logs, if enabled, live in <span class="mono">~/.humsana/</span>.</p>
-  <p><strong style="color:var(--ink);font-weight:500">Partner SDK:</strong> signals are processed in real time. Only aggregated, probabilistic indicators are returned. Raw streams are not retained.</p>
+  <h2>Voice screening</h2>
+  <p>The voice route decodes audio in memory to reach a verdict and writes none of it to disk. The service reports its own retention in health: <span class="mono">retention.audio_stored: false</span> and <span class="mono">retention.metadata_days: 30</span>. Voice screening is covered in full by the <a class="accent" href="swanprivacy.html">Swan privacy policy</a>.</p>
 
-  <h2>What Humsana is not used for</h2>
-  <ul>
-    <li>Surveillance or monitoring</li>
-    <li>Employee tracking or scoring</li>
-    <li>Psychological or medical diagnosis</li>
-    <li>Law enforcement or intelligence use</li>
-  </ul>
-
-  <h2>Compliance</h2>
-  <p>Designed to align with GDPR and CCPA. Because we avoid collecting personal data by design, compliance risk is minimized.</p>
+  <h2>API keys</h2>
+  <p>A caller obtains a key through <span class="mono">POST /v1/keys</span>. The boundary answers <span class="mono">GET /v1/health</span> without a key.</p>
 
   <h2>Contact</h2>
   <p>Email: <a class="accent" href="mailto:contact@humsana.com">contact@humsana.com</a></p>
+  <div class="cta-row" style="margin-top:2.4rem">
+    <a class="btn btn-primary arrow-after" href="https://api.humsana.com/sandbox/">Open the sandbox</a>
+    <a class="btn btn-ghost" href="mailto:contact@humsana.com">Contact us</a>
+  </div>
 </div></div></section>
 
 <footer><div class="wrap foot-in">
-  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana" class="logo" onerror="this.remove()"></a>
-  <div class="foot-links"><a href="use-cases.html">Action classes</a>
-    <a href="walkthrough.html">Walkthrough</a><a href="swan.html">Swan</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a>
-  </div>
-  <div class="foot-copy">&copy; 2026 Humsana</div>
+  <div class="brand"><img src="logo.png" alt="Humsana"></div>
+  <div class="foot-links"><a href="use-cases.html">Action classes</a><a href="walkthrough.html">Walkthrough</a><a href="swan.html">Swan</a><a href="the-execution-boundary.html">Execution boundary</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a><a href="mailto:contact@humsana.com">contact@humsana.com</a></div>
+  <div class="foot-copy">Humsana. Authority travels with the action.</div>
 </div></footer>
 
 <script src="site.js"></script>

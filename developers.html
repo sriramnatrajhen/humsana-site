@@ -52,14 +52,14 @@
 
 <section><div class="wrap">
 <div class="head"><h2>What the boundary answers with.</h2></div>
-<table class="tbl"><thead><tr><th>Decision</th><th>What it means</th></tr></thead><tbody>
-<tr><td>ALLOW</td><td>The action proceeds.</td></tr>
-<tr><td>ALLOW_WITH_LIMITS</td><td>It proceeds with the limits applied.</td></tr>
-<tr><td>VERIFY</td><td>Something is verified first.</td></tr>
-<tr><td>HUMAN_CONFIRM</td><td>An authenticated human approves this exact action.</td></tr>
-<tr><td>HOLD</td><td>It waits until something changes.</td></tr>
-<tr><td>DENY</td><td>It does not proceed.</td></tr>
-</tbody></table>
+<div class="tw"><table class="tbl"><thead><tr><th>Decision</th><th>What it means</th></tr></thead><tbody>
+<tr><td>ALLOW</td><td data-l="What it means">The action proceeds.</td></tr>
+<tr><td>ALLOW_WITH_LIMITS</td><td data-l="What it means">It proceeds with the limits applied.</td></tr>
+<tr><td>VERIFY</td><td data-l="What it means">Something is verified first.</td></tr>
+<tr><td>HUMAN_CONFIRM</td><td data-l="What it means">An authenticated human approves this exact action.</td></tr>
+<tr><td>HOLD</td><td data-l="What it means">It waits until something changes.</td></tr>
+<tr><td>DENY</td><td data-l="What it means">It does not proceed.</td></tr>
+</tbody></table></div>
 <p class="note">The grant is single use: the check that passes spends it.</p>
 </div></section>
 
@@ -97,14 +97,14 @@
 
 <section><div class="wrap">
 <div class="head"><h2>What the service exposes.</h2></div>
-<table class="tbl"><thead><tr><th>Endpoint</th><th>Purpose</th></tr></thead><tbody>
-<tr><td>POST /v1/authorize/verify</td><td>Propose an action, receive a decision and a binding.</td></tr>
-<tr><td>POST /v1/authorize/effectuate</td><td>Present the action at execution.</td></tr>
-<tr><td>POST /v1/authorize/confirm</td><td>Record the confirmation, bound to the digest.</td></tr>
-<tr><td>POST /v1/authorize/challenge</td><td>Ask for the challenge.</td></tr>
-<tr><td>POST /v1/authorize/confirm/request</td><td>Request the confirmation step.</td></tr>
-<tr><td>GET /v1/health</td><td>The service summary: policy version, confirmation mode, and the limits a caller is held to. Send a key for the running configuration: detector, detector version, gates, queue depth.</td></tr>
-</tbody></table>
+<div class="tw"><table class="tbl"><thead><tr><th>Endpoint</th><th>Purpose</th></tr></thead><tbody>
+<tr><td>POST /v1/authorize/verify</td><td data-l="Purpose">Propose an action, receive a decision and a binding.</td></tr>
+<tr><td>POST /v1/authorize/effectuate</td><td data-l="Purpose">Present the action at execution.</td></tr>
+<tr><td>POST /v1/authorize/confirm</td><td data-l="Purpose">Record the confirmation, bound to the digest.</td></tr>
+<tr><td>POST /v1/authorize/challenge</td><td data-l="Purpose">Ask for the challenge.</td></tr>
+<tr><td>POST /v1/authorize/confirm/request</td><td data-l="Purpose">Request the confirmation step.</td></tr>
+<tr><td>GET /v1/health</td><td data-l="Purpose">The service summary: policy version, confirmation mode, and the limits a caller is held to. Send a key for the running configuration: detector, detector version, gates, queue depth.</td></tr>
+</tbody></table></div>
 <p class="note">Bearer key authentication, except for GET /v1/health, which answers without one.</p>
 <pre class="code">python3 -m receipt.verify record.receipt.json --key key.pub.json</pre>
 <p class="note">The integration guide is available on request.</p>
@@ -113,7 +113,7 @@
 
 <footer><div class="wrap foot-in">
   <div class="brand"><img src="logo.png" alt="Humsana"></div>
-  <div class="foot-links"><a href="use-cases.html">Action classes</a><a href="walkthrough.html">Walkthrough</a><a href="swan.html">Swan</a><a href="the-execution-boundary.html">Execution boundary</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a></div>
+  <div class="foot-links"><a href="use-cases.html">Action classes</a><a href="walkthrough.html">Walkthrough</a><a href="swan.html">Swan</a><a href="the-execution-boundary.html">Execution boundary</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a><a href="mailto:contact@humsana.com">contact@humsana.com</a></div>
   <div class="foot-copy">Humsana. Authority travels with the action.</div>
 </div></footer>
 <script src="site.js"></script>
