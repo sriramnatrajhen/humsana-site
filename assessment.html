@@ -473,7 +473,7 @@
     entries.forEach(function (e) {
       if (!e.isIntersecting) { return; }
       e.target.classList.add('in');
-      progress(Number(e.target.getAttribute('data-stage')), e.target.getAttribute('data-name'));
+      progress(Number(e.target.getAttribute('data-stage')));
       io.unobserve(e.target);
     });
   }, { threshold: 0.2 }) : null;
@@ -501,6 +501,14 @@
     if (here) {
       var idx = here.querySelector('.as-idx');
       if (idx) { idx.classList.add('is-now'); }
+      // The strip and its label both name where the reader is, rather than the furthest stage revealed.
+      var n = Number(here.getAttribute('data-stage'));
+      var segs = document.querySelectorAll('#as-progress .as-seg');
+      for (var k = 0; k < segs.length; k++) {
+        segs[k].classList.toggle('on', Number(segs[k].getAttribute('data-i')) <= n);
+      }
+      var label = here.getAttribute('data-name');
+      if (label) { $('as-plabel').textContent = label; }
     }
   }
   var marking = false;
