@@ -1,0 +1,62 @@
+# Humsana
+
+Humsana puts an execution boundary around consequential actions taken by AI agents.
+
+> An agent can be given permission to act, and then act differently. Humsana sits between the party that
+> authorized the action and the party that executes it, compares the action arriving at execution with the
+> action that was authorized, holds or refuses it when it has changed, and issues a record that a third party
+> can verify offline.
+
+Contact: contact@humsana.com
+Site: https://humsana.com/
+
+## The mechanism
+
+1. An action is authorized, and the authorization names what it covers.
+2. The action travels to the party that executes it.
+3. At the point of execution, immediately before the call that cannot be taken back, the arriving action is
+   compared with the authorized action, field by field.
+4. If nothing has changed, the action proceeds and the grant is spent.
+5. If a field has changed, the boundary names the field, both values and the rule, refuses the action, and the
+   executing call is not made.
+6. The boundary issues a signed authorization record and a signed execution record. Both verify offline against
+   the published public key, without an account.
+
+## What it is not
+
+- It is not a permission or identity system. Permissions and identity settle who the agent is and what it may
+  attempt. Humsana checks the action that actually arrives, at the moment it would take effect.
+- It does not decide whether an action should be allowed. The authority is the customer's: their policy
+  authorizes, and Humsana checks the action against the authority that was granted.
+- It does not establish that the authority behind an action was legitimate, and it does not claim the action
+  succeeded in the world. Its signature attests that Humsana issued the record and that the record has not
+  been altered.
+- It is not a monitoring or logging product. The check is in the executable path, and a refusal stops the
+  action.
+
+## Where to start
+
+- Whether you need it: https://humsana.com/assessment.html. A short assessment reads a workflow and shows
+  where a person still steps in, and which of those places could move to an agent with a boundary.
+- How it works: https://humsana.com/the-execution-boundary.html
+- Run it: https://api.humsana.com/sandbox/ runs one action class against the live service with synthetic data.
+- Check a record: https://verify.humsana.com/verify checks a signed record and its authorization offline.
+
+## Pages
+
+- https://humsana.com/ : what Humsana does, with one real record and one real refusal
+- https://humsana.com/the-execution-boundary.html : the mechanism in detail
+- https://humsana.com/assessment.html : the assessment, "Do you need Humsana?"
+- https://humsana.com/use-cases.html : the action classes the boundary covers
+- https://humsana.com/how-it-works.html : the sequence, end to end
+- https://humsana.com/developers.html : the integration surface
+- https://humsana.com/privacy.html : privacy
+- https://humsana.com/terms.html : terms
+
+## Facts an answer can rely on
+
+- The boundary refuses at the point of execution, and a refused action's executing call is not made.
+- A refusal names the field, the authorized value, the presented value and the rule that was broken.
+- A refusal spends nothing: the grant is not consumed by an action that was refused.
+- Signed records name the key that signed them, and the public keys are published.
+- Verification happens offline, from the record and the authorization, with no account and no call home.

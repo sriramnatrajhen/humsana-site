@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Humsana: the authorization boundary for autonomous action</title>
-<meta name="description" content="Humsana binds an approval to one exact action, compares the action arriving at execution against it, refuses any drift with a code naming the field and both values, and issues a signed record a third party verifies offline.">
+<title>Humsana: an execution boundary for AI agent actions</title>
+<meta name="description" content="Humsana helps a company unlock more of its AI workflow by putting an execution boundary around consequential actions. It compares the action arriving at execution with the action that was authorized, holds or refuses anything that changed, and issues a signed record a third party verifies offline.">
 <link rel="canonical" href="https://humsana.com/">
 <link rel="icon" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -12,13 +12,86 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Humsana">
 <meta property="og:url" content="https://humsana.com/">
-<meta property="og:title" content="Humsana: the authorization boundary for autonomous action">
-<meta property="og:description" content="One check between an AI agent and the action it takes. It compares the action that arrives with the action that was authorized, refuses the difference, and leaves a record a third party verifies offline.">
+<meta property="og:title" content="Humsana: an execution boundary for AI agent actions">
+<meta property="og:description" content="Your AI can do more. The reason you still keep a person in the loop is often the final action. Humsana puts a boundary around that action, and proves what happened.">
 <meta property="og:image" content="https://humsana.com/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="style.css?v=8">
+<link rel="alternate" type="text/plain" href="https://humsana.com/llms.txt" title="Summary for agents">
+<script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Organization",
+   "@id": "https://humsana.com/#organization",
+   "name": "Humsana",
+   "url": "https://humsana.com/",
+   "logo": "https://humsana.com/logo.png",
+   "email": "contact@humsana.com",
+   "description": "Humsana puts an execution boundary around consequential actions taken by AI agents. It compares the action reaching execution with what the agent was authorized to do, holds or refuses it when it has changed, and issues a record a third party can verify offline."
+  },
+  {
+   "@type": "Service",
+   "@id": "https://humsana.com/#service",
+   "name": "Humsana execution boundary",
+   "provider": {
+    "@id": "https://humsana.com/#organization"
+   },
+   "serviceType": "Execution boundary for AI agent actions",
+   "audience": {
+    "@type": "Audience",
+    "audienceType": "Engineering leaders who run AI agents"
+   },
+   "description": "An execution boundary between the party that authorizes an action and the party that executes it. The action is compared with the authorization at the point of execution, refused when it differs, and recorded in a signed authorization record and a signed execution record that verify offline.",
+   "url": "https://humsana.com/the-execution-boundary.html",
+   "offers": {
+    "@type": "Offer",
+    "url": "https://humsana.com/assessment.html",
+    "name": "Do you need Humsana?"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "@id": "https://humsana.com/#questions",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "What is an execution boundary?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "It sits between the party that authorized an action and the party that executes it. It compares the action arriving at execution with the action that was authorized, and it decides there."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Where does it run?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Immediately before the call that cannot be taken back, on the executing side."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "What happens when the action has changed?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "The boundary names the field, both values and the rule, and refuses. The refusal is a code, the grant is not spent, and the executing call is not made."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "How does somebody else check what happened?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "The boundary issues a signed record of the authorization and a signed record of the execution, and the verifier checks the signature, the record digests and the link between the two, offline."
+     }
+    }
+   ]
+  }
+ ]
+}</script>
+<link rel="stylesheet" href="style.css?v=9">
 <style>
 /* index only. The first screen carries one real record, so the record id and the run's timestamp
    keep their own case in the panel head. Everything else composes from style.css. */
@@ -27,6 +100,15 @@
 .proof .panel-head b,.proof .panel-head span{text-transform:none;letter-spacing:.02em}
 .proof .cta-row{margin-top:1.2rem}
 @media(max-width:900px){.hero .proof{grid-column:1 / -1}}
+/* The story blocks and the questions. Stacked, one below the other, never side by side. */
+.story{list-style:none;margin:0;padding:0;display:grid;gap:1.6rem;max-width:56rem}
+.story li{border-left:2px solid var(--line);padding-left:1.3rem}
+.story b{display:block;margin-bottom:.4rem;font-weight:600}
+.faq{max-width:56rem}
+.faq details{border-top:1px solid var(--line);padding:1.15rem 0}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;font-weight:600;font-family:inherit}
+.faq p{margin:.7rem 0 0}
 </style>
 </head>
 <body>
@@ -48,7 +130,8 @@
   <div class="hero-grid">
     <div class="hero-copy">
       <h1>Give your AI permission to act. Humsana makes sure it stays within that permission.</h1>
-      <p class="lead">An agent can be given permission to act, and then act differently. On the executing side, nothing compares the action that arrives with the action that was authorized.</p>
+      <p class="lead">Your AI can do more. The reason you still keep a person in the loop is often the final action.</p>
+      <p>Humsana puts a boundary around that action. It compares the action arriving at execution with the action that was authorized, and it holds or refuses anything that has changed.</p>
       <div class="cta-row">
         <a class="btn btn-primary arrow-after" href="assessment.html">Do you need Humsana?</a>
         <a class="btn btn-ghost" href="#demonstration">See an approved action refused</a>
@@ -80,10 +163,23 @@
 
 <section class="invite"><div class="wrap">
   <h2>Do you need Humsana?</h2>
-  <p class="lead">Tell us what your AI does today. We'll show you where you could let it do more, and what would keep it within the permission you set.</p>
+  <p class="lead">Where is your AI still stopping because a person has to make, or check, the final consequential action?</p>
+  <p>Answer a short set of questions about how the work runs today. Humsana shows you where a person is still in the chain, what they are there to catch, and which of those places could move to an agent with a boundary around the action.</p>
+  <p class="note">Based on what you tell us and what could be identified from your public information. This is an interpretation of your workflow, not a certification of it.</p>
   <div class="cta-row">
-    <a class="btn btn-primary arrow-after" href="assessment.html">Find out</a>
+    <a class="btn btn-primary arrow-after" href="assessment.html">Start the assessment</a>
+    <a class="btn btn-ghost" href="mailto:contact@humsana.com">Contact us</a>
   </div>
+</div></section>
+
+<section id="what"><div class="wrap">
+  <h2>What Humsana does</h2>
+  <ul class="story">
+    <li><b>A company unlocks more of its AI workflow.</b> Humsana puts an execution boundary around the actions that are consequential, so the agent can carry the work further instead of handing every one of them to a person at the end.</li>
+    <li><b>It checks the action at execution.</b> The action reaching execution is compared with what the agent was authorized to do, and it is held or refused when it has changed.</li>
+    <li><b>It does not stop at permission or identity.</b> It stays with the action through execution, and it issues a record of what was authorized and what happened that a third party can check offline.</li>
+    <li><b>A person stops being the last manual check</b> for the actions Humsana keeps inside the authority that was granted.</li>
+  </ul>
 </div></section>
 
 <section id="demonstration"><div class="wrap">
@@ -161,12 +257,33 @@
   </div>
 </div></section>
 
+<section id="surfaces"><div class="wrap">
+  <h2>Three things, one mechanism.</h2>
+  <ul class="story">
+    <li><b>Whether you need it.</b> <a href="assessment.html">The assessment</a> reads your workflow and shows where a person still steps in, and which of those places could move to an agent with a boundary.</li>
+    <li><b>How it works.</b> <a href="the-execution-boundary.html">The execution boundary</a> sets out the mechanism, and <a href="https://api.humsana.com/sandbox/">the sandbox</a> runs it in front of you on one action class.</li>
+    <li><b>What happened, and the proof.</b> The boundary issues a signed record of the authorization and of the execution, and <a href="https://verify.humsana.com/verify">the verifier</a> lets somebody who was not there check the signature, the digests and the link between the two records. The Control Room is the operational view of the same records; we set it up with you.</li>
+  </ul>
+</div></section>
+
 <section class="cta-band"><div class="wrap">
   <h2>Run the boundary yourself.</h2>
   <p>The sandbox runs one action class against the live service with synthetic data. Three runs, in order: the boundary authorizes an action and it executes unchanged, a higher-consequence action is held for a person and released, and an action that arrives with the amount raised is stopped with the field, both values and the rule. Nothing needs installing, and no money moves.</p>
   <div class="cta-row">
     <a class="btn btn-primary arrow-after" href="https://api.humsana.com/sandbox/">Open the sandbox</a>
     <a class="btn btn-ghost" href="mailto:contact@humsana.com">Contact us</a>
+  </div>
+</div></section>
+
+<section id="questions"><div class="wrap">
+  <h2>Questions an engineer asks first.</h2>
+  <div class="faq">
+    <details><summary>What is an execution boundary?</summary><p>It sits between the party that authorized an action and the party that executes it. It compares the action arriving at execution with the action that was authorized, and it decides there.</p></details>
+    <details><summary>Where does it run?</summary><p>Immediately before the call that cannot be taken back, on the executing side. A control inside the agent's own system cannot answer for the action once the action has left that system.</p></details>
+    <details><summary>Does it replace the agent's permissions or its identity?</summary><p>No. Permissions and identity settle who the agent is and what it may attempt. Humsana checks the action that actually arrives, at the moment it would take effect.</p></details>
+    <details><summary>What happens when the action has changed?</summary><p>The boundary names the field, both values and the rule, and refuses. The refusal is a code, the grant is not spent, and the executing call is not made.</p></details>
+    <details><summary>How does somebody else check what happened?</summary><p>The boundary issues a signed record of the authorization and a signed record of the execution. The verifier checks the signature, the record digests and the link between the two, offline, without an account here.</p></details>
+    <details><summary>Does Humsana decide whether an action is allowed?</summary><p>No. The authority is yours: your policy decides what may be authorized. Humsana checks the action against the authority that was granted, and holds or refuses when the action is not within it. The signature attests that Humsana issued the record and that it has not been altered; it does not establish that the authority behind the action was legitimate.</p></details>
   </div>
 </div></section>
 

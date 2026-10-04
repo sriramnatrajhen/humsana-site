@@ -488,7 +488,8 @@
   }
 
   function api(path, body) {
-    var opts = { headers: {} };
+    // The session cookie is the capability for this assessment, so every call asks for it to be sent.
+    var opts = { headers: {}, credentials: 'include' };
     if (body) { opts.method = 'POST'; opts.headers['Content-Type'] = 'application/json'; opts.body = JSON.stringify(body); }
     return fetch(ASSESSMENT_API + path, opts).then(function (r) {
       return r.json().catch(function () { return {}; }).then(function (data) {
@@ -851,6 +852,7 @@
     win.document.write('<p style="font:16px system-ui,-apple-system,sans-serif;padding:24px">Opening the record.</p>');
     btn.disabled = true; btn.textContent = 'Opening';
     fetch(ASSESSMENT_API + '/assessment/finding', {
+      credentials: 'include',
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: S.id })
     }).then(function (r) { return r.text(); }).then(function (html) {
       win.document.open();

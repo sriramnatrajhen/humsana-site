@@ -1,4 +1,19 @@
 User-agent: *
 Allow: /
 
+# Named for the assistants that fetch pages for people, so the reason they are welcome is on the record.
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: CCBot
+Allow: /
+
+# A plain-text summary of what Humsana is, for anything that reads pages to answer a question.
+# https://humsana.com/llms.txt
+
 Sitemap: https://humsana.com/sitemap.xml
