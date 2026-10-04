@@ -40,18 +40,18 @@
     <a href="the-execution-boundary.html">Execution boundary</a>
     <a href="how-it-works.html">How it works</a>
     <a href="developers.html">Developers</a>
-    <a class="nav-cta" href="https://api.humsana.com/sandbox/">Sandbox</a>
+    <a class="nav-cta" href="assessment.html">Do you need Humsana?</a>
   </div>
 </div></nav>
 
 <header class="hero"><div class="wrap">
   <div class="hero-grid">
     <div class="hero-copy">
-      <h1>Make sure AI agents do exactly what they were authorized to do.</h1>
-      <p class="lead">Humsana checks the action arriving at execution against the action that was authorized, and refuses any difference.</p>
+      <h1>Give your AI permission to act. Humsana makes sure it stays within that permission.</h1>
+      <p class="lead">An agent can be given permission to act, and then act differently. On the executing side, nothing compares the action that arrives with the action that was authorized.</p>
       <div class="cta-row">
-        <a class="btn btn-primary" href="https://api.humsana.com/sandbox/">Run the live demo</a>
-        <a class="btn btn-ghost" href="how-it-works.html">View the architecture</a>
+        <a class="btn btn-primary arrow-after" href="assessment.html">Do you need Humsana?</a>
+        <a class="btn btn-ghost" href="#demonstration">See an approved action refused</a>
       </div>
     </div>
 
@@ -86,36 +86,7 @@
   </div>
 </div></section>
 
-<section><div class="wrap">
-  <h2>Where the check runs</h2>
-  <p>An action leaves the party that authorized it and arrives at the party that executes it. The check sits on the executing side, immediately before the call that cannot be taken back.</p>
-  <div class="bmap">
-    <div class="bmap-sides">
-      <div class="side a">
-        <span class="pname">Company A</span>
-        <ul>
-          <li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="7" r="3"/><path d="M4.2 17c0-3.2 2.6-5.8 5.8-5.8s5.8 2.6 5.8 5.8"/></svg>Principal</li>
-          <li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.2l5.6 1.9v4.4c0 3.1-2.2 5.7-5.6 6.6-3.4-.9-5.6-3.5-5.6-6.6V5.1z"/></svg>Authority</li>
-          <li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="4" width="15" height="12" rx="1.5"/><path d="M6 8.5l2.2 2L6 12.5M10.8 13h3.2"/></svg>Agent</li>
-        </ul>
-      </div>
-      <div class="side b">
-        <span class="pname">Company B</span>
-        <ul>
-          <li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="6" width="14" height="8" rx="1"/><path d="M4.5 16.5h2M13.5 16.5h2"/></svg>Executor</li>
-        </ul>
-      </div>
-    </div>
-    <div class="bd" aria-hidden="true"><span>boundary</span></div>
-    <div class="rail" aria-hidden="true">
-      <span class="tok">pay 4821</span>
-      <span class="chip"><i class="stop"></i>4821 &rarr; 9137 &middot; refused</span>
-    </div>
-  </div>
-</div></section>
-
-
-<section><div class="wrap">
+<section id="demonstration"><div class="wrap">
   <h2>An approved action can still be refused.</h2>
   <p>A payment is approved for &pound;1,800 to Supplier X at account 4821. The instruction that arrives at Company B's executor carries account 9137, and nothing else about the action has changed. The service compares the two, names the field it disagrees on, and refuses.</p>
   <p class="note" style="margin-top:2.4rem">The action as approved</p>
@@ -143,6 +114,34 @@
     <span class="api no">Payment API: not called</span>
   </div>
   <p class="note">Recorded from the live boundary at 08:42 UTC on 27 September 2026. <a href="use-cases.html">Every action class</a>. <a href="https://api.humsana.com/sandbox/">Run it yourself</a>.</p>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Where the check runs</h2>
+  <p>Humsana checks the action arriving at execution against the action that was authorized, and refuses any difference. An action leaves the party that authorized it and arrives at the party that executes it, so the check sits on the executing side, immediately before the call that cannot be taken back.</p>
+  <div class="bmap">
+    <div class="bmap-sides">
+      <div class="side a">
+        <span class="pname">Company A</span>
+        <ul>
+          <li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="7" r="3"/><path d="M4.2 17c0-3.2 2.6-5.8 5.8-5.8s5.8 2.6 5.8 5.8"/></svg>Principal</li>
+          <li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.2l5.6 1.9v4.4c0 3.1-2.2 5.7-5.6 6.6-3.4-.9-5.6-3.5-5.6-6.6V5.1z"/></svg>Authority</li>
+          <li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="4" width="15" height="12" rx="1.5"/><path d="M6 8.5l2.2 2L6 12.5M10.8 13h3.2"/></svg>Agent</li>
+        </ul>
+      </div>
+      <div class="side b">
+        <span class="pname">Company B</span>
+        <ul>
+          <li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="6" width="14" height="8" rx="1"/><path d="M4.5 16.5h2M13.5 16.5h2"/></svg>Executor</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bd" aria-hidden="true"><span>boundary</span></div>
+    <div class="rail" aria-hidden="true">
+      <span class="tok">pay 4821</span>
+      <span class="chip"><i class="stop"></i>4821 &rarr; 9137 &middot; refused</span>
+    </div>
+  </div>
 </div></section>
 
 <section><div class="wrap">
