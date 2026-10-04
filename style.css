@@ -545,3 +545,9 @@ html{scrollbar-color:var(--line) var(--bg)}
   .figstrip{grid-template-columns:1fr}
   .figstrip > div + div{border-left:0;border-top:1px solid var(--line-soft);padding-left:0}
 }
+
+/* The invitation to the company assessment: a band under the hero, and the only thing on the home page that
+   leads there. It is a section, not a card: the tint and the space do the work. */
+.invite{background:var(--warm)}
+.invite h2{margin-bottom:1rem}
+.invite .cta-row{margin-top:1.8rem}

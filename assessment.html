@@ -133,6 +133,9 @@
 
 /* the finding: the headline, the basis beside the conclusions, then five stacked lines */
 .as-headline{font-size:clamp(26px,3.2vw,40px);line-height:1.1;font-weight:600;letter-spacing:-.02em;color:var(--ink);max-width:26ch;margin-top:1.6rem}
+/* The payoff sits under its own rule: the conclusion, set apart from the stage above it. */
+.as-payoff{border-top:1px solid var(--ink);margin-top:2.6rem}
+.as-idx.is-now{color:var(--accent-text)}
 .as-basis{font-size:16px;line-height:1.55;color:var(--muted);max-width:64ch;margin-top:1.3rem;border-left:2px solid var(--line);padding-left:1.2rem}
 .as-close{border-top:1px solid var(--line);margin-top:2.2rem}
 .as-close > div{display:grid;grid-template-columns:14rem 1fr;gap:1.4rem;padding:1.15rem 0;border-bottom:1px solid var(--line-soft);align-items:baseline}
@@ -307,14 +310,16 @@
     <div class="as-head"><h2>The finding.</h2><span class="as-idx">07 / 08</span></div>
     <p class="as-copy">What we could identify, with our basis beside it, then the same boundary problem running for real.</p>
     <div class="js-only">
-      <p class="as-headline" id="c-headline"></p>
-      <p class="as-basis" id="c-basis"></p>
+      <div class="as-payoff">
+        <p class="as-headline" id="c-headline"></p>
+        <p class="as-basis" id="c-basis"></p>
+      </div>
       <dl class="as-close">
         <div><dt>Today</dt><dd id="c-today"></dd></div>
         <div><dt>Why the person remains</dt><dd id="c-why"></dd></div>
         <div><dt>Where Humsana fits</dt><dd id="c-where"></dd></div>
         <div><dt>What changes</dt><dd id="c-changes"></dd></div>
-        <div><dt>Readiness</dt><dd class="as-result" id="c-result"></dd></div>
+        <div><dt>Result</dt><dd class="as-result" id="c-result"></dd></div>
       </dl>
       <p class="as-nothing" id="c-nothing" hidden></p>
 
@@ -376,7 +381,6 @@
           <div class="panel-head"><b id="r-head">Assessment</b><span>assessment</span></div>
           <ul class="panel-rows">
             <li><span class="k">Company</span><span class="v" id="r-company"></span></li>
-            <li><span class="k">Agent</span><span class="v" id="r-agent"></span></li>
             <li><span class="k">Consequential action</span><span class="v" id="r-action"></span></li>
             <li><span class="k">Readiness</span><span class="v" id="r-readiness"></span></li>
             <li class="as-stack"><span class="k">Why the person remains</span><span class="v" id="r-why"></span></li>
@@ -469,6 +473,12 @@
     entries.forEach(function (e) {
       if (!e.isIntersecting) { return; }
       e.target.classList.add('in');
+      // The stage index in the accent marks where the reader has reached, so each stage reads as arrived at
+      // rather than as the seventh of eight slides. It follows the scroll, not the order things were revealed.
+      var marked = document.querySelectorAll('.as-stage .as-idx.is-now');
+      for (var i = 0; i < marked.length; i++) { marked[i].classList.remove('is-now'); }
+      var idx = e.target.querySelector('.as-idx');
+      if (idx) { idx.classList.add('is-now'); }
       progress(Number(e.target.getAttribute('data-stage')), e.target.getAttribute('data-name'));
       io.unobserve(e.target);
     });
@@ -721,7 +731,6 @@
   function renderCard(rep) {
     setText('r-head', rep.company || 'Assessment');
     setText('r-company', rep.company || '');
-    setText('r-agent', rep.agent || '');
     setText('r-action', rep.action || '');
     setText('r-readiness', rep.readiness || '');
     setText('r-why', rep.why_human || '');
@@ -729,7 +738,7 @@
     setText('r-evidence', rep.evidence || '');
 
     $('as-copy').addEventListener('click', function () {
-      var order = [['Company', 'company'], ['Agent', 'agent'], ['Consequential action', 'action'],
+      var order = [['Company', 'company'], ['Consequential action', 'action'],
         ['Readiness', 'readiness'], ['Why the person remains', 'why_human'],
         ['Control', 'control'], ['Evidence', 'evidence']];
       var lines = [(rep.company || '') + '. Assessment.'];
