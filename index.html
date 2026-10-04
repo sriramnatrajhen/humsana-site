@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Humsana">
 <meta property="og:url" content="https://humsana.com/">
 <meta property="og:title" content="Humsana: an execution boundary for AI agent actions">
-<meta property="og:description" content="Your AI can do more. The reason you still keep a person in the loop is often the final action. Humsana puts a boundary around that action, and proves what happened.">
+<meta property="og:description" content="Your AI can do more. The reason you still keep a person in the loop is often what happens at the final action. Humsana puts a boundary around that action, and proves what happened.">
 <meta property="og:image" content="https://humsana.com/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -110,32 +110,40 @@
 .faq summary{cursor:pointer;font-weight:600;font-family:inherit}
 .faq p{margin:.7rem 0 0}
 
-/* The boundary: one instrument, reused. The accent is reserved for the change and the refusal. */
-.bx{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:1.7rem 1.6rem;display:grid;gap:.85rem;max-width:34rem}
+/* The boundary: one instrument, reused everywhere. The accent is reserved for the change and the refusal. */
+.bx{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:1.7rem 1.6rem;display:grid;gap:.8rem}
 .bx-tag{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim)}
-.bx-act{font-size:1.05rem;color:var(--ink)}
-.bx-act s{color:var(--dim);text-decoration:line-through}
-.bx-act b{color:var(--accent-text);font-weight:600}
-.bx-line{display:flex;align-items:center;gap:.7rem}
-.bx-dot{width:1px;height:20px;background:var(--line);margin-left:.4rem}
+.bx-flow{display:flex;align-items:center;gap:.7rem;min-height:1.4rem}
+.bx-stem{width:1px;height:22px;background:var(--line);margin-left:.4rem;position:relative}
+.bx-stem::after{content:"";position:absolute;bottom:-1px;left:-2px;border-left:2.5px solid transparent;border-right:2.5px solid transparent;border-top:4px solid var(--line)}
 .bx-word{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim)}
 .bx-bar{display:flex;align-items:baseline;gap:.6rem;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:.6rem 0}
 .bx-name{font-weight:600}
 .bx-sub{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim)}
-.bx-stop{display:grid;gap:.55rem;border-top:1px solid var(--line);padding-top:1rem}
-.bx-state{font-family:var(--mono);font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-text)}
-.bx-why{display:grid;gap:.4rem;font-family:var(--mono);font-size:12.5px;color:var(--ink)}
+.bx-out{list-style:none;display:grid;gap:.45rem;margin:0;padding:0}
+.bx-out li{display:flex;justify-content:space-between;gap:1rem;font-family:var(--mono);font-size:12.5px;padding-left:1.1rem;position:relative}
+.bx-out li::before{content:"";position:absolute;left:0;top:.45em;width:.5rem;height:1px;background:var(--line)}
+.bx-out b{font-family:var(--sans);font-weight:400;color:var(--muted)}
+.bx-out span{letter-spacing:.08em}
+.bx-out .s-refuse span{color:var(--accent-text)}
+.bx-punch{margin-top:.4rem;font-size:1.02rem}
+.bx-example{border:1px solid var(--line);border-radius:14px;padding:1.3rem 1.6rem;display:grid;gap:.6rem}
+.bx-act{font-size:1rem;color:var(--ink)}
+.bx-act s{color:var(--dim);text-decoration:line-through}
+.bx-act b{color:var(--accent-text);font-weight:600}
+.bx-why{display:grid;gap:.35rem;font-family:var(--mono);font-size:12.5px;color:var(--ink)}
 .bx-why span{display:flex;gap:.7rem}
 .bx-why i{font-style:normal;color:var(--dim);min-width:5.4rem}
 .bx-id{font-family:var(--mono);font-size:11.5px;color:var(--dim)}
-.bx-note{font-size:.95rem;color:var(--muted)}
 .bx-verify{font-size:.98rem;color:var(--accent-text)}
-@keyframes bx-arrive{0%,18%{opacity:0;transform:translateY(-6px)}58%,100%{opacity:1;transform:none}}
-@keyframes bx-stop{0%,52%{opacity:0}82%,100%{opacity:1}}
-.bx-act.arrived{animation:bx-arrive 2.6s ease-out 1 both}
-.bx-stop{animation:bx-stop 2.6s ease-out 1 both}
-@media(prefers-reduced-motion:reduce){.bx-act.arrived,.bx-stop{animation:none}}
+@keyframes bx-step{0%{opacity:0;transform:translateY(-4px)}100%{opacity:1;transform:none}}
+.bx-out li{animation:bx-step .7s ease-out 1 both}
+.bx-out li:nth-child(1){animation-delay:.5s}
+.bx-out li:nth-child(2){animation-delay:.95s}
+.bx-out li:nth-child(3){animation-delay:1.4s}
+@media(prefers-reduced-motion:reduce){.bx-out li{animation:none}}
 /* The receipt was built for a hero column; as a section it keeps a reading measure of its own. */
+.hero-note{max-width:64ch;margin-top:2.4rem;padding-top:1.2rem;border-top:1px solid var(--line-soft)}
 #proof h2{max-width:24ch}
 #proof .lead{max-width:52ch}
 #proof .proof{max-width:44rem;margin-top:2.2rem}
@@ -172,26 +180,31 @@
     </div>
     <div class="hero-panel">
       <div class="bx">
-        <p class="bx-tag">Payment agent</p>
-        <p class="bx-act">Pay &pound;1,800 to Supplier X</p>
-        <div class="bx-line"><span class="bx-dot"></span><span class="bx-word">authorized</span></div>
+        <p class="bx-tag">AI agent</p>
+        <div class="bx-flow"><span class="bx-stem"></span><span class="bx-word">authorized action</span></div>
         <div class="bx-bar"><span class="bx-name">Humsana</span><span class="bx-sub">execution boundary</span></div>
-        <div class="bx-line"><span class="bx-dot"></span><span class="bx-word">received</span></div>
-        <p class="bx-act arrived">Pay <s>&pound;1,800</s> <b>&pound;2,400</b> to Supplier X</p>
-        <div class="bx-stop">
-          <p class="bx-state">Refused</p>
-          <div class="bx-why">
-            <span><i>amount, GBP</i> &pound;1,800 &rarr; &pound;2,400</span>
-            <span><i>rule</i> MAY_NOT_INCREASE</span>
-            <span><i>result</i> Not executed</span>
-          </div>
-          <p class="bx-id">exec_vHnOShRdlnkOjcgu &middot; 4 October 2026 &middot; Humsana Sandbox</p>
-          <p class="bx-note">This is a real run from the sandbox, kept as the boundary issued it: a payment authorized at &pound;1,800 arrived at &pound;2,400, and the call was never made. <a href="https://api.humsana.com/sandbox/">Run it yourself and verify the record it issues.</a></p>
-          <a class="bx-verify arrow-after" href="https://verify.humsana.com/verify">Verify this record</a>
+        <div class="bx-flow"><span class="bx-stem"></span><span class="bx-word">the action arrives</span></div>
+        <ul class="bx-out">
+          <li class="s-allow"><b>Unchanged</b><span>ALLOW</span></li>
+          <li class="s-hold"><b>Needs a person</b><span>HOLD</span></li>
+          <li class="s-refuse"><b>Changed</b><span>REFUSE</span></li>
+        </ul>
+        <p class="bx-punch">The action changes. The boundary catches it.</p>
+      </div>
+      <div class="bx-example">
+        <p class="bx-tag">One real example: supplier payment</p>
+        <p class="bx-act">Pay <s>&pound;1,800</s> <b>&pound;2,400</b> to Supplier X</p>
+        <div class="bx-why">
+          <span><i>amount, GBP</i> &pound;1,800 &rarr; &pound;2,400</span>
+          <span><i>rule</i> MAY_NOT_INCREASE</span>
+          <span><i>result</i> Not executed</span>
         </div>
+        <p class="bx-id">exec_vHnOShRdlnkOjcgu &middot; 4 October 2026 &middot; Humsana Sandbox</p>
+        <a class="bx-verify arrow-after" href="https://verify.humsana.com/verify">Verify this record</a>
       </div>
     </div>
   </div>
+  <p class="note hero-note">Payments are one example. The same problem appears wherever an AI agent can change something consequential.</p>
 </div></header>
 
 <section class="invite"><div class="wrap">
