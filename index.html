@@ -95,11 +95,11 @@
 <style>
 /* index only. The first screen carries one real record, so the record id and the run's timestamp
    keep their own case in the panel head. Everything else composes from style.css. */
-.hero .proof{grid-column:8 / span 5}
+.proof{grid-column:8 / span 5}
 .proof h2{font-size:22px;line-height:1.35}
 .proof .panel-head b,.proof .panel-head span{text-transform:none;letter-spacing:.02em}
 .proof .cta-row{margin-top:1.2rem}
-@media(max-width:900px){.hero .proof{grid-column:1 / -1}}
+
 /* The story blocks and the questions. Stacked, one below the other, never side by side. */
 .story{list-style:none;margin:0;padding:0;display:grid;gap:1.6rem;max-width:56rem}
 .story li{border-left:2px solid var(--line);padding-left:1.3rem}
@@ -109,6 +109,38 @@
 .faq details:last-child{border-bottom:1px solid var(--line)}
 .faq summary{cursor:pointer;font-weight:600;font-family:inherit}
 .faq p{margin:.7rem 0 0}
+
+/* The boundary: one instrument, reused. The accent is reserved for the change and the refusal. */
+.bx{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:1.7rem 1.6rem;display:grid;gap:.85rem;max-width:34rem}
+.bx-tag{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim)}
+.bx-act{font-size:1.05rem;color:var(--ink)}
+.bx-act s{color:var(--dim);text-decoration:line-through}
+.bx-act b{color:var(--accent-text);font-weight:600}
+.bx-line{display:flex;align-items:center;gap:.7rem}
+.bx-dot{width:1px;height:20px;background:var(--line);margin-left:.4rem}
+.bx-word{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim)}
+.bx-bar{display:flex;align-items:baseline;gap:.6rem;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:.6rem 0}
+.bx-name{font-weight:600}
+.bx-sub{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim)}
+.bx-stop{display:grid;gap:.55rem;border-top:1px solid var(--line);padding-top:1rem}
+.bx-state{font-family:var(--mono);font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-text)}
+.bx-why{display:grid;gap:.4rem;font-family:var(--mono);font-size:12.5px;color:var(--ink)}
+.bx-why span{display:flex;gap:.7rem}
+.bx-why i{font-style:normal;color:var(--dim);min-width:5.4rem}
+.bx-id{font-family:var(--mono);font-size:11.5px;color:var(--dim)}
+.bx-note{font-size:.95rem;color:var(--muted)}
+.bx-verify{font-size:.98rem;color:var(--accent-text)}
+@keyframes bx-arrive{0%,18%{opacity:0;transform:translateY(-6px)}58%,100%{opacity:1;transform:none}}
+@keyframes bx-stop{0%,52%{opacity:0}82%,100%{opacity:1}}
+.bx-act.arrived{animation:bx-arrive 2.6s ease-out 1 both}
+.bx-stop{animation:bx-stop 2.6s ease-out 1 both}
+@media(prefers-reduced-motion:reduce){.bx-act.arrived,.bx-stop{animation:none}}
+/* The receipt was built for a hero column; as a section it keeps a reading measure of its own. */
+#proof h2{max-width:24ch}
+#proof .lead{max-width:52ch}
+#proof .proof{max-width:44rem;margin-top:2.2rem}
+#proof .note{max-width:52ch;margin-top:1.6rem}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.bx{max-width:none}#proof .proof{max-width:none}}
 </style>
 </head>
 <body>
@@ -129,34 +161,35 @@
 <header class="hero"><div class="wrap">
   <div class="hero-grid">
     <div class="hero-copy">
+      <p class="eyebrow">The execution boundary for AI agents</p>
       <h1>Give your AI permission to act. Humsana makes sure it stays within that permission.</h1>
       <p class="lead">Your AI can do more. The reason you still keep a person in the loop is often the final action.</p>
-      <p>Humsana puts a boundary around that action. It compares the action arriving at execution with the action that was authorized, and it holds or refuses anything that has changed.</p>
+      <p>AI can already do much of the work. The part companies still keep with a person is often the final action, because something consequential can change before it happens. Humsana checks the action that reaches execution against the action that was authorized.</p>
       <div class="cta-row">
         <a class="btn btn-primary arrow-after" href="assessment.html">Do you need Humsana?</a>
-        <a class="btn btn-ghost" href="#demonstration">See an approved action refused</a>
+        <a class="btn btn-ghost" href="the-execution-boundary.html">See how the boundary works</a>
       </div>
     </div>
-
-    <div class="hero-panel proof">
-      <h2>Real Humsana boundary · recorded example</h2>
-      <p class="note">One record from one real run, kept as it was issued. Run the live demo to make your own and check it yourself.</p>
-      <div class="panel">
-        <div class="panel-head"><b>exec_9M6XK2NNZYxmFUqP</b><span>2026-10-03T10:56:57Z</span></div>
-        <ul class="panel-rows">
-          <li><span class="k">agent</span><span class="v">records-proof-agent</span></li>
-          <li><span class="k">authorized</span><span class="v">post_message, channel team</span></li>
-          <li><span class="k">received</span><span class="v">post_message, channel general</span></li>
-          <li><span class="k">changed</span><span class="v flag">parameters.channel</span></li>
-          <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE</span></li>
-          <li><span class="k">outcome</span><span class="v">NOT_EXECUTED</span></li>
-        </ul>
-        <div class="panel-foot">Refused, EFFECTUATION_DRIFT</div>
+    <div class="hero-panel">
+      <div class="bx">
+        <p class="bx-tag">Payment agent</p>
+        <p class="bx-act">Pay &pound;1,800 to Supplier X</p>
+        <div class="bx-line"><span class="bx-dot"></span><span class="bx-word">authorized</span></div>
+        <div class="bx-bar"><span class="bx-name">Humsana</span><span class="bx-sub">execution boundary</span></div>
+        <div class="bx-line"><span class="bx-dot"></span><span class="bx-word">received</span></div>
+        <p class="bx-act arrived">Pay <s>&pound;1,800</s> <b>&pound;2,400</b> to Supplier X</p>
+        <div class="bx-stop">
+          <p class="bx-state">Refused</p>
+          <div class="bx-why">
+            <span><i>amount, GBP</i> &pound;1,800 &rarr; &pound;2,400</span>
+            <span><i>rule</i> MAY_NOT_INCREASE</span>
+            <span><i>result</i> Not executed</span>
+          </div>
+          <p class="bx-id">exec_vHnOShRdlnkOjcgu &middot; 4 October 2026 &middot; Humsana Sandbox</p>
+          <p class="bx-note">This is a real run from the sandbox, kept as the boundary issued it: a payment authorized at &pound;1,800 arrived at &pound;2,400, and the call was never made. <a href="https://api.humsana.com/sandbox/">Run it yourself and verify the record it issues.</a></p>
+          <a class="bx-verify arrow-after" href="https://verify.humsana.com/verify">Verify this record</a>
+        </div>
       </div>
-      <div class="cta-row">
-        <a class="btn" href="https://verify.humsana.com/verify?record=%7B%22action%22%3A%20%7B%22authorized_digest%22%3A%20%22sha256%3A69c7bc609a53599accc8c151ddf0a0e7108e0a9f04305a232d8ca5bdc0c3123f%22%2C%20%22authorized_parameters%22%3A%20%7B%22channel%22%3A%20%22team%22%7D%2C%20%22field_comparison%22%3A%20%5B%7B%22authorized%22%3A%20%22team%22%2C%20%22authorized_absent%22%3A%20false%2C%20%22field%22%3A%20%22channel%22%2C%20%22presented%22%3A%20%22general%22%2C%20%22presented_absent%22%3A%20false%7D%5D%2C%20%22name%22%3A%20%22post_message%22%2C%20%22presented_digest%22%3A%20%22sha256%3A9ae2fe342a18869f97ac6eecfa2745a38d5b6a577ec7f3afbc36e20117eca7f6%22%2C%20%22presented_digest_stated%22%3A%20true%2C%20%22presented_parameters%22%3A%20%7B%22channel%22%3A%20%22general%22%7D%7D%2C%20%22authorization%22%3A%20%7B%22authorization_id%22%3A%20%22authz_UQp4SRaOjyHaq0bfp3HKgQ%22%2C%20%22key_id%22%3A%20%22humsana-production-2026%22%2C%20%22receipt_id%22%3A%20%22authz_UQp4SRaOjyHaq0bfp3HKgQ%22%2C%20%22record_digest%22%3A%20%22sha256%3Ae389c8440ad1b935efe4e22df17340219bd30893ecfeb9dd2671a077488db7c5%22%2C%20%22schema%22%3A%20%22swan.authz%2F1%22%7D%2C%20%22comparison%22%3A%20%7B%22decision%22%3A%20%22HUMAN_CONFIRM%22%2C%20%22deviations%22%3A%20%5B%7B%22authorized%22%3A%20%22team%22%2C%20%22code%22%3A%20%22MAY_NOT_CHANGE%22%2C%20%22detail%22%3A%20%22The%20field%20is%20fixed%20by%20the%20authorization%20and%20may%20not%20differ%20at%20execution.%22%2C%20%22field%22%3A%20%22parameters.channel%22%2C%20%22presented%22%3A%20%22general%22%7D%5D%2C%20%22matched%22%3A%20false%2C%20%22refusal%22%3A%20%7B%22code%22%3A%20%22EFFECTUATION_DRIFT%22%2C%20%22deviations%22%3A%20%5B%7B%22authorized%22%3A%20%22team%22%2C%20%22code%22%3A%20%22MAY_NOT_CHANGE%22%2C%20%22detail%22%3A%20%22The%20field%20is%20fixed%20by%20the%20authorization%20and%20may%20not%20differ%20at%20execution.%22%2C%20%22field%22%3A%20%22parameters.channel%22%2C%20%22presented%22%3A%20%22general%22%7D%5D%2C%20%22reasons%22%3A%20%5B%7B%22code%22%3A%20%22EFFECTUATION_DRIFT%22%2C%20%22detail%22%3A%20%221%20field%28s%29%20outside%20the%20authorized%20tuple%22%7D%5D%2C%20%22repairable%22%3A%20true%7D%2C%20%22vocabulary%22%3A%20%22humsana.deviation%2F1%22%7D%2C%20%22comparison_ran%22%3A%20true%2C%20%22execution%22%3A%20%7B%22note%22%3A%20%22no%20execution%20was%20reported%20for%20this%20action%22%2C%20%22outcome%22%3A%20%22NOT_EXECUTED%22%2C%20%22rail_called%22%3A%20false%7D%2C%20%22executor_acknowledgment%22%3A%20%7B%22agrees_with%22%3A%20null%2C%20%22key_id%22%3A%20null%2C%20%22note%22%3A%20%22the%20executor%20reported%20an%20acknowledgment%20but%20did%20not%20sign%2C%20so%20this%20is%20the%20executor%27s%20unsigned%20statement%20and%20not%20yet%20a%20two-party%20record%22%2C%20%22received_at%22%3A%20null%2C%20%22received_by%22%3A%20null%2C%20%22received_digest%22%3A%20null%2C%20%22signature%22%3A%20null%2C%20%22status%22%3A%20%22acknowledged%22%7D%2C%20%22issued_at%22%3A%20%222026-10-03T10%3A56%3A57Z%22%2C%20%22issuer%22%3A%20%7B%22key_id%22%3A%20%22humsana-production-2026%22%2C%20%22name%22%3A%20%22Humsana%22%7D%2C%20%22record_digest%22%3A%20%22sha256%3A68b524f4d54938613753dbf68c049ec09655c17ee7c7ce2539fa5fafc6ac0413%22%2C%20%22record_id%22%3A%20%22exec_9M6XK2NNZYxmFUqP%22%2C%20%22schema%22%3A%20%22humsana.execution%2F1%22%2C%20%22scope%22%3A%20%22This%20signature%20attests%20that%20Humsana%20issued%20this%20execution%20record%20and%20that%20it%20has%20not%20been%20altered%20since.%20It%20states%20what%20arrived%20at%20the%20boundary%2C%20whether%20the%20comparison%20ran%2C%20what%20the%20comparison%20found%2C%20and%20what%20the%20boundary%20did.%20It%20does%20not%20establish%20that%20the%20authority%20behind%20the%20action%20was%20legitimate%2C%20and%20it%20does%20not%20show%20that%20the%20action%20succeeded%20in%20the%20world%3A%20whether%20the%20rail%20was%20called%20and%20what%20the%20executor%20acknowledged%20are%20the%20executor%27s%20report%2C%20carried%20verbatim%2C%20not%20an%20effect%20Humsana%20observed.%22%2C%20%22signature%22%3A%20%7B%22alg%22%3A%20%22ed25519%22%2C%20%22key_id%22%3A%20%22humsana-production-2026%22%2C%20%22value%22%3A%20%22eed62bc53ee463bab27f39189cd790009bb68b103e2b3600d18d8073bb092bafbfc25d615765db182b3953f5e8f65c3f7cc83565d6b75d1b92e8b89cd90a430f%22%7D%7D&amp;authorization=%7B%22action%22%3A%20%7B%22digest%22%3A%20%22sha256%3A69c7bc609a53599accc8c151ddf0a0e7108e0a9f04305a232d8ca5bdc0c3123f%22%2C%20%22name%22%3A%20%22post_message%22%2C%20%22parameters%22%3A%20%7B%22channel%22%3A%20%22team%22%7D%7D%2C%20%22agent%22%3A%20%7B%22id%22%3A%20%22records-proof-agent%22%2C%20%22identity%22%3A%20%22declared%20by%20the%20caller%2C%20not%20verified%20at%20the%20boundary%22%7D%2C%20%22authority%22%3A%20%7B%22action_class%22%3A%20%22post_message%22%2C%20%22authorization_id%22%3A%20%22authz_UQp4SRaOjyHaq0bfp3HKgQ%22%2C%20%22grant_expires_at%22%3A%20%222026-12-31T00%3A00%3A00Z%22%2C%20%22granted_at%22%3A%20null%2C%20%22operation_digest%22%3A%20%22sha256%3A69c7bc609a53599accc8c151ddf0a0e7108e0a9f04305a232d8ca5bdc0c3123f%22%2C%20%22policy_version%22%3A%20%221%22%2C%20%22ref%22%3A%20%22%22%2C%20%22single_use%22%3A%20null%7D%2C%20%22confirmation%22%3A%20%7B%22confirmation_id%22%3A%20null%2C%20%22obtained%22%3A%20false%2C%20%22required%22%3A%20false%7D%2C%20%22consequence%22%3A%20%7B%22class%22%3A%20%22C1%22%7D%2C%20%22decision%22%3A%20%7B%22granted%22%3A%20true%2C%20%22value%22%3A%20%22ALLOW%22%7D%2C%20%22expiry%22%3A%20%222026-12-31T00%3A00%3A00Z%22%2C%20%22issued_at%22%3A%20%222026-10-03T10%3A56%3A57Z%22%2C%20%22issuer%22%3A%20%7B%22key_id%22%3A%20%22humsana-production-2026%22%2C%20%22name%22%3A%20%22Humsana%22%7D%2C%20%22principal%22%3A%20%7B%22approved_by%22%3A%20%7B%7D%2C%20%22id%22%3A%20%22%22%7D%2C%20%22receipt_id%22%3A%20%22authz_UQp4SRaOjyHaq0bfp3HKgQ%22%2C%20%22record_digest%22%3A%20%22sha256%3Ae389c8440ad1b935efe4e22df17340219bd30893ecfeb9dd2671a077488db7c5%22%2C%20%22schema%22%3A%20%22swan.authz%2F1%22%2C%20%22scope%22%3A%20%22This%20signature%20attests%20that%20Humsana%20issued%20this%20authorization%20record%20and%20that%20it%20has%20not%20been%20altered%20since.%20It%20states%20what%20was%20authorized.%20It%20does%20not%20establish%20that%20the%20authority%20behind%20the%20action%20was%20legitimate%2C%20and%20it%20says%20nothing%20about%20what%20happened%20after%20execution%3A%20that%20is%20the%20execution%20record%27s%20subject%2C%20and%20no%20execution%20status%2C%20comparison%20outcome%20or%20deviation%20block%20lives%20in%20this%20record.%22%2C%20%22signature%22%3A%20%7B%22alg%22%3A%20%22ed25519%22%2C%20%22key_id%22%3A%20%22humsana-production-2026%22%2C%20%22value%22%3A%20%22d0d75e354699c0cdc5193305b0850414446d55630e8934aefbfb55d00cbc5d9dabd42ed2a228a8a8f9afaebd6e3b807626a9876c980d466f3a3214e40a6bb40b%22%7D%7D">See the proof</a>
-      </div>
-      <p class="note">Signed by humsana-production-2026 with Ed25519. The verifier reports signature VALID, record digest MATCHES and authorization link VALID.</p>
     </div>
   </div>
 </div></header>
@@ -254,6 +287,35 @@
     <div class="r">A refusal is a code naming the field and both values, and it spends nothing.</div>
     <div class="l">The evidence is the agent's own log.</div>
     <div class="r">The record is signed, and a third party verifies it offline.</div>
+  </div>
+</div></section>
+
+<section id="proof"><div class="wrap">
+  <h2>And you can prove what happened.</h2>
+  <p class="lead">Every governed action leaves a signed record of what was authorized and of what reached the execution boundary. The signature names the key that produced it, and the public keys are published, so somebody who was not there can check it without an account here.</p>
+  <div class="proof">
+      <h2>Real Humsana boundary · recorded example</h2>
+      <p class="note">One record from one real run, kept as it was issued. Run the live demo to make your own and check it yourself.</p>
+      <div class="panel">
+        <div class="panel-head"><b>exec_9M6XK2NNZYxmFUqP</b><span>2026-10-03T10:56:57Z</span></div>
+        <ul class="panel-rows">
+          <li><span class="k">agent</span><span class="v">records-proof-agent</span></li>
+          <li><span class="k">authorized</span><span class="v">post_message, channel team</span></li>
+          <li><span class="k">received</span><span class="v">post_message, channel general</span></li>
+          <li><span class="k">changed</span><span class="v flag">parameters.channel</span></li>
+          <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE</span></li>
+          <li><span class="k">outcome</span><span class="v">NOT_EXECUTED</span></li>
+        </ul>
+        <div class="panel-foot">Refused, EFFECTUATION_DRIFT</div>
+      </div>
+      <div class="cta-row">
+        <a class="btn" href="https://verify.humsana.com/verify?record=%7B%22action%22%3A%20%7B%22authorized_digest%22%3A%20%22sha256%3A69c7bc609a53599accc8c151ddf0a0e7108e0a9f04305a232d8ca5bdc0c3123f%22%2C%20%22authorized_parameters%22%3A%20%7B%22channel%22%3A%20%22team%22%7D%2C%20%22field_comparison%22%3A%20%5B%7B%22authorized%22%3A%20%22team%22%2C%20%22authorized_absent%22%3A%20false%2C%20%22field%22%3A%20%22channel%22%2C%20%22presented%22%3A%20%22general%22%2C%20%22presented_absent%22%3A%20false%7D%5D%2C%20%22name%22%3A%20%22post_message%22%2C%20%22presented_digest%22%3A%20%22sha256%3A9ae2fe342a18869f97ac6eecfa2745a38d5b6a577ec7f3afbc36e20117eca7f6%22%2C%20%22presented_digest_stated%22%3A%20true%2C%20%22presented_parameters%22%3A%20%7B%22channel%22%3A%20%22general%22%7D%7D%2C%20%22authorization%22%3A%20%7B%22authorization_id%22%3A%20%22authz_UQp4SRaOjyHaq0bfp3HKgQ%22%2C%20%22key_id%22%3A%20%22humsana-production-2026%22%2C%20%22receipt_id%22%3A%20%22authz_UQp4SRaOjyHaq0bfp3HKgQ%22%2C%20%22record_digest%22%3A%20%22sha256%3Ae389c8440ad1b935efe4e22df17340219bd30893ecfeb9dd2671a077488db7c5%22%2C%20%22schema%22%3A%20%22swan.authz%2F1%22%7D%2C%20%22comparison%22%3A%20%7B%22decision%22%3A%20%22HUMAN_CONFIRM%22%2C%20%22deviations%22%3A%20%5B%7B%22authorized%22%3A%20%22team%22%2C%20%22code%22%3A%20%22MAY_NOT_CHANGE%22%2C%20%22detail%22%3A%20%22The%20field%20is%20fixed%20by%20the%20authorization%20and%20may%20not%20differ%20at%20execution.%22%2C%20%22field%22%3A%20%22parameters.channel%22%2C%20%22presented%22%3A%20%22general%22%7D%5D%2C%20%22matched%22%3A%20false%2C%20%22refusal%22%3A%20%7B%22code%22%3A%20%22EFFECTUATION_DRIFT%22%2C%20%22deviations%22%3A%20%5B%7B%22authorized%22%3A%20%22team%22%2C%20%22code%22%3A%20%22MAY_NOT_CHANGE%22%2C%20%22detail%22%3A%20%22The%20field%20is%20fixed%20by%20the%20authorization%20and%20may%20not%20differ%20at%20execution.%22%2C%20%22field%22%3A%20%22parameters.channel%22%2C%20%22presented%22%3A%20%22general%22%7D%5D%2C%20%22reasons%22%3A%20%5B%7B%22code%22%3A%20%22EFFECTUATION_DRIFT%22%2C%20%22detail%22%3A%20%221%20field%28s%29%20outside%20the%20authorized%20tuple%22%7D%5D%2C%20%22repairable%22%3A%20true%7D%2C%20%22vocabulary%22%3A%20%22humsana.deviation%2F1%22%7D%2C%20%22comparison_ran%22%3A%20true%2C%20%22execution%22%3A%20%7B%22note%22%3A%20%22no%20execution%20was%20reported%20for%20this%20action%22%2C%20%22outcome%22%3A%20%22NOT_EXECUTED%22%2C%20%22rail_called%22%3A%20false%7D%2C%20%22executor_acknowledgment%22%3A%20%7B%22agrees_with%22%3A%20null%2C%20%22key_id%22%3A%20null%2C%20%22note%22%3A%20%22the%20executor%20reported%20an%20acknowledgment%20but%20did%20not%20sign%2C%20so%20this%20is%20the%20executor%27s%20unsigned%20statement%20and%20not%20yet%20a%20two-party%20record%22%2C%20%22received_at%22%3A%20null%2C%20%22received_by%22%3A%20null%2C%20%22received_digest%22%3A%20null%2C%20%22signature%22%3A%20null%2C%20%22status%22%3A%20%22acknowledged%22%7D%2C%20%22issued_at%22%3A%20%222026-10-03T10%3A56%3A57Z%22%2C%20%22issuer%22%3A%20%7B%22key_id%22%3A%20%22humsana-production-2026%22%2C%20%22name%22%3A%20%22Humsana%22%7D%2C%20%22record_digest%22%3A%20%22sha256%3A68b524f4d54938613753dbf68c049ec09655c17ee7c7ce2539fa5fafc6ac0413%22%2C%20%22record_id%22%3A%20%22exec_9M6XK2NNZYxmFUqP%22%2C%20%22schema%22%3A%20%22humsana.execution%2F1%22%2C%20%22scope%22%3A%20%22This%20signature%20attests%20that%20Humsana%20issued%20this%20execution%20record%20and%20that%20it%20has%20not%20been%20altered%20since.%20It%20states%20what%20arrived%20at%20the%20boundary%2C%20whether%20the%20comparison%20ran%2C%20what%20the%20comparison%20found%2C%20and%20what%20the%20boundary%20did.%20It%20does%20not%20establish%20that%20the%20authority%20behind%20the%20action%20was%20legitimate%2C%20and%20it%20does%20not%20show%20that%20the%20action%20succeeded%20in%20the%20world%3A%20whether%20the%20rail%20was%20called%20and%20what%20the%20executor%20acknowledged%20are%20the%20executor%27s%20report%2C%20carried%20verbatim%2C%20not%20an%20effect%20Humsana%20observed.%22%2C%20%22signature%22%3A%20%7B%22alg%22%3A%20%22ed25519%22%2C%20%22key_id%22%3A%20%22humsana-production-2026%22%2C%20%22value%22%3A%20%22eed62bc53ee463bab27f39189cd790009bb68b103e2b3600d18d8073bb092bafbfc25d615765db182b3953f5e8f65c3f7cc83565d6b75d1b92e8b89cd90a430f%22%7D%7D&amp;authorization=%7B%22action%22%3A%20%7B%22digest%22%3A%20%22sha256%3A69c7bc609a53599accc8c151ddf0a0e7108e0a9f04305a232d8ca5bdc0c3123f%22%2C%20%22name%22%3A%20%22post_message%22%2C%20%22parameters%22%3A%20%7B%22channel%22%3A%20%22team%22%7D%7D%2C%20%22agent%22%3A%20%7B%22id%22%3A%20%22records-proof-agent%22%2C%20%22identity%22%3A%20%22declared%20by%20the%20caller%2C%20not%20verified%20at%20the%20boundary%22%7D%2C%20%22authority%22%3A%20%7B%22action_class%22%3A%20%22post_message%22%2C%20%22authorization_id%22%3A%20%22authz_UQp4SRaOjyHaq0bfp3HKgQ%22%2C%20%22grant_expires_at%22%3A%20%222026-12-31T00%3A00%3A00Z%22%2C%20%22granted_at%22%3A%20null%2C%20%22operation_digest%22%3A%20%22sha256%3A69c7bc609a53599accc8c151ddf0a0e7108e0a9f04305a232d8ca5bdc0c3123f%22%2C%20%22policy_version%22%3A%20%221%22%2C%20%22ref%22%3A%20%22%22%2C%20%22single_use%22%3A%20null%7D%2C%20%22confirmation%22%3A%20%7B%22confirmation_id%22%3A%20null%2C%20%22obtained%22%3A%20false%2C%20%22required%22%3A%20false%7D%2C%20%22consequence%22%3A%20%7B%22class%22%3A%20%22C1%22%7D%2C%20%22decision%22%3A%20%7B%22granted%22%3A%20true%2C%20%22value%22%3A%20%22ALLOW%22%7D%2C%20%22expiry%22%3A%20%222026-12-31T00%3A00%3A00Z%22%2C%20%22issued_at%22%3A%20%222026-10-03T10%3A56%3A57Z%22%2C%20%22issuer%22%3A%20%7B%22key_id%22%3A%20%22humsana-production-2026%22%2C%20%22name%22%3A%20%22Humsana%22%7D%2C%20%22principal%22%3A%20%7B%22approved_by%22%3A%20%7B%7D%2C%20%22id%22%3A%20%22%22%7D%2C%20%22receipt_id%22%3A%20%22authz_UQp4SRaOjyHaq0bfp3HKgQ%22%2C%20%22record_digest%22%3A%20%22sha256%3Ae389c8440ad1b935efe4e22df17340219bd30893ecfeb9dd2671a077488db7c5%22%2C%20%22schema%22%3A%20%22swan.authz%2F1%22%2C%20%22scope%22%3A%20%22This%20signature%20attests%20that%20Humsana%20issued%20this%20authorization%20record%20and%20that%20it%20has%20not%20been%20altered%20since.%20It%20states%20what%20was%20authorized.%20It%20does%20not%20establish%20that%20the%20authority%20behind%20the%20action%20was%20legitimate%2C%20and%20it%20says%20nothing%20about%20what%20happened%20after%20execution%3A%20that%20is%20the%20execution%20record%27s%20subject%2C%20and%20no%20execution%20status%2C%20comparison%20outcome%20or%20deviation%20block%20lives%20in%20this%20record.%22%2C%20%22signature%22%3A%20%7B%22alg%22%3A%20%22ed25519%22%2C%20%22key_id%22%3A%20%22humsana-production-2026%22%2C%20%22value%22%3A%20%22d0d75e354699c0cdc5193305b0850414446d55630e8934aefbfb55d00cbc5d9dabd42ed2a228a8a8f9afaebd6e3b807626a9876c980d466f3a3214e40a6bb40b%22%7D%7D">See the proof</a>
+      </div>
+      <p class="note">Signed by humsana-production-2026 with Ed25519. The verifier reports signature VALID, record digest MATCHES and authorization link VALID.</p>
+    </div>
+  <p class="note">Do not take the interface's word for it. The verifier checks the signature, the record digests and the link between the authorization and the execution, offline.</p>
+  <div class="cta-row">
+    <a class="btn btn-primary arrow-after" href="https://verify.humsana.com/verify">Check a record yourself</a>
   </div>
 </div></section>
 

@@ -100,11 +100,11 @@ Testing the authorization boundary with your own action
   <h2>Download the record for that press and check it offline.</h2>
   <p style="margin-top:1.4rem">The sandbox issues a signed record for the action it presented, and serves the public key beside it.</p>
   <p style="margin-top:.9rem">The record route answers only in a session that has pressed, so curl keeps the cookie in jar.txt.</p>
-  <pre class="code" style="margin-top:1.8rem">$ curl -s -c jar.txt -o /dev/null -w 'GET  %{url_effective}  %{http_code}\n' https://api.humsana.com/sandbox/gregg/
-GET  https://api.humsana.com/sandbox/gregg/  200
+  <pre class="code" style="margin-top:1.8rem">$ curl -s -c jar.txt -o /dev/null -w 'GET  %{url_effective}  %{http_code}\n' https://api.humsana.com/sandbox/
+GET  https://api.humsana.com/sandbox/  200
 
-$ curl -s -b jar.txt -c jar.txt -o pressed.html -w 'POST %{url_effective}  %{http_code}\n' -d 'do=execute' -d 'amount_gbp=1800' -d 'beneficiary=Supplier X' -d 'account_four=9137' -d 'expiry=14:00' https://api.humsana.com/sandbox/gregg/
-POST https://api.humsana.com/sandbox/gregg/  200
+$ curl -s -b jar.txt -c jar.txt -o pressed.html -w 'POST %{url_effective}  %{http_code}\n' -d 'do=execute' -d 'amount_gbp=1800' -d 'beneficiary=Supplier X' -d 'account_four=9137' -d 'expiry=14:00' https://api.humsana.com/sandbox/
+POST https://api.humsana.com/sandbox/  200
 
 the two rows the press wrote into the case record on the page it returned:
   verdict REFUSED code GRANT_DOES_NOT_COVER_THIS_ACTION
@@ -112,10 +112,10 @@ the two rows the press wrote into the case record on the page it returned:
   executed  code GRANT_DOES_NOT_COVER_THIS_ACTION, matched False, consumed False
   refused   GRANT_DOES_NOT_COVER_THIS_ACTION (this grant covers a different action: parameters.payee_account)
 
-$ curl -s -b jar.txt -o record.receipt.json -w 'GET  %{url_effective}  %{http_code}\n' https://api.humsana.com/sandbox/gregg/record.receipt.json
-GET  https://api.humsana.com/sandbox/gregg/record.receipt.json  200
-$ curl -s -b jar.txt -o key.pub.json -w 'GET  %{url_effective}  %{http_code}\n' https://api.humsana.com/sandbox/gregg/key.pub.json
-GET  https://api.humsana.com/sandbox/gregg/key.pub.json  200
+$ curl -s -b jar.txt -o record.receipt.json -w 'GET  %{url_effective}  %{http_code}\n' https://api.humsana.com/sandbox/record.receipt.json
+GET  https://api.humsana.com/sandbox/record.receipt.json  200
+$ curl -s -b jar.txt -o key.pub.json -w 'GET  %{url_effective}  %{http_code}\n' https://api.humsana.com/sandbox/key.pub.json
+GET  https://api.humsana.com/sandbox/key.pub.json  200
 
 $ python3 -m receipt.verify record.receipt.json --key key.pub.json
 SIGNATURE VERIFIES: the signature verifies against the published key
