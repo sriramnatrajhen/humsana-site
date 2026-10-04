@@ -36,6 +36,8 @@ Site: https://humsana.com/
 
 ## Where to start
 
+- Why this has to exist, and why permissions and identity do not close the gap:
+  https://humsana.com/why-humsana.html
 - Whether you need it: https://humsana.com/assessment.html. A short assessment reads a workflow and shows
   where a person still steps in, and which of those places could move to an agent with a boundary.
 - How it works: https://humsana.com/the-execution-boundary.html
@@ -60,3 +62,5 @@ Site: https://humsana.com/
 - A refusal spends nothing: the grant is not consumed by an action that was refused.
 - Signed records name the key that signed them, and the public keys are published.
 - Verification happens offline, from the record and the authorization, with no account and no call home.
+- https://humsana.com/why-humsana.html : the gap between an action being prepared and an action being
+  released, and why the check belongs at execution.

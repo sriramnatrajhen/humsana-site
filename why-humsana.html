@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>Why Humsana exists</title>
+<meta name="description" content="AI can already perform most of a workflow, and a person is still asked to release the final action. Permissions and identity are decided before the action exists, and neither compares the action that arrives with the action that was authorized. Humsana sits at execution.">
+<link rel="canonical" href="https://humsana.com/why-humsana.html">
+<meta name="theme-color" content="#FCFAF7">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Humsana">
+<meta property="og:url" content="https://humsana.com/why-humsana.html">
+<meta property="og:title" content="Why Humsana exists">
+<meta property="og:description" content="Permissions and identity are decided before the action exists, and neither compares the action that arrives with the action that was authorized. That gap is the reason this product exists.">
+<meta property="og:image" content="https://humsana.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="text/plain" href="https://humsana.com/llms.txt" title="Short description for machines">
+<link rel="stylesheet" href="style.css?v=8">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why can existing permissions or agent identities not answer this?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A permission answers whether a caller may do a kind of thing, and an identity says who is asking. Both are decided before the action exists in the form that will run, and neither of them compares the action that arrives at execution with the action that was authorized. A permission wide enough to be useful is also wide enough to allow a changed action."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is an execution boundary?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An execution boundary sits on the executing side of an action, immediately before the call that cannot be taken back. It holds the authority that was granted, compares the action arriving there against that authority, and decides whether the action proceeds."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens when an agent changes the action before it runs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The boundary names the field that moved, refuses the action, and records the comparison. The action does not execute. Humsana records both the authorization and the execution decision, each signed and independently verifiable."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Humsana replace an agent's permissions or its identity?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Permissions and identity decide who may act. Humsana decides whether the action about to be executed is still the action that was authorized. It sits after those decisions, at the point where the action becomes real."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav><div class="wrap nav-in">
+  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana"></a>
+  <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
+  <div class="nav-links" id="nav">
+    <a href="index.html">Home</a>
+    <a href="why-humsana.html" aria-current="page">Why Humsana</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="developers.html">Developers</a>
+    <a href="trust.html">Proof</a>
+    <a class="nav-cta" href="assessment.html">Do you need Humsana?</a>
+  </div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <p class="eyebrow">Why Humsana exists</p>
+  <h1 style="max-width:24ch">Why Humsana exists.</h1>
+  <p class="lead" style="max-width:64ch">AI can already perform most of a workflow. A person is still asked to approve or release the final action, because by the time the action is about to happen it can differ from the action that was approved. Humsana sits at that point and keeps the action inside the permission that was given.</p>
+  <div class="cta-row" style="margin-top:2.2rem">
+    <a class="btn btn-primary arrow-after" href="assessment.html">Do you need Humsana?</a>
+    <a class="btn btn-ghost" href="the-execution-boundary.html">See the boundary</a>
+  </div>
+</div></header>
+
+<section><div class="wrap">
+  <div class="head"><h2>The gap, in two paragraphs.</h2></div>
+  <p>The machine can do the work. The person is kept for the last step, and usually for one reason: something consequential can change between the approval and the execution, and nobody wants that to happen unseen.</p>
+  <p>That is why a workflow that looks automated on the diagram still ends with a person pressing a button. The work moved. The responsibility for the final action did not.</p>
+</div></section>
+
+<section id="why-permissions"><div class="wrap">
+  <div class="head"><h2>Why permissions and identity do not close it.</h2></div>
+  <p>A permission answers a question about a kind of action: may this caller do this sort of thing? An identity answers who is asking. Both are decided before the action exists in the form that will actually run, and both are usually held by the party that owns the agent.</p>
+  <p>Neither one compares the action that arrives with the action that was authorized. A permission wide enough to be useful is also wide enough to allow a changed action, and a correct identity says nothing about what that identity is about to do.</p>
+  <div class="tw"><table class="tbl">
+    <thead><tr><th>The question</th><th>What answers it today</th><th>What it leaves open</th></tr></thead>
+    <tbody>
+      <tr><td>May this caller do this kind of thing?</td><td data-l="What answers it today">Permissions and policy</td><td data-l="What it leaves open">It covers a class of actions, not the one about to run.</td></tr>
+      <tr><td>Who is acting?</td><td data-l="What answers it today">Identity and credentials</td><td data-l="What it leaves open">A correct identity is still correct after the action has changed.</td></tr>
+      <tr><td>Is the action arriving the action that was authorized?</td><td data-l="What answers it today">Nothing, unless something sits at execution</td><td data-l="What it leaves open">This is the gap Humsana is built for.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Permissions and identity remain necessary. They are simply decided earlier in the workflow than the moment where the consequence happens.</p>
+</div></section>
+
+<section id="where"><div class="wrap">
+  <div class="head"><h2>Where the check has to sit.</h2></div>
+  <p>An action leaves the system that authorized it and arrives at the system that executes it. A control inside the first system cannot answer for the action once the action has left it. So the check sits on the executing side, immediately before the call that cannot be taken back.</p>
+  <div class="cols3">
+    <div><h3>Allow</h3><p>The action that arrives is the action that was authorized. It proceeds.</p></div>
+    <div><h3>Hold</h3><p>Something consequential needs a person to confirm the exact action, and the approval is bound to it.</p></div>
+    <div><h3>Refuse</h3><p>The action changed. The field that moved is named, and the action does not execute.</p></div>
+  </div>
+</div></section>
+
+<section id="record"><div class="wrap">
+  <div class="head"><h2>What the customer keeps.</h2></div>
+  <p>Two signed records: one for the authorization and one for the execution decision. Each names the key that signed it, so a third party can verify the pair without asking Humsana.</p>
+  <p>The pairing is the point. It shows what was authorized, what arrived, and what the boundary did about it, in a form that survives the workflow that produced it.</p>
+  <div class="cta-row" style="margin-top:1.6rem">
+    <a class="btn btn-ghost" href="trust.html">How the proof works</a>
+  </div>
+</div></section>
+
+<section id="change"><div class="wrap">
+  <div class="head"><h2>What changes in the workflow.</h2></div>
+  <p>A person stops being the mandatory checkpoint for the actions the boundary can keep inside the authority that was granted. The agent carries more of the workflow, and the person is asked only where a decision is genuinely required.</p>
+  <p>Where an action should stay with a person, it stays with a person. The point is to move the work that can move and to know which work that is, which is what the assessment is for.</p>
+</div></section>
+
+<section id="applies"><div class="wrap">
+  <div class="head"><h2>Where this applies.</h2></div>
+  <p>The shape is the same wherever a machine prepares an action and a person releases it: supplier payments, production changes, shipment bookings, clinical orders, insurance payouts, purchase orders, employee changes, customer refunds and credits.</p>
+  <p>The industry changes. The point where the action becomes real does not.</p>
+  <div class="cta-row" style="margin-top:1.6rem">
+    <a class="btn btn-ghost" href="use-cases.html">Every action class</a>
+    <a class="btn btn-ghost" href="how-it-works.html">The mechanism in five steps</a>
+  </div>
+</div></section>
+
+<section id="start" class="cta-band"><div class="wrap">
+  <h2>Do you need Humsana?</h2>
+  <p class="lead">Where is your AI still waiting for a person?</p>
+  <p>Tell us about your workflow. We will show you where an execution boundary could let the agent take on more, and where it should not.</p>
+  <div class="cta-row">
+    <a class="btn btn-primary arrow-after" href="assessment.html">Do you need Humsana?</a>
+    <a class="btn btn-ghost" href="mailto:contact@humsana.com">Contact us</a>
+  </div>
+</div></section>
+
+<footer><div class="wrap foot-in">
+  <div class="brand"><img src="logo.png" alt="Humsana"></div>
+  <div class="foot-links"><a href="use-cases.html">Action classes</a><a href="walkthrough.html">Walkthrough</a><a href="the-execution-boundary.html">Execution boundary</a><a href="sandbox.html">Sandbox</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a><a href="mailto:contact@humsana.com">contact@humsana.com</a></div>
+  <div class="foot-copy">Humsana. Authority travels with the action.</div>
+</div></footer>
+<script src="site.js"></script>
+</body>
+</html>
