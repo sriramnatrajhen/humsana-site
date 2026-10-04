@@ -6,14 +6,14 @@
 <link rel="icon" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>Sandbox: Humsana</title>
-<meta name="description" content="One action, one authorization, one refusal. Synthetic data, no login, no money moves.">
+<meta name="description" content="Three runs against the live service with synthetic data: an action that executes unchanged, one held for a person, and one stopped because the amount arrived changed. No login and no money moves.">
 <link rel="canonical" href="https://humsana.com/sandbox.html">
 <meta name="theme-color" content="#FCFAF7">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Humsana">
 <meta property="og:url" content="https://humsana.com/sandbox.html">
 <meta property="og:title" content="Sandbox: Humsana">
-<meta property="og:description" content="One action, one authorization, one refusal. Synthetic data, no login, no money moves.">
+<meta property="og:description" content="Three runs against the live service with synthetic data: an action that executes unchanged, one held for a person, and one stopped because the amount arrived changed. No login and no money moves.">
 <meta property="og:image" content="https://humsana.com/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -35,30 +35,31 @@
 </div></nav>
 
 <header class="hero"><div class="wrap">
-  <h1 style="max-width:22ch">See a refusal on a live action.</h1>
-  <p class="lead" style="max-width:62ch">The sandbox runs one action class against the live service with synthetic data: an approved payout release. Change the destination account, and the executor asks Humsana whether the action is still the one that was approved. It is not, so the service refuses it.</p>
+  <h1 style="max-width:22ch">See the boundary decide, on a live action.</h1>
+  <p class="lead" style="max-width:62ch">The sandbox runs one action class against the live service with synthetic data: an approved payout release. Three runs, in order. The boundary authorizes an action and it executes unchanged. A higher-consequence action is held for a person and released. An action that arrives with the amount raised is stopped, naming the field, both values and the rule.</p>
   <div class="cta-row" style="margin-top:2.2rem"><a class="btn btn-primary arrow-after" href="https://api.humsana.com/sandbox/">Open the sandbox</a><a class="btn btn-ghost" href="how-it-works.html">How it works</a></div>
 </div></header>
 
 <section><div class="wrap">
   <div class="step-copy">
-    <h2>Four values, four outcomes.</h2>
-    <p>The approved action is a payout release: &pound;1,800 to Supplier X, account 4821, valid until 14:00.</p>
-    <p>Change the account to 9137 and press Execute.</p>
-    <p>Change the amount, the beneficiary, the account or the expiry.</p>
-    <p>Restore the approved value and the same action is allowed, once.</p>
-    <p>The sandbox runs one action class.</p>
+    <h2>Three runs, three outcomes.</h2>
+    <p>The boundary authorizes the action, and it executes unchanged.</p>
+    <p>A higher-consequence action is held. A confirmation is answered by the reference confirmer described below, and the released grant executes once.</p>
+    <p>The action arrives with the amount raised from 1,800 to 2,400, and the boundary stops it.</p>
+    <p>The refusal names the field, both values and the rule that was broken.</p>
+    <p>There is nothing to fill in and nothing to configure. One button per run.</p>
+    <p>Each run ends with the record the boundary stored, and a link that checks it against the key this deployment publishes.</p>
   </div>
   <aside class="hero-panel"><div class="refusal">
     <div class="rf-head">Approved</div>
     <div class="rf-block"><p class="who">Pay &pound;1,800 to Supplier X</p>
       <ul class="rf-kv"><li><span>Account</span><span class="v">GB00SUPPLIER00004821</span></li><li><span>Valid until</span><span class="v">14:00</span></li></ul></div>
     <div class="rf-head">Presented</div>
-    <div class="rf-block"><p class="who">Pay &pound;1,800 to Supplier X</p>
-      <ul class="rf-kv"><li><span>Account</span><span class="v chg rf-changed">GB00SUPPLIER00009137</span></li></ul></div>
+    <div class="rf-block"><p class="who">Pay &pound;2,400 to Supplier Y</p>
+      <ul class="rf-kv"><li><span>Amount, GBP</span><span class="v chg rf-changed">2,400</span></li></ul></div>
     <div class="rf-verdict"><span class="k">Decision</span>REFUSED</div>
-    <p class="rf-reason">The destination account changed</p>
-    <ul class="rf-cmp"><li><span class="k">Approved:</span><span class="v">GB00SUPPLIER00004821</span></li><li><span class="k">Presented:</span><span class="v chg">GB00SUPPLIER00009137</span></li><li><span class="k">Rule:</span><span class="v">MAY_NOT_CHANGE</span></li></ul>
+    <p class="rf-reason">The amount increased</p>
+    <ul class="rf-cmp"><li><span class="k">Approved:</span><span class="v">1,800</span></li><li><span class="k">Presented:</span><span class="v chg">2,400</span></li><li><span class="k">Rule:</span><span class="v">MAY_NOT_INCREASE</span></li></ul>
     <div class="rf-foot">Payment API: not called</div>
   </div></aside>
 </div></section>
@@ -66,8 +67,9 @@
 <section><div class="wrap">
 <div class="head"><h2>What the sandbox is.</h2></div>
 <p>No account and no login. Synthetic data only, and no money moves. A run keeps its own state for a short time, so a reload keeps it.</p>
-<p>Where a confirmation is shown, the sandbox uses a reference confirmer and labels it.</p>
-<p class="note">Reference confirmer, demo only. The five-step run by command, with the record checked offline, is on the <a href="walkthrough.html">walkthrough</a>.</p>
+<p>Each run ends with the authorization and the execution record the boundary stored. Open the run's finding to read them, and the proof link to have them checked. The verifier reports the signature, the record digest and the authorization link, and names the key it used.</p>
+<p>Where the sandbox holds an action for a person, the confirmation is answered by humsana-ops-2026 (ops@humsana.com), a Humsana-operated reference confirmer. It demonstrates that the confirmation path works end to end. It is not a customer's approval.</p>
+<p class="note">The five-step run by command, with the record checked offline, is on the <a href="walkthrough.html">walkthrough</a>.</p>
 <div class="cta-row" style="margin-top:2.4rem">
   <a class="btn btn-primary arrow-after" href="https://api.humsana.com/sandbox/">Open the sandbox</a>
   <a class="btn btn-ghost" href="mailto:contact@humsana.com">Contact us</a>
