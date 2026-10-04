@@ -48,6 +48,11 @@
   <p>The boundary keeps a signed record of each authorization and each execution in an append-only store. In production the store is a file at <span class="mono">/var/swan/records.jsonl</span> with mode 600. A record names the principal, the agent, the action and its parameters, the decision, and the comparison that ran. Each record is signed with Ed25519 under the deployment's key, and the deployment publishes the matching public key, so a third party can check a record offline against it.</p>
   <p>The demo space keeps the records of a visitor's own demo runs in its own store, separate from the production store. A demo run uses synthetic data and the real authorization service.</p>
 
+  <h2>The company assessment</h2>
+  <p>The assessment reads the public page you give it and, when you write one, your own description of what your AI does. It sends that text to the DeepSeek API to work out the company, the workflow and the actions that carry a consequence. The model names and phrases. It never decides whether an action is allowed, and every verdict on that page comes from the authorization service.</p>
+  <p>It keeps the state of your session on the server so a reload does not lose your place: the address you gave, your description, your answers, and what the model extracted. That state is dropped after 24 hours. The signed records of the run itself stay in the demo space's store, like any other demo run. It writes no log of your description and no log of the page it read.</p>
+  <p>It reads the page you give it, plus at most two further pages on the same site, and it asks that site's robots file first. It refuses addresses that are not public. There is no account and no cookie. Your browser tab keeps only a session id.</p>
+
   <h2>Voice screening</h2>
   <p>The voice route decodes audio in memory to reach a verdict and writes none of it to disk. The service reports its own retention in health: <span class="mono">retention.audio_stored: false</span> and <span class="mono">retention.metadata_days: 30</span>. Voice screening is covered in full by the <a class="accent" href="swanprivacy.html">Swan privacy policy</a>.</p>
 
