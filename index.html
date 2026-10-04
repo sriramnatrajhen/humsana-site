@@ -96,7 +96,7 @@
 /* index only. The first screen carries one real record, so the record id and the run's timestamp
    keep their own case in the panel head. Everything else composes from style.css. */
 .proof{grid-column:8 / span 5}
-.proof h2{font-size:22px;line-height:1.35}
+.proof h2,.proof h3{font-size:22px;line-height:1.35}
 .proof .panel-head b,.proof .panel-head span{text-transform:none;letter-spacing:.02em}
 .proof .cta-row{margin-top:1.2rem}
 
@@ -144,10 +144,16 @@
 @media(prefers-reduced-motion:reduce){.bx-out li{animation:none}}
 /* The receipt was built for a hero column; as a section it keeps a reading measure of its own. */
 .hero-note{max-width:64ch;margin-top:2.4rem;padding-top:1.2rem;border-top:1px solid var(--line-soft)}
-#proof h2{max-width:24ch}
-#proof .lead{max-width:52ch}
-#proof .proof{max-width:44rem;margin-top:2.2rem}
-#proof .note{max-width:52ch;margin-top:1.6rem}
+#trust h2{max-width:24ch}
+#trust .lead{max-width:52ch}
+#trust .proof{max-width:44rem;margin-top:2.2rem}
+#trust .note{max-width:52ch;margin-top:1.6rem}
+/* Sub-headings inside a block, and the second way in. The form is secondary to the assessment, so it is
+   separated by a rule rather than sitting level with the primary call to action. */
+h3{font-size:19px;line-height:1.35;margin:0 0 .6rem;color:var(--ink)}
+#mechanism h3,#reference h3{margin-top:2.6rem}
+.talk-sub{margin-top:3.2rem;padding-top:2.2rem;border-top:1px solid var(--line-soft)}
+
 /* The contact form: four fields, and the answer the service gives back. */
 .contact{display:grid;gap:1.1rem;max-width:34rem;margin-top:1.8rem}
 .c-two{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
@@ -158,7 +164,7 @@
 .c-row .note{margin:0}
 .contact .sent{color:var(--ink)}
 @media(max-width:640px){.c-two{grid-template-columns:1fr}}
-@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.bx{max-width:none}#proof .proof{max-width:none}}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.bx{max-width:none}#trust .proof{max-width:none}}
 </style>
 </head>
 <body>
@@ -201,44 +207,60 @@
         </ul>
         <p class="bx-punch">The action changes. The boundary catches it.</p>
       </div>
-      <div class="bx-example">
-        <p class="bx-tag">One real example: supplier payment</p>
-        <p class="bx-act">Pay <s>&pound;1,800</s> <b>&pound;2,400</b> to Supplier X</p>
-        <div class="bx-why">
-          <span><i>amount, GBP</i> &pound;1,800 &rarr; &pound;2,400</span>
-          <span><i>rule</i> MAY_NOT_INCREASE</span>
-          <span><i>result</i> Not executed</span>
-        </div>
-        <p class="bx-id">exec_vHnOShRdlnkOjcgu &middot; 4 October 2026 &middot; Humsana Sandbox</p>
-        <a class="bx-verify arrow-after" href="https://verify.humsana.com/verify">Verify this record</a>
-      </div>
     </div>
   </div>
   <p class="note hero-note">Payments are one example. The same problem appears wherever an AI agent can change something consequential.</p>
-</div></header>
-
-<section class="invite"><div class="wrap">
-  <h2>Do you need Humsana?</h2>
-  <p class="lead">Where is your AI still stopping because a person has to make, or check, the final consequential action?</p>
+</div></header><section id="discovery" class="invite"><div class="wrap">
+  <h2>Where is that happening in your company?</h2>
+  <p class="lead">A person still steps in before the consequential action. The assessment shows you where that happens in your workflow, and which of those places could move to an agent with a boundary.</p>
   <p>This is a workflow assessment. It is a short set of questions about how the work runs today, answered in the browser, and it shows you where a person is still in the chain, what they are there to catch, and which of those places could move to an agent with a boundary around the action.</p>
   <p class="note">Based on what you tell us and what could be identified from your public information. This is an interpretation of your workflow, not a certification of it.</p>
   <div class="cta-row">
     <a class="btn btn-primary arrow-after" href="assessment.html">Find your boundary</a>
     <a class="btn btn-ghost" href="#talk">Contact us</a>
   </div>
-</div></section>
+</div></section><section id="mechanism"><div class="wrap">
+  <h2>Where the check runs</h2>
+  <p>Humsana checks the action arriving at execution against the action that was authorized, and refuses any difference. An action leaves the party that authorized it and arrives at the party that executes it, so the check sits on the executing side, immediately before the call that cannot be taken back.</p>
+  <div class="bmap">
+    <div class="bmap-sides">
+      <div class="side a">
+        <span class="pname">Company A</span>
+        <ul>
+          <li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="7" r="3"/><path d="M4.2 17c0-3.2 2.6-5.8 5.8-5.8s5.8 2.6 5.8 5.8"/></svg>Principal</li>
+          <li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.2l5.6 1.9v4.4c0 3.1-2.2 5.7-5.6 6.6-3.4-.9-5.6-3.5-5.6-6.6V5.1z"/></svg>Authority</li>
+          <li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="4" width="15" height="12" rx="1.5"/><path d="M6 8.5l2.2 2L6 12.5M10.8 13h3.2"/></svg>Agent</li>
+        </ul>
+      </div>
+      <div class="side b">
+        <span class="pname">Company B</span>
+        <ul>
+          <li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="6" width="14" height="8" rx="1"/><path d="M4.5 16.5h2M13.5 16.5h2"/></svg>Executor</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bd" aria-hidden="true"><span>boundary</span></div>
+    <div class="rail" aria-hidden="true">
+      <span class="tok">pay 4821</span>
+      <span class="chip"><i class="stop"></i>4821 &rarr; 9137 &middot; refused</span>
+    </div>
+  </div>
 
-<section id="what"><div class="wrap">
-  <h2>What Humsana does</h2>
-  <ul class="story">
-    <li><b>A company unlocks more of its AI workflow.</b> Humsana puts an execution boundary around the actions that are consequential, so the agent can carry the work further instead of handing every one of them to a person at the end.</li>
-    <li><b>It checks the action at execution.</b> The action reaching execution is compared with what the agent was authorized to do, and it is held or refused when it has changed.</li>
-    <li><b>It does not stop at permission or identity.</b> It stays with the action through execution, and it issues a record of what was authorized and what happened that a third party can check offline.</li>
-    <li><b>A person stops being the last manual check</b> for the actions Humsana keeps inside the authority that was granted.</li>
-  </ul>
-</div></section>
-
-<section id="demonstration"><div class="wrap">
+  <h3>The difference is at the point of execution.</h3>
+  <p>A control inside the agent's own system cannot answer for the action once the action has left that system. This check is placed where the action is executed, and it decides there.</p>
+  <div class="compare">
+    <div class="ch">Without a boundary</div>
+    <div class="ch">With Humsana</div>
+    <div class="l">The executor trusts that the request is the approved one.</div>
+    <div class="r">The arriving action is compared with the authorized one, field by field.</div>
+    <div class="l">An approval is a claim inside the request.</div>
+    <div class="r">The grant is single use and names what it covers.</div>
+    <div class="l">A refusal is advice the caller may ignore.</div>
+    <div class="r">A refusal is a code naming the field and both values, and it spends nothing.</div>
+    <div class="l">The evidence is the agent's own log.</div>
+    <div class="r">The record is signed, and a third party verifies it offline.</div>
+  </div>
+</div></section><section id="proof"><div class="wrap">
   <h2>An approved action can still be refused.</h2>
   <p>A payment is approved for &pound;1,800 to Supplier X at account 4821. The instruction that arrives at Company B's executor carries account 9137, and nothing else about the action has changed. The service compares the two, names the field it disagrees on, and refuses.</p>
   <p class="note" style="margin-top:2.4rem">The action as approved</p>
@@ -265,59 +287,12 @@
     </ul>
     <span class="api no">Payment API: not called</span>
   </div>
-  <p class="note">Recorded from the live boundary at 08:42 UTC on 27 September 2026. <a href="use-cases.html">Every action class</a>. <a href="https://api.humsana.com/sandbox/">Run it yourself</a>.</p>
-</div></section>
-
-<section><div class="wrap">
-  <h2>Where the check runs</h2>
-  <p>Humsana checks the action arriving at execution against the action that was authorized, and refuses any difference. An action leaves the party that authorized it and arrives at the party that executes it, so the check sits on the executing side, immediately before the call that cannot be taken back.</p>
-  <div class="bmap">
-    <div class="bmap-sides">
-      <div class="side a">
-        <span class="pname">Company A</span>
-        <ul>
-          <li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="7" r="3"/><path d="M4.2 17c0-3.2 2.6-5.8 5.8-5.8s5.8 2.6 5.8 5.8"/></svg>Principal</li>
-          <li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.2l5.6 1.9v4.4c0 3.1-2.2 5.7-5.6 6.6-3.4-.9-5.6-3.5-5.6-6.6V5.1z"/></svg>Authority</li>
-          <li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="4" width="15" height="12" rx="1.5"/><path d="M6 8.5l2.2 2L6 12.5M10.8 13h3.2"/></svg>Agent</li>
-        </ul>
-      </div>
-      <div class="side b">
-        <span class="pname">Company B</span>
-        <ul>
-          <li><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="6" width="14" height="8" rx="1"/><path d="M4.5 16.5h2M13.5 16.5h2"/></svg>Executor</li>
-        </ul>
-      </div>
-    </div>
-    <div class="bd" aria-hidden="true"><span>boundary</span></div>
-    <div class="rail" aria-hidden="true">
-      <span class="tok">pay 4821</span>
-      <span class="chip"><i class="stop"></i>4821 &rarr; 9137 &middot; refused</span>
-    </div>
-  </div>
-</div></section>
-
-<section><div class="wrap">
-  <h2>The difference is at the point of execution.</h2>
-  <p>A control inside the agent's own system cannot answer for the action once the action has left that system. This check is placed where the action is executed, and it decides there.</p>
-  <div class="compare">
-    <div class="ch">Without a boundary</div>
-    <div class="ch">With Humsana</div>
-    <div class="l">The executor trusts that the request is the approved one.</div>
-    <div class="r">The arriving action is compared with the authorized one, field by field.</div>
-    <div class="l">An approval is a claim inside the request.</div>
-    <div class="r">The grant is single use and names what it covers.</div>
-    <div class="l">A refusal is advice the caller may ignore.</div>
-    <div class="r">A refusal is a code naming the field and both values, and it spends nothing.</div>
-    <div class="l">The evidence is the agent's own log.</div>
-    <div class="r">The record is signed, and a third party verifies it offline.</div>
-  </div>
-</div></section>
-
-<section id="proof"><div class="wrap">
+  <p class="note">Recorded from the live boundary at 08:42 UTC on 27 September 2026. <a href="use-cases.html">Every action class</a>. <a href="https://api.humsana.com/sandbox/">Run the same comparison yourself</a>. <a href="https://verify.humsana.com/verify">Check a record yourself</a>.</p>
+</div></section><section id="trust"><div class="wrap">
   <h2>And you can prove what happened.</h2>
   <p class="lead">Every governed action leaves a signed record of what was authorized and of what reached the execution boundary. The signature names the key that produced it, and the public keys are published, so somebody who was not there can check it without an account here.</p>
   <div class="proof">
-      <h2>Real Humsana boundary · recorded example</h2>
+      <h3>Real Humsana boundary · recorded example</h3>
       <p class="note">One record from one real run, kept as it was issued. Run the live demo to make your own and check it yourself.</p>
       <div class="panel">
         <div class="panel-head"><b>exec_9M6XK2NNZYxmFUqP</b><span>2026-10-03T10:56:57Z</span></div>
@@ -340,27 +315,7 @@
   <div class="cta-row">
     <a class="btn btn-primary arrow-after" href="https://verify.humsana.com/verify">Check a record yourself</a>
   </div>
-</div></section>
-
-<section id="surfaces"><div class="wrap">
-  <h2>Three things, one mechanism.</h2>
-  <ul class="story">
-    <li><b>Whether you need it.</b> <a href="assessment.html">The assessment</a> reads your workflow and shows where a person still steps in, and which of those places could move to an agent with a boundary.</li>
-    <li><b>How it works.</b> <a href="the-execution-boundary.html">The execution boundary</a> sets out the mechanism, and <a href="https://api.humsana.com/sandbox/">the sandbox</a> runs it in front of you on one action class.</li>
-    <li><b>What happened, and the proof.</b> The boundary issues a signed record of the authorization and of the execution, and <a href="https://verify.humsana.com/verify">the verifier</a> lets somebody who was not there check the signature, the digests and the link between the two records. The Control Room is the operational view of the same records; we set it up with you.</li>
-  </ul>
-</div></section>
-
-<section class="cta-band"><div class="wrap">
-  <h2>Where is your AI still waiting for a person?</h2>
-  <p>Tell us about your workflow. We will show you where an execution boundary could let the agent take on more.</p>
-  <div class="cta-row">
-    <a class="btn btn-primary arrow-after" href="assessment.html">Do you need Humsana?</a>
-    <a class="btn btn-ghost" href="#talk">Contact us</a>
-  </div>
-</div></section>
-
-<section id="plain"><div class="wrap">
+</div></section><section id="reference"><div class="wrap">
   <h2>In plain terms.</h2>
   <ul class="story">
     <li><b>What is Humsana?</b> An execution boundary for AI agents.</li>
@@ -370,10 +325,8 @@
     <li><b>What evidence exists?</b> A signed authorization record and a signed execution record, each naming the key that signed it, so the pair can be verified independently.</li>
     <li><b>Who is it for?</b> Teams putting AI agents on work that can change something another system depends on.</li>
   </ul>
-</div></section>
 
-<section id="questions"><div class="wrap">
-  <h2>Questions an engineer asks first.</h2>
+  <h3>Questions an engineer asks first.</h3>
   <div class="faq">
     <details><summary>What is an execution boundary?</summary><p>It sits between the party that authorized an action and the party that executes it. It compares the action arriving at execution with the action that was authorized, and it decides there.</p></details>
     <details><summary>Where does it run?</summary><p>Immediately before the call that cannot be taken back, on the executing side. A control inside the agent's own system cannot answer for the action once the action has left that system.</p></details>
@@ -382,10 +335,16 @@
     <details><summary>How does somebody else check what happened?</summary><p>The boundary issues a signed record of the authorization and a signed record of the execution. The verifier checks the signature, the record digests and the link between the two, offline, without an account here.</p></details>
     <details><summary>Does Humsana decide whether an action is allowed?</summary><p>No. The authority is yours: your policy decides what may be authorized. Humsana checks the action against the authority that was granted, and holds or refuses when the action is not within it. The signature attests that Humsana issued the record and that it has not been altered; it does not establish that the authority behind the action was legitimate.</p></details>
   </div>
-</div></section>
+</div></section><section id="conversion" class="cta-band"><div class="wrap">
+  <h2>Do you need Humsana?</h2>
+  <p class="lead">Where is your AI still waiting for a person?</p>
+  <p>Tell us about your workflow. We will show you where an execution boundary could let the agent take on more.</p>
+  <div class="cta-row">
+    <a class="btn btn-primary arrow-after" href="assessment.html">Do you need Humsana?</a>
+    <a class="btn btn-ghost" href="#talk">Contact us</a>
+  </div>
 
-<section id="talk"><div class="wrap">
-  <h2>Already know where Humsana fits?</h2>
+  <h3 id="talk" class="talk-sub">Already know where Humsana fits?</h3>
   <p class="lead">Talk to us. Four fields, and we will pick it up from there. If you would rather find out where the boundary belongs in your workflow first, start with the assessment instead.</p>
   <form class="contact" id="contact-form" novalidate>
     <div class="c-two">
@@ -399,9 +358,7 @@
       <p class="note" id="contact-state" role="status" aria-live="polite">We answer from contact@humsana.com.</p>
     </div>
   </form>
-</div></section>
-
-<footer><div class="wrap foot-in">
+</div></section><footer><div class="wrap foot-in">
   <div class="brand"><img src="logo.png" alt="Humsana"></div>
   <div class="foot-links"><a href="use-cases.html">Action classes</a><a href="walkthrough.html">Walkthrough</a><a href="swan.html">Swan</a><a href="the-execution-boundary.html">Execution boundary</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a><a href="mailto:contact@humsana.com">contact@humsana.com</a></div>
   <div class="foot-copy">Humsana. Authority travels with the action.</div>
