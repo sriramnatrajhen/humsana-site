@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Company assessment: Humsana</title>
+<meta name="description" content="Give a company website and an AI workflow you are considering automating. The service reads the public site, draws the workflow, finds where a person still stands in it, and runs one consequential action against the execution boundary.">
+<link rel="canonical" href="https://humsana.com/assessment.html">
+<meta name="theme-color" content="#FCFAF7">
+<link rel="icon" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Humsana">
+<meta property="og:url" content="https://humsana.com/assessment.html">
+<meta property="og:title" content="Company assessment: Humsana">
+<meta property="og:description" content="Give a company website and an AI workflow you are considering automating. The service reads the public site, draws the workflow, finds where a person still stands in it, and runs one consequential action against the execution boundary.">
+<meta property="og:image" content="https://humsana.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script>document.documentElement.className += ' js';</script>
+<link rel="stylesheet" href="style.css?v=8">
+<style>
+/* assessment.html only. Composes from the tokens in style.css, and every rule is prefixed with .as-
+   so none of it can reach another page. The shape is the design sample's: warm paper, hairlines,
+   large type, and one ink rule where an action crosses the boundary. */
+
+/* the progression, a thin instrument under the navigation */
+.as-progress{position:sticky;top:var(--nav-h);z-index:40;background:var(--bg);border-bottom:1px solid var(--line-soft)}
+.as-progress-in{display:flex;align-items:center;gap:1.2rem;height:38px}
+.as-plabel{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.as-segs{display:flex;gap:4px;flex:1}
+.as-seg{height:2px;flex:1;background:var(--line)}
+.as-seg.on{background:var(--ink)}
+
+/* stages: with javascript the story reveals as it goes; without it every description still reads */
+.as-stage[data-state="pending"]{display:block}
+.js .as-stage[data-state="pending"]{display:none}
+.js-only{display:none}
+.js .js-only{display:block}
+/* an element with the hidden attribute wins over any author display rule, so a hidden split or a
+   hidden row of links cannot leak back into view */
+.js-only [hidden]{display:none!important}
+.as-head{display:flex;align-items:baseline;justify-content:space-between;gap:1.5rem;margin-bottom:1rem}
+.as-idx{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--dim);white-space:nowrap}
+.as-copy{max-width:62ch}
+
+/* the entry form */
+.as-form{max-width:640px;margin-top:2rem}
+.as-field + .as-field{margin-top:1.5rem}
+.as-flab{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:.65rem}
+.as-flab .as-opt{color:var(--accent-text);margin-left:.6rem}
+.as-input,.as-area{display:block;width:100%;background:var(--panel);border:1px solid var(--line);border-radius:2px;padding:.95rem 1.1rem;font-family:var(--sans);font-size:18px;line-height:1.45;color:var(--ink)}
+.as-area{min-height:96px;resize:vertical}
+.as-input::placeholder,.as-area::placeholder{color:var(--dim)}
+.as-input:focus,.as-area:focus{outline:2px solid var(--accent-text);outline-offset:2px}
+
+/* the honest working state: one line and an indeterminate hairline, never a claimed stage */
+.as-work{max-width:520px;margin-top:1.6rem}
+.as-work-line{display:block;font-family:var(--mono);font-size:13px;color:var(--muted)}
+.as-bar{position:relative;display:block;height:1px;background:var(--line-soft);margin-top:1rem;overflow:hidden}
+.as-bar i{position:absolute;top:0;left:-40%;width:40%;height:1px;background:var(--ink)}
+.as-stage.in .as-bar i{animation:asTravel 1.7s cubic-bezier(.45,0,.25,1) infinite}
+@keyframes asTravel{from{left:-40%}to{left:100%}}
+
+/* the profile */
+.as-profile{display:grid;grid-template-columns:1fr 1.05fr;gap:3.4rem;margin-top:2.4rem;align-items:start}
+.as-co{font-size:clamp(26px,3vw,36px);line-height:1.1;font-weight:600;color:var(--ink);letter-spacing:-.02em}
+.as-what{font-size:18px;color:var(--muted);margin-top:1rem;max-width:40ch}
+
+/* the workflow, drawn. Each step carries who does it today: the mark is filled where the machine
+   acts, hollow where a person does it, half where the two share the step. */
+.as-flow{border:1px solid var(--line);background:var(--panel);border-radius:2px}
+.as-flow-h{padding:.95rem 1.4rem;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;gap:1rem}
+.as-flow ol{list-style:none;padding:1.05rem 1.4rem 1.15rem}
+.as-step{position:relative;display:grid;grid-template-columns:2.3rem 1fr;gap:1.1rem;padding:.9rem 0}
+.as-step::before{content:'';position:absolute;left:.28rem;top:0;bottom:0;width:1px;background:var(--line)}
+.as-step::after{content:'';position:absolute;left:0;top:1.1rem;width:9px;height:9px;background:var(--panel);border:1px solid var(--ink)}
+.as-step:first-child::before{top:1.35rem}
+.as-step:last-child::before{bottom:auto;height:1.35rem}
+.as-step.as-machine::after{background:var(--ink)}
+.as-step.as-both::after{background:linear-gradient(90deg,var(--ink) 50%,var(--panel) 50%)}
+.as-step.as-at-boundary::after{box-shadow:0 0 0 3px var(--panel),0 0 0 4px var(--ink)}
+.as-k{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--dim);padding:.32rem 0 0 1.1rem}
+.as-t{display:block;font-size:17px;font-weight:500;color:var(--ink);line-height:1.35}
+.as-today{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--dim);border:1px solid var(--line);padding:.15rem .45rem;margin-top:.45rem}
+.as-key{padding:.85rem 1.4rem;border-top:1px solid var(--line);font-family:var(--mono);font-size:11.5px;line-height:1.6;color:var(--dim)}
+
+/* the boundary mark, an ink rule through the flow */
+.as-bound{position:relative;display:flex;align-items:center;gap:1rem;padding:1rem 0 1.1rem}
+.as-bound i{flex:1 1 2rem;min-width:1.2rem;height:2px;background:var(--ink)}
+.as-bound .as-tag{flex:none;background:var(--ink);color:var(--bg);font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:.3rem .55rem;white-space:nowrap}
+
+/* motion: lines draw in, rows rise in sequence, the mark lands. The finished state is the default,
+   so reduced motion, an old browser or javascript off all show the completed picture. */
+.as-flow.in .as-step::before{transform-origin:top;animation:asDraw .55s cubic-bezier(.16,1,.3,1) both}
+.as-flow.in .as-step,.as-actions.in .as-arow{animation:asRise .5s cubic-bezier(.16,1,.3,1) both}
+.as-flow.in .as-step:nth-child(1),.as-actions.in .as-arow:nth-child(1){animation-delay:.03s}
+.as-flow.in .as-step:nth-child(2),.as-actions.in .as-arow:nth-child(2){animation-delay:.1s}
+.as-flow.in .as-step:nth-child(3),.as-actions.in .as-arow:nth-child(3){animation-delay:.17s}
+.as-flow.in .as-step:nth-child(4),.as-actions.in .as-arow:nth-child(4){animation-delay:.24s}
+.as-flow.in .as-step:nth-child(5),.as-actions.in .as-arow:nth-child(5){animation-delay:.31s}
+.as-flow.in .as-step:nth-child(6),.as-actions.in .as-arow:nth-child(6){animation-delay:.38s}
+.as-flow.in .as-step:nth-child(7),.as-actions.in .as-arow:nth-child(7){animation-delay:.45s}
+.as-flow.in .as-bound{animation:asLand .5s cubic-bezier(.16,1,.3,1) .46s both}
+@keyframes asDraw{from{transform:scaleY(0)}}
+@keyframes asRise{from{opacity:0;transform:translateY(6px)}}
+@keyframes asLand{from{opacity:0;transform:translateY(-4px)}}
+
+/* the questions, one at a time */
+.as-q{max-width:640px;margin-top:1.6rem}
+.as-qmark{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-text);margin-bottom:.9rem}
+.as-qtext{font-size:clamp(22px,2.4vw,28px);line-height:1.25;font-weight:500;color:var(--ink);letter-spacing:-.01em;max-width:34ch}
+.as-qwhy{font-family:var(--mono);font-size:12px;color:var(--dim);margin-top:.8rem}
+.as-q .as-field{margin-top:1.5rem}
+
+/* the consequential actions, with the readiness the service computed */
+.as-actions{list-style:none;border-top:1px solid var(--line);margin-top:2rem}
+.as-arow{display:grid;grid-template-columns:44px 1fr;gap:1.2rem;padding:1.35rem 0;border-bottom:1px solid var(--line-soft);align-items:baseline}
+.as-an{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--dim)}
+.as-at{font-size:18px;font-weight:500;color:var(--ink)}
+.as-af{display:grid;grid-template-columns:8.5rem 1fr;gap:.4rem 1.2rem;margin-top:.75rem;font-family:var(--mono);font-size:12.5px}
+.as-af dt{color:var(--dim);text-transform:uppercase;letter-spacing:.08em;font-size:11px;padding-top:.15rem}
+.as-af dd{color:var(--ink);overflow-wrap:anywhere}
+.as-af dd.as-readable{color:var(--accent-text)}
+.as-why{font-size:15px;color:var(--muted);margin-top:.7rem;max-width:66ch}
+
+/* the boundary moment: the workflow redrawn, the sentence beside it */
+.as-boundgrid{display:grid;grid-template-columns:1fr 1fr;gap:3.2rem;margin-top:2.2rem;align-items:start}
+.as-boundtext{font-family:var(--mono);font-size:13px;line-height:1.6;color:var(--muted);margin-top:1.6rem;max-width:44ch}
+.as-boundtext b{color:var(--ink);font-weight:500}
+
+/* the finding: the headline, the basis beside the conclusions, then five stacked lines */
+.as-headline{font-size:clamp(26px,3.2vw,40px);line-height:1.1;font-weight:600;letter-spacing:-.02em;color:var(--ink);max-width:26ch;margin-top:1.6rem}
+.as-basis{font-size:16px;line-height:1.55;color:var(--muted);max-width:64ch;margin-top:1.3rem;border-left:2px solid var(--line);padding-left:1.2rem}
+.as-close{border-top:1px solid var(--line);margin-top:2.2rem}
+.as-close > div{display:grid;grid-template-columns:14rem 1fr;gap:1.4rem;padding:1.15rem 0;border-bottom:1px solid var(--line-soft);align-items:baseline}
+.as-close dt{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.as-close dd{font-size:17px;color:var(--muted);max-width:60ch}
+.as-close dd.as-result{color:var(--accent-text);font-weight:500}
+.as-nothing{font-size:17px;color:var(--muted);max-width:64ch;margin-top:1.4rem}
+
+/* the demonstration: introduced as the same boundary problem, the note beside it, then the run */
+.as-demogrid{display:grid;grid-template-columns:1fr 1fr;gap:2.6rem;margin-top:2.8rem;align-items:start}
+.as-demointro{font-size:19px;font-weight:500;color:var(--ink);max-width:30ch}
+.as-demogrid .cta-row{margin-top:1.4rem}
+.as-demo{font-size:16px;line-height:1.55;color:var(--muted);max-width:60ch;border-left:2px solid var(--line);padding-left:1.2rem}
+.as-states{list-style:none;border-top:1px solid var(--line);margin-top:2.4rem}
+.as-states li{display:grid;grid-template-columns:9rem 1fr;gap:1.2rem;padding:.9rem 0;border-bottom:1px solid var(--line-soft)}
+.as-states .k{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.as-states .d{font-size:16px;color:var(--muted)}
+.as-kv{list-style:none;font-family:var(--mono);font-size:13px;margin-top:1rem}
+.as-kv li{display:grid;grid-template-columns:1fr auto;gap:1rem;padding:.5rem 0;border-top:1px solid var(--line-soft)}
+.as-kv li:first-child{border-top:0}
+.as-kv .k{color:var(--dim);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding-top:.15rem}
+.as-kv .v{color:var(--ink);text-align:right;overflow-wrap:anywhere}
+.as-kv .v.chg{color:var(--accent-text);background:var(--accent-pale);padding:0 .3rem}
+.as-refusal{max-width:660px;margin-top:1.9rem}
+
+/* the card the visitor can forward */
+.as-card{max-width:560px;margin-top:2rem}
+.as-card .panel-rows li{grid-template-columns:minmax(8rem,auto) 1fr}
+.as-card .panel-rows .v{text-align:right;overflow-wrap:anywhere}
+/* a row whose value is a sentence reads better stacked, so the label sits above it */
+.as-card .panel-rows li.as-stack{grid-template-columns:1fr;gap:.3rem}
+.as-card .panel-rows li.as-stack .v{text-align:left}
+
+/* a refusal to answer */
+.as-error{border-left:2px solid var(--accent);padding:.9rem 0 .9rem 1.3rem;color:var(--muted);max-width:60ch;margin-top:1.6rem;display:none}
+.as-error.show{display:block}
+
+@media(max-width:900px){
+  .as-profile,.as-boundgrid,.as-demogrid{grid-template-columns:1fr;gap:2rem}
+}
+@media(max-width:760px){
+  .as-head{flex-direction:column;gap:.5rem}
+  .as-arow{grid-template-columns:32px 1fr;gap:1rem}
+  .as-af{grid-template-columns:1fr;gap:0}
+  .as-af dt{padding:.6rem 0 .15rem}
+  .as-card .panel-rows li{grid-template-columns:1fr;gap:.25rem}
+  .as-card .panel-rows .v{text-align:left}
+  .as-states li,.as-close > div{grid-template-columns:1fr;gap:.3rem}
+  .as-progress-in{gap:.8rem}
+}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap nav-in">
+  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana"></a>
+  <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
+  <div class="nav-links" id="nav">
+    <a href="index.html">Home</a>
+    <a href="use-cases.html">Action classes</a>
+    <a href="the-execution-boundary.html">Execution boundary</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="developers.html">Developers</a>
+    <a class="nav-cta" href="https://api.humsana.com/sandbox/">Sandbox</a>
+  </div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div class="as-head">
+    <h1>Start with your company.</h1>
+    <span class="as-idx">01 / 08</span>
+  </div>
+  <p class="lead" style="max-width:62ch">Give the company website and, optionally, the workflow you are considering automating. The service reads the public site, draws that workflow, and finds where a person still stands in it. It names the actions that carry consequence and runs one of them against the execution boundary.</p>
+
+  <form class="as-form" id="as-form" novalidate>
+    <div class="as-field">
+      <label class="as-flab" for="as-url">Company website</label>
+      <input class="as-input" id="as-url" name="url" type="url" inputmode="url" autocomplete="url" placeholder="https://example.com" required>
+    </div>
+    <div class="as-field">
+      <label class="as-flab" for="as-desc">The workflow you are considering automating<span class="as-opt">Optional</span></label>
+      <textarea class="as-area" id="as-desc" name="description" rows="3" placeholder="For example: an agent reads carrier invoices and releases payments, and a person approves a release above a set threshold."></textarea>
+    </div>
+    <div class="cta-row" style="margin-top:1.4rem">
+      <button class="btn btn-primary arrow-after" type="submit">Read the site</button>
+    </div>
+    <p class="note">One website per session. No account and no email.</p>
+    <p class="as-error" id="entry-error" role="alert"></p>
+  </form>
+
+  <noscript><p class="as-error show">The assessment reads a website and runs an action against the boundary, so the stages below need JavaScript. This opening and every stage description stay readable without it.</p></noscript>
+</div></header>
+
+<div class="as-progress" id="as-progress" aria-hidden="true">
+  <div class="wrap as-progress-in">
+    <span class="as-plabel" id="as-plabel">Start</span>
+    <span class="as-segs">
+      <span class="as-seg" data-i="1"></span><span class="as-seg" data-i="2"></span><span class="as-seg" data-i="3"></span><span class="as-seg" data-i="4"></span><span class="as-seg" data-i="5"></span><span class="as-seg" data-i="6"></span><span class="as-seg" data-i="7"></span><span class="as-seg" data-i="8"></span>
+    </span>
+  </div>
+</div>
+
+<section class="as-stage" id="s-working" data-stage="2" data-name="Reading the site" data-state="pending">
+  <div class="wrap">
+    <div class="as-head"><h2>Reading the site.</h2><span class="as-idx">02 / 08</span></div>
+    <p class="as-copy">The service reads the public site and works out how the business runs.</p>
+    <div class="as-work js-only" id="live-working" aria-live="polite">
+      <span class="as-work-line">Reading the public site.</span>
+      <span class="as-bar" aria-hidden="true"><i></i></span>
+    </div>
+  </div>
+</section>
+
+<section class="as-stage" id="s-profile" data-stage="3" data-name="Profile" data-state="pending">
+  <div class="wrap">
+    <div class="as-head"><h2>How we think your business works.</h2><span class="as-idx">03 / 08</span></div>
+    <p class="as-copy">The company, and the workflow with who does each step today.</p>
+    <div class="js-only">
+      <div class="as-profile">
+        <div>
+          <p class="as-co" id="p-company">Company</p>
+          <p class="as-what" id="p-what"></p>
+        </div>
+        <div class="as-flow" id="p-flow">
+          <p class="as-flow-h"><span id="p-flow-title">Workflow</span><span id="p-flow-count"></span></p>
+          <ol id="p-flow-list"></ol>
+          <p class="as-key">Filled, the machine acts. Hollow, a person does it. Half, both.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="as-stage" id="s-questions" data-stage="4" data-name="Questions" data-state="pending">
+  <div class="wrap">
+    <div class="as-head"><h2>A few questions.</h2><span class="as-idx">04 / 08</span></div>
+    <p class="as-copy">One question at a time. The service asks what the person still in the chain is there to catch.</p>
+    <div id="live-questions" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="as-stage" id="s-assessment" data-stage="5" data-name="Assessment" data-state="pending">
+  <div class="wrap">
+    <div class="as-head"><h2>The actions that carry consequence.</h2><span class="as-idx">05 / 08</span></div>
+    <p class="as-copy">Each row is one action, with the boundary, what could change, the readiness the service computed, and why a person is still in the loop.</p>
+    <ul class="as-actions" id="a-list"></ul>
+  </div>
+</section>
+
+<section class="as-stage" id="s-boundary" data-stage="6" data-name="Boundary" data-state="pending">
+  <div class="wrap">
+    <div class="as-head"><h2>The boundary moment.</h2><span class="as-idx">06 / 08</span></div>
+    <p class="as-copy">The workflow again, with the boundary on the step the service named.</p>
+    <div class="js-only">
+      <div class="as-boundgrid">
+        <div class="as-flow" id="b-flow">
+          <p class="as-flow-h"><span id="b-flow-title">Workflow</span><span id="b-flow-count"></span></p>
+          <ol id="b-flow-list"></ol>
+          <p class="as-key">Filled, the machine acts. Hollow, a person does it. Half, both.</p>
+        </div>
+        <div>
+          <p class="statement">This is the point where the AI permission has to survive all the way to execution.</p>
+          <p class="as-boundtext" id="b-text"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="as-stage" id="s-finding" data-stage="7" data-name="The finding" data-state="pending">
+  <div class="wrap">
+    <div class="as-head"><h2>The finding.</h2><span class="as-idx">07 / 08</span></div>
+    <p class="as-copy">What we could identify, with our basis beside it, then the same boundary problem running for real.</p>
+    <div class="js-only">
+      <p class="as-headline" id="c-headline"></p>
+      <p class="as-basis" id="c-basis"></p>
+      <dl class="as-close">
+        <div><dt>Today</dt><dd id="c-today"></dd></div>
+        <div><dt>Why the person remains</dt><dd id="c-why"></dd></div>
+        <div><dt>Where Humsana fits</dt><dd id="c-where"></dd></div>
+        <div><dt>What changes</dt><dd id="c-changes"></dd></div>
+        <div><dt>Readiness</dt><dd class="as-result" id="c-result"></dd></div>
+      </dl>
+      <p class="as-nothing" id="c-nothing" hidden></p>
+
+      <div class="as-demogrid">
+        <div>
+          <p class="as-demointro">The same boundary problem, running for real.</p>
+          <div class="cta-row" id="as-run-row">
+            <button class="btn btn-primary arrow-after" type="button" id="as-run">Run the demonstration</button>
+            <span class="note" id="as-run-note" style="margin-top:0"></span>
+          </div>
+        </div>
+        <p class="as-demo" id="t-demo"></p>
+      </div>
+
+      <div id="demo-output" hidden>
+        <ul class="as-states">
+          <li><span class="k">Allowed</span><span class="d">The action is inside its authority. Can automate.</span></li>
+          <li><span class="k">Held</span><span class="d">The consequence needs a person. Automate with a boundary.</span></li>
+          <li><span class="k">Refused</span><span class="d">The action arrives different from the one that was authorized.</span></li>
+        </ul>
+        <div class="two" id="t-split" style="margin-top:2.4rem">
+          <div class="side a">
+            <span class="zone-h">Authorized</span>
+            <div id="t-auth"></div>
+          </div>
+          <div class="side b">
+            <span class="zone-h">At execution</span>
+            <div id="t-pres"></div>
+          </div>
+          <div class="bdry" aria-hidden="true"><span>boundary</span></div>
+        </div>
+        <div class="refusal as-refusal" id="t-refusal">
+          <div class="rf-verdict"><span class="k">Decision</span><span id="t-decision"></span></div>
+          <ul class="rf-cmp">
+            <li><span class="k">Field:</span><span class="v" id="t-field"></span></li>
+            <li><span class="k">Authorized:</span><span class="v" id="t-authorized"></span></li>
+            <li><span class="k">Presented:</span><span class="v chg" id="t-presented"></span></li>
+            <li><span class="k">Rule:</span><span class="v" id="t-rule"></span></li>
+          </ul>
+          <div class="rf-foot" id="t-foot"></div>
+        </div>
+        <div class="cta-row" id="t-links" style="margin-top:1.8rem">
+          <a class="btn arrow-after" id="t-finding" href="#" target="_blank" rel="noopener">Open the record</a>
+          <a class="btn btn-ghost" id="t-verify" href="#" target="_blank" rel="noopener">Verify the record</a>
+        </div>
+        <p class="note" id="demo-mechanism" hidden>The demonstration runs the boundary on a supplier payment. <a href="https://api.humsana.com/sandbox/">See the demonstration</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="as-stage" id="s-card" data-stage="8" data-name="The card" data-state="pending">
+  <div class="wrap">
+    <div class="as-head"><h2>What you can forward.</h2><span class="as-idx">08 / 08</span></div>
+    <p class="as-copy">The finding as one card, with the readiness rather than a score.</p>
+    <div class="js-only">
+      <div class="as-card">
+        <div class="panel">
+          <div class="panel-head"><b id="r-head">Assessment</b><span>assessment</span></div>
+          <ul class="panel-rows">
+            <li><span class="k">Company</span><span class="v" id="r-company"></span></li>
+            <li><span class="k">Agent</span><span class="v" id="r-agent"></span></li>
+            <li><span class="k">Consequential action</span><span class="v" id="r-action"></span></li>
+            <li><span class="k">Readiness</span><span class="v" id="r-readiness"></span></li>
+            <li class="as-stack"><span class="k">Why the person remains</span><span class="v" id="r-why"></span></li>
+            <li><span class="k">Control</span><span class="v" id="r-control"></span></li>
+            <li class="as-stack"><span class="k">Evidence</span><span class="v" id="r-evidence"></span></li>
+          </ul>
+        </div>
+        <div class="cta-row" style="margin-top:1.6rem">
+          <button class="btn" type="button" id="as-copy">Copy the card</button>
+          <a class="btn btn-ghost" href="mailto:contact@humsana.com">Contact us</a>
+          <span class="note" id="as-copy-note" style="margin-top:0" role="status"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap foot-in">
+  <div class="brand"><img src="logo.png" alt="Humsana"></div>
+  <div class="foot-links"><a href="use-cases.html">Action classes</a><a href="walkthrough.html">Walkthrough</a><a href="swan.html">Swan</a><a href="the-execution-boundary.html">Execution boundary</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a><a href="mailto:contact@humsana.com">contact@humsana.com</a></div>
+  <div class="foot-copy">Humsana. Authority travels with the action.</div>
+</div></footer>
+
+<script src="site.js"></script>
+<script>
+/* The company assessment. One constant points the page at the service and is the only line that
+   changes when the live host takes over. The page holds the session id in this tab and sends it
+   with every request, so nothing here is credentialed and humsana.com can serve the page. */
+(function () {
+  'use strict';
+
+  var ASSESSMENT_API = 'https://api.humsana.com'; /* local: http://127.0.0.1:8788 */
+
+  var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var S = { id: null, questions: [], answers: [] };
+  var watched = {}, maxStage = 1;
+
+  function $(id) { return document.getElementById(id); }
+  function esc(v) { return String(v == null ? '' : v).replace(/[&<>"]/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function el(tag, cls) { var e = document.createElement(tag); if (cls) { e.className = cls; } return e; }
+  function setText(id, v) { var n = $(id); if (n) { n.textContent = v == null ? '' : v; } }
+  function cap(s) { s = String(s || ''); return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
+
+  /* The step's `today` value comes from the service: a word from contract.AUTONOMY_STEPS, or
+     "shared". The mark reads the three cases quietly: filled where the machine acts, hollow where a
+     person does it, half where the two share the step. A person keeps "Approve"; the other verbs are
+     acts the machine performs today. */
+  var PERSON_TODAY = { approve: true };
+  function todayClass(t) {
+    var v = String(t || '').trim().toLowerCase();
+    if (!v) { return ''; }
+    if (v === 'shared') { return 'as-both'; }
+    return PERSON_TODAY[v] ? 'as-person' : 'as-machine';
+  }
+  function stepHTML(s, i, extra) {
+    var cls = todayClass(s.today);
+    return '<li class="as-step' + (cls ? ' ' + cls : '') + (extra || '') + '">' +
+      '<span class="as-k">' + pad(i + 1) + '</span><div>' +
+      '<span class="as-t">' + esc(s.label) + '</span>' +
+      (s.today ? '<span class="as-today">' + esc(s.today) + '</span>' : '') + '</div></li>';
+  }
+
+  function api(path, body) {
+    var opts = { headers: {} };
+    if (body) { opts.method = 'POST'; opts.headers['Content-Type'] = 'application/json'; opts.body = JSON.stringify(body); }
+    return fetch(ASSESSMENT_API + path, opts).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (data) {
+        if (!r.ok) { throw new Error((data && data.error) ? data.error : ('the service answered ' + r.status)); }
+        return data;
+      });
+    });
+  }
+
+  /* the progression strip, and it only ever moves forward */
+  function progress(n, name) {
+    if (n < maxStage) { return; }
+    maxStage = n;
+    var segs = document.querySelectorAll('#as-progress .as-seg');
+    for (var i = 0; i < segs.length; i++) { segs[i].classList.toggle('on', Number(segs[i].getAttribute('data-i')) <= n); }
+    if (name) { $('as-plabel').textContent = name; }
+  }
+
+  /* each stage animates once, when it first enters view */
+  var io = window.IntersectionObserver ? new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) { return; }
+      e.target.classList.add('in');
+      progress(Number(e.target.getAttribute('data-stage')), e.target.getAttribute('data-name'));
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.2 }) : null;
+
+  function reveal(id) {
+    var node = $(id);
+    if (!node) { return; }
+    node.setAttribute('data-state', 'on');
+    if (io && !watched[id]) { watched[id] = true; io.observe(node); }
+    return node;
+  }
+  function conceal(id) { var node = $(id); if (node) { node.setAttribute('data-state', 'pending'); node.classList.remove('in'); } }
+
+  function scrollToStage(id) {
+    var node = $(id);
+    if (!node) { return; }
+    var top = node.getBoundingClientRect().top + window.pageYOffset - 56;
+    window.scrollTo({ top: top, behavior: reduce ? 'auto' : 'smooth' });
+  }
+
+  function showError(msg) { var box = $('entry-error'); box.textContent = msg; box.classList.add('show'); }
+
+  function fail(err) {
+    conceal('s-working');
+    $('as-form').hidden = false;
+    showError('The service did not answer. ' + (err && err.message ? err.message : 'unknown error') + '. Try again.');
+  }
+
+  /* ---- stage 3: the profile ---- */
+  function renderProfile(data) {
+    var u = data.understanding || {};
+    var steps = data.workflow || u.workflow_steps || [];
+    setText('p-company', u.company || 'Company');
+    setText('p-what', u.what_it_does || '');
+    setText('p-flow-title', u.company || 'Workflow');
+    setText('p-flow-count', steps.length + (steps.length === 1 ? ' step' : ' steps'));
+    var html = '';
+    for (var i = 0; i < steps.length; i++) { html += stepHTML(steps[i] || {}, i, ''); }
+    $('p-flow-list').innerHTML = html;
+  }
+
+  /* ---- stage 4: the questions ---- */
+  function renderQuestion(index) {
+    var q = S.questions[index] || {};
+    var live = $('live-questions');
+    live.innerHTML = '';
+    var wrap = el('div', 'as-q');
+    var mark = el('p', 'as-qmark');
+    mark.textContent = 'Question ' + (index + 1) + ' of ' + S.questions.length;
+    var text = el('p', 'as-qtext');
+    text.textContent = q.text || '';
+    wrap.appendChild(mark);
+    wrap.appendChild(text);
+    if (q.why) { var why = el('p', 'as-qwhy'); why.textContent = q.why; wrap.appendChild(why); }
+    var field = el('div', 'as-field');
+    var area = el('textarea', 'as-area');
+    area.id = 'as-answer';
+    area.rows = 3;
+    area.placeholder = 'One or two sentences.';
+    field.appendChild(area);
+    var row = el('div', 'cta-row');
+    row.style.marginTop = '1.4rem';
+    var btn = el('button', 'btn btn-primary arrow-after');
+    btn.type = 'button';
+    btn.textContent = 'Continue';
+    btn.addEventListener('click', function () { submitAnswer(index, btn, area); });
+    row.appendChild(btn);
+    wrap.appendChild(field);
+    wrap.appendChild(row);
+    live.appendChild(wrap);
+    window.setTimeout(function () { area.focus(); }, reduce ? 0 : 80);
+  }
+
+  function submitAnswer(index, btn, area) {
+    var answer = area ? area.value.trim() : '';
+    btn.disabled = true;
+    btn.textContent = 'Sending';
+    api('/assessment/answer', { id: S.id, answer: answer }).then(function (r) {
+      S.answers.push(answer);
+      if (r.questions) { S.questions = r.questions; }
+      if (r.stage === 'questions' && r.question) {
+        renderQuestion((r.index || 2) - 1);
+      } else {
+        conceal('s-questions');
+        toAssessment(r);
+      }
+    }).catch(function (err) {
+      btn.disabled = false;
+      btn.textContent = 'Continue';
+      showError('The service did not answer. ' + err.message + '. Try again.');
+    });
+  }
+
+  /* ---- stage 5: the consequential actions ---- */
+  function renderAssessment(a) {
+    var rows = (a && a.actions) || [];
+    var html = '';
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i] || {};
+      var cc = (row.could_change || []).join(', ');
+      html += '<li class="as-arow"><span class="as-an">' + pad(i + 1) + '</span><div>' +
+        '<p class="as-at">' + esc(row.label) + '</p>' +
+        '<dl class="as-af">' +
+        '<dt>Readiness</dt><dd class="as-readable">' + esc(row.readiness || '') + '</dd>' +
+        '<dt>Boundary</dt><dd>' + esc(row.boundary || 'none identified') + '</dd>' +
+        '<dt>Could change</dt><dd>' + esc(cc || 'none') + '</dd>' +
+        (row.why_human ? '<dt>Why a person</dt><dd>' + esc(row.why_human) + '</dd>' : '') +
+        '</dl>' +
+        (row.plain ? '<p class="as-why">' + esc(row.plain) + '</p>' : '') +
+        '</div></li>';
+    }
+    $('a-list').innerHTML = html;
+  }
+
+  function toAssessment(r) {
+    renderAssessment(r.assessment);
+    reveal('s-assessment');
+    renderBoundary(r);
+    reveal('s-boundary');
+    renderFinding(r);
+    reveal('s-finding');
+    renderCard((r.report) || {});
+    reveal('s-card');
+    progress(5, 'Assessment');
+  }
+
+  /* ---- stage 6: the boundary moment ---- */
+  function runnableRow(a) {
+    if (!a) { return null; }
+    var rows = a.actions || [];
+    if (typeof a.runnable_index === 'number' && rows[a.runnable_index]) { return rows[a.runnable_index]; }
+    if (!a.found) { return null; }
+    for (var i = 0; i < rows.length; i++) { if (rows[i].readiness === 'Automate with a boundary') { return rows[i]; } }
+    return rows[0] || null;
+  }
+
+  function renderBoundary(data) {
+    var steps = data.workflow || (data.understanding && data.understanding.workflow_steps) || [];
+    var a = data.assessment || {};
+    var at = (typeof a.boundary_step === 'number') ? a.boundary_step : -1;
+    var run = runnableRow(a);
+    setText('b-flow-title', (data.understanding && data.understanding.company) || 'Workflow');
+    setText('b-flow-count', steps.length + (steps.length === 1 ? ' step' : ' steps'));
+    var html = '';
+    for (var i = 0; i < steps.length; i++) {
+      html += stepHTML(steps[i] || {}, i, i === at ? ' as-at-boundary' : '');
+      if (i === at) {
+        html += '<li class="as-bound"><i aria-hidden="true"></i><span class="as-tag">Execution boundary</span><i aria-hidden="true"></i></li>';
+      }
+    }
+    $('b-flow-list').innerHTML = html;
+    var stepLabel = (at >= 0 && steps[at]) ? steps[at].label : '';
+    $('b-text').innerHTML = at >= 0
+      ? 'The service placed the boundary after <b>' + esc(stepLabel) + '</b>. The boundary it named: ' + esc(run ? run.boundary : '') + '.'
+      : 'The service did not identify a boundary in this workflow.';
+  }
+
+  /* ---- stage 7: the finding, then the demonstration ---- */
+  function renderFinding(r) {
+    var rep = r.report || {};
+    setText('c-headline', rep.headline || '');
+    setText('c-basis', rep.basis_note || '');
+    setText('c-today', rep.today || '');
+    setText('c-why', rep.why_human || '');
+    setText('c-where', rep.where_humsana_fits || '');
+    setText('c-changes', rep.what_changes || '');
+    var rd = rep.readiness || '', rdm = rep.readiness_meaning || '';
+    setText('c-result', rdm ? (rd + '. ' + cap(rdm) + '.') : rd);
+
+    var nn = $('c-nothing');
+    if (rep.nothing_found_note) { setText('c-nothing', rep.nothing_found_note); nn.hidden = false; }
+    else { nn.hidden = true; }
+
+    setText('t-demo', r.demonstration_note || rep.demonstration_note || '');
+
+    var found = rep.found !== false;
+    $('as-run-row').style.display = found ? '' : 'none';
+    $('demo-output').hidden = found ? true : false;
+    $('t-split').hidden = !found;
+    $('t-refusal').hidden = !found;
+    $('t-links').hidden = !found;
+    $('demo-mechanism').hidden = found;
+  }
+
+  /* ---- the demonstration ---- */
+  var FIELD_LABELS = { amount_gbp: 'Amount, GBP', currency: 'Currency', beneficiary: 'Beneficiary', reference: 'Reference' };
+  function fieldLabel(k) { return FIELD_LABELS[k] || k.replace(/_/g, ' '); }
+
+  function kvList(obj, other) {
+    if (!obj) { return ''; }
+    var keys = Object.keys(obj), html = '<ul class="as-kv">';
+    for (var i = 0; i < keys.length; i++) {
+      var k = keys[i];
+      var changed = other ? String(obj[k]) !== String(other[k]) : false;
+      html += '<li><span class="k">' + esc(fieldLabel(k)) + '</span><span class="v' + (changed ? ' chg' : '') + '">' + esc(String(obj[k])) + '</span></li>';
+    }
+    return html + '</ul>';
+  }
+
+  function renderRun(r) {
+    var run = r.run || {};
+    $('t-auth').innerHTML = kvList(run.authorized, run.presented);
+    $('t-pres').innerHTML = kvList(run.presented, run.authorized);
+    var dev = (run.deviations || [])[0] || null;
+    setText('t-decision', run.decision || '');
+    if (dev) {
+      setText('t-field', dev.field);
+      setText('t-authorized', String(dev.authorized));
+      setText('t-presented', String(dev.presented));
+      setText('t-rule', dev.rule);
+    }
+    setText('t-foot', run.rail_called ? 'Payment rail: called' : 'Payment rail: not called');
+    var finding = $('t-finding'), verify = $('t-verify');
+    if (run.finding_url) { finding.href = run.finding_url; } else { finding.parentNode.removeChild(finding); }
+    if (run.verify_url) { verify.href = run.verify_url; } else { verify.parentNode.removeChild(verify); }
+  }
+
+  function runDemo() {
+    var btn = $('as-run');
+    btn.disabled = true;
+    btn.textContent = 'Running';
+    $('as-run-note').textContent = 'Authorizing the action, then presenting it to the boundary.';
+    api('/assessment/run', { id: S.id, confirm: true }).then(function (r) {
+      $('as-run-row').style.display = 'none';
+      renderRun(r);
+      $('demo-output').hidden = false;
+      $('t-split').hidden = false;
+      $('t-refusal').hidden = false;
+      $('t-links').hidden = false;
+      $('demo-mechanism').hidden = true;
+      progress(7, 'The finding');
+      scrollToStage('demo-output');
+    }).catch(function (err) {
+      btn.disabled = false;
+      btn.textContent = 'Run the demonstration';
+      $('as-run-note').textContent = err.message;
+    });
+  }
+
+  /* ---- stage 8: the card ---- */
+  function renderCard(rep) {
+    setText('r-head', rep.company || 'Assessment');
+    setText('r-company', rep.company || '');
+    setText('r-agent', rep.agent || '');
+    setText('r-action', rep.action || '');
+    setText('r-readiness', rep.readiness || '');
+    setText('r-why', rep.why_human || '');
+    setText('r-control', rep.control || '');
+    setText('r-evidence', rep.evidence || '');
+
+    $('as-copy').addEventListener('click', function () {
+      var order = [['Company', 'company'], ['Agent', 'agent'], ['Consequential action', 'action'],
+        ['Readiness', 'readiness'], ['Why the person remains', 'why_human'],
+        ['Control', 'control'], ['Evidence', 'evidence']];
+      var lines = [(rep.company || '') + '. Assessment.'];
+      for (var j = 0; j < order.length; j++) { lines.push(order[j][0] + ': ' + (rep[order[j][1]] || '')); }
+      var text = lines.join('\n');
+      function done(ok) { setText('as-copy-note', ok ? 'Copied to the clipboard.' : 'Copy failed. Select the card and copy it.'); }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+      } else {
+        try {
+          var ta = el('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+          document.body.appendChild(ta); ta.select(); var ok = document.execCommand('copy');
+          document.body.removeChild(ta); done(ok);
+        } catch (e) { done(false); }
+      }
+    });
+  }
+
+  /* ---- wiring ---- */
+  $('as-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var url = $('as-url').value.trim();
+    var description = $('as-desc').value.trim();
+    if (!url) { $('as-url').focus(); showError('A company website is required.'); return; }
+    $('entry-error').classList.remove('show');
+    $('as-form').hidden = true;
+    reveal('s-working');
+    progress(2, 'Reading the site');
+    api('/assessment/start', { url: url, description: description }).then(function (r) {
+      S.id = r.id;
+      S.questions = r.questions || [];
+      S.answers = [];
+      try { sessionStorage.setItem('as_id', r.id); } catch (e) {}
+      conceal('s-working');
+      renderProfile(r);
+      reveal('s-profile');
+      progress(3, 'Profile');
+      if (S.questions.length) {
+        reveal('s-questions');
+        progress(4, 'Questions');
+        renderQuestion(0);
+      } else {
+        toAssessment(r);
+      }
+    }).catch(fail);
+  });
+
+  $('as-run').addEventListener('click', runDemo);
+
+  /* resume a session this tab opened: the id is unguessable and possession is the access */
+  (function resume() {
+    var id = null;
+    try { id = sessionStorage.getItem('as_id'); } catch (e) {}
+    if (!id) { return; }
+    api('/assessment/state?id=' + encodeURIComponent(id)).then(function (s) {
+      if (!s || !s.id) { return; }
+      S.id = s.id;
+      S.questions = s.questions || [];
+      S.answers = s.answers || [];
+      $('as-form').hidden = true;
+      renderProfile(s);
+      reveal('s-profile');
+      progress(3, 'Profile');
+      var stage = s.stage;
+      if (stage === 'profile' || stage === 'questions') {
+        if (S.answers.length < S.questions.length) {
+          reveal('s-questions');
+          progress(4, 'Questions');
+          renderQuestion(S.answers.length);
+        }
+      }
+      if (stage === 'assessment' || stage === 'report') {
+        conceal('s-questions');
+        renderAssessment(s.assessment);
+        reveal('s-assessment');
+        renderBoundary(s);
+        reveal('s-boundary');
+        renderFinding(s);
+        reveal('s-finding');
+        renderCard(s.report || {});
+        reveal('s-card');
+        progress(5, 'Assessment');
+      }
+      if (stage === 'report' && s.run) {
+        $('as-run-row').style.display = 'none';
+        renderRun({ run: s.run });
+        $('demo-output').hidden = false;
+        $('t-split').hidden = false;
+        $('t-refusal').hidden = false;
+        $('t-links').hidden = false;
+        $('demo-mechanism').hidden = true;
+      }
+    }).catch(function () {});
+  }());
+
+}());
+</script>
+</body>
+</html>
