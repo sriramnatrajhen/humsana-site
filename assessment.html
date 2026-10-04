@@ -158,6 +158,11 @@
 .as-fsplit-line.is-stay{color:var(--ink)}
 .as-fnote{font-size:14px;color:var(--dim);padding:.9rem 0 0 3.4rem}
 .as-nothing{font-size:17px;color:var(--muted);max-width:64ch;margin-top:1.4rem}
+/* the continuation: the diagnostic hands the reader to a conversation rather than a sales button */
+.as-next{margin-top:2.8rem;padding-top:2rem;border-top:1px solid var(--line)}
+.as-next h3{font-size:22px;line-height:1.2;font-weight:600;letter-spacing:-.015em;color:var(--ink)}
+.as-next p{font-size:16px;line-height:1.6;color:var(--muted);max-width:60ch;margin-top:.7rem}
+.as-next .cta-row{margin-top:1.4rem}
 
 /* the demonstration: introduced as the same boundary problem, the note beside it, then the run */
 .as-demogrid{display:grid;grid-template-columns:1fr 1fr;gap:2.6rem;margin-top:2.8rem;align-items:start}
@@ -419,9 +424,15 @@
         </div>
         <div class="cta-row" style="margin-top:1.6rem">
           <button class="btn" type="button" id="as-copy">Copy the card</button>
-          <a class="btn btn-ghost" href="mailto:contact@humsana.com">Contact us</a>
           <span class="note" id="as-copy-note" style="margin-top:0" role="status"></span>
         </div>
+      </div>
+    </div>
+    <div class="as-next" id="as-next" style="display:none">
+      <h3>Take this further</h3>
+      <p>We found a place where your AI could take on more of the work, with a boundary around the action.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary arrow-after" href="mailto:contact@humsana.com">Talk to us</a>
       </div>
     </div>
   </div>
@@ -670,8 +681,8 @@
     var split = $('f-split');
     split.innerHTML = '';
     var lines = [];
-    if (move) { lines.push([move + ' could move to an agent with a boundary.', 'is-move']); }
-    if (stay) { lines.push([stay + ' should remain with a person.', 'is-stay']); }
+    if (move) { lines.push([move + ' could be moved to an agent with a boundary.', 'is-move']); }
+    if (stay) { lines.push([stay + ' is better kept with a person.', 'is-stay']); }
     if (ready) { lines.push([ready + ' can be automated as it is.', '']); }
     for (var j = 0; j < lines.length; j++) {
       var line = el('p', 'as-fsplit-line' + (lines[j][1] ? ' ' + lines[j][1] : ''));
@@ -859,6 +870,8 @@
     setText('r-result', rep.result || rep.readiness || '');
     setText('r-control', rep.control || '');
     setText('r-evidence', rep.evidence || '');
+    // The continuation appears when there is a finding to continue from, and not before.
+    if ($('as-next')) { $('as-next').style.display = rep.action ? '' : 'none'; }
 
     $('as-copy').addEventListener('click', function () {
       var order = [['Company', 'company'], ['Consequential action', 'action'], ['Today', 'today'],
