@@ -651,10 +651,10 @@
   function word(n) { return NUMBER_WORDS[n] || String(n); }
   function foundRows(a) {
     var rows = (a && a.actions) || [];
-    var human = rows.filter(function (r) { return r.human_in_loop; });
-    // The ones a boundary lifts come first, so the markers lead with what Humsana can actually do here.
-    return human.filter(function (r) { return r.readiness === 'Automate with a boundary'; })
-      .concat(human.filter(function (r) { return r.readiness !== 'Automate with a boundary'; }));
+    // The service surfaces only the actions where a person is still required, so every row here is a place
+    // where their AI stops. The ones a boundary can lift lead, so the markers open with what Humsana can do.
+    return rows.filter(function (r) { return r.readiness === 'Automate with a boundary'; })
+      .concat(rows.filter(function (r) { return r.readiness !== 'Automate with a boundary'; }));
   }
   function renderFound(a) {
     var rows = foundRows(a);
