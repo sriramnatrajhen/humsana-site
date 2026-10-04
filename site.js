@@ -122,12 +122,24 @@
   maps.forEach(function (map) { io.observe(map); });
 }());
 
-/* The action-class panels flash the changed value the first time the section is seen. Switching tabs
-   restarts the same flash through the tablist above. */
+/* The changed value flashes once, the first time the comparison is seen. This is the same wash the
+   action-class panels use, so the deviation reads the same wherever it appears. */
 (function () {
   if (!('IntersectionObserver' in window) || !window.matchMedia) { return; }
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { return; }
   var wrap = document.querySelector('.acts');
+  var audit = document.querySelector('.audit');
+  if (!wrap && !audit) { return; }
+  if (audit) {
+    var io2 = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) { return; }
+        entry.target.classList.add('enter');
+        io2.unobserve(entry.target);
+      });
+    }, { threshold: 0.35 });
+    io2.observe(audit);
+  }
   if (!wrap) { return; }
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {

@@ -148,6 +148,44 @@
 #trust .lead{max-width:52ch}
 #trust .proof{max-width:44rem;margin-top:2.2rem}
 #trust .note{max-width:52ch;margin-top:1.6rem}
+
+/* The finding: three outcomes, and the one Humsana sits at carries the weight. */
+#discovery .find{margin:2.2rem 0 2.4rem;border:1px solid var(--line);background:var(--panel)}
+#discovery .find-row{display:grid;grid-template-columns:minmax(10rem,15rem) 1fr;gap:1.6rem;align-items:baseline;padding:1.15rem 1.3rem;border-top:1px solid var(--line-soft)}
+#discovery .find-row:first-child{border-top:0}
+#discovery .find-row.key{background:var(--accent-pale)}
+#discovery .find-tag{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-text)}
+#discovery .find-row p{margin:0;font-size:16.5px;line-height:1.5;color:var(--ink)}
+@media (max-width:640px){#discovery .find-row{grid-template-columns:1fr;gap:.45rem}}
+
+/* The comparison: one object with two halves, so the field that moved is found before the words are read. */
+.audit{margin-top:2rem}
+.audit-k{margin:0 0 1rem;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.audit-k .mono{text-transform:none;letter-spacing:0;color:var(--ink)}
+.audit-head,.cmp.pair li{display:grid;grid-template-columns:170px 1fr 1fr;gap:1.2rem;align-items:baseline}
+.audit-head{padding-bottom:.7rem;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.audit-head b{font-weight:500}
+.audit-head .v-allow{color:var(--ink)}
+.audit-head .v-refuse{color:var(--accent-text)}
+.audit-head .code{text-transform:none;letter-spacing:.02em;color:var(--muted)}
+.cmp.pair{margin-top:0;border-top:0}
+.cmp.pair li{padding:.85rem 0;grid-template-columns:170px 1fr 1fr}
+.cmp.pair li .v{font-size:13px}
+.cmp.pair li .v.chg{color:var(--accent-text);background:var(--accent-pale);padding:0 .35rem}
+.audit.enter .v.chg{animation:wash .6s ease-out both}
+.audit-out{margin-top:1.3rem;padding:1rem 1.2rem;border:1px solid var(--line);background:var(--warm);font-size:16px;color:var(--ink)}
+.audit-k2{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-right:.5rem}
+@media (max-width:760px){
+  .audit-head{display:none}
+  .cmp.pair li{grid-template-columns:1fr;gap:.35rem}
+  .cmp.pair li .k{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+  .cmp.pair li .v::before{content:attr(data-l) " \00b7 ";font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+}
+
+/* The verification is an action, so it stands apart from the prose that describes it. */
+.verify{margin-top:2rem;padding-top:1.8rem;border-top:1px solid var(--line-soft)}
+.verify .note{margin-top:1rem}
+
 /* Sub-headings inside a block, and the second way in. The form is secondary to the assessment, so it is
    separated by a rule rather than sitting level with the primary call to action. */
 h3{font-size:19px;line-height:1.35;margin:0 0 .6rem;color:var(--ink)}
@@ -170,10 +208,9 @@ h3{font-size:19px;line-height:1.35;margin:0 0 .6rem;color:var(--ink)}
 <body>
 
 <nav><div class="wrap nav-in">
-  <a class="brand" href="index.html"><img src="logo.png" alt="Humsana"></a>
+  <a class="brand" href="index.html" aria-label="Humsana, home"><img src="logo.png" alt="Humsana"></a>
   <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">&#9776;</button>
   <div class="nav-links" id="nav">
-    <a href="index.html" aria-current="page">Home</a>
     <a href="why-humsana.html">Why Humsana</a>
     <a href="how-it-works.html">How it works</a>
     <a href="developers.html">Developers</a>
@@ -211,13 +248,17 @@ h3{font-size:19px;line-height:1.35;margin:0 0 .6rem;color:var(--ink)}
   </div>
   <p class="note hero-note">Payments are one example. The same problem appears wherever an AI agent can change something consequential.</p>
 </div></header><section id="discovery" class="invite"><div class="wrap">
-  <h2>Where is that happening in your company?</h2>
-  <p class="lead">A person still steps in before the consequential action. The assessment shows you where that happens in your workflow, and which of those places could move to an agent with a boundary.</p>
-  <p>This is a workflow assessment. It is a short set of questions about how the work runs today, answered in the browser, and it shows you where a person is still in the chain, what they are there to catch, and which of those places could move to an agent with a boundary around the action.</p>
+  <p class="eyebrow">The company assessment</p>
+  <h2>We show you where a person still steps in.</h2>
+  <p class="lead">A short set of questions about your workflow, and a read of your own public site. Every place where the machine already does the work and a person still releases the action is marked, and each place is given one of three outcomes.</p>
+  <div class="find">
+    <div class="find-row"><span class="find-tag">Can automate</span><p>The machine can perform the action without a person needing to remain at the boundary.</p></div>
+    <div class="find-row key"><span class="find-tag">Automate with a boundary</span><p>The machine can perform the action, but a person currently remains because something consequential needs to be checked or approved. Humsana can sit at that boundary.</p></div>
+    <div class="find-row"><span class="find-tag">Stays with a person</span><p>The assessment does not establish that this action should move to an agent, so it remains with a person.</p></div>
+  </div>
   <p class="note">Based on what you tell us and what could be identified from your public information. This is an interpretation of your workflow, not a certification of it.</p>
   <div class="cta-row">
-    <a class="btn btn-primary arrow-after" href="assessment.html">Find your boundary</a>
-    <a class="btn btn-ghost" href="#talk">Contact us</a>
+    <a class="btn btn-primary arrow-after" href="assessment.html">Do you need Humsana?</a>
   </div>
 </div></section><section id="mechanism"><div class="wrap">
   <h2>Where the check runs</h2>
@@ -263,34 +304,26 @@ h3{font-size:19px;line-height:1.35;margin:0 0 .6rem;color:var(--ink)}
 </div></section><section id="proof"><div class="wrap">
   <h2>An approved action can still be refused.</h2>
   <p>A payment is approved for &pound;1,800 to Supplier X at account 4821. The instruction that arrives at Company B's executor carries account 9137, and nothing else about the action has changed. The service compares the two, names the field it disagrees on, and refuses.</p>
-  <p class="note" style="margin-top:2.4rem">The action as approved</p>
-  <div id="ans-allowed" style="margin-top:1rem">
-    <div class="verdict"><span class="v-allow">Allowed</span><span class="code">MATCHED</span></div>
-    <ul class="cmp">
-      <li><span class="k">field</span><span class="v">parameters.payee_account</span></li>
-      <li><span class="k">approved</span><span class="v">GB00SUPPLIER00004821</span></li>
-      <li><span class="k">presented</span><span class="v">GB00SUPPLIER00004821</span></li>
-      <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE, satisfied</span></li>
-      <li><span class="k">consumed</span><span class="v">true</span></li>
+  <div class="audit">
+    <p class="audit-k">Field under comparison <span class="mono">parameters.payee_account</span></p>
+    <div class="audit-head">
+      <span></span>
+      <span><b class="v-allow">Allowed</b> <span class="code">MATCHED</span></span>
+      <span><b class="v-refuse">Refused</b> <span class="code">GRANT_DOES_NOT_COVER_THIS_ACTION</span></span>
+    </div>
+    <ul class="cmp pair">
+      <li><span class="k">approved</span><span class="v" data-l="authorized">GB00SUPPLIER00004821</span><span class="v" data-l="authorized">GB00SUPPLIER00004821</span></li>
+      <li><span class="k">presented</span><span class="v" data-l="authorized">GB00SUPPLIER00004821</span><span class="v chg" data-l="received">GB00SUPPLIER00009137</span></li>
+      <li><span class="k">rule</span><span class="v" data-l="authorized">MAY_NOT_CHANGE, satisfied</span><span class="v" data-l="authorized">MAY_NOT_CHANGE</span></li>
+      <li><span class="k">consumed</span><span class="v" data-l="authorized">true</span><span class="v" data-l="authorized">false</span></li>
+      <li><span class="k">executor</span><span class="v" data-l="authorized"><span class="api yes">Payment API: accepted INV-88213, GBP 1,800 to ...4821</span></span><span class="v" data-l="received"><span class="api no">Payment API: not called</span></span></li>
     </ul>
-    <span class="api yes">Payment API: accepted INV-88213, GBP 1,800 to ...4821</span>
+    <div class="audit-out"><span class="audit-k2">Outcome</span> The value that arrived differs from the value that was authorized, so the action is refused, the field is named, and nothing is executed.</div>
   </div>
-  <p class="note" style="margin-top:2.4rem">The action that arrived</p>
-  <div id="ans-refused" style="margin-top:1rem">
-    <div class="verdict"><span class="v-refuse">Refused</span><span class="code">GRANT_DOES_NOT_COVER_THIS_ACTION</span></div>
-    <ul class="cmp">
-      <li><span class="k">field</span><span class="v">parameters.payee_account</span></li>
-      <li><span class="k">approved</span><span class="v">GB00SUPPLIER00004821</span></li>
-      <li><span class="k">presented</span><span class="v chg">GB00SUPPLIER00009137</span></li>
-      <li><span class="k">rule</span><span class="v">MAY_NOT_CHANGE</span></li>
-      <li><span class="k">consumed</span><span class="v">false</span></li>
-    </ul>
-    <span class="api no">Payment API: not called</span>
-  </div>
-  <p class="note">Recorded from the live boundary at 08:42 UTC on 27 September 2026. <a href="use-cases.html">Every action class</a>. <a href="https://api.humsana.com/sandbox/">Run the same comparison yourself</a>. <a href="https://verify.humsana.com/verify">Check a record yourself</a>.</p>
+  <p class="note">Recorded from the live boundary at 08:42 UTC on 27 September 2026. <a href="https://api.humsana.com/sandbox/">Run the same comparison yourself</a>.</p>
 </div></section><section id="trust"><div class="wrap">
   <h2>And you can prove what happened.</h2>
-  <p class="lead">Every governed action leaves a signed record of what was authorized and of what reached the execution boundary. The signature names the key that produced it, and the public keys are published, so somebody who was not there can check it without an account here.</p>
+  <p class="lead">Every governed action leaves two signed records: what was authorized, and what reached the boundary. Each names the key that signed it, and the public keys are published.</p>
   <div class="proof">
       <h3>Real Humsana boundary · recorded example</h3>
       <p class="note">One record from one real run, kept as it was issued. Run the live demo to make your own and check it yourself.</p>
@@ -306,34 +339,12 @@ h3{font-size:19px;line-height:1.35;margin:0 0 .6rem;color:var(--ink)}
         </ul>
         <div class="panel-foot">Refused, EFFECTUATION_DRIFT</div>
       </div>
-      <div class="cta-row">
-        <a class="btn" href="https://verify.humsana.com/verify?record=%7B%22action%22%3A%20%7B%22authorized_digest%22%3A%20%22sha256%3A69c7bc609a53599accc8c151ddf0a0e7108e0a9f04305a232d8ca5bdc0c3123f%22%2C%20%22authorized_parameters%22%3A%20%7B%22channel%22%3A%20%22team%22%7D%2C%20%22field_comparison%22%3A%20%5B%7B%22authorized%22%3A%20%22team%22%2C%20%22authorized_absent%22%3A%20false%2C%20%22field%22%3A%20%22channel%22%2C%20%22presented%22%3A%20%22general%22%2C%20%22presented_absent%22%3A%20false%7D%5D%2C%20%22name%22%3A%20%22post_message%22%2C%20%22presented_digest%22%3A%20%22sha256%3A9ae2fe342a18869f97ac6eecfa2745a38d5b6a577ec7f3afbc36e20117eca7f6%22%2C%20%22presented_digest_stated%22%3A%20true%2C%20%22presented_parameters%22%3A%20%7B%22channel%22%3A%20%22general%22%7D%7D%2C%20%22authorization%22%3A%20%7B%22authorization_id%22%3A%20%22authz_UQp4SRaOjyHaq0bfp3HKgQ%22%2C%20%22key_id%22%3A%20%22humsana-production-2026%22%2C%20%22receipt_id%22%3A%20%22authz_UQp4SRaOjyHaq0bfp3HKgQ%22%2C%20%22record_digest%22%3A%20%22sha256%3Ae389c8440ad1b935efe4e22df17340219bd30893ecfeb9dd2671a077488db7c5%22%2C%20%22schema%22%3A%20%22swan.authz%2F1%22%7D%2C%20%22comparison%22%3A%20%7B%22decision%22%3A%20%22HUMAN_CONFIRM%22%2C%20%22deviations%22%3A%20%5B%7B%22authorized%22%3A%20%22team%22%2C%20%22code%22%3A%20%22MAY_NOT_CHANGE%22%2C%20%22detail%22%3A%20%22The%20field%20is%20fixed%20by%20the%20authorization%20and%20may%20not%20differ%20at%20execution.%22%2C%20%22field%22%3A%20%22parameters.channel%22%2C%20%22presented%22%3A%20%22general%22%7D%5D%2C%20%22matched%22%3A%20false%2C%20%22refusal%22%3A%20%7B%22code%22%3A%20%22EFFECTUATION_DRIFT%22%2C%20%22deviations%22%3A%20%5B%7B%22authorized%22%3A%20%22team%22%2C%20%22code%22%3A%20%22MAY_NOT_CHANGE%22%2C%20%22detail%22%3A%20%22The%20field%20is%20fixed%20by%20the%20authorization%20and%20may%20not%20differ%20at%20execution.%22%2C%20%22field%22%3A%20%22parameters.channel%22%2C%20%22presented%22%3A%20%22general%22%7D%5D%2C%20%22reasons%22%3A%20%5B%7B%22code%22%3A%20%22EFFECTUATION_DRIFT%22%2C%20%22detail%22%3A%20%221%20field%28s%29%20outside%20the%20authorized%20tuple%22%7D%5D%2C%20%22repairable%22%3A%20true%7D%2C%20%22vocabulary%22%3A%20%22humsana.deviation%2F1%22%7D%2C%20%22comparison_ran%22%3A%20true%2C%20%22execution%22%3A%20%7B%22note%22%3A%20%22no%20execution%20was%20reported%20for%20this%20action%22%2C%20%22outcome%22%3A%20%22NOT_EXECUTED%22%2C%20%22rail_called%22%3A%20false%7D%2C%20%22executor_acknowledgment%22%3A%20%7B%22agrees_with%22%3A%20null%2C%20%22key_id%22%3A%20null%2C%20%22note%22%3A%20%22the%20executor%20reported%20an%20acknowledgment%20but%20did%20not%20sign%2C%20so%20this%20is%20the%20executor%27s%20unsigned%20statement%20and%20not%20yet%20a%20two-party%20record%22%2C%20%22received_at%22%3A%20null%2C%20%22received_by%22%3A%20null%2C%20%22received_digest%22%3A%20null%2C%20%22signature%22%3A%20null%2C%20%22status%22%3A%20%22acknowledged%22%7D%2C%20%22issued_at%22%3A%20%222026-10-03T10%3A56%3A57Z%22%2C%20%22issuer%22%3A%20%7B%22key_id%22%3A%20%22humsana-production-2026%22%2C%20%22name%22%3A%20%22Humsana%22%7D%2C%20%22record_digest%22%3A%20%22sha256%3A68b524f4d54938613753dbf68c049ec09655c17ee7c7ce2539fa5fafc6ac0413%22%2C%20%22record_id%22%3A%20%22exec_9M6XK2NNZYxmFUqP%22%2C%20%22schema%22%3A%20%22humsana.execution%2F1%22%2C%20%22scope%22%3A%20%22This%20signature%20attests%20that%20Humsana%20issued%20this%20execution%20record%20and%20that%20it%20has%20not%20been%20altered%20since.%20It%20states%20what%20arrived%20at%20the%20boundary%2C%20whether%20the%20comparison%20ran%2C%20what%20the%20comparison%20found%2C%20and%20what%20the%20boundary%20did.%20It%20does%20not%20establish%20that%20the%20authority%20behind%20the%20action%20was%20legitimate%2C%20and%20it%20does%20not%20show%20that%20the%20action%20succeeded%20in%20the%20world%3A%20whether%20the%20rail%20was%20called%20and%20what%20the%20executor%20acknowledged%20are%20the%20executor%27s%20report%2C%20carried%20verbatim%2C%20not%20an%20effect%20Humsana%20observed.%22%2C%20%22signature%22%3A%20%7B%22alg%22%3A%20%22ed25519%22%2C%20%22key_id%22%3A%20%22humsana-production-2026%22%2C%20%22value%22%3A%20%22eed62bc53ee463bab27f39189cd790009bb68b103e2b3600d18d8073bb092bafbfc25d615765db182b3953f5e8f65c3f7cc83565d6b75d1b92e8b89cd90a430f%22%7D%7D&amp;authorization=%7B%22action%22%3A%20%7B%22digest%22%3A%20%22sha256%3A69c7bc609a53599accc8c151ddf0a0e7108e0a9f04305a232d8ca5bdc0c3123f%22%2C%20%22name%22%3A%20%22post_message%22%2C%20%22parameters%22%3A%20%7B%22channel%22%3A%20%22team%22%7D%7D%2C%20%22agent%22%3A%20%7B%22id%22%3A%20%22records-proof-agent%22%2C%20%22identity%22%3A%20%22declared%20by%20the%20caller%2C%20not%20verified%20at%20the%20boundary%22%7D%2C%20%22authority%22%3A%20%7B%22action_class%22%3A%20%22post_message%22%2C%20%22authorization_id%22%3A%20%22authz_UQp4SRaOjyHaq0bfp3HKgQ%22%2C%20%22grant_expires_at%22%3A%20%222026-12-31T00%3A00%3A00Z%22%2C%20%22granted_at%22%3A%20null%2C%20%22operation_digest%22%3A%20%22sha256%3A69c7bc609a53599accc8c151ddf0a0e7108e0a9f04305a232d8ca5bdc0c3123f%22%2C%20%22policy_version%22%3A%20%221%22%2C%20%22ref%22%3A%20%22%22%2C%20%22single_use%22%3A%20null%7D%2C%20%22confirmation%22%3A%20%7B%22confirmation_id%22%3A%20null%2C%20%22obtained%22%3A%20false%2C%20%22required%22%3A%20false%7D%2C%20%22consequence%22%3A%20%7B%22class%22%3A%20%22C1%22%7D%2C%20%22decision%22%3A%20%7B%22granted%22%3A%20true%2C%20%22value%22%3A%20%22ALLOW%22%7D%2C%20%22expiry%22%3A%20%222026-12-31T00%3A00%3A00Z%22%2C%20%22issued_at%22%3A%20%222026-10-03T10%3A56%3A57Z%22%2C%20%22issuer%22%3A%20%7B%22key_id%22%3A%20%22humsana-production-2026%22%2C%20%22name%22%3A%20%22Humsana%22%7D%2C%20%22principal%22%3A%20%7B%22approved_by%22%3A%20%7B%7D%2C%20%22id%22%3A%20%22%22%7D%2C%20%22receipt_id%22%3A%20%22authz_UQp4SRaOjyHaq0bfp3HKgQ%22%2C%20%22record_digest%22%3A%20%22sha256%3Ae389c8440ad1b935efe4e22df17340219bd30893ecfeb9dd2671a077488db7c5%22%2C%20%22schema%22%3A%20%22swan.authz%2F1%22%2C%20%22scope%22%3A%20%22This%20signature%20attests%20that%20Humsana%20issued%20this%20authorization%20record%20and%20that%20it%20has%20not%20been%20altered%20since.%20It%20states%20what%20was%20authorized.%20It%20does%20not%20establish%20that%20the%20authority%20behind%20the%20action%20was%20legitimate%2C%20and%20it%20says%20nothing%20about%20what%20happened%20after%20execution%3A%20that%20is%20the%20execution%20record%27s%20subject%2C%20and%20no%20execution%20status%2C%20comparison%20outcome%20or%20deviation%20block%20lives%20in%20this%20record.%22%2C%20%22signature%22%3A%20%7B%22alg%22%3A%20%22ed25519%22%2C%20%22key_id%22%3A%20%22humsana-production-2026%22%2C%20%22value%22%3A%20%22d0d75e354699c0cdc5193305b0850414446d55630e8934aefbfb55d00cbc5d9dabd42ed2a228a8a8f9afaebd6e3b807626a9876c980d466f3a3214e40a6bb40b%22%7D%7D">See the proof</a>
-      </div>
-      <p class="note">Signed by humsana-production-2026 with Ed25519. The verifier reports signature VALID, record digest MATCHES and authorization link VALID.</p>
+      
+      <p class="note">Signed by humsana-production-2026 with Ed25519.</p>
     </div>
-  <p class="note">Do not take the interface's word for it. The verifier checks the signature, the record digests and the link between the authorization and the execution, offline.</p>
-  <div class="cta-row">
-    <a class="btn btn-primary arrow-after" href="https://verify.humsana.com/verify">Check a record yourself</a>
-  </div>
-</div></section><section id="reference"><div class="wrap">
-  <h2>In plain terms.</h2>
-  <ul class="story">
-    <li><b>What is Humsana?</b> An execution boundary for AI agents.</li>
-    <li><b>What does it do?</b> It checks the action reaching execution against the action that was authorized.</li>
-    <li><b>Why?</b> So a company can let AI take on more consequential work while keeping the action inside the permission that was given.</li>
-    <li><b>What happens when an action changes?</b> Humsana can hold it or refuse it, and it records the deviation.</li>
-    <li><b>What evidence exists?</b> A signed authorization record and a signed execution record, each naming the key that signed it, so the pair can be verified independently.</li>
-    <li><b>Who is it for?</b> Teams putting AI agents on work that can change something another system depends on.</li>
-  </ul>
-
-  <h3>Questions an engineer asks first.</h3>
-  <div class="faq">
-    <details><summary>What is an execution boundary?</summary><p>It sits between the party that authorized an action and the party that executes it. It compares the action arriving at execution with the action that was authorized, and it decides there.</p></details>
-    <details><summary>Where does it run?</summary><p>Immediately before the call that cannot be taken back, on the executing side. A control inside the agent's own system cannot answer for the action once the action has left that system.</p></details>
-    <details><summary>Does it replace the agent's permissions or its identity?</summary><p>No. Permissions and identity settle who the agent is and what it may attempt. Humsana checks the action that actually arrives, at the moment it would take effect.</p></details>
-    <details><summary>What happens when the action has changed?</summary><p>The boundary names the field, both values and the rule, and refuses. The refusal is a code, the grant is not spent, and the executing call is not made.</p></details>
-    <details><summary>How does somebody else check what happened?</summary><p>The boundary issues a signed record of the authorization and a signed record of the execution. The verifier checks the signature, the record digests and the link between the two, offline, without an account here.</p></details>
-    <details><summary>Does Humsana decide whether an action is allowed?</summary><p>No. The authority is yours: your policy decides what may be authorized. Humsana checks the action against the authority that was granted, and holds or refuses when the action is not within it. The signature attests that Humsana issued the record and that it has not been altered; it does not establish that the authority behind the action was legitimate.</p></details>
+  <div class="verify">
+    <a class="btn btn-primary arrow-after" href="https://verify.humsana.com/verify?record=%7B%22action%22%3A%20%7B%22authorized_digest%22%3A%20%22sha256%3A69c7bc609a53599accc8c151ddf0a0e7108e0a9f04305a232d8ca5bdc0c3123f%22%2C%20%22authorized_parameters%22%3A%20%7B%22channel%22%3A%20%22team%22%7D%2C%20%22field_comparison%22%3A%20%5B%7B%22authorized%22%3A%20%22team%22%2C%20%22authorized_absent%22%3A%20false%2C%20%22field%22%3A%20%22channel%22%2C%20%22presented%22%3A%20%22general%22%2C%20%22presented_absent%22%3A%20false%7D%5D%2C%20%22name%22%3A%20%22post_message%22%2C%20%22presented_digest%22%3A%20%22sha256%3A9ae2fe342a18869f97ac6eecfa2745a38d5b6a577ec7f3afbc36e20117eca7f6%22%2C%20%22presented_digest_stated%22%3A%20true%2C%20%22presented_parameters%22%3A%20%7B%22channel%22%3A%20%22general%22%7D%7D%2C%20%22authorization%22%3A%20%7B%22authorization_id%22%3A%20%22authz_UQp4SRaOjyHaq0bfp3HKgQ%22%2C%20%22key_id%22%3A%20%22humsana-production-2026%22%2C%20%22receipt_id%22%3A%20%22authz_UQp4SRaOjyHaq0bfp3HKgQ%22%2C%20%22record_digest%22%3A%20%22sha256%3Ae389c8440ad1b935efe4e22df17340219bd30893ecfeb9dd2671a077488db7c5%22%2C%20%22schema%22%3A%20%22swan.authz%2F1%22%7D%2C%20%22comparison%22%3A%20%7B%22decision%22%3A%20%22HUMAN_CONFIRM%22%2C%20%22deviations%22%3A%20%5B%7B%22authorized%22%3A%20%22team%22%2C%20%22code%22%3A%20%22MAY_NOT_CHANGE%22%2C%20%22detail%22%3A%20%22The%20field%20is%20fixed%20by%20the%20authorization%20and%20may%20not%20differ%20at%20execution.%22%2C%20%22field%22%3A%20%22parameters.channel%22%2C%20%22presented%22%3A%20%22general%22%7D%5D%2C%20%22matched%22%3A%20false%2C%20%22refusal%22%3A%20%7B%22code%22%3A%20%22EFFECTUATION_DRIFT%22%2C%20%22deviations%22%3A%20%5B%7B%22authorized%22%3A%20%22team%22%2C%20%22code%22%3A%20%22MAY_NOT_CHANGE%22%2C%20%22detail%22%3A%20%22The%20field%20is%20fixed%20by%20the%20authorization%20and%20may%20not%20differ%20at%20execution.%22%2C%20%22field%22%3A%20%22parameters.channel%22%2C%20%22presented%22%3A%20%22general%22%7D%5D%2C%20%22reasons%22%3A%20%5B%7B%22code%22%3A%20%22EFFECTUATION_DRIFT%22%2C%20%22detail%22%3A%20%221%20field%28s%29%20outside%20the%20authorized%20tuple%22%7D%5D%2C%20%22repairable%22%3A%20true%7D%2C%20%22vocabulary%22%3A%20%22humsana.deviation%2F1%22%7D%2C%20%22comparison_ran%22%3A%20true%2C%20%22execution%22%3A%20%7B%22note%22%3A%20%22no%20execution%20was%20reported%20for%20this%20action%22%2C%20%22outcome%22%3A%20%22NOT_EXECUTED%22%2C%20%22rail_called%22%3A%20false%7D%2C%20%22executor_acknowledgment%22%3A%20%7B%22agrees_with%22%3A%20null%2C%20%22key_id%22%3A%20null%2C%20%22note%22%3A%20%22the%20executor%20reported%20an%20acknowledgment%20but%20did%20not%20sign%2C%20so%20this%20is%20the%20executor%27s%20unsigned%20statement%20and%20not%20yet%20a%20two-party%20record%22%2C%20%22received_at%22%3A%20null%2C%20%22received_by%22%3A%20null%2C%20%22received_digest%22%3A%20null%2C%20%22signature%22%3A%20null%2C%20%22status%22%3A%20%22acknowledged%22%7D%2C%20%22issued_at%22%3A%20%222026-10-03T10%3A56%3A57Z%22%2C%20%22issuer%22%3A%20%7B%22key_id%22%3A%20%22humsana-production-2026%22%2C%20%22name%22%3A%20%22Humsana%22%7D%2C%20%22record_digest%22%3A%20%22sha256%3A68b524f4d54938613753dbf68c049ec09655c17ee7c7ce2539fa5fafc6ac0413%22%2C%20%22record_id%22%3A%20%22exec_9M6XK2NNZYxmFUqP%22%2C%20%22schema%22%3A%20%22humsana.execution%2F1%22%2C%20%22scope%22%3A%20%22This%20signature%20attests%20that%20Humsana%20issued%20this%20execution%20record%20and%20that%20it%20has%20not%20been%20altered%20since.%20It%20states%20what%20arrived%20at%20the%20boundary%2C%20whether%20the%20comparison%20ran%2C%20what%20the%20comparison%20found%2C%20and%20what%20the%20boundary%20did.%20It%20does%20not%20establish%20that%20the%20authority%20behind%20the%20action%20was%20legitimate%2C%20and%20it%20does%20not%20show%20that%20the%20action%20succeeded%20in%20the%20world%3A%20whether%20the%20rail%20was%20called%20and%20what%20the%20executor%20acknowledged%20are%20the%20executor%27s%20report%2C%20carried%20verbatim%2C%20not%20an%20effect%20Humsana%20observed.%22%2C%20%22signature%22%3A%20%7B%22alg%22%3A%20%22ed25519%22%2C%20%22key_id%22%3A%20%22humsana-production-2026%22%2C%20%22value%22%3A%20%22eed62bc53ee463bab27f39189cd790009bb68b103e2b3600d18d8073bb092bafbfc25d615765db182b3953f5e8f65c3f7cc83565d6b75d1b92e8b89cd90a430f%22%7D%7D&amp;authorization=%7B%22action%22%3A%20%7B%22digest%22%3A%20%22sha256%3A69c7bc609a53599accc8c151ddf0a0e7108e0a9f04305a232d8ca5bdc0c3123f%22%2C%20%22name%22%3A%20%22post_message%22%2C%20%22parameters%22%3A%20%7B%22channel%22%3A%20%22team%22%7D%7D%2C%20%22agent%22%3A%20%7B%22id%22%3A%20%22records-proof-agent%22%2C%20%22identity%22%3A%20%22declared%20by%20the%20caller%2C%20not%20verified%20at%20the%20boundary%22%7D%2C%20%22authority%22%3A%20%7B%22action_class%22%3A%20%22post_message%22%2C%20%22authorization_id%22%3A%20%22authz_UQp4SRaOjyHaq0bfp3HKgQ%22%2C%20%22grant_expires_at%22%3A%20%222026-12-31T00%3A00%3A00Z%22%2C%20%22granted_at%22%3A%20null%2C%20%22operation_digest%22%3A%20%22sha256%3A69c7bc609a53599accc8c151ddf0a0e7108e0a9f04305a232d8ca5bdc0c3123f%22%2C%20%22policy_version%22%3A%20%221%22%2C%20%22ref%22%3A%20%22%22%2C%20%22single_use%22%3A%20null%7D%2C%20%22confirmation%22%3A%20%7B%22confirmation_id%22%3A%20null%2C%20%22obtained%22%3A%20false%2C%20%22required%22%3A%20false%7D%2C%20%22consequence%22%3A%20%7B%22class%22%3A%20%22C1%22%7D%2C%20%22decision%22%3A%20%7B%22granted%22%3A%20true%2C%20%22value%22%3A%20%22ALLOW%22%7D%2C%20%22expiry%22%3A%20%222026-12-31T00%3A00%3A00Z%22%2C%20%22issued_at%22%3A%20%222026-10-03T10%3A56%3A57Z%22%2C%20%22issuer%22%3A%20%7B%22key_id%22%3A%20%22humsana-production-2026%22%2C%20%22name%22%3A%20%22Humsana%22%7D%2C%20%22principal%22%3A%20%7B%22approved_by%22%3A%20%7B%7D%2C%20%22id%22%3A%20%22%22%7D%2C%20%22receipt_id%22%3A%20%22authz_UQp4SRaOjyHaq0bfp3HKgQ%22%2C%20%22record_digest%22%3A%20%22sha256%3Ae389c8440ad1b935efe4e22df17340219bd30893ecfeb9dd2671a077488db7c5%22%2C%20%22schema%22%3A%20%22swan.authz%2F1%22%2C%20%22scope%22%3A%20%22This%20signature%20attests%20that%20Humsana%20issued%20this%20authorization%20record%20and%20that%20it%20has%20not%20been%20altered%20since.%20It%20states%20what%20was%20authorized.%20It%20does%20not%20establish%20that%20the%20authority%20behind%20the%20action%20was%20legitimate%2C%20and%20it%20says%20nothing%20about%20what%20happened%20after%20execution%3A%20that%20is%20the%20execution%20record%27s%20subject%2C%20and%20no%20execution%20status%2C%20comparison%20outcome%20or%20deviation%20block%20lives%20in%20this%20record.%22%2C%20%22signature%22%3A%20%7B%22alg%22%3A%20%22ed25519%22%2C%20%22key_id%22%3A%20%22humsana-production-2026%22%2C%20%22value%22%3A%20%22d0d75e354699c0cdc5193305b0850414446d55630e8934aefbfb55d00cbc5d9dabd42ed2a228a8a8f9afaebd6e3b807626a9876c980d466f3a3214e40a6bb40b%22%7D%7D">Verify this record</a>
+    <p class="note">Opens the verifier holding this record and its authorization. It checks the signature and the link between them, offline, with no account here.</p>
   </div>
 </div></section><section id="conversion" class="cta-band"><div class="wrap">
   <h2>Do you need Humsana?</h2>
@@ -358,9 +369,31 @@ h3{font-size:19px;line-height:1.35;margin:0 0 .6rem;color:var(--ink)}
       <p class="note" id="contact-state" role="status" aria-live="polite">We answer from contact@humsana.com.</p>
     </div>
   </form>
+</div></section>
+
+<section id="reference"><div class="wrap">
+  <h2>In plain terms.</h2>
+  <ul class="story">
+    <li><b>What is Humsana?</b> An execution boundary for AI agents.</li>
+    <li><b>What does it do?</b> It checks the action reaching execution against the action that was authorized.</li>
+    <li><b>Why?</b> So a company can let AI take on more consequential work while keeping the action inside the permission that was given.</li>
+    <li><b>What happens when an action changes?</b> Humsana can hold it or refuse it, and it records the deviation.</li>
+    <li><b>What evidence exists?</b> A signed authorization record and a signed execution record, each naming the key that signed it, so the pair can be verified independently.</li>
+    <li><b>Who is it for?</b> Teams putting AI agents on work that can change something another system depends on.</li>
+  </ul>
+
+  <h3>Questions an engineer asks first.</h3>
+  <div class="faq">
+    <details><summary>What is an execution boundary?</summary><p>It sits between the party that authorized an action and the party that executes it. It compares the action arriving at execution with the action that was authorized, and it decides there.</p></details>
+    <details><summary>Where does it run?</summary><p>Immediately before the call that cannot be taken back, on the executing side. A control inside the agent's own system cannot answer for the action once the action has left that system.</p></details>
+    <details><summary>Does it replace the agent's permissions or its identity?</summary><p>No. Permissions and identity settle who the agent is and what it may attempt. Humsana checks the action that actually arrives, at the moment it would take effect.</p></details>
+    <details><summary>What happens when the action has changed?</summary><p>The boundary names the field, both values and the rule, and refuses. The refusal is a code, the grant is not spent, and the executing call is not made.</p></details>
+    <details><summary>How does somebody else check what happened?</summary><p>The boundary issues a signed record of the authorization and a signed record of the execution. The verifier checks the signature, the record digests and the link between the two, offline, without an account here.</p></details>
+    <details><summary>Does Humsana decide whether an action is allowed?</summary><p>No. The authority is yours: your policy decides what may be authorized. Humsana checks the action against the authority that was granted, and holds or refuses when the action is not within it. The signature attests that Humsana issued the record and that it has not been altered; it does not establish that the authority behind the action was legitimate.</p></details>
+  </div>
 </div></section><footer><div class="wrap foot-in">
   <div class="brand"><img src="logo.png" alt="Humsana"></div>
-  <div class="foot-links"><a href="use-cases.html">Action classes</a><a href="walkthrough.html">Walkthrough</a><a href="the-execution-boundary.html">Execution boundary</a><a href="sandbox.html">Sandbox</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a><a href="mailto:contact@humsana.com">contact@humsana.com</a></div>
+  <div class="foot-links"><a href="use-cases.html">Action classes</a><a href="sandbox.html">Sandbox</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a><a href="mailto:contact@humsana.com">contact@humsana.com</a></div>
   <div class="foot-copy">Humsana. Authority travels with the action.</div>
 </div></footer>
 <script src="site.js"></script>
