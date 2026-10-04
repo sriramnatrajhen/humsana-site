@@ -394,9 +394,11 @@
           <div class="rf-foot" id="t-foot"></div>
         </div>
         <div class="cta-row" id="t-links" style="margin-top:1.8rem">
-          <a class="btn arrow-after" id="t-finding" href="#" target="_blank" rel="noopener">Open the record</a>
+          <button class="btn arrow-after" type="button" id="t-finding">Open the record</button>
           <a class="btn btn-ghost" id="t-verify" href="#" target="_blank" rel="noopener">Verify the record</a>
+          <button class="btn btn-ghost" type="button" id="t-share">Create a share link</button>
         </div>
+        <p class="note" id="t-share-note" role="status"></p>
         <p class="note" id="demo-mechanism" hidden>The demonstration runs the boundary on a supplier payment. <a href="https://api.humsana.com/sandbox/">See the demonstration</a>.</p>
       </div>
     </div>
@@ -828,9 +830,47 @@
       setText('t-rule', dev.rule);
     }
     setText('t-foot', run.rail_called ? 'Payment rail: called' : 'Payment rail: not called');
-    var finding = $('t-finding'), verify = $('t-verify');
-    if (run.finding_url) { finding.href = run.finding_url; } else { finding.parentNode.removeChild(finding); }
+    var verify = $('t-verify');
     if (run.verify_url) { verify.href = run.verify_url; } else { verify.parentNode.removeChild(verify); }
+    // The finding is private to this session, so it is fetched and opened rather than linked. No token is
+    // ever placed in an address bar, and the address a reader ends up holding opens nothing for anybody else.
+    $('t-finding').onclick = openFinding;
+    $('t-share').onclick = shareFinding;
+  }
+
+  function openFinding() {
+    var btn = $('t-finding'), was = btn.textContent;
+    btn.disabled = true; btn.textContent = 'Opening';
+    fetch(ASSESSMENT_API + '/assessment/finding', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: S.id })
+    }).then(function (r) { return r.text(); }).then(function (html) {
+      var url = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+      window.open(url, '_blank', 'noopener');
+      setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
+    }).catch(function () {
+      setText('t-share-note', 'The record could not be opened.');
+    }).then(function () { btn.disabled = false; btn.textContent = was; });
+  }
+
+  function shareFinding() {
+    var note = $('t-share-note'), btn = $('t-share');
+    btn.disabled = true;
+    setText('t-share-note', 'Creating a read-only link.');
+    api('/assessment/share', { id: S.id }).then(function (d) {
+      btn.disabled = false;
+      if (!d || !d.share_url) { setText('t-share-note', (d && d.plain) || 'That did not work.'); return; }
+      var days = Math.round((d.expires_in_s || 0) / 86400);
+      note.innerHTML = 'Read-only link, expires in ' + days + ' days: <span class="mono" id="t-share-url"></span> ' +
+        '<button class="btn btn-ghost" type="button" id="t-share-copy">Copy</button>';
+      setText('t-share-url', d.share_url);
+      $('t-share-copy').onclick = function () {
+        navigator.clipboard.writeText(d.share_url);
+        this.textContent = 'Copied';
+      };
+    }).catch(function (e) {
+      btn.disabled = false;
+      setText('t-share-note', e && e.message ? e.message : 'The link could not be created.');
+    });
   }
 
   function runDemo() {
