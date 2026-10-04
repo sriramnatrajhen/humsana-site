@@ -142,6 +142,18 @@
 .as-close dt{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
 .as-close dd{font-size:17px;color:var(--muted);max-width:60ch}
 .as-close dd.as-result{color:var(--accent-text);font-weight:500}
+/* The discovery: the same step marks the workflow used, filtered to the places where a person still stands.
+   No draw animation here: the workflow already had that moment, and this is a list, not a second drawing. */
+.as-foundline{font-size:clamp(22px,2.6vw,32px);line-height:1.15;font-weight:600;letter-spacing:-.015em;color:var(--ink);margin-top:2.2rem;max-width:28ch}
+.as-founds{list-style:none;margin-top:1.6rem;border-top:1px solid var(--line)}
+.as-founds .as-step{padding:1.25rem 0;border-bottom:1px solid var(--line-soft)}
+.as-founds .as-step::before{background:var(--line-soft)}
+.as-founds .as-step .as-t{font-size:18px}
+.as-founds .as-today{margin-top:0;margin-left:.6rem;vertical-align:.1rem}
+.as-fwhy,.as-fbound{font-size:15px;line-height:1.5;color:var(--muted);margin-top:.5rem;max-width:64ch}
+.as-fbound{color:var(--dim)}
+.as-fnote{font-size:14px;color:var(--dim);padding:.9rem 0 0 3.4rem}
+.as-foundclose{margin-top:1.9rem;font-size:17px;line-height:1.5;color:var(--accent-text);font-weight:500;max-width:56ch}
 .as-nothing{font-size:17px;color:var(--muted);max-width:64ch;margin-top:1.4rem}
 
 /* the demonstration: introduced as the same boundary problem, the note beside it, then the run */
@@ -206,7 +218,7 @@
 <header class="hero"><div class="wrap">
   <div class="as-head">
     <h1>Start with your company.</h1>
-    <span class="as-idx">01 / 08</span>
+    <span class="as-idx">01 / 09</span>
   </div>
   <p class="lead" style="max-width:62ch">Give the company website and, optionally, the workflow you are considering automating. The service reads the public site, draws that workflow, and finds where a person still stands in it. It names the actions that carry consequence and runs one of them against the execution boundary.</p>
 
@@ -233,14 +245,14 @@
   <div class="wrap as-progress-in">
     <span class="as-plabel" id="as-plabel">Start</span>
     <span class="as-segs">
-      <span class="as-seg" data-i="1"></span><span class="as-seg" data-i="2"></span><span class="as-seg" data-i="3"></span><span class="as-seg" data-i="4"></span><span class="as-seg" data-i="5"></span><span class="as-seg" data-i="6"></span><span class="as-seg" data-i="7"></span><span class="as-seg" data-i="8"></span>
+      <span class="as-seg" data-i="1"></span><span class="as-seg" data-i="2"></span><span class="as-seg" data-i="3"></span><span class="as-seg" data-i="4"></span><span class="as-seg" data-i="5"></span><span class="as-seg" data-i="6"></span><span class="as-seg" data-i="7"></span><span class="as-seg" data-i="8"></span><span class="as-seg" data-i="9"></span>
     </span>
   </div>
 </div>
 
 <section class="as-stage" id="s-working" data-stage="2" data-name="Reading the site" data-state="pending">
   <div class="wrap">
-    <div class="as-head"><h2>Reading the site.</h2><span class="as-idx">02 / 08</span></div>
+    <div class="as-head"><h2>Reading the site.</h2><span class="as-idx">02 / 09</span></div>
     <p class="as-copy">The service reads the public site and works out how the business runs.</p>
     <div class="as-work js-only" id="live-working" aria-live="polite">
       <span class="as-work-line">Reading the public site.</span>
@@ -251,7 +263,7 @@
 
 <section class="as-stage" id="s-profile" data-stage="3" data-name="Profile" data-state="pending">
   <div class="wrap">
-    <div class="as-head"><h2>How we think your business works.</h2><span class="as-idx">03 / 08</span></div>
+    <div class="as-head"><h2>How we think your business works.</h2><span class="as-idx">03 / 09</span></div>
     <p class="as-copy">The company, and the workflow with who does each step today.</p>
     <div class="js-only">
       <div class="as-profile">
@@ -271,23 +283,35 @@
 
 <section class="as-stage" id="s-questions" data-stage="4" data-name="Questions" data-state="pending">
   <div class="wrap">
-    <div class="as-head"><h2>A few questions.</h2><span class="as-idx">04 / 08</span></div>
+    <div class="as-head"><h2>A few questions.</h2><span class="as-idx">04 / 09</span></div>
     <p class="as-copy">One question at a time. The service asks what the person still in the chain is there to catch.</p>
     <div id="live-questions" aria-live="polite"></div>
   </div>
 </section>
 
-<section class="as-stage" id="s-assessment" data-stage="5" data-name="Assessment" data-state="pending">
+<section class="as-stage" id="s-found" data-stage="5" data-name="Where your AI stops" data-state="pending">
   <div class="wrap">
-    <div class="as-head"><h2>The actions that carry consequence.</h2><span class="as-idx">05 / 08</span></div>
+    <div class="as-head"><h2>Where your AI stops.</h2><span class="as-idx">05 / 09</span></div>
+    <p class="as-copy">The places where the machine already does the work and a person still stands at the end of it.</p>
+    <div class="js-only">
+      <p class="as-foundline" id="f-count"></p>
+      <ol class="as-founds" id="f-list"></ol>
+      <p class="as-foundclose" id="f-close"></p>
+    </div>
+  </div>
+</section>
+
+<section class="as-stage" id="s-assessment" data-stage="6" data-name="Assessment" data-state="pending">
+  <div class="wrap">
+    <div class="as-head"><h2>The actions that carry consequence.</h2><span class="as-idx">06 / 09</span></div>
     <p class="as-copy">Each row is one action, with the boundary, what could change, the readiness the service computed, and why a person is still in the loop.</p>
     <ul class="as-actions" id="a-list"></ul>
   </div>
 </section>
 
-<section class="as-stage" id="s-boundary" data-stage="6" data-name="Boundary" data-state="pending">
+<section class="as-stage" id="s-boundary" data-stage="7" data-name="Boundary" data-state="pending">
   <div class="wrap">
-    <div class="as-head"><h2>The boundary moment.</h2><span class="as-idx">06 / 08</span></div>
+    <div class="as-head"><h2>The boundary moment.</h2><span class="as-idx">07 / 09</span></div>
     <p class="as-copy">The workflow again, with the boundary on the step the service named.</p>
     <div class="js-only">
       <div class="as-boundgrid">
@@ -305,9 +329,9 @@
   </div>
 </section>
 
-<section class="as-stage" id="s-finding" data-stage="7" data-name="The finding" data-state="pending">
+<section class="as-stage" id="s-finding" data-stage="8" data-name="The finding" data-state="pending">
   <div class="wrap">
-    <div class="as-head"><h2>The finding.</h2><span class="as-idx">07 / 08</span></div>
+    <div class="as-head"><h2>The finding.</h2><span class="as-idx">08 / 09</span></div>
     <p class="as-copy">What we could identify, with our basis beside it, then the same boundary problem running for real.</p>
     <div class="js-only">
       <div class="as-payoff">
@@ -371,9 +395,9 @@
   </div>
 </section>
 
-<section class="as-stage" id="s-card" data-stage="8" data-name="The card" data-state="pending">
+<section class="as-stage" id="s-card" data-stage="9" data-name="The card" data-state="pending">
   <div class="wrap">
-    <div class="as-head"><h2>What you can forward.</h2><span class="as-idx">08 / 08</span></div>
+    <div class="as-head"><h2>What you can forward.</h2><span class="as-idx">09 / 09</span></div>
     <p class="as-copy">The finding as one card, with the readiness rather than a score.</p>
     <div class="js-only">
       <div class="as-card">
@@ -382,8 +406,10 @@
           <ul class="panel-rows">
             <li><span class="k">Company</span><span class="v" id="r-company"></span></li>
             <li><span class="k">Consequential action</span><span class="v" id="r-action"></span></li>
-            <li><span class="k">Readiness</span><span class="v" id="r-readiness"></span></li>
+            <li class="as-stack"><span class="k">Today</span><span class="v" id="r-today"></span></li>
             <li class="as-stack"><span class="k">Why the person remains</span><span class="v" id="r-why"></span></li>
+            <li class="as-stack"><span class="k">Humsana</span><span class="v" id="r-checks"></span></li>
+            <li class="as-stack"><span class="k">Result</span><span class="v" id="r-result"></span></li>
             <li><span class="k">Control</span><span class="v" id="r-control"></span></li>
             <li class="as-stack"><span class="k">Evidence</span><span class="v" id="r-evidence"></span></li>
           </ul>
@@ -620,8 +646,67 @@
     $('a-list').innerHTML = html;
   }
 
+  /* ---- stage 5: where the AI stops, the same marks filtered to the places a person still stands ---- */
+  var NUMBER_WORDS = { 1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six' };
+  function word(n) { return NUMBER_WORDS[n] || String(n); }
+  function foundRows(a) {
+    var rows = (a && a.actions) || [];
+    var human = rows.filter(function (r) { return r.human_in_loop; });
+    // The ones a boundary lifts come first, so the markers lead with what Humsana can actually do here.
+    return human.filter(function (r) { return r.readiness === 'Automate with a boundary'; })
+      .concat(human.filter(function (r) { return r.readiness !== 'Automate with a boundary'; }));
+  }
+  function renderFound(a) {
+    var rows = foundRows(a);
+    var moveable = rows.filter(function (r) { return r.readiness === 'Automate with a boundary'; });
+    setText('f-count', rows.length
+      ? 'We found ' + word(rows.length) + (rows.length === 1 ? ' place where your AI still stops.'
+                                                            : ' places where your AI still stops.')
+      : '');
+    var list = $('f-list');
+    list.innerHTML = '';
+    var shown = Math.min(rows.length, 3);
+    for (var i = 0; i < shown; i++) {
+      var row = rows[i], cls = todayClass(row.today);
+      var li = el('li', 'as-step' + (cls ? ' ' + cls : ''));
+      var k = el('span', 'as-k');
+      k.textContent = pad(i + 1);
+      li.appendChild(k);
+      var body = el('div');
+      var label = el('span', 'as-t');
+      label.textContent = row.label || '';
+      body.appendChild(label);
+      if (row.today) { var mark = el('span', 'as-today'); mark.textContent = row.today; body.appendChild(mark); }
+      if (row.why_human) {
+        var why = el('p', 'as-fwhy');
+        why.textContent = 'Why a person: ' + row.why_human;
+        body.appendChild(why);
+      }
+      if (row.boundary) {
+        var bound = el('p', 'as-fbound');
+        bound.textContent = 'The machine stops at: ' + row.boundary;
+        body.appendChild(bound);
+      }
+      li.appendChild(body);
+      list.appendChild(li);
+    }
+    if (rows.length > shown) {
+      var note = el('p', 'as-fnote');
+      note.textContent = cap(word(rows.length - shown)) + ' more ' +
+        (rows.length - shown === 1 ? 'is' : 'are') + ' listed in the rows below.';
+      list.appendChild(note);
+    }
+    setText('f-close', moveable.length === 1
+      ? 'One of these can move to "Automate with a boundary".'
+      : (moveable.length > 1
+          ? cap(word(moveable.length)) + ' of these can move to "Automate with a boundary".'
+          : ''));
+  }
+
   function toAssessment(r) {
-    renderAssessment(r.assessment);
+    var a = r.assessment || {};
+    if (foundRows(a).length) { renderFound(a); reveal('s-found'); } else { conceal('s-found'); }
+    renderAssessment(a);
     reveal('s-assessment');
     renderBoundary(r);
     reveal('s-boundary');
@@ -629,7 +714,7 @@
     reveal('s-finding');
     renderCard((r.report) || {});
     reveal('s-card');
-    progress(5, 'Assessment');
+    progress(6, 'Assessment');
   }
 
   /* ---- stage 6: the boundary moment ---- */
@@ -744,7 +829,7 @@
       $('t-refusal').hidden = false;
       $('t-links').hidden = false;
       $('demo-mechanism').hidden = true;
-      progress(7, 'The finding');
+      progress(8, 'The finding');
       scrollToStage('demo-output');
     }).catch(function (err) {
       btn.disabled = false;
@@ -758,14 +843,16 @@
     setText('r-head', rep.company || 'Assessment');
     setText('r-company', rep.company || '');
     setText('r-action', rep.action || '');
-    setText('r-readiness', rep.readiness || '');
+    setText('r-today', rep.today || '');
     setText('r-why', rep.why_human || '');
+    setText('r-checks', rep.checks || '');
+    setText('r-result', rep.result || rep.readiness || '');
     setText('r-control', rep.control || '');
     setText('r-evidence', rep.evidence || '');
 
     $('as-copy').addEventListener('click', function () {
-      var order = [['Company', 'company'], ['Consequential action', 'action'],
-        ['Readiness', 'readiness'], ['Why the person remains', 'why_human'],
+      var order = [['Company', 'company'], ['Consequential action', 'action'], ['Today', 'today'],
+        ['Why the person remains', 'why_human'], ['Humsana', 'checks'], ['Result', 'result'],
         ['Control', 'control'], ['Evidence', 'evidence']];
       var lines = [(rep.company || '') + '. Assessment.'];
       for (var j = 0; j < order.length; j++) { lines.push(order[j][0] + ': ' + (rep[order[j][1]] || '')); }
@@ -838,6 +925,7 @@
       }
       if (stage === 'assessment' || stage === 'report') {
         conceal('s-questions');
+        if (foundRows(s.assessment || {}).length) { renderFound(s.assessment || {}); reveal('s-found'); }
         renderAssessment(s.assessment);
         reveal('s-assessment');
         renderBoundary(s);
@@ -846,7 +934,7 @@
         reveal('s-finding');
         renderCard(s.report || {});
         reveal('s-card');
-        progress(5, 'Assessment');
+        progress(6, 'Assessment');
       }
       if (stage === 'report' && s.run) {
         $('as-run-row').style.display = 'none';
