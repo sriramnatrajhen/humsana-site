@@ -148,6 +148,16 @@
 #proof .lead{max-width:52ch}
 #proof .proof{max-width:44rem;margin-top:2.2rem}
 #proof .note{max-width:52ch;margin-top:1.6rem}
+/* The contact form: four fields, and the answer the service gives back. */
+.contact{display:grid;gap:1.1rem;max-width:34rem;margin-top:1.8rem}
+.c-two{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+.contact label{display:grid;gap:.4rem;font-size:.95rem;color:var(--muted)}
+.contact input,.contact textarea{font:inherit;font-size:1rem;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:.7rem .8rem;width:100%}
+.contact input:focus,.contact textarea:focus{outline:none;border-color:var(--muted)}
+.c-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.c-row .note{margin:0}
+.contact .sent{color:var(--ink)}
+@media(max-width:640px){.c-two{grid-template-columns:1fr}}
 @media(max-width:900px){.hero-grid{grid-template-columns:1fr}.bx{max-width:none}#proof .proof{max-width:none}}
 </style>
 </head>
@@ -214,7 +224,7 @@
   <p class="note">Based on what you tell us and what could be identified from your public information. This is an interpretation of your workflow, not a certification of it.</p>
   <div class="cta-row">
     <a class="btn btn-primary arrow-after" href="assessment.html">Find your boundary</a>
-    <a class="btn btn-ghost" href="mailto:contact@humsana.com">Contact us</a>
+    <a class="btn btn-ghost" href="#talk">Contact us</a>
   </div>
 </div></section>
 
@@ -346,7 +356,7 @@
   <p>Tell us about your workflow. We will show you where an execution boundary could let the agent take on more.</p>
   <div class="cta-row">
     <a class="btn btn-primary arrow-after" href="assessment.html">Do you need Humsana?</a>
-    <a class="btn btn-ghost" href="mailto:contact@humsana.com">Contact us</a>
+    <a class="btn btn-ghost" href="#talk">Contact us</a>
   </div>
 </div></section>
 
@@ -374,11 +384,59 @@
   </div>
 </div></section>
 
+<section id="talk"><div class="wrap">
+  <h2>Already know where Humsana fits?</h2>
+  <p class="lead">Talk to us. Four fields, and we will pick it up from there. If you would rather find out where the boundary belongs in your workflow first, start with the assessment instead.</p>
+  <form class="contact" id="contact-form" novalidate>
+    <div class="c-two">
+      <label for="c-name">Name<input id="c-name" name="name" autocomplete="name" required></label>
+      <label for="c-email">Work email<input id="c-email" name="email" type="email" autocomplete="email" required></label>
+    </div>
+    <label for="c-company">Company<input id="c-company" name="company" autocomplete="organization" required></label>
+    <label for="c-trying">What are you trying to let your AI do?<textarea id="c-trying" name="trying" rows="3" required></textarea></label>
+    <div class="c-row">
+      <button class="btn btn-primary" type="submit">Send</button>
+      <p class="note" id="contact-state" role="status" aria-live="polite">We answer from contact@humsana.com.</p>
+    </div>
+  </form>
+</div></section>
+
 <footer><div class="wrap foot-in">
   <div class="brand"><img src="logo.png" alt="Humsana"></div>
   <div class="foot-links"><a href="use-cases.html">Action classes</a><a href="walkthrough.html">Walkthrough</a><a href="swan.html">Swan</a><a href="the-execution-boundary.html">Execution boundary</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://github.com/sriramnatrajhen">GitHub</a><a href="mailto:contact@humsana.com">contact@humsana.com</a></div>
   <div class="foot-copy">Humsana. Authority travels with the action.</div>
 </div></footer>
 <script src="site.js"></script>
+<script>
+/* The contact form posts to the service. The service owns the answer, so a refusal shows its own sentence
+   rather than a browser generated one, and the button is only taken away once it has accepted. */
+(function () {
+  var form = document.getElementById('contact-form');
+  if (!form) { return; }
+  var state = document.getElementById('contact-state');
+  var button = form.querySelector('button[type=submit]');
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var body = {};
+    ['name', 'email', 'company', 'trying'].forEach(function (field) {
+      body[field] = (form.elements[field].value || '').trim();
+    });
+    button.disabled = true;
+    state.textContent = 'Sending...';
+    fetch('https://api.humsana.com/contact', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        state.textContent = data.plain || 'Thanks. We will be in touch.';
+        if (response.ok) { form.reset(); state.classList.add('sent'); }
+        else { button.disabled = false; }
+      });
+    }).catch(function () {
+      state.textContent = 'That did not reach us. Write to contact@humsana.com.';
+      button.disabled = false;
+    });
+  });
+})();
+</script>
 </body>
 </html>
