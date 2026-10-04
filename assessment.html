@@ -473,12 +473,6 @@
     entries.forEach(function (e) {
       if (!e.isIntersecting) { return; }
       e.target.classList.add('in');
-      // The stage index in the accent marks where the reader has reached, so each stage reads as arrived at
-      // rather than as the seventh of eight slides. It follows the scroll, not the order things were revealed.
-      var marked = document.querySelectorAll('.as-stage .as-idx.is-now');
-      for (var i = 0; i < marked.length; i++) { marked[i].classList.remove('is-now'); }
-      var idx = e.target.querySelector('.as-idx');
-      if (idx) { idx.classList.add('is-now'); }
       progress(Number(e.target.getAttribute('data-stage')), e.target.getAttribute('data-name'));
       io.unobserve(e.target);
     });
@@ -488,9 +482,33 @@
     var node = $(id);
     if (!node) { return; }
     node.setAttribute('data-state', 'on');
+    markStage();
     if (io && !watched[id]) { watched[id] = true; io.observe(node); }
     return node;
   }
+
+  /* The stage index in the accent follows the reader: the last stage whose top has passed the upper third
+     of the viewport is the one marked, so a stage reads as where you are rather than as slide seven of
+     eight. It is a state change on scroll, tied to the reader's own movement. */
+  function markStage() {
+    var stages = document.querySelectorAll('.as-stage[data-state="on"]');
+    var here = null;
+    for (var i = 0; i < stages.length; i++) {
+      if (stages[i].getBoundingClientRect().top <= window.innerHeight * 0.35) { here = stages[i]; }
+    }
+    var marked = document.querySelectorAll('.as-idx.is-now');
+    for (var j = 0; j < marked.length; j++) { marked[j].classList.remove('is-now'); }
+    if (here) {
+      var idx = here.querySelector('.as-idx');
+      if (idx) { idx.classList.add('is-now'); }
+    }
+  }
+  var marking = false;
+  window.addEventListener('scroll', function () {
+    if (marking) { return; }
+    marking = true;
+    window.requestAnimationFrame(function () { marking = false; markStage(); });
+  }, { passive: true });
   function conceal(id) { var node = $(id); if (node) { node.setAttribute('data-state', 'pending'); node.classList.remove('in'); } }
 
   function scrollToStage(id) {
