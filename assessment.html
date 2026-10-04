@@ -840,15 +840,27 @@
 
   function openFinding() {
     var btn = $('t-finding'), was = btn.textContent;
+    // The tab is opened first, inside the click, so the browser treats it as the reader's own action and
+    // never blocks it. It then carries the finding the service renders for this session, and its address is
+    // about:blank, which opens nothing for anybody else.
+    var win = window.open('', '_blank');
+    if (!win) {
+      setText('t-share-note', 'Your browser blocked the new tab. Allow pop-ups for this page, then try again.');
+      return;
+    }
+    win.document.write('<p style="font:16px system-ui,-apple-system,sans-serif;padding:24px">Opening the record.</p>');
     btn.disabled = true; btn.textContent = 'Opening';
     fetch(ASSESSMENT_API + '/assessment/finding', {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: S.id })
     }).then(function (r) { return r.text(); }).then(function (html) {
-      var url = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
-      window.open(url, '_blank', 'noopener');
-      setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
+      win.document.open();
+      win.document.write(html);
+      win.document.close();
     }).catch(function () {
-      setText('t-share-note', 'The record could not be opened.');
+      win.document.open();
+      win.document.write('<p style="font:16px system-ui,-apple-system,sans-serif;padding:24px">' +
+        'The record could not be opened. Try again from the same tab you ran the assessment in.</p>');
+      win.document.close();
     }).then(function () { btn.disabled = false; btn.textContent = was; });
   }
 
