@@ -152,8 +152,11 @@
 .as-founds .as-today{margin-top:0;margin-left:.6rem;vertical-align:.1rem}
 .as-fwhy,.as-fbound{font-size:15px;line-height:1.5;color:var(--muted);margin-top:.5rem;max-width:64ch}
 .as-fbound{color:var(--dim)}
+.as-fsplit{margin-top:1.1rem}
+.as-fsplit-line{font-size:17px;line-height:1.5;color:var(--muted);margin-top:.35rem}
+.as-fsplit-line.is-move{color:var(--accent-text);font-weight:500}
+.as-fsplit-line.is-stay{color:var(--ink)}
 .as-fnote{font-size:14px;color:var(--dim);padding:.9rem 0 0 3.4rem}
-.as-foundclose{margin-top:1.9rem;font-size:17px;line-height:1.5;color:var(--accent-text);font-weight:500;max-width:56ch}
 .as-nothing{font-size:17px;color:var(--muted);max-width:64ch;margin-top:1.4rem}
 
 /* the demonstration: introduced as the same boundary problem, the note beside it, then the run */
@@ -289,14 +292,14 @@
   </div>
 </section>
 
-<section class="as-stage" id="s-found" data-stage="5" data-name="Where your AI stops" data-state="pending">
+<section class="as-stage" id="s-found" data-stage="5" data-name="Where a person still steps in" data-state="pending">
   <div class="wrap">
-    <div class="as-head"><h2>Where your AI stops.</h2><span class="as-idx">05 / 09</span></div>
+    <div class="as-head"><h2>Where a person still steps in.</h2><span class="as-idx">05 / 09</span></div>
     <p class="as-copy">The places where the machine already does the work and a person still stands at the end of it.</p>
     <div class="js-only">
       <p class="as-foundline" id="f-count"></p>
+      <div id="f-split"></div>
       <ol class="as-founds" id="f-list"></ol>
-      <p class="as-foundclose" id="f-close"></p>
     </div>
   </div>
 </section>
@@ -408,7 +411,7 @@
             <li><span class="k">Consequential action</span><span class="v" id="r-action"></span></li>
             <li class="as-stack"><span class="k">Today</span><span class="v" id="r-today"></span></li>
             <li class="as-stack"><span class="k">Why the person remains</span><span class="v" id="r-why"></span></li>
-            <li class="as-stack"><span class="k">Humsana</span><span class="v" id="r-checks"></span></li>
+            <li class="as-stack"><span class="k">Humsana adds</span><span class="v" id="r-adds"></span></li>
             <li class="as-stack"><span class="k">Result</span><span class="v" id="r-result"></span></li>
             <li><span class="k">Control</span><span class="v" id="r-control"></span></li>
             <li class="as-stack"><span class="k">Evidence</span><span class="v" id="r-evidence"></span></li>
@@ -646,23 +649,35 @@
     $('a-list').innerHTML = html;
   }
 
-  /* ---- stage 5: where the AI stops, the same marks filtered to the places a person still stands ---- */
-  var NUMBER_WORDS = { 1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six' };
-  function word(n) { return NUMBER_WORDS[n] || String(n); }
+  /* ---- stage 5: where a person still steps in, the same marks filtered to those places ---- */
   function foundRows(a) {
     var rows = (a && a.actions) || [];
     // The service surfaces only the actions where a person is still required, so every row here is a place
-    // where their AI stops. The ones a boundary can lift lead, so the markers open with what Humsana can do.
+    // where a person steps in. The ones a boundary can lift lead, so the markers open with what Humsana can do.
     return rows.filter(function (r) { return r.readiness === 'Automate with a boundary'; })
       .concat(rows.filter(function (r) { return r.readiness !== 'Automate with a boundary'; }));
   }
   function renderFound(a) {
     var rows = foundRows(a);
-    var moveable = rows.filter(function (r) { return r.readiness === 'Automate with a boundary'; });
+    var move = rows.filter(function (r) { return r.readiness === 'Automate with a boundary'; }).length;
+    var stay = rows.filter(function (r) { return r.readiness === 'Stays with a person'; }).length;
+    var ready = rows.filter(function (r) { return r.readiness === 'Can automate'; }).length;
     setText('f-count', rows.length
-      ? 'We found ' + word(rows.length) + (rows.length === 1 ? ' place where your AI still stops.'
-                                                            : ' places where your AI still stops.')
+      ? 'We found ' + rows.length + (rows.length === 1 ? ' place where a person still steps in.'
+                                                       : ' places where a person still steps in.')
       : '');
+    // The diagnosis, not the inventory: what the count divides into, before the rows the reader can scan.
+    var split = $('f-split');
+    split.innerHTML = '';
+    var lines = [];
+    if (move) { lines.push([move + ' could move to an agent with a boundary.', 'is-move']); }
+    if (stay) { lines.push([stay + ' should remain with a person.', 'is-stay']); }
+    if (ready) { lines.push([ready + ' can be automated as it is.', '']); }
+    for (var j = 0; j < lines.length; j++) {
+      var line = el('p', 'as-fsplit-line' + (lines[j][1] ? ' ' + lines[j][1] : ''));
+      line.textContent = lines[j][0];
+      split.appendChild(line);
+    }
     var list = $('f-list');
     list.innerHTML = '';
     var shown = Math.min(rows.length, 3);
@@ -692,15 +707,10 @@
     }
     if (rows.length > shown) {
       var note = el('p', 'as-fnote');
-      note.textContent = cap(word(rows.length - shown)) + ' more ' +
-        (rows.length - shown === 1 ? 'is' : 'are') + ' listed in the rows below.';
+      note.textContent = (rows.length - shown) + (rows.length - shown === 1 ? ' more is' : ' more are') +
+        ' listed in the rows below.';
       list.appendChild(note);
     }
-    setText('f-close', moveable.length === 1
-      ? 'One of these can move to "Automate with a boundary".'
-      : (moveable.length > 1
-          ? cap(word(moveable.length)) + ' of these can move to "Automate with a boundary".'
-          : ''));
   }
 
   function toAssessment(r) {
@@ -845,14 +855,14 @@
     setText('r-action', rep.action || '');
     setText('r-today', rep.today || '');
     setText('r-why', rep.why_human || '');
-    setText('r-checks', rep.checks || '');
+    setText('r-adds', rep.adds || '');
     setText('r-result', rep.result || rep.readiness || '');
     setText('r-control', rep.control || '');
     setText('r-evidence', rep.evidence || '');
 
     $('as-copy').addEventListener('click', function () {
       var order = [['Company', 'company'], ['Consequential action', 'action'], ['Today', 'today'],
-        ['Why the person remains', 'why_human'], ['Humsana', 'checks'], ['Result', 'result'],
+        ['Why the person remains', 'why_human'], ['Humsana adds', 'adds'], ['Result', 'result'],
         ['Control', 'control'], ['Evidence', 'evidence']];
       var lines = [(rep.company || '') + '. Assessment.'];
       for (var j = 0; j < order.length; j++) { lines.push(order[j][0] + ': ' + (rep[order[j][1]] || '')); }
