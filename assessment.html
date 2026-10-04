@@ -446,7 +446,10 @@
     if (body) { opts.method = 'POST'; opts.headers['Content-Type'] = 'application/json'; opts.body = JSON.stringify(body); }
     return fetch(ASSESSMENT_API + path, opts).then(function (r) {
       return r.json().catch(function () { return {}; }).then(function (data) {
-        if (!r.ok) { throw new Error((data && data.error) ? data.error : ('the service answered ' + r.status)); }
+        if (!r.ok) {
+          // A refusal carries the service's own sentence in "plain"; use it rather than a status number.
+          throw new Error((data && (data.plain || data.error)) ? (data.plain || data.error) : ('the service answered ' + r.status));
+        }
         return data;
       });
     });
@@ -492,7 +495,7 @@
   function fail(err) {
     conceal('s-working');
     $('as-form').hidden = false;
-    showError('The service did not answer. ' + (err && err.message ? err.message : 'unknown error') + '. Try again.');
+    showError((err && err.message ? err.message : 'Something went wrong.') + ' Try again.');
   }
 
   /* ---- stage 3: the profile ---- */
@@ -556,7 +559,7 @@
     }).catch(function (err) {
       btn.disabled = false;
       btn.textContent = 'Continue';
-      showError('The service did not answer. ' + err.message + '. Try again.');
+      showError((err && err.message ? err.message : 'Something went wrong.') + ' Try again.');
     });
   }
 
@@ -571,7 +574,7 @@
         '<p class="as-at">' + esc(row.label) + '</p>' +
         '<dl class="as-af">' +
         '<dt>Readiness</dt><dd class="as-readable">' + esc(row.readiness || '') + '</dd>' +
-        '<dt>Boundary</dt><dd>' + esc(row.boundary || 'none identified') + '</dd>' +
+        '<dt>Boundary</dt><dd>' + esc(row.boundary || 'not named') + '</dd>' +
         '<dt>Could change</dt><dd>' + esc(cc || 'none') + '</dd>' +
         (row.why_human ? '<dt>Why a person</dt><dd>' + esc(row.why_human) + '</dd>' : '') +
         '</dl>' +
@@ -625,16 +628,20 @@
   }
 
   /* ---- stage 7: the finding, then the demonstration ---- */
-  function renderFinding(r) {
-    var rep = r.report || {};
+  function applyFindingLines(rep) {
     setText('c-headline', rep.headline || '');
     setText('c-basis', rep.basis_note || '');
     setText('c-today', rep.today || '');
     setText('c-why', rep.why_human || '');
-    setText('c-where', rep.where_humsana_fits || '');
+    setText('c-where', rep.where_humsana_fits ? cap(rep.where_humsana_fits) : '');
     setText('c-changes', rep.what_changes || '');
     var rd = rep.readiness || '', rdm = rep.readiness_meaning || '';
     setText('c-result', rdm ? (rd + '. ' + cap(rdm) + '.') : rd);
+  }
+
+  function renderFinding(r) {
+    var rep = r.report || {};
+    applyFindingLines(rep);
 
     var nn = $('c-nothing');
     if (rep.nothing_found_note) { setText('c-nothing', rep.nothing_found_note); nn.hidden = false; }
@@ -692,6 +699,10 @@
     api('/assessment/run', { id: S.id, confirm: true }).then(function (r) {
       $('as-run-row').style.display = 'none';
       renderRun(r);
+      // The finding and the card were drawn before the run, so the evidence line is filled in now that the
+      // record ids exist.
+      applyFindingLines(r.report || {});
+      renderCard(r.report || {});
       $('demo-output').hidden = false;
       $('t-split').hidden = false;
       $('t-refusal').hidden = false;
